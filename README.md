@@ -42,7 +42,7 @@ benefits of `automated tests`.
 
 We'd like a world where every `HowTo` was accompanied by a generator script.
 With a single command, you could download and run the generator, then tweak and
-share with your friends.  
+share the generator with your friends.  
 
 Cogen is scriptable `automated generation` for Elixir
 developers.
@@ -114,6 +114,9 @@ The Cogen Context is a Plug-like structure:
 Cogen helpers are conveniences for working with paths and generating content.
 
 From Mix.Generate:
+
+| Function         | Description                                                  |
+|------------------|--------------------------------------------------------------|
 | copy_file        | Copies source to target.                                     |
 | copy_template    | Evaluates and copy templates at source to target.            |
 | create_directory | Creates a directory if one does not exist yet.               |
@@ -123,6 +126,9 @@ From Mix.Generate:
 | overwrite?       | Prompts the user to overwrite the file if it exists.         |
 
 Other helpers - some inspired by Ansible:
+
+| Function       | Description                                                  |
+|----------------|--------------------------------------------------------------|
 | assign         | Set a key-value pair in the context                          |
 | command        | Execute shell command                                        |
 | mix            | Execute mix task                                             |
