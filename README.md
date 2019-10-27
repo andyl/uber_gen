@@ -6,27 +6,31 @@ Elixir Code Generator
 
 This repo is to explore ideas for scriptable code generation in Elixir,
 inspired by a thread on [Elixir Forum][f].  For now we're practicing "Readme
-Driven Development", writing the README and soliciting feedback before deciding if it's worth it to write the code.
+Driven Development", gathering feedback before deciding if it's worth it to
+write the code.
 
 [f]: https://elixirforum.com/t/what-would-you-think-about-a-new-web-framework-that-extends-phoenix-with-rails-like-or-django-like-built-in-features/26371/8
 
-Evidence of the problem: innumerable `HowTos` with eye-watering detail.
-Here are some examples:
+A professional Phoenix app typically uses many add-on packages - LiveView, Pow,
+Bamboo, and the like.  Add-on packages often require manual configuration.
+The problem: manual install instructions can be hard to follow.  Evidence of the
+problem: innumerable `HowTos` with eye-watering detail.  Here are some
+examples:
 
 - [How to install Bootstrap on a Phoenix 1.4 project][1]
 - [LiveView Installation][2]
 - [Phoenix Authentication with Pow - Part 1][3]
-- etc. etc.
 
 [1]: https://elixirforum.com/t/what-would-you-think-about-a-new-web-framework-that-extends-phoenix-with-rails-like-or-django-like-built-in-features/26371/8
 [2]: https://github.com/phoenixframework/phoenix_live_view/blob/master/guides/introduction/installation.md
 [3]: https://experimentingwithcode.com/phoenix-authentication-with-pow-part-1/
 
-Firstly, thank you authors for your invaluable HowTo guides.  Keep them coming!
+Firstly - thank you authors for your invaluable HowTo guides!  Keep them coming!
 
-Having said that - there are problems with "HowTo Driven Generation" (HDG).
+But there are problems with "HowTo Driven Generation" (HDG):
 
-- HDG is time consuming and error-prone
+- HDG is time consuming - some installations can literally take days
+- Manual configuration is error-prone
 - HDG instructions become out-of-date with tools
 - HDG is a barrier to entry for new programmers
 - HDG friction discourages new code exploration
@@ -37,15 +41,18 @@ thinking about all possible states of an authentication system or file uploads.
 This stuff should just be figured out once and for all, described in a
 meta-programming universal language (state machines? flow diagrams?)."
 
-Back in the ancient days, people did regression tests by hand.  Now we know the
+Back in the old days, people did regression tests by hand.  Now we all know the
 benefits of `automated tests`.
 
-We'd like a world where every `HowTo` was accompanied by a generator script.
-With a single command, you could download and run the generator, then tweak and
-share the generator with your friends.  
+Back in the old days, we installed software dependencies by hand.  With tar
+files!  Now we use `automated package management` tools.
 
-Cogen is scriptable `automated generation` for Elixir
-developers.
+Code generation that requires manual `HowTos` is still in stone-age.  We'd like
+a world where every `HowTo` was accompanied by a generator script.  With a
+single command, you could download and run the generator, then tweak and share
+the generator with your friends.  
+
+Cogen is scriptable `automated generation` for Elixir developers.
 
 ## Comparables
 
@@ -196,15 +203,16 @@ Run Cogen directly in an executable script:
 
 ### With a HowTo Post
 
-Authoring:
+Authoring a HowTo Post:
 
 - Author writes a blog post with manual install instructions
-- Author posts gist with a Cogen script
-- Author posts the address to the Cogen script
+- Author creates gist with a Cogen generator script
+- Author adds the address to the Cogen script to the blog post
 
-Using:
+Reading a HowTo Post:
 
-- Reader views the post
-- From the reader terminal: `$ cogen run https://gist.github.com/howto.cogen`
-- Profit
+- Reader views the post in the browser
+- From the reader terminal: `$ cogen run https://gist.github.com/howto_script.cogen`
+- Instant Working App 
+- Pina Coladas
       
