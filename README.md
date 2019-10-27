@@ -207,7 +207,7 @@ Authoring a HowTo Post:
 
 - Author writes a blog post with manual install instructions
 - Author creates gist with a Cogen generator script
-- Author adds the address to the Cogen script to the blog post
+- Author adds the address of the Cogen script to the blog post
 
 Reading a HowTo Post:
 
