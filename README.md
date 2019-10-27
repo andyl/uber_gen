@@ -44,8 +44,8 @@ meta-programming universal language (state machines? flow diagrams?)."
 Back in the old days, people did regression tests by hand.  Now we all know the
 benefits of `automated tests`.
 
-Back in the old days, we installed software dependencies by hand.  With tar
-files!  Now we use `automated package management` tools.
+Back in the old days, we installed dependencies by hand.  With tar
+files!  Now we use `automated package management`.
 
 Code generation that requires manual `HowTos` is still in stone-age.  We'd like
 a world where every `HowTo` was accompanied by a generator script.  With a
