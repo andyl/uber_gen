@@ -1,9 +1,10 @@
-/_build
-/cover
-/deps
-/doc
+/_build/
+/cover/
+/deps/
+/doc/
 /.fetch
 erl_crash.dump
 *.ez
-*.beam
-/config/*.secret.exs
+*.tar
+/.elixir_ls/
+

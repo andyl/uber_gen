@@ -1,0 +1,3 @@
+%{
+  "version_tasks": {:hex, :version_tasks, "0.3.3", "52d168aab58efa195bdde00263925cbbe5a1663eee225f2adebecd75f0489c03", [:mix], [], "hexpm"},
+}
