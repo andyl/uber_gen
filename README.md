@@ -7,6 +7,8 @@ before committing to actually writing the code.
 
 [f]: https://elixirforum.com/t/what-would-you-think-about-a-new-web-framework-that-extends-phoenix-with-rails-like-or-django-like-built-in-features/26371/8
 
+## Background
+
 Professional Phoenix apps typically use many add-on packages - LiveView, Pow,
 Bamboo, and the like.  Add-on packages often require manual installation.
 
