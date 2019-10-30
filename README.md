@@ -1,7 +1,9 @@
 # UberGen
 
 UberGen is a scriptable code generator for Elixir, motivated by a thread on
-[Elixir Forum][f].  
+[Elixir Forum][f].  Using `Readme Driven Development`, this doc contains
+pseudocode for a possible implementation.  We will explore design alternatives
+before committing to actually writing the code.  
 
 [f]: https://elixirforum.com/t/what-would-you-think-about-a-new-web-framework-that-extends-phoenix-with-rails-like-or-django-like-built-in-features/26371/8
 
@@ -242,6 +244,6 @@ the refactoring functions that we would need.
 
 If we can't find good refactoring libraries, then perhaps we could build our
 own, borrowing techniques from the Elixir Code Formatter or other tech.  Or
-perhaps we could hack together some Refactoring functions that weren't based on
+perhaps we could hack together some Refactoring functions that are not based on
 AST manipulation.  Or perhaps we could pass on the whole project for now, wait
-awhile and see if some related tech emerges.
+awhile and see if some supporting tech emerges.
