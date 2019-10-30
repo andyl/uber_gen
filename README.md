@@ -242,7 +242,7 @@ except one.  Refactoring.  We need flexible, robust, easy to use functions to
 refactor Elixir code.  
 
 Refactoring works in many IDEs - especially for Java.  Refactoring libraries
-exist for JavaScript [CLI][cli] and [Editors][edi].  The [Language Support
+exist for JavaScript [CLI][cli] and [Editors][edi].  The [Language Server
 Protocol][lsp] supports refactorings via [Code Action Request][car] messages.  
 
 [cli]: https://www.graspjs.com/
