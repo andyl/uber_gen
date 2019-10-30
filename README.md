@@ -1,25 +1,18 @@
-# cogen
+# UberGen
 
-Elixir Code Generator
-
-## Background
-
-This repo is to explore ideas for scriptable code generation in Elixir,
-inspired by a thread on [Elixir Forum][f].  For now we're practicing "Readme
-Driven Development", gathering feedback before deciding if it's worth it to
-write the code.
+UberGen is a scriptable code generator for Elixir, motivated by a thread on
+[Elixir Forum][f].  
 
 [f]: https://elixirforum.com/t/what-would-you-think-about-a-new-web-framework-that-extends-phoenix-with-rails-like-or-django-like-built-in-features/26371/8
 
-A professional Phoenix app typically uses many add-on packages - LiveView, Pow,
-Bamboo, and the like.  Add-on packages often require manual configuration.
-The problem: manual install instructions can be hard to follow.  Evidence of the
-problem: innumerable `HowTos` with eye-watering detail.  Here are some
-examples:
+Professional Phoenix apps typically use many add-on packages - LiveView, Pow,
+Bamboo, and the like.  Add-on packages often require manual installation.
 
-- [How to install Bootstrap on a Phoenix 1.4 project][1]
-- [LiveView Installation][2]
-- [Phoenix Authentication with Pow - Part 1][3]
+The problem: manual install instructions can be hard to follow.  Evidence of
+the problem: innumerable `HowTos` with complicated instructions.  Some examples:
+[How to install Bootstrap on a Phoenix 1.4 project][1], 
+[LiveView Installation][2], 
+[Phoenix Authentication with Pow - Part 1][3]
 
 [1]: https://elixirforum.com/t/what-would-you-think-about-a-new-web-framework-that-extends-phoenix-with-rails-like-or-django-like-built-in-features/26371/8
 [2]: https://github.com/phoenixframework/phoenix_live_view/blob/master/guides/introduction/installation.md
@@ -27,32 +20,21 @@ examples:
 
 Firstly - thank you authors for your invaluable HowTo guides!  Keep them coming!
 
-But there are problems with "HowTo Driven Generation" (HDG):
+But there are problems with "HowTo Driven Generation":
 
-- HDG is time consuming - some installations can literally take days
-- Manual configuration is error-prone
-- HDG instructions become out-of-date with tools
-- HDG is a barrier to entry for new programmers
-- HDG friction discourages new code exploration
+- time consuming - some installations can literally take days
+- manual configuration is error-prone
+- written instructions become out-of-date with tools
+- barrier to entry for new programmers
+- friction discourages new code exploration
 
-@dimiarvp says: "Some of us are looking for ways to get the boring stuff out of
-the way as quick as possible. I don’t get any fulfilment out of carefully
-thinking about all possible states of an authentication system or file uploads.
-This stuff should just be figured out once and for all, described in a
-meta-programming universal language (state machines? flow diagrams?)."
+Code generation that requires manual `HowTos` is stone-age.  We'd like a world
+where every `HowTo` was accompanied by a generator script.  With a single
+command, you could download and run the generator, then tweak and share the
+generator with your friends.  
 
-Back in the old days, people did regression tests by hand.  Now we all know the
-benefits of `automated tests`.
-
-Back in the old days, we installed dependencies by hand.  With tar
-files!  Now we use `automated package management`.
-
-Code generation that requires manual `HowTos` is still in stone-age.  We'd like
-a world where every `HowTo` was accompanied by a generator script.  With a
-single command, you could download and run the generator, then tweak and share
-the generator with your friends.  
-
-Cogen is scriptable `automated generation` for Elixir developers.
+We know the value of `automated tests` and `automated package managers`.
+UberGen is scriptable `automated generation` for Elixir developers.
 
 ## Comparables
 
@@ -60,67 +42,73 @@ There are many comparables:
 [Mix.Generate][mixgen],
 [PragDave Generator][pdgen],
 [Orats][orats],
+[Rails Composer][railcom],
 [Exgen][exgen],
 [Elixir Config][exconf], 
+[Elixir Language Server][exls],
+[Elixir Code Formatter][excf],
 [Ansible][ansible], and more
 
-Cogen extends `Mix.Generate`, and borrows ideas from other tools:
-- from [Ansible][ansible] and [Mix.Generate][mixgen]: helper functions like `copy_file` and `update_line_in_file`
+UberGen extends `Mix.Generate`, and borrows ideas from other tools:
+- from [Mix.Generate][mixgen]: helper functions like `copy_file` 
+- from [PragDave][pdgen]: template trees, template installation and discovery
+- from [Ansible][ansible]: idempotent helper functions, composable playbooks
 - from [Orats][orats]: git helper functions
-- from [PragDave][pdgen]: template trees
-- from [Ansible][ansible]: composable playbooks
 
 [mixgen]:  https://hexdocs.pm/mix/Mix.Generator.html
 [pdgen]:   https://pragdave.me/blog/2017/04/18/elixir-project-generator.html
 [orats]:   https://github.com/nickjj/orats
+[railcom]: https://github.com/RailsApps/rails-composer
 [exgen]:   https://github.com/rwdaigle/exgen
 [exconf]:  https://hexdocs.pm/elixir/master/Config.html
+[exls]:    https://github.com/elixir-lsp 
+[excf]:    https://hexdocs.pm/elixir/master/Code.html#format_string!/2
 [ansible]: https://www.ansible.com/
 
-## Installing Cogen
+## Installing UberGen
 
-To install `cogen`:
+To install `uber_gen`:
 
-    mix archive.install github andyl/cogen
+    mix archive.install github andyl/uber_gen
 
-Configure with `.cogen.exs`:
+Configure with `.uber_gen.exs`:
 
-    import Cogen
+    import UberGen
 
-    config :cogen, packages: [
+    config :uber_gen, playbooks: [
       {:live_view_gen, "~> 0.4.0"},
       {:my_codegen, path: "~/src/CG/my_lv_tweaks"}
     ]
 
-    include_cogen "~/.cogen/phoenix_css_setup.exs"
+    include_uber_gen "~/.uber_gen/phoenix_css_setup.exs"
 
-## The Cogen Framework
+## The UberGen Framework
 
 ### Code Style
 
-Cogen uses Elixir-style pipelines:
+UberGen scripts and playbooks use Plug-like pipelines:
 
-    cogen_context
-    |> Cogen.mix("phx.new")
-    |> Cogen.Bootstrap4.apply()
+    uber_gen_context
+    |> UberGen.mix("phx.new")
+    |> UberGen.Bootstrap4.apply()
     |> MyCodegen.Bootstrap4.tweak()
     |> LiveViewGen.install()
-    |> Cogen.mix("deps.get")
-    |> Cogen.mix("test")
+    |> UberGen.mix("deps.get")
+    |> UberGen.mix("test")
 
-### Cogen Context
+### UberGen Context
 
-The Cogen Context is a Plug-like structure:
+The UberGen Context is a Plug-like structure:
 
     %{
       app_name: "TBD"
     }
 
-### Cogen Helpers 
+### UberGen Refactoring Helpers 
 
-Cogen helpers are conveniences for working with paths and generating content.
+UberGen refactoring helpers are conveniences for working with paths and generating content.
 
-From Mix.Generate:
+From Mix.Generator:
 
 | Function         | Description                                                  |
 |------------------|--------------------------------------------------------------|
@@ -148,17 +136,36 @@ Other helpers - some inspired by Ansible:
 | npm_package    | Ensure package setting in a `packages.json` file             |
 | npm_install    | Install NPM packages                                         |
 | webpack_config | Add a webpack config                                         |
-| config_setting | Add a setting to the application config                      |
 
-### Cogen Playbooks
+Refactoring functions - some inspired by JetBrains.  These functions require
+AST analysis and manipulation (which don't yet exist!):
 
-Playbooks are Elixir modules with task functions.
+| Function         | Description                         |
+|------------------|-------------------------------------|
+| rename_project   | Rename a project                    |
+| rename_module    | Rename a module and all callers     |
+| rename_function  | Rename a function and all callers   |
+| rename_variable  | Rename all instances of a variable  |
+| extract_variable | Extract an expression to a variable |
+| extract_function | Extract an expression to a function |
+| ensure_config    | Set a config value                  |
+
+There probably should be refactoring functions that work on other languages:
+- CSS
+- JSON
+- JavaScript
+- etc.
+
+### UberGen Playbooks
+
+Playbooks are structured like Mix tasks - one module per playbook.
 
     defmodule MyCodegen.Bootstrap4 do
-      use Codegen.Playbook
+      use UberGen.Playbook
 
-      @depends_on [Cogen, :setup]
-      task tweak(ctx) do
+      @depends_on [UberGen, :setup]
+      @shortdoc "Install Bootstrap4 in your Phoenix project."
+      task run(ctx, _opts) do
         ctx
         |> assign(tgt_file, "output.css")
         |> copy_file(ctx.source_file, ctx.tgt_file)
@@ -166,53 +173,75 @@ Playbooks are Elixir modules with task functions.
       end
     end
 
-### Cogen Packages
+UberGen playbooks are packaged in a standard Elixir application.  There can be
+many playbooks per application.  UberGen will install playbook packages using
+the same loading techniques that are used for Mix tasks.
 
-Cogen packages are Elixir dependencies.  Cogen will install the packages
-on-demand, using `mix archive.install ...`
+    myapp/
+      lib/
+        mix/
+          tasks/
+            mytask.ex
+        uber_gen
+          playbooks/
+            bootstrap4.ex
 
-## Using Cogen
+## Using UberGen
 
-### Cogen as a Mix task
+### As a Mix Task
 
-Cogen is accessible as a mix task:
+UberGen is accessible as a mix task:
 
-    $ mix cogen --help
+    $ mix ugen.help
+    $ mix ugen.run <playbook> <options>
+    $ mix ugen.playbook list
+    $ mix ugen.playbook install <playbook>
+    $ mix ugen.playbook remove <playbook>
 
-### Cogen Executable
+### As a standalone Script 
 
-Cogen is an escript that you can run on the command line or from a bash script:
+Run UberGen directly in an executable script:
 
-    $ cogen --help
+    #!/usr/bin/env elixir
 
-### Cogen Script 
-
-Run Cogen directly in an executable script:
-
-    #!/usr/bin/env cogen
+    use UberGen
 
     ...
 
-### Cogen in Elixir Source
+### UberGen in Elixir Source
 
     defmodule MyMod do
       ...
     end
 
-## Cogen Workflow
+## UberGen Workflow
 
 ### With a HowTo Post
 
 Authoring a HowTo Post:
 
 - Author writes a blog post with manual install instructions
-- Author creates gist with a Cogen generator script
-- Author adds the address of the Cogen script to the blog post
+- Author creates gist with a UberGen generator script
+- Author adds the address of the UberGen script to the blog post
 
 Reading a HowTo Post:
 
 - Reader views the post in the browser
-- From the reader terminal: `$ cogen run https://gist.github.com/howto_script.cogen`
+- From the reader terminal: `$ uber_gen run https://gist.github.com/howto_script.uber_gen`
 - Instant Working App 
 - Pina Coladas
-      
+
+## The Importance of Refactoring Tech
+
+At this point, all the supporting tech is readily at hand to build UberGen -
+except one.  Refactoring.  We need flexible, robust, easy to use functions to
+refactor Elixir code.  Refactoring tech exists many IDEs - especially for Java.
+The Language Support Protocol (LSP) supports refactorings via Code Action
+Request messages.  But I haven't been able to find Elixir libraries that supply
+the refactoring functions that we would need.
+
+If we can't find good refactoring libraries, then perhaps we could build our
+own, borrowing techniques from the Elixir Code Formatter or other tech.  Or
+perhaps we could hack together some Refactoring functions that weren't based on
+AST manipulation.  Or perhaps we could pass on the whole project for now, wait
+awhile and see if some related tech emerges.
