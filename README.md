@@ -239,13 +239,21 @@ Reading a HowTo Post:
 
 At this point, all the supporting tech is readily at hand to build UberGen -
 except one.  Refactoring.  We need flexible, robust, easy to use functions to
-refactor Elixir code.  Refactoring tech exists many IDEs - especially for Java.
-The Language Support Protocol (LSP) supports refactorings via Code Action
-Request messages.  But I haven't been able to find Elixir libraries that supply
-the refactoring functions that we would need.
+refactor Elixir code.  
 
-If we can't find good refactoring libraries, then perhaps we could build our
-own, borrowing techniques from the Elixir Code Formatter or other tech.  Or
-perhaps we could hack together some Refactoring functions that are not based on
-AST manipulation.  Or perhaps we could pass on the whole project for now, wait
-awhile and see if some supporting tech emerges.
+Refactoring tech exists many IDEs - especially for Java.  Refactoring libraries
+exist for JavaScript [CLI][cli] and [Editors][edi].  The Language Support
+Protocol (LSP) supports refactorings via [Code Action Request][car] messages.  
+
+[cli]: https://www.graspjs.com/
+[edi]: https://github.com/cmstead/js-refactor
+[car]: https://microsoft.github.io//language-server-protocol/specifications/specification-3-14/#textDocument_codeAction
+
+But I haven't been able to find Elixir libraries that supply the refactoring
+functions that we would need.
+
+If we can't find good refactoring libraries for Elixir, then perhaps we could
+build our own, borrowing techniques from the Elixir Code Formatter or other
+tech.  Or perhaps we could hack together some Refactoring functions that are
+not based on AST manipulation.  Or perhaps we could pass on the whole project
+for now, wait awhile and see if some supporting tech emerges.
