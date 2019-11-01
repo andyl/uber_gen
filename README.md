@@ -178,8 +178,9 @@ Playbooks are structured like Mix tasks - one module per playbook.
     end
 
 UberGen playbooks are packaged in a standard Elixir application.  There can be
-many playbooks per application.  UberGen will install playbook packages using
-the same loading techniques that are used for Mix tasks.
+many playbooks per application.  Playbooks can have dependencies.  UberGen will
+install playbook packages using the same loading techniques that are used for
+Mix tasks.
 
     myapp/
       lib/
@@ -189,6 +190,16 @@ the same loading techniques that are used for Mix tasks.
         uber_gen
           playbooks/
             bootstrap4.ex
+      priv/
+        playbooks/
+          bootstrap4/
+            files/
+              bootstrap_config.css
+            templates/
+              bootstrap.css.eex
+
+Playbook static files and templates are stored under the `priv/playbooks`
+directory.
 
 ## Using UberGen
 
@@ -258,3 +269,4 @@ own, borrowing techniques from the Elixir Code Formatter or other tech.  Or
 perhaps we could hack together some Refactoring functions that are not based on
 AST manipulation.  Or perhaps we could pass on the whole project for now, wait
 awhile and see if some supporting tech emerges.
+
