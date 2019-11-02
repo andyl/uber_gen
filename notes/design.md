@@ -22,22 +22,27 @@
           playbook1/
             templates/
             files/
+            docs/
 
-## CLI
+## MIX CLI
 
 mix ugen.help
 
-mix ugen.playbook list
-mix ugen.playbook install <playbook>
-mix ugen.playbook remove 
+mix ugen.playbook list                     # list all local playbooks
+mix ugen.playbook install <playbook>       # install a playbook
+mix ugen.playbook remove                   # remove a playbook 
 
-mix ugen.registry list
-mix ugen.registry publish <playbook>
-mix ugen.registry remove
+mix ugen.registry list                     # list playbooks in registry
+mix ugen.registry publish <playbook>       # push a local playbook to registry
+mix ugen.registry remove                   # remove a playbook from the registry
 
-mix ugen.run <playbook> <opts>
+mix ugen.run <playbook> <opts>             # run playbook
+mix ugen.build <playbook> [--format md]    # build docs
+mix ugen.serve <playbook>                  # serve docs
 
-mix ugen.doc <playbook>
+Run behavior - run until:
+- failed test (code red)
+- wait for manual input (code yellow)
 
 ## .uber_gen.exs
 

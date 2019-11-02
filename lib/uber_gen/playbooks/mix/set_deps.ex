@@ -1,8 +1,8 @@
-defmodule UberGen.Playbooks.Gen.Phx do
+defmodule UberGen.Playbooks.Mix.SetDeps do
 
   use UberGen.Playbook
 
-  @shortdoc "Gen phoenix project"
+  @shortdoc "Set Mix Dependency"
   def run(args \\ []) do
     IO.inspect "+++++++++++++++++++++++++++++++++++++++"
     IO.puts "GEN PHOENIX"

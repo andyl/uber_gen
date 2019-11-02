@@ -12,19 +12,23 @@
 - [x] Remove debug messages
 - [x] Run an internal playbook 
 
-## Code Formatting / Editing / Refactoring
+## 2019 Nov 01 Fri
 
-- [ ] Study Elixir Formatter
-- [ ] Study Elixir Language Server
-
-- [ ] Code Formatting/Editing Elixir
-- [ ] Code Formatting/Editing JSON
-- [ ] Code Formatting/Editing JavaScript
-
-- [ ] Prettier Formatter
+- [x] Study Elixir Formatter
+- [x] Study Elixir Language Server
+- [x] Code Formatting/Editing Elixir
+- [x] Code Formatting/Editing JSON
+- [x] Code Formatting/Editing JavaScript
+- [x] Prettier Formatter
 
 ## TBD
 
+- [ ] Create playbook macros (run, help, call, doc, test)
+- [ ] Build demo pipeline for LiveView
+- [ ] Execute DryRun to assemble the BuildStruct for LiveView
+- [ ] Generate sample markdown for LiveView
+
+- [ ] Build UberGen webserver
 - [ ] External Playbooks - path / github deps
 
 - [ ] Create Registry
@@ -45,4 +49,7 @@
 - [ ] Learning Paths
 - [ ] Time to Learn
 - [ ] Credentialing
-- [ ] Time to run a HowTo
+- [ ] Metrics: Frequency/RunTime per Playbook 
+- [ ] Community: who else is doing this now?
+- [ ] Community: who has the most experience?
+- [ ] Community: who is willing to mentor?

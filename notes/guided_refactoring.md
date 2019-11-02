@@ -1,6 +1,6 @@
-# Notes on Refactoring
+# Guided Refactoring
 
-## Challenges
+## Refactoring Challenges
 
 It would be great to have a set of robust refactoring libraries.
 
@@ -18,7 +18,7 @@ Challenge - many configuration sub-systems:
 
 Conclusion:
 - Building Refactoring tools for all use cases will take years
-- We have to start with manual / guided approach
+- We have to start with manual approach
 
 ## Related Tech
 
@@ -29,56 +29,82 @@ Conclusion:
 
 ## Guided Refactoring
 
-Each playbook and helper function:
-- emits a guide
-- emits a validation test result
+Each playbook:
+- emits a document fragment
+- emits a validation test
 
-The guide is written in markdown with embedded tags.
+Document fragments are assembled into an overall guide.
 
-A default guide is auto-generated from the helper tasks.
+The doc is written in markdown with embedded tags.
 
-There is a mix task to serve the guide on the local machine.
+A default doc is auto-generated from the playbooks.
+
+There is a mix task to serve the doc on the local machine.
 
 The ugen server detects filesystem changes and dynamically updates the
-web page (LiveView).
+web page (using LiveView).
 
 There are server plugins for common editors: emacs, vim, vscode.
 
 With plugins: the server auto-opens the correct page in the editor.
 
-When embedding sub-playbooks: make the sub-guides over-ridable.
+When embedding sub-playbooks: make the sub-docs over-ridable.
 
-Add a command to export guides in various formats:
+Add a command to export docs in various formats:
 - static HTML
 - PDF
 - dynamically served
 
 Mix commands:
-- mix ugen.guide
+- mix ugen.build <playbook>   # write markdown to stdout
+- mix ugen.server <playbook>  # start a webserver / file-listener
 
 Questions:
 - how to structure navigation for web pages?
-- collapse 'playbook' and 'helper module'? (root playbook / leaf playbook)
+- how to detect loops in pipeline?
 
-A 'playbook' behavior:
+Playbook / Helper
+- Playbook / Helper collapsed into Playbooks
+- Playbooks can omit the `run` function for leaf operation
+- Helper functions can still be used - w/o Doc or Test
 
-- run(context, opts) -> new_context
-- guide(context, opts) -> text
-- test(context, opts) -> condition
+A 'playbook' behavior - macros:
+
+- run(cmd_line_opts)                    # call from Mix (optional)
+- help(cmd_line_opts)                   # Mix help
+- call(context, opts)  -> new_context   # execute pipeline until fail
+- doc(context, opts)   -> text          # generate documentation
+- test(context, opts)  -> condition     # run test
+
+GenStruct:
+- mode: :dry_run, :build, :test
 
 Notes:
-- `guide` and `test` are invoked during `run`
-- `guide` and `test` save results in the `new_context`
-- `guide` can be over-ridden in parent playbooks
-- guide templates can be stored in `priv/playbooks/<playbook>/guide`
+- `doc` and `test` are invoked during `run`
+- `doc` and `test` save results in the `new_context`
+- `doc` can be over-ridden in parent playbooks
+- doc templates can be stored in `priv/playbooks/<playbook>/doc`
 
 Example playbook:
 
     defmodule RenameProject do
-      def run(ctx, opts) do
+      use UberGen.Playbook
+
+      run(cmd_line_opts) do
       end
 
-      def guide(ctx, opts) do
+      help(cmd_line_opts) do
+      end
+
+      call(ctx, opts) do
+      end
+
+      doc(ctx, opts) do
+      end
+
+      test(ctx, opts) do
       end
     end
 
+If guided refactoring works, then we can build it directly, and add
+code-refactoring helpers over time.
