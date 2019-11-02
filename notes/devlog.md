@@ -21,14 +21,19 @@
 - [x] Code Formatting/Editing JavaScript
 - [x] Prettier Formatter
 
-## TBD
+## 2019 Nov 02 Sat
 
-- [ ] Create playbook macros (run, help, call, doc, test)
+- [x] Create playbook macros (run, help, call, doc, test)
+
+- [ ] Add playbook behavior (run, help, children, call, doc, test)
 - [ ] Build demo pipeline for LiveView
 - [ ] Execute DryRun to assemble the BuildStruct for LiveView
 - [ ] Generate sample markdown for LiveView
 
+## TBD
+
 - [ ] Build UberGen webserver
+
 - [ ] External Playbooks - path / github deps
 
 - [ ] Create Registry

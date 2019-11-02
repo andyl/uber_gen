@@ -68,16 +68,14 @@ Playbook / Helper
 - Playbooks can omit the `run` function for leaf operation
 - Helper functions can still be used - w/o Doc or Test
 
-A 'playbook' behavior - macros:
+Playbook behavior:
 
 - run(cmd_line_opts)                    # call from Mix (optional)
 - help(cmd_line_opts)                   # Mix help
+- children()           -> [children]    # List Children
 - call(context, opts)  -> new_context   # execute pipeline until fail
 - doc(context, opts)   -> text          # generate documentation
 - test(context, opts)  -> condition     # run test
-
-GenStruct:
-- mode: :dry_run, :build, :test
 
 Notes:
 - `doc` and `test` are invoked during `run`
@@ -90,21 +88,24 @@ Example playbook:
     defmodule RenameProject do
       use UberGen.Playbook
 
-      run(cmd_line_opts) do
+      def run(cmd_line_opts) do
       end
 
-      help(cmd_line_opts) do
+      def help(cmd_line_opts) do
       end
 
-      call(ctx, opts) do
+      def children do
       end
 
-      doc(ctx, opts) do
+      def call(ctx, opts) do
       end
 
-      test(ctx, opts) do
+      def doc(ctx, opts) do
+      end
+
+      def test(ctx, opts) do
       end
     end
 
-If guided refactoring works, then we can build it directly, and add
+If guided refactoring works, then we can build it straight away, and add
 code-refactoring helpers over time.

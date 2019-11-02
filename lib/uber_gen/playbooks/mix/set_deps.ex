@@ -1,12 +1,30 @@
-defmodule UberGen.Playbooks.Mix.SetDeps do
+defmodule UberGen.Playbooks.Phx.SetDeps do
 
   use UberGen.Playbook
 
-  @shortdoc "Set Mix Dependency"
-  def run(args \\ []) do
-    IO.inspect "+++++++++++++++++++++++++++++++++++++++"
-    IO.puts "GEN PHOENIX"
-    IO.inspect args
-    IO.inspect "+++++++++++++++++++++++++++++++++++++++"
+  @shortdoc "ShortDoc for #{__MODULE__}"
+
+  def run(_) do
+    IO.puts "RUNNING #{__MODULE__}"
+  end
+
+  def help(_) do
+    "HELP FOR #{__MODULE__}"
+  end
+
+  def children(_context, _options) do
+    []
+  end
+
+  def call(context, _options) do
+    context
+  end
+
+  def doc(_context, _options) do
+    "DOCUMENTATION FOR #{__MODULE__}"
+  end
+
+  def test(_context, _options) do
+    true
   end
 end
