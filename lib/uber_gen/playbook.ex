@@ -2,35 +2,6 @@ defmodule UberGen.Playbook do
   @moduledoc """
   A simple module that provides conveniences for creating,
   loading and manipulating playbooks.
-
-  An UberGen playbook can be defined by simply using `UberGen.Playbook`
-  in a module starting with `UberGen.Playbooks.` and defining
-  the `run/1` function:
-
-      defmodule UberGen.Playbooks.Echo do
-        use UberGen.Playbook
-        @impl UberGen.Playbook
-        def run(args) do
-          Mix.shell().info(Enum.join(args, " "))
-        end
-      end
-
-  The `run/1` function will receive a list of all arguments passed
-  to the command line.
-
-  ## Attributes
-  #
-  There are a few attributes available in UberGen playbooks to
-  configure them in Mix:
-    * `@shortdoc`  - makes the playbook public with a short description that appears on `mix help`
-    * `@recursive` - runs the playbook recursively in umbrella projects
-    * `@preferred_cli_env` - recommends environment to run playbook. It is used in absence of
-      a Mix project recommendation, or explicit `MIX_ENV`, and it only works for playbooks
-      in the current project. `@preferred_cli_env` is not loaded from dependencies as
-      we need to know the environment before dependencies are loaded.
-  ## Documentation
-  Users can read the documentation for public UberGen playbooks by running `mix help my_playbook`.
-  The documentation that will be shown is the `@moduledoc` of the playbook's module.
   """
 
   @type playbook_name :: String.t() | atom
@@ -41,6 +12,8 @@ defmodule UberGen.Playbook do
   a list of command line args.
   """
   @callback run(command_line_args :: [binary]) :: any
+
+  @optional_callbacks run: 1
 
   @doc false
   defmacro __using__(_opts) do

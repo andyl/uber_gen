@@ -24,9 +24,15 @@
 ## 2019 Nov 02 Sat
 
 - [x] Create playbook macros (run, help, call, doc, test)
+- [x] Add playbook behavior (run, help, children, call, doc, test)
+- [x] Build demo pipeline for LiveView
 
-- [ ] Add playbook behavior (run, help, children, call, doc, test)
-- [ ] Build demo pipeline for LiveView
+## 2019 Nov 03 Sun
+
+- [ ] Drop the `children` function
+- [ ] Add four playbook macros (`run`, `call`, `doc`, `test`)
+- [ ] Create an exec playbook (`util.exec`)
+
 - [ ] Execute DryRun to assemble the BuildStruct for LiveView
 - [ ] Generate sample markdown for LiveView
 
