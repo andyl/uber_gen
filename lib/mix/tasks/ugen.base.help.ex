@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Ugen.Help do
+defmodule Mix.Tasks.Ugen.Base.Help do
   use Mix.Task
 
   @shortdoc "Prints help information for tasks"

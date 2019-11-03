@@ -26,19 +26,20 @@
 
 ## MIX CLI
 
-mix ugen.help
+mix ugen.base
+mix ugen.base.help
 
-mix ugen.playbook list                     # list all local playbooks
-mix ugen.playbook install <playbook>       # install a playbook
-mix ugen.playbook remove                   # remove a playbook 
+mix ugen.cache.list                     # list all cached playbooks
+mix ugen.cache.install <playbook>       # install a playbook to cache
+mix ugen.cache.remove                   # remove a playbook from cache
 
-mix ugen.registry list                     # list playbooks in registry
-mix ugen.registry publish <playbook>       # push a local playbook to registry
-mix ugen.registry remove                   # remove a playbook from the registry
+mix ugen.registry.list                  # list playbooks in registry
+mix ugen.registry.publish <playbook>    # push a local playbook to registry
+mix ugen.registry.remove                # remove a playbook from registry
 
-mix ugen.run <playbook> <opts>             # run playbook
-mix ugen.build <playbook> [--format md]    # build docs
-mix ugen.serve <playbook>                  # serve docs
+mix ugen.pb.run <playbook> <opts>           # run playbook
+mix ugen.pb.build <playbook> [--format md]  # build playbook doc
+mix ugen.pb.serve <playbook>                # serve playbook doc
 
 Run behavior - run until:
 - failed test (code red)

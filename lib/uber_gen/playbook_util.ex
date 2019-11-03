@@ -22,7 +22,6 @@ defmodule UberGen.PlaybookUtil do
 
   def build_playbook_list(modules) do
     modules
-    |> IO.inspect()
     |> Enum.map(&({&1, Mix.Task.task_name(&1)}))
   end
 

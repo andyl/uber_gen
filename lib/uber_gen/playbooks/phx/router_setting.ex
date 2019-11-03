@@ -21,7 +21,9 @@ defmodule UberGen.Playbooks.Phx.RouterSettings do
   end
 
   def doc(_context, _options) do
-    "DOCUMENTATION FOR #{__MODULE__}"
+    header = "HEADER FOR #{__MODULE__}"
+    body   = "BODY FOR #{__MODULE__}"
+    %{header: header, body: body}
   end
 
   def test(_context, _options) do
