@@ -8,10 +8,6 @@ defmodule UberGen.Playbooks.ConfigSetting do
     IO.puts "RUNNING #{__MODULE__}"
   end
 
-  def help(_) do
-    "HELP FOR #{__MODULE__}"
-  end
-
   def children(_context, _options) do
     []
   end

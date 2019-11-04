@@ -12,16 +12,11 @@ defmodule Mix.Tasks.Ugen.Cache.List do
   """
 
   @shortdoc "List all playbooks"
-  def run(arg \\ []) do
+  def run(_arg) do
     PlaybookUtil.loadpaths!()
     modules = UberGen.Playbook.load_all()
     aliases = PlaybookUtil.load_aliases()
     {docs, max} = PlaybookUtil.build_doc_list(modules, aliases)
-
-    IO.inspect "---------------------------------------"
-    IO.inspect arg
-    IO.inspect modules
-    IO.inspect "---------------------------------------"
 
     PlaybookUtil.display_doc_list(docs, max)
   end

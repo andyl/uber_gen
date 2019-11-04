@@ -1,35 +1,16 @@
 defmodule UberGen.Playbook do
   @moduledoc """
-  A simple module that provides conveniences for creating,
-  loading and manipulating playbooks.
+  A module that provides conveniences for playbooks.
   """
 
   @type playbook_name :: String.t() | atom
   @type playbook_module :: atom
 
-  @doc """
-  A playbook needs to implement `run` which receives
-  a list of command line args.
-  """
-  @callback run(command_line_args :: [binary]) :: any
-
-  @optional_callbacks run: 1
-
   @doc false
   defmacro __using__(_opts) do
     quote do
-      Enum.each(
-        UberGen.Playbook.supported_attributes(),
-        &Module.register_attribute(__MODULE__, &1, persist: true)
-      )
-
-      @behaviour UberGen.Playbook
+      Module.register_attribute(__MODULE__, :shortdoc, persist: true)
     end
-  end
-
-  @doc false
-  def supported_attributes do
-    [:shortdoc, :recursive, :preferred_cli_env]
   end
 
   @doc """
@@ -112,67 +93,11 @@ defmodule UberGen.Playbook do
   end
 
   @doc """
-  Checks if the playbook should be run recursively for all sub-apps in
-  umbrella projects.
-  Returns `true` or `false`.
-  """
-  @spec recursive(playbook_module) :: boolean
-  def recursive(module) when is_atom(module) do
-    case List.keyfind(module.__info__(:attributes), :recursive, 0) do
-      {:recursive, [setting]} -> setting
-      _ -> false
-    end
-  end
-
-  @doc """
-  Indicates if the current playbook is recursing.
-  This returns true if a playbook is marked as recursive
-  and it is being executed inside an umbrella project.
-  """
-  @doc since: "1.8.0"
-  @spec recursing?() :: boolean
-  def recursing?() do
-    Mix.ProjectStack.recursing() != nil
-  end
-
-  @doc """
-  Gets preferred CLI environment for the playbook.
-  Returns environment (for example, `:test`, or `:prod`), or `nil`.
-  """
-  @spec preferred_cli_env(playbook_name) :: atom | nil
-  def preferred_cli_env(playbook) when is_atom(playbook) or is_binary(playbook) do
-    case get(playbook) do
-      nil ->
-        nil
-
-      module ->
-        case List.keyfind(module.__info__(:attributes), :preferred_cli_env, 0) do
-          {:preferred_cli_env, [setting]} -> setting
-          _ -> nil
-        end
-    end
-  end
-
-  @doc """
   Returns the playbook name for the given `module`.
   """
   @spec playbook_name(playbook_module) :: playbook_name
   def playbook_name(module) when is_atom(module) do
     Mix.Utils.module_name_to_command(module, 2)
-  end
-
-  @doc """
-  Checks if an alias called `playbook` exists.
-  For more information about playbook aliasing, take a look at the "Aliasing"
-  section in the docs for `Mix`.
-  """
-  @spec alias?(playbook_name) :: boolean
-  def alias?(playbook) when is_binary(playbook) do
-    alias?(String.to_atom(playbook))
-  end
-
-  def alias?(playbook) when is_atom(playbook) do
-    Keyword.has_key?(Mix.Project.config()[:aliases], playbook)
   end
 
   @doc """
@@ -222,13 +147,6 @@ defmodule UberGen.Playbook do
   Runs a `playbook` with the given `args`.
   If the playbook was not yet invoked, it runs the playbook and
   returns the result.
-  If there is an alias with the same name, the alias
-  will be invoked instead of the original playbook.
-  If the playbook or alias were already invoked, it does not
-  run them again and simply aborts with `:noop`.
-  It may raise an exception if an alias or a playbook can't
-  be found or the playbook is invalid. Check `get!/1` for more
-  information.
   """
   @spec run(playbook_name, [any]) :: any
   def run(playbook, args \\ [])
@@ -239,14 +157,8 @@ defmodule UberGen.Playbook do
 
   def run(playbook, args) when is_binary(playbook) do
     proj = Mix.Project.get()
-    alias = Mix.Project.config()[:aliases][String.to_atom(playbook)]
 
     cond do
-      alias && UberGen.PlaybookServer.run({:alias, playbook, proj}) ->
-        res = run_alias(List.wrap(alias), args, :ok)
-        UberGen.PlaybookServer.put({:playbook, playbook, proj})
-        res
-
       UberGen.PlaybookServer.run({:playbook, playbook, proj}) ->
         run_playbook(proj, playbook, args)
 
@@ -266,31 +178,20 @@ defmodule UberGen.Playbook do
         get_playbook_or_run(proj, playbook, fn -> Mix.Project.compile([]) end) ||
         get!(playbook)
 
-    recursive = recursive(module)
+    UberGen.PlaybookServer.put({:playbook, playbook, proj})
 
-    cond do
-      recursive && Mix.Project.umbrella?() ->
-        Mix.ProjectStack.recur(fn ->
-          recur(fn _ -> run(playbook, args) end)
-        end)
-
-      not recursive && Mix.ProjectStack.recursing() ->
-        Mix.ProjectStack.on_recursing_root(fn -> run(playbook, args) end)
-
-      true ->
-        UberGen.PlaybookServer.put({:playbook, playbook, proj})
-
-        try do
-          module.run(args)
-        rescue
-          e in OptionParser.ParseError ->
-            Mix.raise("Could not invoke playbook #{inspect(playbook)}: " <> Exception.message(e))
-        end
+    try do
+      module.run(args)
+    rescue
+      e in OptionParser.ParseError ->
+        Mix.raise("Could not invoke playbook #{inspect(playbook)}: " <> Exception.message(e))
     end
   end
 
   defp output_playbook_debug_info(playbook, args, proj) do
-    Mix.shell().info("** Running mix " <> playbook_to_string(playbook, args) <> project_to_string(proj))
+    Mix.shell().info(
+      "** Running mix " <> playbook_to_string(playbook, args) <> project_to_string(proj)
+    )
   end
 
   defp project_to_string(nil), do: ""
@@ -313,24 +214,6 @@ defmodule UberGen.Playbook do
     end
   end
 
-  defp run_alias([h | t], alias_args, _res) when is_binary(h) do
-    [playbook | args] = OptionParser.split(h)
-    res = UberGen.Playbook.run(playbook, join_args(args, alias_args, t))
-    run_alias(t, alias_args, res)
-  end
-
-  defp run_alias([h | t], alias_args, _res) when is_function(h, 1) do
-    res = h.(join_args([], alias_args, t))
-    run_alias(t, alias_args, res)
-  end
-
-  defp run_alias([], _alias_playbook, res) do
-    res
-  end
-
-  defp join_args(args, alias_args, []), do: args ++ alias_args
-  defp join_args(args, _alias_args, _), do: args
-
   @doc """
   Clears all invoked playbooks, allowing them to be reinvoked.
   This operation is not recursive.
@@ -341,68 +224,15 @@ defmodule UberGen.Playbook do
   end
 
   @doc """
-  Reenables a given playbook so it can be executed again down the stack.
-  Both alias and the regular stack are reenabled when this function
-  is called.
-  If an umbrella project reenables a playbook, it is reenabled for all
-  child projects.
-  """
-  @spec reenable(playbook_name) :: :ok
-  def reenable(playbook) when is_binary(playbook) or is_atom(playbook) do
-    playbook = to_string(playbook)
-    proj = Mix.Project.get()
-    recursive = (module = get(playbook)) && recursive(module)
-
-    UberGen.PlaybookServer.delete_many([{:playbook, playbook, proj}, {:alias, playbook, proj}])
-
-    cond do
-      recursive && Mix.Project.umbrella?() ->
-        recur(fn proj ->
-          UberGen.PlaybookServer.delete_many([{:playbook, playbook, proj}, {:alias, playbook, proj}])
-        end)
-
-      proj = !recursive && Mix.ProjectStack.recursing() ->
-        UberGen.PlaybookServer.delete_many([{:playbook, playbook, proj}, {:alias, playbook, proj}])
-
-      true ->
-        :ok
-    end
-
-    :ok
-  end
-
-  defp recur(fun) do
-    # Get all dependency configuration but not the deps path
-    # as we leave the control of the deps path still to the
-    # umbrella child.
-    config = Mix.Project.deps_config() |> Keyword.delete(:deps_path)
-
-    for %Mix.Dep{app: app, opts: opts} <- Mix.Dep.Umbrella.cached() do
-      Mix.Project.in_project(app, opts[:path], config, fun)
-    end
-  end
-
-  @doc """
-  Reruns `playbook` with the given arguments.
-  This function reruns the given playbook; to do that, it first re-enables the playbook
-  and then runs it as normal.
-  """
-  @spec rerun(playbook_name, [any]) :: any
-  def rerun(playbook, args \\ []) do
-    reenable(playbook)
-    run(playbook, args)
-  end
-
-  @doc """
   Returns `true` if given module is a playbook.
   """
   @spec playbook?(playbook_module) :: boolean
   def playbook?(module) when is_atom(module) do
-    match?('Elixir.UberGen.Playbooks.' ++ _, Atom.to_charlist(module)) and ensure_playbook?(module)
+    match?('Elixir.UberGen.Playbooks.' ++ _, Atom.to_charlist(module)) and
+      ensure_playbook?(module)
   end
 
   defp ensure_playbook?(module) do
     Code.ensure_loaded?(module) and function_exported?(module, :run, 1)
   end
 end
-

@@ -15,11 +15,6 @@ defmodule Mix.Tasks.Ugen.Pb.Run do
       |> Enum.filter(&(elem(&1, 1) == arg))
       |> List.first()
 
-    IO.inspect("=======================================")
-    IO.inspect(arg)
-    IO.inspect(mod)
-    IO.inspect("=======================================")
-
     case mod do
       nil -> IO.puts "Playbook not found (#{arg})"
       {module, _label} -> module.run()

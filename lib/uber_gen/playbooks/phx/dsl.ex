@@ -1,4 +1,4 @@
-defmodule UberGen.Playbooks.Phx.LiveView do
+defmodule UberGen.Playbooks.Phx.Dsl do
 
   use UberGen.Playbook
   use UberGen.Pbook
@@ -11,10 +11,9 @@ defmodule UberGen.Playbooks.Phx.LiveView do
 
   def run(_) do
     IO.puts "RUNNING #{__MODULE__}"
-  end
-
-  def help(_) do
-    "HELP FOR #{__MODULE__}"
+    bong("ping", "pong") do
+      IO.puts "INSIDE DONG"
+    end
   end
 
   def children(_context, _options) do
