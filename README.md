@@ -51,6 +51,7 @@ There are many comparables:
 [Elixir Config][exconf], 
 [Elixir Language Server][exls],
 [Elixir Code Formatter][excf],
+[Exercism][exer],
 [Ansible][ansible], and more
 
 UberGen extends `Mix.Generate`, and borrows ideas from other tools:
@@ -67,6 +68,7 @@ UberGen extends `Mix.Generate`, and borrows ideas from other tools:
 [exconf]:  https://hexdocs.pm/elixir/master/Config.html
 [exls]:    https://github.com/elixir-lsp 
 [excf]:    https://hexdocs.pm/elixir/master/Code.html#format_string!/2
+[exer]:    https://exercism.io/
 [ansible]: https://www.ansible.com/
 
 ## Installing UberGen

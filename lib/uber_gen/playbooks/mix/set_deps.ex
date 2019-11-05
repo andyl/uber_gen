@@ -12,7 +12,7 @@ defmodule UberGen.Playbooks.Mix.SetDeps do
     context
   end
 
-  steps do
+  steps(_ctx, _opts) do
     []
   end
 

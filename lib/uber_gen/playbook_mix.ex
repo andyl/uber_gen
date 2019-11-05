@@ -167,7 +167,7 @@ defmodule UberGen.PlaybookMix do
     # 2. Otherwise we compile and load dependencies
     # 3. Finally, we compile the current project in hope it is available.
     module =
-      get_playbook_or_run(proj, playbook, fn -> UberGen.Playbook.run("deps.loadpaths") end) ||
+      # get_playbook_or_run(proj, playbook, fn -> UberGen.Playbook.run("deps.loadpaths") end) ||
         get_playbook_or_run(proj, playbook, fn -> Mix.Project.compile([]) end) ||
         get!(playbook)
 

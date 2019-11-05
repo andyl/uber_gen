@@ -5,11 +5,11 @@ defmodule UberGen.Playbooks.Phx.LiveView do
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  def run(_) do
+  run(_) do
     IO.puts("RUNNING #{__MODULE__}")
   end
 
-  steps do
+  steps(_ctx, _opts) do
     [
       Playbooks.ConfigSetting,
       {Playbooks.Mix.SetDeps, [a: 1, b: 2]},

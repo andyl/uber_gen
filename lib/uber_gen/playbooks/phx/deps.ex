@@ -3,13 +3,11 @@ defmodule UberGen.Playbooks.Phx.Deps do
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  alias UberGen.Playbooks
-
-  def run(_) do
+  run(_) do
     IO.puts("RUNNING #{__MODULE__}")
   end
 
-  steps do
+  steps(_ctx, _opts) do
     []
   end
 

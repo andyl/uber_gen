@@ -4,25 +4,25 @@ defmodule UberGen.Playbooks.Phx.RouterSettings do
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  def run(_) do
+  run(_) do
     IO.puts "RUNNING #{__MODULE__}"
   end
 
-  call(ctx, opts) do
+  call(ctx, _opts) do
     ctx
   end
 
-  steps do
+  steps(_ctx, _opts) do
     []
   end
 
-  guide(ctx, opts) do
+  guide(_ctx, _opts) do
     header = "HEADER FOR #{__MODULE__}"
     body   = "BODY FOR #{__MODULE__}"
     %{header: header, body: body}
   end
 
-  test(ctx, opts) do
+  test(_ctx, _opts) do
     true
   end
 end

@@ -45,6 +45,15 @@ Run behavior - run until:
 - failed test (code red)
 - wait for manual input (code yellow)
 
+## Guide Return Values
+
+- nil
+- "body"
+- {"header", "body"}
+- %{header: "header"}
+- %{body: "body"}
+- %{header: "header", body: "body"}
+
 ## .uber_gen.exs
 
     playbooks = [

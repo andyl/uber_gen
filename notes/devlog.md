@@ -29,14 +29,29 @@
 
 ## 2019 Nov 03 Sun
 
-- [ ] Drop the `children` function
-- [ ] Add four playbook macros (`run`, `call`, `doc`, `test`)
-- [ ] Create an exec playbook (`util.exec`)
+- [x] Drop the `children` function
+- [x] Add four playbook macros (`run`, `call`, `doc`, `test`)
 
-- [ ] Execute DryRun to assemble the BuildStruct for LiveView
-- [ ] Generate sample markdown for LiveView
+## 2019 Nov 04 Mon
+
+- [x] Add a `steps` macro - acts like `children`
+- [x] Add `call`, `guide` and `test` macros
+- [x] Generate sample markdown for LiveView
+
+## 2019 Nov 05 Tue
+
+- [x] Make run/steps/call/guide/test macros optional
 
 ## TBD
+
+- [ ] Generate documentation (esp for `Playbook`)
+- [ ] Update README
+- [ ] Get mix help working
+- [ ] Don't show playbook in `ugen.cache.list` unless `has_run?` or `--all`
+- [ ] Document playbooks
+
+- [ ] Create an exec playbook (`util.exec`)
+- [ ] Execute DryRun to assemble the BuildStruct for LiveView
 
 - [ ] Build UberGen webserver
 
@@ -51,8 +66,6 @@
 
 - [ ] How does PragDave install templates?
 - [ ] How does PragDave store templates?
-- [ ] Make a function that returns the template directory
-- [ ] Make a mixtask help
 
 ## Website Ideas
 

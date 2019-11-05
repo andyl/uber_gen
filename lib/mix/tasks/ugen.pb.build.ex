@@ -22,7 +22,7 @@ defmodule Mix.Tasks.Ugen.Pb.Build do
   end
 
   defp build(module) do
-    build(module, module.steps(), 1)
+    build(module, module.steps(%{}, []), 1)
   end
 
   defp build(module, [], depth) do
@@ -33,7 +33,7 @@ defmodule Mix.Tasks.Ugen.Pb.Build do
     base = output(module, depth) <> "\n\n" 
     alt  = children
            |> Enum.map(&child_module/1)
-           |> Enum.map(&(build(&1, &1.steps(), depth + 1)))
+           |> Enum.map(&(build(&1, &1.steps(%{}, []), depth + 1)))
            |> Enum.join("\n\n")
     base <> alt
   end

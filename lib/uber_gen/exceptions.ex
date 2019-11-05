@@ -26,10 +26,10 @@ defmodule UberGen.NoPlaybookError do
 
   defp did_you_mean(playbook) do
     # Ensure all playbooks are loaded
-    UberGen.Playbook.load_all()
+    UberGen.PlaybookMix.load_all()
 
-    UberGen.Playbook.all_modules()
-    |> Enum.map(&{&1, UberGen.Playbook.playbook_name(&1)})
+    UberGen.PlaybookMix.all_modules()
+    |> Enum.map(&{&1, UberGen.PlaybookMix.playbook_name(&1)})
     |> Enum.reduce({nil, nil, 0}, &max_similar(&1, playbook, &2))
   end
 

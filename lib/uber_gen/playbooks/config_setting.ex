@@ -4,16 +4,8 @@ defmodule UberGen.Playbooks.ConfigSetting do
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  def run(_) do
-    IO.puts "RUNNING #{__MODULE__}"
-  end
-
   call(context, _options) do
     context
-  end
-
-  steps do
-    []
   end
 
   test(_context, _options) do

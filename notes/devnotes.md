@@ -37,3 +37,28 @@ Implementation Details:
 
 - All elements in the execution pipeline are Playbooks
 - Ad-hoc playbook elements are wrapped in `UberGen.Playbook.Util.Exec`
+
+## 2019 Nov 05 Tue
+
+Playbooks must:
+- have the module-name prefix `UberGen.Playbooks`
+- add the line `use UberGen.Playbook`
+
+The `UberGen.Playbook` module provides five macros for use in Playbooks.
+
+| Macro   | Arg(s)      | Returns            | Purpose                       |
+|---------|-------------|--------------------|-------------------------------|
+| run/1   | mix options | run status         | can be called from a mix task |
+| call/2  | ctx, opts   | new_ctx            | executable playbook code      |
+| test/2  | ctx, opts   | test status        | validation test               |
+| steps/2 | ctx, opts   | list of PB Modules | list of playbook children     |
+| guide/2 | ctx, opts   | guide text         | playbook documentation        |
+
+All of these macros are optional for any given playbook.
+
+Calling a Playbook with an 'undefined' macro returns a default value.
+
+The `UberGen.Playbook` module provides introspection functions that show if a
+method is defined in a playbook: `has_run?/0`, `has_call?/0`, `has_test?/0`,
+`has_steps?/0`, `has_guide?/0`
+
