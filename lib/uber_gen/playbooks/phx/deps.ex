@@ -1,20 +1,16 @@
-defmodule UberGen.Playbooks.Phx.LiveView do
+defmodule UberGen.Playbooks.Phx.Deps do
   use UberGen.Playbook
 
-  alias UberGen.Playbooks
-
   @shortdoc "ShortDoc for #{__MODULE__}"
+
+  alias UberGen.Playbooks
 
   def run(_) do
     IO.puts("RUNNING #{__MODULE__}")
   end
 
   steps do
-    [
-      Playbooks.ConfigSetting,
-      {Playbooks.Mix.SetDeps, [a: 1, b: 2]},
-      Playbooks.Phx.RouterSettings
-    ]
+    []
   end
 
   guide(_ctx, _opts) do
@@ -32,4 +28,5 @@ defmodule UberGen.Playbooks.Phx.LiveView do
   test(_ctx, _opts) do
     true
   end
+
 end

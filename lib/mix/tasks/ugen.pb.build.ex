@@ -1,16 +1,15 @@
 defmodule Mix.Tasks.Ugen.Pb.Build do
   use Mix.Task
-  # use UberGen.Playbook
 
   alias UberGen.PlaybookUtil
 
-  @shortdoc "Build a playbook"
+  @shortdoc "Build a playbook guide"
   def run(args) do
     arg = List.first(args)
     PlaybookUtil.loadpaths!()
 
     mod =
-      UberGen.Playbook.load_all()
+      UberGen.PlaybookMix.load_all()
       |> UberGen.PlaybookUtil.build_playbook_list()
       |> Enum.filter(&(elem(&1, 1) == arg))
       |> List.first()
@@ -23,7 +22,7 @@ defmodule Mix.Tasks.Ugen.Pb.Build do
   end
 
   defp build(module) do
-    build(module, module.children(%{}, []), 1)
+    build(module, module.steps(), 1)
   end
 
   defp build(module, [], depth) do
@@ -33,13 +32,17 @@ defmodule Mix.Tasks.Ugen.Pb.Build do
   defp build(module, children, depth) do
     base = output(module, depth) <> "\n\n" 
     alt  = children
-           |> Enum.map(&(build(&1, &1.children(%{}, []), depth + 1)))
+           |> Enum.map(&child_module/1)
+           |> Enum.map(&(build(&1, &1.steps(), depth + 1)))
            |> Enum.join("\n\n")
     base <> alt
   end
 
+  defp child_module({module, _}), do: module
+  defp child_module(module), do: module
+
   defp output(module, depth) do
-    doc = module.doc(%{}, [])
+    doc = module.guide(%{}, [])
     hdr = String.duplicate("#", depth)
     "#{hdr} #{doc.header}\n\n#{doc.body}"
   end
