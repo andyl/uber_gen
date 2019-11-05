@@ -1,9 +1,6 @@
 defmodule UberGen.Playbooks.Phx.LiveView do
 
   use UberGen.Playbook
-  use UberGen.Pbook
-
-  alias UberGen.Playbooks
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
@@ -13,23 +10,14 @@ defmodule UberGen.Playbooks.Phx.LiveView do
     IO.puts "RUNNING #{__MODULE__}"
   end
 
-  def help(_) do
-    "HELP FOR #{__MODULE__}"
+  call(ctx, opts) do
+    ctx
+    |> UberGen.Playbooks.ConfigSetting.call([])
+    |> UberGen.Playbooks.Mix.SetDeps.call([])
+    |> UberGen.Playbooks.Phx.RouterSettings.call([])
   end
 
-  def children(_context, _options) do
-    [
-      Playbooks.ConfigSetting, 
-      Playbooks.Mix.SetDeps, 
-      Playbooks.Phx.RouterSettings
-    ]
-  end
-
-  def call(context, _options) do
-    context
-  end
-
-  def doc(_context, _options) do
+  guide(ctx, opts) do
     header = "LiveView Installation Guide"
     body   = """
     While Phoenix LiveView is under heavy development, the installation
@@ -39,7 +27,7 @@ defmodule UberGen.Playbooks.Phx.LiveView do
     %{header: header, body: body}
   end
 
-  def test(_context, _options) do
+  test(ctx, opts) do
     true
   end
 end
