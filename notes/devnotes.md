@@ -4,12 +4,13 @@
 
 Exploratory Code Branches
 
-| Branch | Created     | Contents                            |
-|--------|-------------|-------------------------------------|
-| master | 2019 Oct 20 | Just a README stating overall goals |
-| test   | 2019 Oct 25 | Mix-style playbook structure        |
-| build  | 2019 Nov 01 | Document generation                 |
-| macros | 2019 Nov 03 | Use of macros in UberGen playbook   |
+| Branch   | Created     | Contents                            |
+|----------|-------------|-------------------------------------|
+| master   | 2019 Oct 20 | Just a README stating overall goals |
+| test     | 2019 Oct 25 | Mix-style playbook structure        |
+| build    | 2019 Nov 01 | Document generation                 |
+| macros   | 2019 Nov 03 | Use of macros in UberGen playbook   |
+| liveview | 2019 Nov 07 | Write playbook for LiveViews        |
 
 ## 2019 Nov 01 Fri
 
@@ -61,4 +62,16 @@ Calling a Playbook with an 'undefined' macro returns a default value.
 The `UberGen.Playbook` module provides introspection functions that show if a
 method is defined in a playbook: `has_run?/0`, `has_call?/0`, `has_test?/0`,
 `has_steps?/0`, `has_guide?/0`
+
+## 2019 Nov 07 Thu
+
+`UberGen` Mix commands
+
+| Command             | Purpose                                   |
+|---------------------|-------------------------------------------|
+| mix ugen.base.help  | Display help text for a playbook          |
+| mix ugen.cache.list | Show locally cached playbooks             |
+| mix ugen.pb.export  | Export a static playbook to MD, HTML, PDF |
+| mix ugen.pb.run     | Run a playbook on the command line        |
+| mix ugen.pb.serve   | Serve a playbook for browser interaction  |
 
