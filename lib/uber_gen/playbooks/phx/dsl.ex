@@ -1,4 +1,4 @@
-defmodule UberGen.Playbooks.Mix.SetDeps do
+defmodule UberGen.Playbooks.Phx.Dsl do
 
   use UberGen.Playbook
 
@@ -8,19 +8,19 @@ defmodule UberGen.Playbooks.Mix.SetDeps do
     IO.puts "RUNNING #{__MODULE__}"
   end
 
-  call(context, _options) do
+  call(context, options) do
     context
   end
 
-  steps(_ctx, _opts) do
+  steps do
     []
   end
 
-  test(_context, _options) do
+  test(context, options) do
     true
   end
 
-  guide(_context, _options) do
+  guide(context, options) do
     header = "HEADER FOR #{__MODULE__}"
     body   = "BODY FOR #{__MODULE__}"
     %{header: header, body: body}

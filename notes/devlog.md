@@ -42,11 +42,17 @@
 
 - [x] Make run/steps/call/guide/test macros optional
 
+## 2019 Nov 07 Thu
+
+- [x] Generate ExDoc documentation (esp for `Playbook`)
+- [x] Update README
+- [x] Add mix commands (run, export, serve)
+
 ## TBD
 
-- [ ] Generate documentation (esp for `Playbook`)
-- [ ] Update README
-- [ ] Get mix help working
+- [ ] Build playbooks for LiveView installation
+
+- [ ] Get `mix ugen.base.help` working
 - [ ] Don't show playbook in `ugen.cache.list` unless `has_run?` or `--all`
 - [ ] Document playbooks
 

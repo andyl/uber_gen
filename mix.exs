@@ -9,7 +9,11 @@ defmodule UberGen.MixProject do
       version: @version,
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      docs: [
+        main: "readme",
+        extras: ["README.md"]
+      ]
     ]
   end
 
@@ -22,7 +26,8 @@ defmodule UberGen.MixProject do
 
   defp deps do
     [
-      {:version_tasks, "~> 0.3.3"}
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
+      {:version_tasks, "~> 0.11.3"}
     ]
   end
 end

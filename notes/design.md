@@ -37,8 +37,8 @@ mix ugen.registry.list                  # list playbooks in registry
 mix ugen.registry.publish <playbook>    # push a local playbook to registry
 mix ugen.registry.remove                # remove a playbook from registry
 
-mix ugen.pb.run <playbook> <opts>           # run playbook
-mix ugen.pb.build <playbook> [--format md]  # build playbook doc
+mix ugen.pb.run <playbook> <opts>           # run playbook on the command line
+mix ugen.pb.export <playbook> [--format md] # build playbook doc
 mix ugen.pb.serve <playbook>                # serve playbook doc
 
 Run behavior - run until:

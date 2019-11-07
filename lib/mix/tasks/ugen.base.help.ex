@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.Ugen.Base.Help do
   use Mix.Task
 
-  @shortdoc "Prints help information for tasks"
+  @shortdoc "Prints help"
 
   @moduledoc """
   Lists all tasks and aliases or prints the documentation for a given task or alias.

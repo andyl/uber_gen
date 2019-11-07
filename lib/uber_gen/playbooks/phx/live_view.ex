@@ -1,29 +1,26 @@
-defmodule UberGen.Playbooks.Phx.LiveView do
+defmodule UberGen.Playbooks.Phx.Deps do
   use UberGen.Playbook
-
-  alias UberGen.Playbooks
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  run(_) do
-    IO.puts("RUNNING #{__MODULE__}")
-  end
+  @moduledoc """
+  Playbook for adding dependencies to a Mix project.
 
-  steps(_ctx, _opts) do
-    [
-      Playbooks.ConfigSetting,
-      {Playbooks.Mix.SetDeps, [a: 1, b: 2]},
-      Playbooks.Phx.RouterSettings
-    ]
-  end
+  This playbook takes two options:
+
+  **intro_text** - some intro text
+
+  **dependency_list** - a list of dependencies
+  """
 
   guide(_ctx, _opts) do
-    header = "LiveView Installation Guide"
+    header = "Install Dependencies"
+    intro  = "TBD"
 
     body = """
-    While Phoenix LiveView is under heavy development, the installation
-    instructions are also likely to change rapidly.  The instructions below
-    will serve if you are installing the latest stable version from Hex.
+    #{intro}
+    
+    More text here.
     """
 
     %{header: header, body: body}

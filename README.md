@@ -9,14 +9,20 @@ before committing to actually writing the code.
 
 ## Background
 
-Professional Phoenix apps typically use many add-on packages - LiveView, Pow,
-Bamboo, and the like.  Add-on packages often require manual installation.
+Professional Phoenix apps typically use many add-on packages like
+[LiveView][lv], [Pow][pow], and [Bamboo][bb].  Add-on packages often require
+manual installation.
 
-The problem: manual install instructions can be hard to follow.  Evidence of
-the problem: innumerable `HowTos` with complicated instructions.  Some examples:
-[How to install Bootstrap on a Phoenix 1.4 project][1], 
-[LiveView Installation][2], 
-[Phoenix Authentication with Pow - Part 1][3]
+[lv]:  https://github.com/phoenixframework/phoenix_live_view
+[bb]:  https://github.com/thoughtbot/bamboo
+[pow]: https://github.com/danschultzer/pow
+
+**The problem:** manual install instructions can be hard to follow.  
+**Evidence:** innumerable `HowTos` with complicated instructions.  
+**Examples:**
+- [How to install Bootstrap on a Phoenix 1.4 project][1] 
+- [LiveView Installation][2] 
+- [Phoenix Authentication with Pow - Part 1][3]
 
 [1]: https://elixirforum.com/t/what-would-you-think-about-a-new-web-framework-that-extends-phoenix-with-rails-like-or-django-like-built-in-features/26371/8
 [2]: https://github.com/phoenixframework/phoenix_live_view/blob/master/guides/introduction/installation.md
@@ -24,18 +30,18 @@ the problem: innumerable `HowTos` with complicated instructions.  Some examples:
 
 Firstly - thank you authors for your invaluable HowTo guides!  Keep them coming!
 
-But there are problems with "HowTo Driven Generation":
+But there are problems with **HowTo Driven Generation**:
 
 - time consuming - some installations can literally take days
 - manual configuration is error-prone
 - written instructions become out-of-date with tools
+- no feedback mechanism for bugs and improvements
 - barrier to entry for new programmers
 - friction discourages new code exploration
 
-Code generation that requires manual `HowTos` is stone-age.  We'd like a world
-where every `HowTo` was accompanied by a generator script.  With a single
-command, you could download and run the generator, then tweak and share the
-generator with your friends.  
+We'd like a world where every `HowTo` was accompanied by a generator script.
+With a single command, you could download and run the generator, then tweak and
+share the generator with your friends.  
 
 We know the value of `automated tests` and `automated package managers`.
 UberGen is scriptable `automated generation` for Elixir developers.
@@ -51,6 +57,7 @@ There are many comparables:
 [Elixir Config][exconf], 
 [Elixir Language Server][exls],
 [Elixir Code Formatter][excf],
+[ExDoc][exdoc],
 [Exercism][exer],
 [Ansible][ansible], and more
 
@@ -59,6 +66,7 @@ UberGen extends `Mix.Generate`, and borrows ideas from other tools:
 - from [PragDave][pdgen]: template trees, template installation and discovery
 - from [Ansible][ansible]: idempotent helper functions, composable playbooks
 - from [Orats][orats]: git helper functions
+- from [Exercism][exer]: guided refactoring
 
 [mixgen]:  https://hexdocs.pm/mix/Mix.Generator.html
 [pdgen]:   https://pragdave.me/blog/2017/04/18/elixir-project-generator.html
@@ -68,6 +76,7 @@ UberGen extends `Mix.Generate`, and borrows ideas from other tools:
 [exconf]:  https://hexdocs.pm/elixir/master/Config.html
 [exls]:    https://github.com/elixir-lsp 
 [excf]:    https://hexdocs.pm/elixir/master/Code.html#format_string!/2
+[exdoc]:   https://github.com/elixir-lang/ex_doc
 [exer]:    https://exercism.io/
 [ansible]: https://www.ansible.com/
 
@@ -77,7 +86,7 @@ To install `uber_gen`:
 
     mix archive.install github andyl/uber_gen
 
-Configure with `.uber_gen.exs`:
+Configure with `.uber_gen.exs`: [DROP?]
 
     import UberGen
 
@@ -248,7 +257,17 @@ Reading a HowTo Post:
 - Instant Working App 
 - Pina Coladas
 
-## The Importance of Refactoring Tech
+## Playbook Modes
+
+Static Mode - Just output a static doc (Markdown, PDF, ExDoc)
+
+Active Mode - checks your environment as you go:
+- generates guide text
+- validates each step
+
+(Another terminology: Export / Run)
+
+## Refactoring Tech
 
 At this point, all the supporting tech is readily at hand to build UberGen -
 except one.  Refactoring.  We need flexible, robust, easy to use functions to

@@ -1,9 +1,15 @@
-defmodule Mix.Tasks.Ugen.Pb.Build do
+defmodule Mix.Tasks.Ugen.Pb.Export do
   use Mix.Task
 
   alias UberGen.PlaybookUtil
 
-  @shortdoc "Build a playbook guide"
+  @moduledoc """
+  Export a Playbook.
+
+  Export a Playbook to Markdown, PDF, HTML, or ExDoc
+  """
+
+  @shortdoc "Export a playbook"
   def run(args) do
     arg = List.first(args)
     PlaybookUtil.loadpaths!()
