@@ -50,35 +50,46 @@
 
 ## 2019 Nov 08 Fri 
 
-- [ ] Add UberGen.Ctx
-- [ ] Add assign and halt functions
+- [x] Add `UberGen.Ctx`
+- [x] Add `Util.Command` playbook
+- [x] Add assign and halt functions to `UberGen.Ctx`
+- [x] Add `Util.Command` playbook
+- [x] Add `Util.BlockInFile` playbook
+- [x] LiveView: working `mix ugen.pb.export` command
 
 ## TBD
 
-- [ ] Build playbooks for LiveView installation
+- [ ] LiveView: working `mix ugen.pg.run` command (run validation tests)
+
+- [ ] Get `Playbooks.Util.Command` working (execute run task)
+
+- [ ] Design `Compser` UI
+- [ ] Design `Director` UI
 
 - [ ] Get `mix ugen.base.help` working
 - [ ] Don't show playbook in `ugen.cache.list` unless `has_run?` or `--all`
 - [ ] Document playbooks
 
 - [ ] Create an exec playbook (`util.exec`)
-- [ ] Execute DryRun to assemble the BuildStruct for LiveView
 
-- [ ] Build UberGen webserver
+## Questions
+
+- [ ] How to configure nested playbooks?
+- [ ] How to expose the properties of a playbook?
+- [ ] Do we need a construct like `ecto_changeset`?
+- [ ] How to script a playbook?
+- [ ] Can someone save a script as a playbook?
+- [ ] How does PragDave install templates?
+- [ ] How does PragDave store templates?
+
+## Playbook Registry
 
 - [ ] External Playbooks - path / github deps
 
 - [ ] Create Registry
 - [ ] Registry upload/download/search
-- [ ] Create Blog
-- [ ] HowTo Blog Search
 
-## Questions
-
-- [ ] How does PragDave install templates?
-- [ ] How does PragDave store templates?
-
-## Website Ideas
+## Website 
 
 - [ ] A HowTo Blog
 - [ ] Learning Paths
