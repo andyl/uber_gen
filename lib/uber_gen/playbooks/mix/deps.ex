@@ -7,17 +7,41 @@ defmodule UberGen.Playbooks.Mix.Deps do
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  call(ctx, _opts) do
-    ctx
-  end
+  @doc """
+  Generate guide for deps install.
 
-  test(_context, _options) do
-    true
-  end
+  options:
+  - instructions: an intro paragraph
+  - deps: default dependency
 
-  guide(_context, _options) do
-    header = "HEADER FOR #{__MODULE__}"
-    body   = "BODY FOR #{__MODULE__}"
+  For example:
+
+  ```elixir
+  deps: [
+    {:phoenix_live_view, "~> 0.3.0"},
+    {:floki, ">= 0.0.0", only: :test}
+  ]
+  ```
+  """
+  guide(ctx, opts) do
+    header = "Project Dependencies"
+    body   = genbody(ctx, opts)
     %{header: header, body: body}
   end
+
+  # -------------------------------------
+  
+  defp genbody(_ctx, opts) do
+    intro_text = Keyword.get(opts, :instructions)
+    dep_vals   = Keyword.get(opts, :deps, [])
+    body_text = """
+    ```elixir
+    def deps do
+    #{inspect(dep_vals) |> Code.format_string!(line_length: 40)}
+    end
+    ```
+    """
+    "#{intro_text}\n\n#{body_text}"
+  end
+
 end

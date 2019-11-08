@@ -6,8 +6,6 @@ defmodule UberGen.Playbooks.ConfigSetting do
   ConfigSettings Playbook
 
   Extensive text on config settings goes here.
-
-  Blah blah blah.
   """
 
   @shortdoc "ShortDoc for #{__MODULE__}"

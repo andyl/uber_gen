@@ -2,6 +2,12 @@ defmodule UberGen.Playbooks.Phx.RouterSettings do
 
   use UberGen.Playbook
 
+  @moduledoc """
+  ConfigSettings Playbook
+
+  Extensive text on config settings goes here.
+  """
+
   @shortdoc "ShortDoc for #{__MODULE__}"
 
   run(_) do
