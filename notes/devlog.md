@@ -48,6 +48,11 @@
 - [x] Update README
 - [x] Add mix commands (run, export, serve)
 
+## 2019 Nov 08 Fri 
+
+- [ ] Add UberGen.Ctx
+- [ ] Add assign and halt functions
+
 ## TBD
 
 - [ ] Build playbooks for LiveView installation

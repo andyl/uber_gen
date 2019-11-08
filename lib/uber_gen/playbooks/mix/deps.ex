@@ -7,7 +7,7 @@ defmodule UberGen.Playbooks.Mix.Deps do
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  call(ctx, opts) do
+  call(ctx, _opts) do
     ctx
   end
 

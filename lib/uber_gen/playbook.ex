@@ -65,6 +65,7 @@ defmodule UberGen.Playbook do
       defp has?(tuple), do: Enum.any?(flist(), &(&1 == tuple))
 
       import UberGen.Playbook
+      import UberGen.Ctx
     end
   end
 
