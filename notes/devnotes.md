@@ -11,6 +11,7 @@ Exploratory Code Branches
 | build    | 2019 Nov 01 | Document generation                 |
 | macros   | 2019 Nov 03 | Use of macros in UberGen playbook   |
 | liveview | 2019 Nov 07 | Write playbook for LiveViews        |
+| schemas  | 2019 Nov 10 | Playbook schemas, nested playbooks  |
 
 ## 2019 Nov 01 Fri
 
@@ -22,10 +23,10 @@ source-code edits.  Each step in the instructions can contain a validation
 test.  Over time, as refactoring tech improves, more automation can be built
 into playbooks.
 
-So the path forward is `guided refactoring` (`guided generation`?).  The vision
+So the focus will be to optimize the `guided refactoring` process.  The vision
 would be to have an interactive web page (a guide) with instructions, and an
-editor running side by side.  The coder can read instructions, make manual
-edits, perform validation tests. 
+vim-like code editor running side by side.  The coder can read instructions,
+make manual edits, perform validation tests. 
 
 ## 2019 Nov 03 Sun
 
@@ -74,4 +75,31 @@ method is defined in a playbook: `has_run?/0`, `has_call?/0`, `has_test?/0`,
 | mix ugen.pb.export  | Export a static playbook to MD, HTML, PDF |
 | mix ugen.pb.run     | Run a playbook on the command line        |
 | mix ugen.pb.serve   | Serve a playbook for browser interaction  |
+
+## 2019 Nov 10 Sun
+
+After writing our first playbooks it becomes evident that each playbook needs
+schemas that behave like Ecto changesets with validation and introspection.
+
+In the long term, schemas will be used for:
+- coder documentation
+- parameter validation
+- guiding the editor interfaces of composer UIs
+- validating playbook scripts
+
+The structure of the UberGen toolchain would borrow themes from VisualBasic.
+
+VisualBasic has **components** (created by C-coders with c-coding tools)
+assembled into **applications** (by VB Developers using the VB UI) that are
+distributed to End Users.
+
+UberGen has **playbooks** (created by Elixir-coders with elixir-coding tools)
+assembled into **guides** (by authors using the UberGen UI) that are distriuted
+to End Users.
+
+Playbooks are assembled into trees.  Branches for a playbook are specified as
+steps.  Each step takes configuration options - Ecto.Schemas and changesets!
+
+To setup an entire playbook tree with a single config file, we'll borrow ideas
+from the `embeds_one` and `embeds_many` constructs provided by Ecto.
 
