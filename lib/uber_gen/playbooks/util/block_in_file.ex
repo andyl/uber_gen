@@ -13,11 +13,18 @@ defmodule UberGen.Playbooks.Util.BlockInFile do
   - file_type 
   """
 
+  # params do
+  #   field(:instruction, :string)
+  #   field(:text_block, :string)
+  #   field(:check_for, :string)
+  #   field(:target_file, :string)
+  #   field(:file_type, :string)
+  # end
+
   @shortdoc "ShortDoc for #{__MODULE__}"
 
   @doc """
   Block in file.
-
   """
   guide(_ctx, opts) do
     instruction = Keyword.get(opts, :instruction)

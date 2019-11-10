@@ -39,33 +39,61 @@ defmodule UberGen.Playbook do
       Module.register_attribute(__MODULE__, :shortdoc, persist: true)
 
       @doc false
-      def has_run?   , do: has?({:_run, 1})
+      def has_run?       , do: has?({:_run, 1})
       @doc false
-      def has_test?  , do: has?({:_test, 2})
+      def has_test?      , do: has?({:_test, 2})
       @doc false
-      def has_call?  , do: has?({:_call, 2})
+      def has_call?      , do: has?({:_call, 2})
       @doc false
-      def has_steps? , do: has?({:_steps, 2})
+      def has_steps?     , do: has?({:_steps, 2})
       @doc false
-      def has_guide? , do: has?({:_guide, 2})
+      def has_guide?     , do: has?({:_guide, 2})
+      @doc false
+      def has_changeset? , do: has?({:_changeset, 1})
 
       @doc false
-      def run(args)        , do: if has_run?()  , do: apply(mod(), :_run,   [args])      , else: nil
+      def run(args)        , do: if has_run?()      , do: apply(mod(), :_run,       [args])      , else: nil
       @doc false
-      def call(ctx, opts)  , do: if has_call?() , do: apply(mod(), :_call,  [ctx, opts]) , else: ctx
+      def call(ctx, opts)  , do: if has_call?()     , do: apply(mod(), :_call,      [ctx, opts]) , else: ctx
       @doc false
-      def test(ctx, opts)  , do: if has_test?() , do: apply(mod(), :_test,  [ctx, opts]) , else: true
+      def test(ctx, opts)  , do: if has_test?()     , do: apply(mod(), :_test,      [ctx, opts]) , else: true
       @doc false
-      def guide(ctx, opts) , do: if has_guide?(), do: apply(mod(), :_guide, [ctx, opts]) , else: nil
+      def guide(ctx, opts) , do: if has_guide?()    , do: apply(mod(), :_guide,     [ctx, opts]) , else: ""
       @doc false
-      def steps(ctx, opts) , do: if has_steps?(), do: apply(mod(), :_steps, [ctx, opts]) , else: []
+      def steps(ctx, opts) , do: if has_steps?()    , do: apply(mod(), :_steps,     [ctx, opts]) , else: []
+      @doc false
+      def changeset(opts)  , do: if has_changeset?(), do: apply(mod(), :_changeset, [opts])      , else: {:ok, opts}
 
       defp mod        , do: __MODULE__
       defp flist      , do: __MODULE__.__info__(:functions)
       defp has?(tuple), do: Enum.any?(flist(), &(&1 == tuple))
 
+      use Ecto.Schema
+      import Ecto.Changeset
       import UberGen.Playbook
       import UberGen.Ctx
+    end
+  end
+
+  @doc """
+  Define Playbooks params.
+  """
+  defmacro params(do: yeild) do
+    quote do
+      embedded_schema do
+        unquote(yeild)
+      end
+    end
+  end
+
+  @doc """
+  Changeset for Playbook params.
+  """
+  defmacro changeset(params, do: yeild) do
+    quote do
+      def _changeset(unquote(params)) do
+        unquote(yeild)
+      end
     end
   end
 

@@ -54,11 +54,14 @@ defmodule Mix.Tasks.Ugen.Pb.Export do
   defp output({module, opts}, depth) do
     doc = module.guide(%{}, opts)
     hdr = String.duplicate("#", depth)
-    block_text(hdr, doc)
+    block_text(hdr, doc) 
   end
 
   defp block_text(hdr,  %{header: header, body: body}), do: "#{hdr} #{header}\n\n#{body}"
   defp block_text(hdr,  %{header: header})            , do: "#{hdr} #{header}"
   defp block_text(_hdr, %{body: body})                , do: body
+  defp block_text(hdr,  [header: header, body: body]) , do: "#{hdr} #{header}\n\n#{body}"
+  defp block_text(hdr,  [header: header])             , do: "#{hdr} #{header}"
+  defp block_text(_hdr, [body: body])                 , do: body
   defp block_text(_hdr, body)                         , do: body
 end

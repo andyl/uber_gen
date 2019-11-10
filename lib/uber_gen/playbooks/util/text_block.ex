@@ -10,13 +10,20 @@ defmodule UberGen.Playbooks.Util.TextBlock do
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  @doc """
-  Guide block.
+  params do
+    field(:header, :string)
+    field(:body,   :string)
+  end
 
-  Required option: 
-  - text_block
+  changeset(params) do
+    %__MODULE__{}
+    |> cast(params, [:header, :body])
+  end
+
+  @doc """
+  Guide text.
   """
   guide(_ctx, opts) do
-    Keyword.get(opts, :text_block)
+    opts
   end
 end

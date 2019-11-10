@@ -54,7 +54,7 @@ defmodule UberGen.Playbooks.Phx.LiveView do
  
   defp text_opts do
     [
-      text_block: """
+      body: """
       If you want the latest features, install from GitHub:
       
       ```elixir

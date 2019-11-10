@@ -57,7 +57,16 @@
 - [x] Add `Util.BlockInFile` playbook
 - [x] LiveView: working `mix ugen.pb.export` command
 
+## 2019 Nov 10 Sun 
+
+- [x] Add `params` and `changeset` macros to `Playbook`
+- [x] Create `Playbooks.Test.MultiText` playbook 
+
 ## TBD
+
+- [ ] Add param validation to `_guide` function.
+- [ ] Remove `run` macro from Playbook
+- [ ] Rename `call` macro to `run`
 
 - [ ] LiveView: working `mix ugen.pg.run` command (run validation tests)
 
