@@ -10,11 +10,7 @@ defmodule UberGen.Playbooks.Phx.RouterSettings do
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  run(_) do
-    IO.puts "RUNNING #{__MODULE__}"
-  end
-
-  call(ctx, _opts) do
+  run(ctx, _opts) do
     ctx
   end
 

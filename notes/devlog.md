@@ -62,11 +62,18 @@
 - [x] Add `params` and `changeset` macros to `Playbook`
 - [x] Create `Playbooks.Test.MultiText` playbook 
 
-## TBD
+## 2019 Nov 11 Mon
 
-- [ ] Add param validation to `_guide` function.
+- [x] Questions: How to configure nested playbooks?
+- [x] Questions: How to expose the properties of a playbook?
+- [x] Questions: Do we need a construct like `ecto_changeset`?
+- [x] Questions: How to script a playbook?
+
 - [ ] Remove `run` macro from Playbook
 - [ ] Rename `call` macro to `run`
+- [ ] Add param validation to `_guide` function.
+
+## TBD
 
 - [ ] LiveView: working `mix ugen.pg.run` command (run validation tests)
 
@@ -83,10 +90,6 @@
 
 ## Questions
 
-- [ ] How to configure nested playbooks?
-- [ ] How to expose the properties of a playbook?
-- [ ] Do we need a construct like `ecto_changeset`?
-- [ ] How to script a playbook?
 - [ ] Can someone save a script as a playbook?
 - [ ] How does PragDave install templates?
 - [ ] How does PragDave store templates?

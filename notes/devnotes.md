@@ -46,15 +46,16 @@ Playbooks must:
 - have the module-name prefix `UberGen.Playbooks`
 - add the line `use UberGen.Playbook`
 
-The `UberGen.Playbook` module provides five macros for use in Playbooks.
+The `UberGen.Playbook` module provides macros for use in Playbooks.
 
-| Macro   | Arg(s)      | Returns            | Purpose                       |
-|---------|-------------|--------------------|-------------------------------|
-| run/1   | mix options | run status         | can be called from a mix task |
-| call/2  | ctx, opts   | new_ctx            | executable playbook code      |
-| test/2  | ctx, opts   | test status        | validation test               |
-| steps/2 | ctx, opts   | list of PB Modules | list of playbook children     |
-| guide/2 | ctx, opts   | guide text         | playbook documentation        |
+| Macro       | Arg(s)    | Returns            | Purpose                   |
+|-------------|-----------|--------------------|---------------------------|
+| run/2       | ctx, opts | new_ctx            | executable playbook code  |
+| test/2      | ctx, opts | test status        | validation test           |
+| steps/2     | ctx, opts | list of PB Modules | list of playbook children |
+| guide/2     | ctx, opts | guide text         | playbook documentation    |
+| params/0    | TBD       | params             | declare param schema      |
+| changeset/0 | TBD       | status             | cast and validate params  |
 
 All of these macros are optional for any given playbook.
 

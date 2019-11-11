@@ -10,12 +10,6 @@ defmodule UberGen.Playbooks.Phx.LiveView do
   Extensive text on config settings goes here.
   """
 
-  @shortdoc "ShortDoc for #{__MODULE__}"
-
-  run(_) do
-    IO.puts "RUNNING #{__MODULE__}"
-  end
-
   steps(_ctx, _opts) do
     [
       { Playbooks.Mix.Deps,         dep_opts()   },

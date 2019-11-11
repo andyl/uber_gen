@@ -11,11 +11,11 @@ defmodule UberGen.Playbooks.ConfigSetting do
   @shortdoc "ShortDoc for #{__MODULE__}"
 
   @doc """
-  Call ConfigSettings
+  Run ConfigSettings
 
   asdf
   """
-  call(context, _options) do
+  run(context, _options) do
     context
   end
 

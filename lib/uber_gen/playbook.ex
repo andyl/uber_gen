@@ -16,13 +16,14 @@ defmodule UberGen.Playbook do
 
   The `UberGen.Playbook` module provides five macros for use in Playbooks.
 
-  | Macro   | Arg(s)      | Returns            | Purpose                       |
-  |---------|-------------|--------------------|-------------------------------|
-  | run/1   | mix options | run status         | can be called from a mix task |
-  | call/2  | ctx, opts   | new_ctx            | executable playbook code      |
-  | test/2  | ctx, opts   | test status        | validation test               |
-  | steps/2 | ctx, opts   | list of PB Modules | list of playbook children     |
-  | guide/2 | ctx, opts   | guide text         | playbook documentation        |
+  | Macro       | Arg(s)    | Returns                     | Purpose                   |
+  |-------------|-----------|-----------------------------|---------------------------|
+  | run/2       | ctx, opts | new_ctx                     | executable playbook code  |
+  | test/2      | ctx, opts | test status                 | validation test           |
+  | guide/2     | ctx, opts | guide text                  | playbook documentation    |
+  | steps/2     | ctx, opts | list of PB Modules & params | list of playbook children |
+  | params/x    | TBD       | TBD                         | declare playbook params   |
+  | changeset/2 | TBD       | TBD                         | param cast and validation |
 
   All of these macros are optional for any given playbook.
 
@@ -39,11 +40,9 @@ defmodule UberGen.Playbook do
       Module.register_attribute(__MODULE__, :shortdoc, persist: true)
 
       @doc false
-      def has_run?       , do: has?({:_run, 1})
+      def has_run?       , do: has?({:_run, 2})
       @doc false
       def has_test?      , do: has?({:_test, 2})
-      @doc false
-      def has_call?      , do: has?({:_call, 2})
       @doc false
       def has_steps?     , do: has?({:_steps, 2})
       @doc false
@@ -52,9 +51,7 @@ defmodule UberGen.Playbook do
       def has_changeset? , do: has?({:_changeset, 1})
 
       @doc false
-      def run(args)        , do: if has_run?()      , do: apply(mod(), :_run,       [args])      , else: nil
-      @doc false
-      def call(ctx, opts)  , do: if has_call?()     , do: apply(mod(), :_call,      [ctx, opts]) , else: ctx
+      def run(ctx, opts)   , do: if has_run?()      , do: apply(mod(), :_run,       [ctx, opts]) , else: ctx
       @doc false
       def test(ctx, opts)  , do: if has_test?()     , do: apply(mod(), :_test,      [ctx, opts]) , else: true
       @doc false
@@ -98,19 +95,6 @@ defmodule UberGen.Playbook do
   end
 
   @doc """
-  Run from a mix task.
-
-  Bing bong bang.
-  """
-  defmacro run(args, do: yeild) do
-    quote do
-      def _run(unquote(args)) do
-        unquote(yeild)
-      end
-    end
-  end
-
-  @doc """
   Execution steps.
 
   Bong bang bong.
@@ -124,9 +108,9 @@ defmodule UberGen.Playbook do
   end
 
   @doc false
-  defmacro call(ctx, opts, do: yeild) do
+  defmacro run(ctx, opts, do: yeild) do
     quote do
-      def _call(unquote(ctx), unquote(opts)) do
+      def _run(unquote(ctx), unquote(opts)) do
         # IO.inspect unquote(ctx)
         # IO.inspect unquote(opts)
         unquote(yeild)
