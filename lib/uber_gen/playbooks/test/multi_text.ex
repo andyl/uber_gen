@@ -11,12 +11,12 @@ defmodule UberGen.Playbooks.Test.MultiText do
 
   steps(_ctx, _opts) do
     [
-      { Playbooks.Util.TextBlock, [header: "asdf", body: "HELLO BODY"]},
-      { Playbooks.Util.TextBlock, [header: "qwer", body: "SECOND BODY"]},
+      { Playbooks.Util.TextBlock, %{header: "asdf", body: "HELLO BODY"}},
+      { Playbooks.Util.TextBlock, %{header: "qwer", body: "SECOND BODY"}},
     ]
   end
 
-  guide(_ctx, _opts) do
+  guide(ctx, opts) do
     %{
       header: "MultiText",
       body: "Just a simple test of MultiText"

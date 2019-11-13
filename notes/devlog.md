@@ -68,29 +68,53 @@
 - [x] Questions: How to expose the properties of a playbook?
 - [x] Questions: Do we need a construct like `ecto_changeset`?
 - [x] Questions: How to script a playbook?
+- [x] Remove `run` macro from Playbook
+- [x] Rename `call` macro to `run`
 
-- [ ] Remove `run` macro from Playbook
-- [ ] Rename `call` macro to `run`
-- [ ] Add param validation to `_guide` function.
+## 2019 Nov 12 Tue
+
+- [x] Rename 'run' to 'work'
+- [x] Rename 'changeset' to 'verify'
+- [x] Add param validation to `_guide` function.
+- [x] Design scripting layer
+- [x] How to save a script as a playbook?
+- [x] How to dynamically configure a tree of playbooks?
+
+- [ ] Add steps as third (optional) tuple setting
+- [ ] Demo recursive step definition
 
 ## TBD
+
+- [ ] Write YAML interpreter
+- [ ] Demo YAML interprerter with nested configuration
 
 - [ ] LiveView: working `mix ugen.pg.run` command (run validation tests)
 
 - [ ] Get `Playbooks.Util.Command` working (execute run task)
 
-- [ ] Design `Compser` UI
-- [ ] Design `Director` UI
+- [ ] Convert internal bash generator scripts to UberGen
+
+- [ ] Design Web UI (Composer and Director)
 
 - [ ] Get `mix ugen.base.help` working
-- [ ] Don't show playbook in `ugen.cache.list` unless `has_run?` or `--all`
+- [ ] Don't show playbook in `ugen.cache.list` unless `has_work?` or `--all`
 - [ ] Document playbooks
 
 - [ ] Create an exec playbook (`util.exec`)
 
 ## Questions
 
-- [ ] Can someone save a script as a playbook?
+- [ ] How to manage long-running state?  (like tasks)
+- [ ] Is there a datastore for UberGen?
+- [ ] How to access-control for shared playbooks?
+- [ ] Use-cases for playbooks with multi-parents? (listeners, chat, comments)
+- [ ] What is a a URI-scheme for Playbooks?
+- [ ] Can we get CRDTs working for offline access?
+- [ ] How to generate event-streams?  
+- [ ] Are playbooks wrappered in a manipulation API?
+
+- [ ] Do we need to define playbook variables and default values?
+
 - [ ] How does PragDave install templates?
 - [ ] How does PragDave store templates?
 

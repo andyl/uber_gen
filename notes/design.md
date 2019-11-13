@@ -86,3 +86,52 @@ Rename Project
 
 Add Dependency
 
+## Scripting
+
+### UberGen interpreter
+
+Takes a YAML file as input
+
+```yaml
+Name: Install LiveView
+CreatedBy: Andy
+CreatedOn: 2019 Jan 15
+PlaybookName: MyNewPlaybook
+---
+- name: Introduction
+  playbook: TextBlock 
+  params:
+    header: Install LiveView
+    body: We can install LiveView using UberGen.
+  steps:
+    - playbook: TextBlock
+      params:
+        header: Do something else
+        body: Now do something else.
+    - playbook: Command
+      params:
+        command: "ps aux | grep"
+        creates: "/tmp/asdf.txt"
+```
+
+Using the Command-Line Interpreter
+
+```
+$ ubergen myfile.yaml export  # writes markdown to stdout
+$ ubergen myfile.yaml run     # start the ubergen runner
+$ ubergen myfile.yaml serve   # start the ubergen server
+$ ubergen myfile.yaml save    # save as reusable playbook
+```
+
+### Markdown-Embedded Tags
+
+Comparables: Gatsby, React-Components Markdown, MDX, ReactStatic
+
+```
+# Sample Markdown - How to install X
+
+<Pb.Command instruction="Now run 'cat /etc/passwd | grep asdf' > /tmp/output.txt" creates="/tmp/output.txt" />
+
+more markdown ...
+```
+

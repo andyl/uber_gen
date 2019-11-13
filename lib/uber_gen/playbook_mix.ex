@@ -40,6 +40,7 @@ defmodule UberGen.PlaybookMix do
     base = Path.basename(filename)
     part = byte_size(base) - @prefix_size - @suffix_size
 
+
     case base do
       <<"Elixir.UberGen.Playbooks.", rest::binary-size(part), ".beam">> ->
         mod = :"Elixir.UberGen.Playbooks.#{rest}"
@@ -136,50 +137,50 @@ defmodule UberGen.PlaybookMix do
     end
   end
 
-  @doc """
-  Runs a `playbook` with the given `args`.
-  If the playbook was not yet invoked, it runs the playbook and
-  returns the result.
-  """
-  @spec run(playbook_name, [any]) :: any
-  def run(playbook, args \\ [])
+  # @doc """
+  # Runs a `playbook` with the given `args`.
+  # If the playbook was not yet invoked, it runs the playbook and
+  # returns the result.
+  # """
+  # @spec run(playbook_name, [any]) :: any
+  # def run(playbook, args \\ [])
+  #
+  # def run(playbook, args) when is_atom(playbook) do
+  #   run(Atom.to_string(playbook), args)
+  # end
+  #
+  # def run(playbook, args) when is_binary(playbook) do
+  #   proj = Mix.Project.get()
+  #
+  #   cond do
+  #     UberGen.PlaybookServer.run({:playbook, playbook, proj}) ->
+  #       run_playbook(proj, playbook, args)
+  #
+  #     true ->
+  #       :noop
+  #   end
+  # end
 
-  def run(playbook, args) when is_atom(playbook) do
-    run(Atom.to_string(playbook), args)
-  end
-
-  def run(playbook, args) when is_binary(playbook) do
-    proj = Mix.Project.get()
-
-    cond do
-      UberGen.PlaybookServer.run({:playbook, playbook, proj}) ->
-        run_playbook(proj, playbook, args)
-
-      true ->
-        :noop
-    end
-  end
-
-  defp run_playbook(proj, playbook, args) do
-    if Mix.debug?(), do: output_playbook_debug_info(playbook, args, proj)
-
-    # 1. If the playbook is available, we run it.
-    # 2. Otherwise we compile and load dependencies
-    # 3. Finally, we compile the current project in hope it is available.
-    module =
-      # get_playbook_or_run(proj, playbook, fn -> UberGen.Playbook.run("deps.loadpaths") end) ||
-        get_playbook_or_run(proj, playbook, fn -> Mix.Project.compile([]) end) ||
-        get!(playbook)
-
-    UberGen.PlaybookServer.put({:playbook, playbook, proj})
-
-    try do
-      module.run(args)
-    rescue
-      e in OptionParser.ParseError ->
-        Mix.raise("Could not invoke playbook #{inspect(playbook)}: " <> Exception.message(e))
-    end
-  end
+  # defp run_playbook(proj, playbook, args) do
+  #   if Mix.debug?(), do: output_playbook_debug_info(playbook, args, proj)
+  #
+  #   # 1. If the playbook is available, we run it.
+  #   # 2. Otherwise we compile and load dependencies
+  #   # 3. Finally, we compile the current project in hope it is available.
+  #   module =
+  #     # get_playbook_or_run(proj, playbook, fn -> UberGen.Playbook.run("deps.loadpaths") end) ||
+  #       get_playbook_or_run(proj, playbook, fn -> Mix.Project.compile([]) end) ||
+  #       get!(playbook)
+  #
+  #   UberGen.PlaybookServer.put({:playbook, playbook, proj})
+  #
+  #   try do
+  #     module.run(args)
+  #   rescue
+  #     e in OptionParser.ParseError ->
+  #       Mix.raise("Could not invoke playbook #{inspect(playbook)}: " <> Exception.message(e))
+  #   end
+  # end
 
   defp output_playbook_debug_info(playbook, args, proj) do
     Mix.shell().info(
@@ -226,6 +227,7 @@ defmodule UberGen.PlaybookMix do
   end
 
   defp ensure_playbook?(module) do
-    Code.ensure_loaded?(module) and function_exported?(module, :run, 1)
+    # Code.ensure_loaded?(module) and function_exported?(module, :run, 1)
+    Code.ensure_loaded?(module)
   end
 end

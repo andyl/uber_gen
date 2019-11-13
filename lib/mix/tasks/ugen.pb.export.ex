@@ -28,15 +28,15 @@ defmodule Mix.Tasks.Ugen.Pb.Export do
   end
 
   defp build(module) do
-    build({module, []}, module.steps(%{}, []), 1)
+    build({module, %{}, module.steps(%{}, [])}, 1)
     |> String.replace(~r/\n\n[\n]+/, "\n\n")
   end
 
-  defp build({module, opts}, [], depth) do
+  defp build({module, opts, []}, depth) do
     output({module, opts}, depth)
   end
 
-  defp build({module, opts}, children, depth) do
+  defp build({module, opts, children}, depth) do
     base = output({module, opts}, depth) <> "\n\n"
 
     alt =

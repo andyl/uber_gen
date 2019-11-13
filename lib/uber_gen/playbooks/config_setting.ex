@@ -11,11 +11,11 @@ defmodule UberGen.Playbooks.ConfigSetting do
   @shortdoc "ShortDoc for #{__MODULE__}"
 
   @doc """
-  Run ConfigSettings
+  ConfigSettings Work
 
   asdf
   """
-  run(context, _options) do
+  work(context, _options) do
     context
   end
 
@@ -33,9 +33,10 @@ defmodule UberGen.Playbooks.ConfigSetting do
 
   asdf
   """
-  guide(_context, _options) do
+  guide(_context, opts) do
     header = "HEADER FOR #{__MODULE__}"
     body   = "BODY FOR #{__MODULE__}"
     %{header: header, body: body}
   end
+
 end
