@@ -74,13 +74,15 @@
 ## 2019 Nov 12 Tue
 
 - [x] Rename 'run' to 'work'
-- [x] Rename 'changeset' to 'verify'
 - [x] Add param validation to `_guide` function.
 - [x] Design scripting layer
 - [x] How to save a script as a playbook?
 - [x] How to dynamically configure a tree of playbooks?
 
-- [ ] Add steps as third (optional) tuple setting
+## 2019 Nov 13 Wed
+
+- [x] Rename 'changeset' to 'verify'
+- [x] Add children as third (optional) tuple setting
 - [ ] Demo recursive step definition
 
 ## TBD
@@ -88,11 +90,11 @@
 - [ ] Write YAML interpreter
 - [ ] Demo YAML interprerter with nested configuration
 
+- [ ] Convert internal bash generator scripts to UberGen
+
 - [ ] LiveView: working `mix ugen.pg.run` command (run validation tests)
 
 - [ ] Get `Playbooks.Util.Command` working (execute run task)
-
-- [ ] Convert internal bash generator scripts to UberGen
 
 - [ ] Design Web UI (Composer and Director)
 

@@ -42,14 +42,17 @@ defmodule Mix.Tasks.Ugen.Pb.Export do
     alt =
       children
       |> Enum.map(&child_module/1)
-      |> Enum.map(&build(&1, elem(&1, 0).steps(%{}, []), depth + 1))
+      |> Enum.map(&build(&1, depth + 1))
       |> Enum.join("\n\n")
 
     base <> alt
   end
 
-  defp child_module({module, opts}), do: {module, opts}
-  defp child_module(module), do: {module, []}
+  # if children are defined, use them
+  # otherwise, use the hard-coded steps as children
+  defp child_module({module, opts, children}), do: {module, opts, children}
+  defp child_module({module, opts}), do: {module, opts, module.steps(%{}, %{})}
+  defp child_module(module), do: {module, %{}, []}
 
   defp output({module, opts}, depth) do
     doc = module.guide(%{}, opts)
