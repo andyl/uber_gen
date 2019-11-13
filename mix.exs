@@ -30,6 +30,7 @@ defmodule UberGen.MixProject do
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:version_tasks, "~> 0.11.3"},
       {:yaml_elixir, "~> 2.4.0"},
+      {:jason, "~> 1.1"},
       {:ecto, "~> 3.0"},
     ]
   end

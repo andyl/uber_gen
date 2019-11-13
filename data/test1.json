@@ -1,0 +1,52 @@
+{
+   "name": "Test1",
+   "version": "0.0.1",
+   "params": {
+      "header": "YAML MultiText",
+      "body": "Just a simple test of MultiText from YAML"
+   },
+   "steps": [
+      {
+         "name": "Item 1.0",
+         "playbook": "Util.TextBlock",
+         "params": {
+            "header": "asdf",
+            "body": "HELLO BODY FIRST ITEM"
+         }
+      },
+      {
+         "name": "Item 2.0",
+         "playbook": "Util.TextBlock",
+         "params": {
+            "header": "qwer",
+            "body": "HELLO BODY SECOND ITEM"
+         },
+         "steps": [
+            {
+               "name": "Item 2.1",
+               "playbook": "Util.TextBlock",
+               "params": {
+                  "header": "zxcv",
+                  "body": "HELLO BODY 2.1"
+               }
+            },
+            {
+               "name": "Item 2.2",
+               "playbook": "Util.TextBlock",
+               "params": {
+                  "header": "poiu",
+                  "body": "HELLO BODY 2.2"
+               }
+            }
+         ]
+      },
+      {
+         "name": "Item 3.0",
+         "playbook": "Util.TextBlock",
+         "params": {
+            "header": "last",
+            "body": "HELLO BODY LAST ITEM"
+         }
+      }
+   ]
+}
