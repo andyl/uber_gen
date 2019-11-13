@@ -16,14 +16,14 @@ defmodule UberGen.Playbook do
 
   The `UberGen.Playbook` module provides five macros for use in Playbooks.
 
-  | Macro       | Arg(s)    | Returns                     | Purpose                   |
-  |-------------|-----------|-----------------------------|---------------------------|
-  | run/2       | ctx, opts | new_ctx                     | executable playbook code  |
-  | test/2      | ctx, opts | test status                 | validation test           |
-  | guide/2     | ctx, opts | guide text                  | playbook documentation    |
-  | steps/2     | ctx, opts | list of PB Modules & params | list of playbook children |
-  | params/x    | TBD       | TBD                         | declare playbook params   |
-  | changeset/2 | TBD       | TBD                         | param cast and validation |
+  | Macro    | Arg(s)    | Returns                     | Purpose                   |
+  |----------|-----------|-----------------------------|---------------------------|
+  | work/2   | ctx, opts | new_ctx                     | executable playbook code  |
+  | test/2   | ctx, opts | test status                 | validation test           |
+  | guide/2  | ctx, opts | guide text                  | playbook documentation    |
+  | steps/2  | ctx, opts | list of PB Modules & params | list of playbook children |
+  | params/x | TBD       | TBD                         | declare playbook params   |
+  | verify/2 | TBD       | TBD                         | param cast and validation |
 
   All of these macros are optional for any given playbook.
 
@@ -40,27 +40,28 @@ defmodule UberGen.Playbook do
       Module.register_attribute(__MODULE__, :shortdoc, persist: true)
 
       @doc false
-      def has_run?       , do: has?({:_run, 2})
+      def has_run?    , do: has?({:_run, 2})
       @doc false
-      def has_test?      , do: has?({:_test, 2})
+      def has_test?   , do: has?({:_test, 2})
       @doc false
-      def has_steps?     , do: has?({:_steps, 2})
+      def has_steps?  , do: has?({:_steps, 2})
       @doc false
-      def has_guide?     , do: has?({:_guide, 2})
+      def has_guide?  , do: has?({:_guide, 2})
       @doc false
-      def has_changeset? , do: has?({:_changeset, 1})
+      def has_verify? , do: has?({:_verify, 1})
 
       @doc false
-      def run(ctx, opts)   , do: if has_run?()      , do: apply(mod(), :_run,       [ctx, opts]) , else: ctx
+      def run(ctx, opts)  , do: if has_run?()   , do: apply(mod(), :_run,    [ctx, opts]) , else: ctx
       @doc false
-      def test(ctx, opts)  , do: if has_test?()     , do: apply(mod(), :_test,      [ctx, opts]) , else: true
+      def test(ctx, opts) , do: if has_test?()  , do: apply(mod(), :_test,   [ctx, opts]) , else: true
       @doc false
-      def guide(ctx, opts) , do: if has_guide?()    , do: apply(mod(), :_guide,     [ctx, opts]) , else: ""
+      def guide(ctx, opts), do: if has_guide?() , do: apply(mod(), :_guide,  [ctx, opts]) , else: ""
       @doc false
-      def steps(ctx, opts) , do: if has_steps?()    , do: apply(mod(), :_steps,     [ctx, opts]) , else: []
-      @doc false
-      def changeset(opts)  , do: if has_changeset?(), do: apply(mod(), :_changeset, [opts])      , else: {:ok, opts}
+      def steps(ctx, opts), do: if has_steps?() , do: apply(mod(), :_steps,  [ctx, opts]) , else: []
+      @doc false 
+      def verify(opts)    , do: if has_verify?(), do: apply(mod(), :_verify, [opts])      , else: ok(opts)
 
+      defp ok(opts)   , do: %{valid?: true, changes: opts}
       defp mod        , do: __MODULE__
       defp flist      , do: __MODULE__.__info__(:functions)
       defp has?(tuple), do: Enum.any?(flist(), &(&1 == tuple))
@@ -84,33 +85,20 @@ defmodule UberGen.Playbook do
   end
 
   @doc """
-  Changeset for Playbook params.
+  Verify Playbook params.
   """
-  defmacro changeset(params, do: yeild) do
+  defmacro verify(params, do: yeild) do
     quote do
-      def _changeset(unquote(params)) do
-        unquote(yeild)
-      end
-    end
-  end
-
-  @doc """
-  Execution steps.
-
-  Bong bang bong.
-  """
-  defmacro steps(ctx, opts, do: yeild) do
-    quote do
-      def _steps(unquote(ctx), unquote(opts)) do
+      def _verify(unquote(params)) do
         unquote(yeild)
       end
     end
   end
 
   @doc false
-  defmacro run(ctx, opts, do: yeild) do
+  defmacro work(ctx, opts, do: yeild) do
     quote do
-      def _run(unquote(ctx), unquote(opts)) do
+      def _work(unquote(ctx), unquote(opts)) do
         # IO.inspect unquote(ctx)
         # IO.inspect unquote(opts)
         unquote(yeild)
@@ -122,9 +110,20 @@ defmodule UberGen.Playbook do
   defmacro guide(ctx, opts, do: yeild) do
     quote do
       def _guide(unquote(ctx), unquote(opts)) do
-        # IO.inspect unquote(ctx)
-        # IO.inspect unquote(opts)
-        unquote(yeild)
+        changeset = verify(unquote(opts))
+        if changeset.valid? do
+          fn (cx, op) -> unquote(yeild) end.(unquote(ctx), changeset.changes)
+        else
+          """
+          ---
+          Playbook Error: Invalid Params (#{__MODULE__})
+
+          ```
+          #{inspect(changeset.errors)}
+          ```
+          ---
+          """
+        end
       end
     end
   end
@@ -139,5 +138,19 @@ defmodule UberGen.Playbook do
       end
     end
   end
+
+  @doc """
+  Playbook steps.
+
+  Bong bang bong.
+  """
+  defmacro steps(ctx, opts, do: yeild) do
+    quote do
+      def _steps(unquote(ctx), unquote(opts)) do
+        unquote(yeild)
+      end
+    end
+  end
+
 
 end

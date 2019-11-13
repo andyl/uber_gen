@@ -74,6 +74,7 @@
 ## 2019 Nov 12 Tue
 
 - [x] Rename 'run' to 'work'
+- [x] Rename 'changeset' to 'verify'
 - [x] Add param validation to `_guide` function.
 - [x] Design scripting layer
 - [x] How to save a script as a playbook?
@@ -81,14 +82,18 @@
 
 ## 2019 Nov 13 Wed
 
-- [x] Rename 'changeset' to 'verify'
 - [x] Add children as third (optional) tuple setting
-- [ ] Demo recursive step definition
+- [x] Demo recursive step definition
 
 ## TBD
 
 - [ ] Write YAML interpreter
 - [ ] Demo YAML interprerter with nested configuration
+
+- [ ] $ ubergen myfile.yaml export  
+- [ ] $ ubergen myfile.yaml run     
+- [ ] $ ubergen myfile.yaml serve   
+- [ ] $ ubergen myfile.yaml save    
 
 - [ ] Convert internal bash generator scripts to UberGen
 

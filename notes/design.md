@@ -93,25 +93,27 @@ Add Dependency
 Takes a YAML file as input
 
 ```yaml
-Name: Install LiveView
-CreatedBy: Andy
-CreatedOn: 2019 Jan 15
-PlaybookName: MyNewPlaybook
 ---
-- name: Introduction
-  playbook: TextBlock 
-  params:
-    header: Install LiveView
-    body: We can install LiveView using UberGen.
+- name: Install LivewView
+  createdby: andyl
+  createdon: 2019 jan 15
+  playbookname: MyNewPlaybook
+  version: 0.0.1
   steps:
-    - playbook: TextBlock
+    - name: Introduction
+      playbook: TextBlock 
       params:
-        header: Do something else
-        body: Now do something else.
-    - playbook: Command
-      params:
-        command: "ps aux | grep"
-        creates: "/tmp/asdf.txt"
+        header: Install LiveView
+        body: We can install LiveView using UberGen.
+      steps:
+        - playbook: TextBlock
+          params:
+            header: Do something else
+            body: Now do something else.
+        - playbook: Command
+          params:
+            command: "ps aux | grep"
+            creates: "/tmp/asdf.txt"
 ```
 
 Using the Command-Line Interpreter
@@ -120,7 +122,8 @@ Using the Command-Line Interpreter
 $ ubergen myfile.yaml export  # writes markdown to stdout
 $ ubergen myfile.yaml run     # start the ubergen runner
 $ ubergen myfile.yaml serve   # start the ubergen server
-$ ubergen myfile.yaml save    # save as reusable playbook
+$ ubergen myfile.yaml save    # save as reusable playbook in the registry
+$ ubergen myfile.yaml gen     # generate an elixir module from the yaml 
 ```
 
 ### Markdown-Embedded Tags
@@ -134,4 +137,8 @@ Comparables: Gatsby, React-Components Markdown, MDX, ReactStatic
 
 more markdown ...
 ```
+
+### Other Markup Formats
+
+It should be possible to extend `RST` or `Asciidoc` to work with UberGen.
 
