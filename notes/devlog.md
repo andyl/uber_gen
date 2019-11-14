@@ -84,16 +84,15 @@
 
 - [x] Add children as third (optional) tuple setting
 - [x] Demo recursive step definition
+- [x] Write YAML interpreter
+- [x] Demo YAML interprerter with nested configuration
+- [x] $ ubergen myfile.yaml export  
+- [x] $ ubergen myfile.yaml run     
 
 ## TBD
 
-- [ ] Write YAML interpreter
-- [ ] Demo YAML interprerter with nested configuration
-
-- [ ] $ ubergen myfile.yaml export  
-- [ ] $ ubergen myfile.yaml run     
-- [ ] $ ubergen myfile.yaml serve   
-- [ ] $ ubergen myfile.yaml save    
+- [ ] Tag and Consolidate Branches
+- [ ] Move to dev-branch system
 
 - [ ] Convert internal bash generator scripts to UberGen
 

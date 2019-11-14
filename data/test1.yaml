@@ -1,6 +1,7 @@
 ---
 name: Test1
 version: 0.0.1
+playbook: Util.TextBlock
 params:
   header: "YAML MultiText"
   body: "Just a simple test of MultiText from YAML"
