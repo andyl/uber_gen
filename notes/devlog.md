@@ -92,12 +92,11 @@
 
 ## 2019 Nov 14 Thu
 
-- [ ] Tag and Consolidate Branches
+- [x] Tag and Consolidate Branches
+- [ ] Create LiveView generator
+- [ ] Convert bash generators to UberGen
 
 ## TBD
-
-- [ ] Convert bash generators to UberGen
-- [ ] Create LiveView generator
 
 - [ ] Get `mix ugen.base.help` working
 - [ ] Don't show playbook in `ugen.cache.list` unless `has_work?` or `--all`

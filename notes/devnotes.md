@@ -2,16 +2,16 @@
 
 ## Overview
 
-Exploratory Code Branches
+Exploratory Code  
 
-| Branch   | Created     | Contents                            |
-|----------|-------------|-------------------------------------|
-| master   | 2019 Oct 20 | Just a README stating overall goals |
-| test     | 2019 Oct 25 | Mix-style playbook structure        |
-| build    | 2019 Nov 01 | Document generation                 |
-| macros   | 2019 Nov 03 | Use of macros in UberGen playbook   |
-| liveview | 2019 Nov 07 | Write playbook for LiveViews        |
-| schemas  | 2019 Nov 10 | Playbook schemas, nested playbooks  |
+| Tag         | Created     | Contents                            |
+|-------------|-------------|-------------------------------------|
+| x1_master   | 2019 Oct 20 | Just a README stating overall goals |
+| x2_test     | 2019 Oct 25 | Mix-style playbook structure        |
+| x3_guide    | 2019 Nov 01 | Document generation                 |
+| x4_macros   | 2019 Nov 03 | Use of macros in UberGen playbook   |
+| x5_liveview | 2019 Nov 07 | Write playbook for LiveViews        |
+| x6_schemas  | 2019 Nov 10 | Playbook schemas, nested playbooks  |
 
 ## 2019 Nov 01 Fri
 
