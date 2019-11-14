@@ -88,25 +88,20 @@
 - [x] Demo YAML interprerter with nested configuration
 - [x] $ ubergen myfile.yaml export  
 - [x] $ ubergen myfile.yaml run     
+- [x] Move to dev-branch system
+
+## 2019 Nov 14 Thu
+
+- [ ] Tag and Consolidate Branches
 
 ## TBD
 
-- [ ] Tag and Consolidate Branches
-- [ ] Move to dev-branch system
-
-- [ ] Convert internal bash generator scripts to UberGen
-
-- [ ] LiveView: working `mix ugen.pg.run` command (run validation tests)
-
-- [ ] Get `Playbooks.Util.Command` working (execute run task)
-
-- [ ] Design Web UI (Composer and Director)
+- [ ] Convert bash generators to UberGen
+- [ ] Create LiveView generator
 
 - [ ] Get `mix ugen.base.help` working
 - [ ] Don't show playbook in `ugen.cache.list` unless `has_work?` or `--all`
 - [ ] Document playbooks
-
-- [ ] Create an exec playbook (`util.exec`)
 
 ## Questions
 
@@ -124,20 +119,20 @@
 - [ ] How does PragDave install templates?
 - [ ] How does PragDave store templates?
 
-## Playbook Registry
+## Futures
 
-- [ ] External Playbooks - path / github deps
+- [ ] WebUI: Design WebUI
 
-- [ ] Create Registry
-- [ ] Registry upload/download/search
+- [ ] Registry: Create Registry
+- [ ] Registry: External Playbooks - path / github deps
+- [ ] Registry: Registry upload/download/search
 
-## Website 
+- [ ] Website: A HowTo Blog
+- [ ] Website: Learning Paths
+- [ ] Website: Time to Learn
+- [ ] Website: Credentialing
+- [ ] Website: Metrics: Frequency/RunTime per Playbook 
 
-- [ ] A HowTo Blog
-- [ ] Learning Paths
-- [ ] Time to Learn
-- [ ] Credentialing
-- [ ] Metrics: Frequency/RunTime per Playbook 
 - [ ] Community: who else is doing this now?
 - [ ] Community: who has the most experience?
 - [ ] Community: who is willing to mentor?
