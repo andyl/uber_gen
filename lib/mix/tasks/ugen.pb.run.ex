@@ -1,15 +1,20 @@
-defmodule Mix.Tasks.Ugen.Pb.Serve do
+defmodule Mix.Tasks.Ugen.Pb.Run do
   use Mix.Task
 
   alias UberGen.PlaybookUtil
 
   @moduledoc """
-  Serves a Playbook - similar to Jekyll serve.
+  Run a playbook on the command-line.
 
-  Watches the filesystem & updates status when files change.
+  Operates similar to Ansible - runs in the terminal, shows test status.
+
+  Saves the context, so you can re-run and it remembers your previous actions.
+
+  Optional: displays guide text for the failing step.
   """
 
-  @shortdoc "Serves a playbook"
+  @shortdoc "Run a playbook"
+  
   def run(args) do
     arg = List.first(args)
     PlaybookUtil.loadpaths!()

@@ -97,10 +97,17 @@
 - [x] Add ability to use YAML or JSON in playbook steps
 - [x] Create LiveView generator
 - [x] Design UberGen runner
+- [x] Rename 'Playbook.work' to 'Playbook.cmd'
+- [x] Create `Exec.Export.guide/1`
+- [x] Create `Exec.Run.cmd/1`
+
+## 2019 Nov 14 Thu
+
 
 ## TBD
 
-- [ ] Rename 'work' to 'cmd'
+- [ ] Create run function
+- [ ] Convert macros to callbacks
 
 - [ ] Convert bash generators to UberGen
 

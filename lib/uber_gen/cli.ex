@@ -11,7 +11,7 @@ defmodule UberGen.Cli do
   # --------------------------------------------------
 
   def process(data, "export") do
-    IO.puts(UberGen.Exec.Export.build(data, 1))
+    IO.puts(UberGen.Exec.Export.guide(data, 1))
   end
 
   def process(_data, "run") do

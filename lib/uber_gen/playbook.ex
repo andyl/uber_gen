@@ -18,7 +18,7 @@ defmodule UberGen.Playbook do
 
   | Macro    | Arg(s)    | Returns                     | Purpose                   |
   |----------|-----------|-----------------------------|---------------------------|
-  | work/2   | ctx, opts | new_ctx                     | executable playbook code  |
+  | cmd/2    | ctx, opts | new_ctx                     | executable playbook code  |
   | test/2   | ctx, opts | test status                 | validation test           |
   | guide/2  | ctx, opts | guide text                  | playbook documentation    |
   | steps/2  | ctx, opts | list of PB Modules & params | list of playbook children |
@@ -30,7 +30,7 @@ defmodule UberGen.Playbook do
   Calling a Playbook with an 'undefined' macro returns a default value.
 
   The `UberGen.Playbook` module provides introspection functions that show if a
-  method is defined in a playbook: `has_run?/0`, `has_call?/0`, `has_test?/0`,
+  method is defined in a playbook: `has_cmd?/0`, `has_call?/0`, `has_test?/0`,
   `has_steps?/0`, `has_guide?/0`
   """
 
@@ -40,7 +40,7 @@ defmodule UberGen.Playbook do
       Module.register_attribute(__MODULE__, :shortdoc, persist: true)
 
       @doc false
-      def has_run?    , do: has?({:_run, 2})
+      def has_cmd?    , do: has?({:_cmd, 2})
       @doc false
       def has_test?   , do: has?({:_test, 2})
       @doc false
@@ -51,7 +51,7 @@ defmodule UberGen.Playbook do
       def has_verify? , do: has?({:_verify, 1})
 
       @doc false
-      def run(ctx, opts)  , do: if has_run?()   , do: apply(mod(), :_run,    [ctx, opts]) , else: ctx
+      def cmd(ctx, opts)  , do: if has_cmd?()   , do: apply(mod(), :_cmd,    [ctx, opts]) , else: ctx
       @doc false
       def test(ctx, opts) , do: if has_test?()  , do: apply(mod(), :_test,   [ctx, opts]) , else: true
       @doc false
@@ -96,9 +96,9 @@ defmodule UberGen.Playbook do
   end
 
   @doc false
-  defmacro work(ctx, opts, do: yeild) do
+  defmacro cmd(ctx, opts, do: yeild) do
     quote do
-      def _work(unquote(ctx), unquote(opts)) do
+      def _cmd(unquote(ctx), unquote(opts)) do
         # IO.inspect unquote(ctx)
         # IO.inspect unquote(opts)
         unquote(yeild)

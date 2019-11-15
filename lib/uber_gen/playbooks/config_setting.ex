@@ -15,7 +15,7 @@ defmodule UberGen.Playbooks.ConfigSetting do
 
   asdf
   """
-  work(context, _options) do
+  cmd(context, _options) do
     context
   end
 
@@ -33,10 +33,9 @@ defmodule UberGen.Playbooks.ConfigSetting do
 
   asdf
   """
-  guide(_context, opts) do
+  guide(ctx, opts) do
     header = "HEADER FOR #{__MODULE__}"
     body   = "BODY FOR #{__MODULE__}"
     %{header: header, body: body}
   end
-
 end

@@ -69,6 +69,7 @@ UberGen extends `Mix.Generate`, and borrows ideas from other tools:
 - from [Ansible][ansible]: idempotent helper functions, composable playbooks
 - from [Orats][orats]: git helper functions
 - from [Exercism][exer]: guided refactoring
+- from [Ansible][ansible], the playbook execution model
 
 [mixgen]:  https://hexdocs.pm/mix/Mix.Generator.html
 [pdgen]:   https://pragdave.me/blog/2017/04/18/elixir-project-generator.html
@@ -123,9 +124,9 @@ The UberGen Context is a Plug-like structure:
       app_name: "TBD"
     }
 
-### UberGen Helpers 
+### UberGen Command Helpers 
 
-UberGen helpers are conveniences for working with paths and generating content.
+UberGen command helpers are conveniences for working with paths and generating content.
 
 From Mix.Generator:
 
