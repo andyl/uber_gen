@@ -93,13 +93,18 @@
 ## 2019 Nov 14 Thu
 
 - [x] Tag and Consolidate Branches
-- [ ] Create LiveView generator
-- [ ] Convert bash generators to UberGen
+- [x] Don't show playbook in `ugen.cache.list` unless `has_work?` or `--all`
+- [x] Add ability to use YAML or JSON in playbook steps
+- [x] Create LiveView generator
+- [x] Design UberGen runner
 
 ## TBD
 
+- [ ] Rename 'work' to 'cmd'
+
+- [ ] Convert bash generators to UberGen
+
 - [ ] Get `mix ugen.base.help` working
-- [ ] Don't show playbook in `ugen.cache.list` unless `has_work?` or `--all`
 - [ ] Document playbooks
 
 ## Questions

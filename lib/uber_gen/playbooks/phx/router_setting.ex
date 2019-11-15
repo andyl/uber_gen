@@ -18,7 +18,7 @@ defmodule UberGen.Playbooks.Phx.RouterSettings do
     []
   end
 
-  guide(_ctx, opts) do
+  guide(ctx, opts) do
     header = "HEADER FOR #{__MODULE__}"
     body   = "BODY FOR #{__MODULE__}"
     %{header: header, body: body}

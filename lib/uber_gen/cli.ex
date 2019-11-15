@@ -2,9 +2,9 @@ defmodule UberGen.Cli do
   def main(args \\ []) do
     opts = args |> parse_args()
 
-    opts
-    |> file_data()
-    |> to_steps()
+    opts.filename 
+    |> Util.Steps.file_data()
+    |> Util.Steps.to_steps()
     |> process(opts.command)
   end
 
@@ -32,7 +32,7 @@ defmodule UberGen.Cli do
 
     %{
       filename: Enum.at(words, 0),
-      filetype: Enum.at(words, 0) |> String.split(".") |> List.last(),
+      filetype: Enum.at(words, 0) |> Util.Steps.file_type(),
       command: Enum.at(words, 1)
     }
   end
@@ -63,43 +63,5 @@ defmodule UberGen.Cli do
   defp abort do
     IO.puts("Usage: uber_gen <file> [export|run]")
     System.halt()
-  end
-
-  # --------------------------------------------------
-
-  defp file_data(opts) do
-    file_data(opts.filename, opts.filetype)
-    |> Util.Svc.convert_to_atom_map()
-  end
-
-  defp file_data(filename, "json") do
-    filename
-    |> Path.expand()
-    |> File.read!()
-    |> Jason.decode!()
-  end
-
-  defp file_data(filename, "yaml") do
-    filename
-    |> Path.expand()
-    |> YamlElixir.read_from_file!()
-  end
-
-  # --------------------------------------------------
-
-  defp to_steps(input) do
-    mod = "Elixir.UberGen.Playbooks.#{input[:playbook]}" |> String.to_existing_atom()
-    opt = input[:params] || %{}
-    chr = input[:steps] || %{}
-    to_steps(mod, opt, chr)
-  end
-
-  defp to_steps(mod, opt, []) do
-    {mod, opt, []}
-  end
-
-  defp to_steps(mod, opt, children) do
-    offspring = children |> Enum.map(&to_steps(&1))
-    {mod, opt, offspring}
   end
 end
