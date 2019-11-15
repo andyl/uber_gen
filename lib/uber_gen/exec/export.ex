@@ -1,21 +1,21 @@
 defmodule UberGen.Exec.Export do
   
-  def build(module) do
-    build({module, %{}, module.steps(%{}, [])}, 1)
+  def guide(module) do
+    guide({module, %{}, module.steps(%{}, [])}, 1)
     |> String.replace(~r/\n\n[\n]+/, "\n\n")
   end
 
-  def build({module, opts, []}, depth) do
+  def guide({module, opts, []}, depth) do
     output({module, opts}, depth)
   end
 
-  def build({module, opts, children}, depth) do
+  def guide({module, opts, children}, depth) do
     base = output({module, opts}, depth) <> "\n\n"
 
     alt =
       children
       |> Enum.map(&child_module/1)
-      |> Enum.map(&build(&1, depth + 1))
+      |> Enum.map(&guide(&1, depth + 1))
       |> Enum.join("\n\n")
 
     base <> alt

@@ -4,7 +4,6 @@ defmodule UberGen.Exec.Run do
 
   def cmd(module) do
     cmd(%{}, {module, %{}, module.steps(%{}, [])})
-    |> String.replace(~r/\n\n[\n]+/, "\n\n")
   end
 
   def cmd(ctx, {module, opts, []}) do

@@ -14,8 +14,8 @@ defmodule UberGen.Cli do
     IO.puts(UberGen.Exec.Export.guide(data, 1))
   end
 
-  def process(_data, "run") do
-    IO.puts "RUNNING DATA (UNDER CONSTRUCTION)"
+  def process(data, "run") do
+    UberGen.Exec.Run.cmd(%{}, data)
   end
   
   # --------------------------------------------------

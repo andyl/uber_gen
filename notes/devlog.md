@@ -104,12 +104,14 @@
 ## 2019 Nov 15 Fri
 
 - [x] Create run function
-- [ ] Convert macros to callbacks
+- [x] Start to convert macros to callbacks
+
 - [ ] Implement run mix task
 - [ ] Implement run escript
 
 ## TBD
 
+- [ ] Finish convert macros to callbacks
 - [ ] Convert bash generators to UberGen
 
 - [ ] Get `mix ugen.base.help` working
