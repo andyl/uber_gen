@@ -57,7 +57,9 @@ There are many comparables:
 [Elixir Config][exconf], 
 [Elixir Language Server][exls],
 [Elixir Code Formatter][excf],
+[Literate Programming][litpro], 
 [ExDoc][exdoc],
+[Visual Basic][vbas],
 [Exercism][exer],
 [Ansible][ansible], and more
 
@@ -77,6 +79,8 @@ UberGen extends `Mix.Generate`, and borrows ideas from other tools:
 [exls]:    https://github.com/elixir-lsp 
 [excf]:    https://hexdocs.pm/elixir/master/Code.html#format_string!/2
 [exdoc]:   https://github.com/elixir-lang/ex_doc
+[vbas]:    https://en.wikipedia.org/wiki/Visual_Basic
+[litpro]:  https://en.wikipedia.org/wiki/Literate_programming
 [exer]:    https://exercism.io/
 [ansible]: https://www.ansible.com/
 
@@ -119,9 +123,9 @@ The UberGen Context is a Plug-like structure:
       app_name: "TBD"
     }
 
-### UberGen Refactoring Helpers 
+### UberGen Helpers 
 
-UberGen refactoring helpers are conveniences for working with paths and generating content.
+UberGen helpers are conveniences for working with paths and generating content.
 
 From Mix.Generator:
 
@@ -175,7 +179,7 @@ There probably should be refactoring functions that work on other languages:
 
 Playbooks are structured like Mix tasks - one module per playbook.
 
-    defmodule MyCodegen.Bootstrap4 do
+    defmodule UberGen.Playbooks.Myapp.Bootstrap4 do
       use UberGen.Playbook
 
       @depends_on [UberGen, :setup]
@@ -200,14 +204,16 @@ Mix tasks.
             mytask.ex
         uber_gen
           playbooks/
-            bootstrap4.ex
+            myapp/
+              bootstrap4.ex
       priv/
         playbooks/
-          bootstrap4/
-            files/
-              bootstrap_config.css
-            templates/
-              bootstrap.css.eex
+          apps/ 
+            bootstrap4/
+              files/
+                bootstrap_config.css
+              templates/
+                bootstrap.css.eex
 
 Playbook static files and templates are stored under the `priv/playbooks`
 directory.
@@ -223,16 +229,16 @@ UberGen is accessible as a mix task:
     $ mix ugen.playbook list
     $ mix ugen.playbook install <playbook>
     $ mix ugen.playbook remove <playbook>
+    $ mix ugen.playbook export <playbook>
+    $ mix ugen.playbook run <playbook>
 
-### As a standalone Script 
+### The UberGen eScript
 
-Run UberGen directly in an executable script:
+The `uber_gen` executable reads playbook configs from `yaml` or `json` files.
 
-    #!/usr/bin/env elixir
-
-    use UberGen
-
-    ...
+    $ uber_gen <playbook>.yaml export
+    $ uber_gen <playbook>.yaml serve
+    $ uber_gen <playbook>.yaml run
 
 ### UberGen in Elixir Source
 
@@ -257,37 +263,12 @@ Reading a HowTo Post:
 - Instant Working App 
 - Pina Coladas
 
-## Playbook Modes
+## Playbook Commands
 
-Static Mode - Just output a static doc (Markdown, PDF, ExDoc)
+Export - Just output a static doc (Markdown, PDF, ExDoc)
 
-Active Mode - checks your environment as you go:
+Run - CLI checks your environment every run
 - generates guide text
 - validates each step
 
-(Another terminology: Export / Run)
-
-## Refactoring Tech
-
-At this point, all the supporting tech is readily at hand to build UberGen -
-except one.  Refactoring.  We need flexible, robust, easy to use functions to
-refactor Elixir code.  
-
-Refactoring works in many IDEs - especially for Java.  Refactoring libraries
-exist for JavaScript [CLI][cli] and [Editors][edi].  The [Language Server
-Protocol][lsp] supports refactorings via [Code Action Request][car] messages.  
-
-[cli]: https://www.graspjs.com/
-[edi]: https://github.com/cmstead/js-refactor
-[lsp]: https://langserver.org/
-[car]: https://microsoft.github.io//language-server-protocol/specifications/specification-3-14/#textDocument_codeAction
-
-But I haven't been able to find libraries that supply the Elixir refactoring
-functions that we would need.
-
-If we can't find a good refactoring library, then perhaps we could write our
-own, borrowing techniques from the Elixir Code Formatter or other tech.  Or
-perhaps we could hack together some Refactoring functions that are not based on
-AST manipulation.  Or perhaps we could pass on the whole project for now, wait
-awhile and see if some supporting tech emerges.
-
+Serve - starts a webserver and a file watcher

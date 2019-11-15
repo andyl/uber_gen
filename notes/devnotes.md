@@ -48,14 +48,14 @@ Playbooks must:
 
 The `UberGen.Playbook` module provides macros for use in Playbooks.
 
-| Macro       | Arg(s)    | Returns            | Purpose                   |
-|-------------|-----------|--------------------|---------------------------|
-| run/2       | ctx, opts | new_ctx            | executable playbook code  |
-| test/2      | ctx, opts | test status        | validation test           |
-| steps/2     | ctx, opts | list of PB Modules | list of playbook children |
-| guide/2     | ctx, opts | guide text         | playbook documentation    |
-| params/0    | TBD       | params             | declare param schema      |
-| changeset/0 | TBD       | status             | cast and validate params  |
+| Macro    | Arg(s)    | Returns            | Purpose                   |
+|----------|-----------|--------------------|---------------------------|
+| cmd/2    | ctx, opts | new_ctx            | executable playbook code  |
+| test/2   | ctx, opts | test status        | validation test           |
+| steps/2  | ctx, opts | list of PB Modules | list of playbook children |
+| guide/2  | ctx, opts | guide text         | playbook documentation    |
+| params/0 | TBD       | params             | declare param schema      |
+| verify/0 | TBD       | status             | cast and validate params  |
 
 All of these macros are optional for any given playbook.
 
@@ -104,3 +104,15 @@ steps.  Each step takes configuration options - Ecto.Schemas and changesets!
 To setup an entire playbook tree with a single config file, we'll borrow ideas
 from the `embeds_one` and `embeds_many` constructs provided by Ecto.
 
+## 2019 Nov 14 Thu
+
+New features:
+- Ecto-style schemas and option validation
+- Ability to configure nested trees of playbooks
+- Ability to specify tree configuration in YAML or JSON docs
+- A standalone executable `uber_gen` that reads config files.
+
+Next step:
+- CLI interaction design for running playbooks
+- running playbooks (mix and escript)
+- passing context during run (fail points, default values for variables)

@@ -272,3 +272,28 @@ Example playbook:
 
 If guided refactoring works, then we can build it straight away, and add
 code-refactoring helpers over time.
+
+## Refactoring Tech
+
+At this point, all the supporting tech is readily at hand to build UberGen -
+except one.  Refactoring.  We need flexible, robust, easy to use functions to
+refactor Elixir code.  
+
+Refactoring works in many IDEs - especially for Java.  Refactoring libraries
+exist for JavaScript [CLI][cli] and [Editors][edi].  The [Language Server
+Protocol][lsp] supports refactorings via [Code Action Request][car] messages.  
+
+[cli]: https://www.graspjs.com/
+[edi]: https://github.com/cmstead/js-refactor
+[lsp]: https://langserver.org/
+[car]: https://microsoft.github.io//language-server-protocol/specifications/specification-3-14/#textDocument_codeAction
+
+But I haven't been able to find libraries that supply the Elixir refactoring
+functions that we would need.
+
+If we can't find a good refactoring library, then perhaps we could write our
+own, borrowing techniques from the Elixir Code Formatter or other tech.  Or
+perhaps we could hack together some Refactoring functions that are not based on
+AST manipulation.  Or perhaps we could pass on the whole project for now, wait
+awhile and see if some supporting tech emerges.
+

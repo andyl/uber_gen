@@ -4,32 +4,32 @@ defmodule UberGen.Playbooks.Util.BlockInFile do
 
   @moduledoc """
   Add a text-block to a file.
-
-  Options:
-  - instruction
-  - text_block
-  - check_for
-  - target_file
-  - file_type 
   """
 
-  # params do
-  #   field(:instruction, :string)
-  #   field(:text_block, :string)
-  #   field(:check_for, :string)
-  #   field(:target_file, :string)
-  #   field(:file_type, :string)
-  # end
+  params do
+    field(:header, :string)
+    field(:instruction, :string)
+    field(:text_block, :string)
+    # field(:check_for, :map)
+    field(:target_file, :string)
+    field(:file_type, :string)
+  end
+
+  verify(params) do
+    %__MODULE__{}
+    |> cast(params, [:header, :instruction, :text_block, :target_file, :file_type])
+    |> validate_required([:text_block, :target_file])
+  end
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
   @doc """
   Block in file.
   """
-  guide(_ctx, opts) do
-    instruction = Keyword.get(opts, :instruction)
-    text_block  = Keyword.get(opts, :text_block)
-    """
+  guide(ctx, opts) do
+    instruction = opts[:instruction] 
+    text_block  = opts[:text_block] 
+    body = """
     #{instruction}
     
     ```#{file_type(opts)}
@@ -38,14 +38,19 @@ defmodule UberGen.Playbooks.Util.BlockInFile do
     #{text_block}
     ```
     """
+    if opts[:header] do
+      %{header: opts[:header], body: body}
+    else
+      body
+    end
   end
 
   # ---------------------------------------------------------
 
   defp file_type(opts) do
-    target_file = Keyword.get(opts, :target_file)
+    target_file = opts[:target_file] 
     file_ext    = String.split(target_file, ".") |> List.last()
-    Keyword.get(opts, :file_type) || case file_ext do
+    opts[:file_type] || case file_ext do
       "ex"   -> "elixir"
       "exs"  -> "elixir"
       "json" -> "json"
@@ -57,7 +62,7 @@ defmodule UberGen.Playbooks.Util.BlockInFile do
   end
 
   defp comment_file(opts) do
-    fname = Keyword.get(opts, :target_file)
+    fname = opts[:target_file] 
     ftype = file_type(opts)
     case ftype do
       "bash"       -> "# #{fname}"

@@ -104,7 +104,7 @@ Add LiveView NPM dependencies in your `assets/package.json`. For a regular proje
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
     "phoenix_live_view": "file:../deps/phoenix_live_view"
-  }
+  Keyword.get(opts, :deps, [])}
 }
 ```
 
