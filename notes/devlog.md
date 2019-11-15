@@ -101,13 +101,14 @@
 - [x] Create `Exec.Export.guide/1`
 - [x] Create `Exec.Run.cmd/1`
 
-## 2019 Nov 14 Thu
+## 2019 Nov 15 Fri
 
+- [x] Create run function
+- [ ] Convert macros to callbacks
+- [ ] Implement run mix task
+- [ ] Implement run escript
 
 ## TBD
-
-- [ ] Create run function
-- [ ] Convert macros to callbacks
 
 - [ ] Convert bash generators to UberGen
 
