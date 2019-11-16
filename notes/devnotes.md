@@ -121,4 +121,12 @@ Next step:
 - CLI interaction design for running playbooks
 - running playbooks (mix and escript)
 - passing context during run (fail points, default values for variables)
+- envision the design for specifying and using `assigns`
+
+## 2019 Nov 16 Sat
+
+The playbook abstraction might work for many use cases: generators, tasks,
+contracts, wikis, etc.  We may change some of the terminology:
+- playbook -> xtool
+- retain UberGen for generators, with Xtool as a dependency
 

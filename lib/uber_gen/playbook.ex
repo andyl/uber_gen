@@ -2,13 +2,6 @@ defmodule UberGen.Playbook do
   @moduledoc """
   A module that provides conveniences for playbooks.
 
-  Playbooks are modules that can be composed into an application generation
-  pipeline.  Each playbook can provide three major elements:
-
-    1) installation guides
-    2) software support
-    3) validation tests
-
   Playbooks must:
 
   - have the module-name prefix `UberGen.Playbooks`
@@ -16,14 +9,14 @@ defmodule UberGen.Playbook do
 
   The `UberGen.Playbook` module provides five macros for use in Playbooks.
 
-  | Macro    | Arg(s)    | Returns                     | Purpose                   |
-  |----------|-----------|-----------------------------|---------------------------|
-  | cmd/2    | ctx, opts | new_ctx                     | executable playbook code  |
-  | test/2   | ctx, opts | test status                 | validation test           |
-  | guide/2  | ctx, opts | guide text                  | playbook documentation    |
-  | steps/2  | ctx, opts | list of PB Modules & params | list of playbook children |
-  | params/x | TBD       | TBD                         | declare playbook params   |
-  | verify/2 | TBD       | TBD                         | param cast and validation |
+  | Macro    | Arg(s)    | Returns     | Purpose                   |
+  |----------|-----------|-------------|---------------------------|
+  | cmd/2    | ctx, opts | new_ctx     | executable playbook code  |
+  | test/2   | ctx, opts | test status | validation test           |
+  | guide/2  | ctx, opts | guide text  | playbook documentation    |
+  | steps/2  | ctx, opts | child list  | list of playbook children |
+  | params/x | TBD       | TBD         | declare playbook params   |
+  | verify/2 | TBD       | TBD         | param cast and validation |
 
   All of these macros are optional for any given playbook.
 
@@ -147,6 +140,4 @@ defmodule UberGen.Playbook do
       end
     end
   end
-
-
 end

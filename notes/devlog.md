@@ -109,20 +109,24 @@
 - [x] Implement run escript
 - [x] Get rid of warnings
 - [x] Add tests
+- [x] Finish convert macros to callbacks
 
 ## TBD
 
-- [ ] Finish convert macros to callbacks
+- [ ] Do we need to define playbook variables and default values?
 
-- [ ] Rename UberGen to Xtool (xtool.dev, xtool.tech)
-- [ ] Retain UberGen for generator vertical
+- [ ] Update runner to read & write assigns
+- [ ] Add EEx interpolation for guide text
+- [ ] Design a variable declaration callback(?)
+- [ ] Figure out how to handle dynamic variables in params block
+
+- [ ] Finish Runner/REPL
 
 - [ ] Convert bash generators to UberGen
 
 - [ ] Get `mix ugen.base.help` working
+- [ ] Cleanup code
 - [ ] Document playbooks
-
-- [ ] Build out Runner/REPL
 
 ## Questions
 
@@ -135,12 +139,13 @@
 - [ ] How to generate event-streams?  
 - [ ] Are playbooks wrappered in a manipulation API?
 
-- [ ] Do we need to define playbook variables and default values?
-
 - [ ] How does PragDave install templates?
 - [ ] How does PragDave store templates?
 
 ## Futures
+
+- [ ] Naming: Rename UberGen to Xtool (xtool.dev, xtool.tech)
+- [ ] Naming: Retain UberGen for generator vertical
 
 - [ ] WebUI: Design WebUI
 
