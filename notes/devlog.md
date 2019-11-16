@@ -105,11 +105,12 @@
 
 - [x] Create run function
 - [x] Start to convert macros to callbacks
-
-- [ ] Implement run mix task
-- [ ] Implement run escript
+- [x] Implement run mix task
+- [x] Implement run escript
 
 ## TBD
+
+- [ ] Add tests
 
 - [ ] Finish convert macros to callbacks
 - [ ] Convert bash generators to UberGen

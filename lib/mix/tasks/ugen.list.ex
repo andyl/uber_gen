@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Ugen.Cache.List do
+defmodule Mix.Tasks.Ugen.List do
   use Mix.Task
 
   alias UberGen.PlaybookUtil
@@ -15,10 +15,6 @@ defmodule Mix.Tasks.Ugen.Cache.List do
     PlaybookUtil.loadpaths!()
     modules = UberGen.PlaybookMix.load_all()
     aliases = PlaybookUtil.load_aliases()
-    IO.inspect "---------------------------------------"
-    IO.inspect modules
-    IO.inspect aliases
-    IO.inspect "---------------------------------------"
     {docs, max} = PlaybookUtil.build_doc_list(modules, aliases)
 
     PlaybookUtil.display_doc_list(docs, max)

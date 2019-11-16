@@ -99,8 +99,6 @@ defmodule UberGen.Playbook do
   defmacro cmd(ctx, opts, do: yeild) do
     quote do
       def _cmd(unquote(ctx), unquote(opts)) do
-        # IO.inspect unquote(ctx)
-        # IO.inspect unquote(opts)
         unquote(yeild)
       end
     end
@@ -132,8 +130,6 @@ defmodule UberGen.Playbook do
   defmacro test(ctx, opts, do: yeild) do
     quote do
       def _test(unquote(ctx), unquote(opts)) do
-        # IO.inspect unquote(ctx)
-        # IO.inspect unquote(opts)
         unquote(yeild)
       end
     end

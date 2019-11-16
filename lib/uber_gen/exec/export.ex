@@ -1,7 +1,12 @@
 defmodule UberGen.Exec.Export do
   
-  def guide(module) do
+  def guide(module) when is_tuple(module) do
     guide({module, %{}, module.steps(%{}, [])}, 1)
+    |> String.replace(~r/\n\n[\n]+/, "\n\n")
+  end
+  
+  def guide(input) when is_list(input) do
+    guide({UberGen.Playbooks.Util.Null, %{}, input}, 0)
     |> String.replace(~r/\n\n[\n]+/, "\n\n")
   end
 

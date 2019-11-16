@@ -2,8 +2,12 @@ defmodule UberGen.Exec.Run do
 
   import UberGen.Ctx
 
-  def cmd(module) do
+  def cmd(module) when is_tuple(module) do
     cmd(%{}, {module, %{}, module.steps(%{}, [])})
+  end
+  
+  def cmd(input) when is_list(input) do
+    cmd(%{}, {UberGen.Playbooks.Util.Null, %{}, input})
   end
 
   def cmd(ctx, {module, opts, []}) do

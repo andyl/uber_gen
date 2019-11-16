@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Ugen.Pb.Export do
+defmodule Mix.Tasks.Ugen.Export do
   use Mix.Task
 
   alias UberGen.PlaybookUtil
