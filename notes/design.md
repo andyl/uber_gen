@@ -38,8 +38,8 @@ mix ugen.registry.publish <playbook>    # push a local playbook to registry
 mix ugen.registry.remove                # remove a playbook from registry
 
 mix ugen.pb.run <playbook> <opts>           # run playbook on the command line
-mix ugen.pb.export <playbook> [--format md] # build playbook doc
-mix ugen.pb.serve <playbook>                # serve playbook doc
+mix ugen.pb.serve <playbook>                # serve playbook in a browser
+mix ugen.pb.export <playbook> [--format md] # build playbook guide
 
 Run behavior - run until:
 - failed test (code red)
@@ -219,8 +219,8 @@ Add a command to export docs in various formats:
 - dynamically served
 
 Mix commands:
-- mix ugen.build <playbook>   # write markdown to stdout
-- mix ugen.server <playbook>  # start a webserver / file-listener
+- mix ugen.export <playbook>   # write markdown to stdout
+- mix ugen.serve <playbook>    # start a webserver / file-listener
 
 Questions:
 - how to structure navigation for web pages?
@@ -297,3 +297,26 @@ perhaps we could hack together some Refactoring functions that are not based on
 AST manipulation.  Or perhaps we could pass on the whole project for now, wait
 awhile and see if some supporting tech emerges.
 
+## Playbook Server & CGI-style Interface
+
+New Features:
+- a CGI-style protocol definition
+- a server that serves playbooks (methods: command, guide, test)
+- Playbooks identified via Module name OR URL
+
+Goals:
+- decentralized playbook management
+- language-independent implementation of playbooks
+
+## Considerations
+
+Use Cases:
+- Generator
+- HowTo Guides
+- Training Manuals
+- Wikis
+- Tasks & Checklists
+- Composite Contracts
+
+Questions:
+- can a task be part of multiple checklists?

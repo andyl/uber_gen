@@ -33,3 +33,25 @@ REPL Commands:
 
 - use neovim and mhinz/neovim-remote
 - editor and repl-runner side by side
+
+## Exex.Run.cmd Sequence
+
+    def Exec.Run.cmd(module)
+
+    def Exec.Run.cmd(ctx, {module, opts, children}) do
+      if module.test(ctx, opts) do
+        IO.puts("PASS")
+      else
+        module.cmd(ctx, opts)
+      end
+
+      if test(ctx, opts) do
+        children
+        |> Enum.map(&cmd(ctx, &1))
+      else
+        IO.puts("FAIL")
+        module.guide(ctx, opts) |> IO.puts()
+        halt(ctx)
+      end 
+    end
+

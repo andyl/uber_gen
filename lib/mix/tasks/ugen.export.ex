@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Ugen.Pb.Export do
+defmodule Mix.Tasks.Ugen.Export do
   use Mix.Task
 
   alias UberGen.PlaybookUtil
@@ -22,8 +22,8 @@ defmodule Mix.Tasks.Ugen.Pb.Export do
 
     case mod do
       nil -> IO.puts("Playbook not found (#{arg})")
-      {module, _label} -> IO.puts(UberGen.Exec.Export.build(module))
-      _ -> "ERROR run"
+      {module, _label} -> IO.puts(UberGen.Exec.Export.guide(module))
+      _ -> "ERROR Export"
     end
   end
 end

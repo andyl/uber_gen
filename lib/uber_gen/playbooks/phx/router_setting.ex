@@ -10,7 +10,7 @@ defmodule UberGen.Playbooks.Phx.RouterSettings do
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  work(ctx, _opts) do
+  cmd(ctx, _opts) do
     ctx
   end
 

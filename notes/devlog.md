@@ -97,11 +97,22 @@
 - [x] Add ability to use YAML or JSON in playbook steps
 - [x] Create LiveView generator
 - [x] Design UberGen runner
+- [x] Rename 'Playbook.work' to 'Playbook.cmd'
+- [x] Create `Exec.Export.guide/1`
+- [x] Create `Exec.Run.cmd/1`
+
+## 2019 Nov 15 Fri
+
+- [x] Create run function
+- [x] Start to convert macros to callbacks
+- [x] Implement run mix task
+- [x] Implement run escript
 
 ## TBD
 
-- [ ] Rename 'work' to 'cmd'
+- [ ] Add tests
 
+- [ ] Finish convert macros to callbacks
 - [ ] Convert bash generators to UberGen
 
 - [ ] Get `mix ugen.base.help` working

@@ -21,7 +21,6 @@ defmodule Util.Steps do
   # --------------------------------------------------
 
   def to_steps(input) when is_map(input) do
-    IO.inspect input
     mod = "Elixir.UberGen.Playbooks.#{input[:playbook]}" |> String.to_existing_atom()
     opt = input[:params] || %{}
     chr = input[:steps] || %{}

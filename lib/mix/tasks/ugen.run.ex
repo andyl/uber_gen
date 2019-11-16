@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Ugen.Pb.Run do
+defmodule Mix.Tasks.Ugen.Run do
   use Mix.Task
 
   alias UberGen.PlaybookUtil
@@ -14,6 +14,7 @@ defmodule Mix.Tasks.Ugen.Pb.Run do
   """
 
   @shortdoc "Run a playbook"
+  
   def run(args) do
     arg = List.first(args)
     PlaybookUtil.loadpaths!()
@@ -26,8 +27,8 @@ defmodule Mix.Tasks.Ugen.Pb.Run do
 
     case mod do
       nil -> IO.puts "Playbook not found (#{arg})"
-      {module, _label} -> module.run([])
-      _ -> "ERROR run"
+      {module, _label} -> UberGen.Exec.Run.cmd(module)
+      _ -> "ERROR Run"
     end
   end
 end

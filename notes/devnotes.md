@@ -112,7 +112,13 @@ New features:
 - Ability to specify tree configuration in YAML or JSON docs
 - A standalone executable `uber_gen` that reads config files.
 
+New possibilities:
+- HTTP-like playbook protocol with CGI 
+- IP-addressible Playbook Servers
+- Language-independent playbook implementation
+
 Next step:
 - CLI interaction design for running playbooks
 - running playbooks (mix and escript)
 - passing context during run (fail points, default values for variables)
+
