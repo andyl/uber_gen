@@ -2,7 +2,7 @@ defmodule UberGen.Exec.Run do
 
   import UberGen.Ctx
 
-  def cmd(module) when is_tuple(module) do
+  def cmd(module) when is_atom(module) do
     cmd(%{}, {module, %{}, module.steps(%{}, [])})
   end
   

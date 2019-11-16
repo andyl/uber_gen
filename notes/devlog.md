@@ -107,13 +107,15 @@
 - [x] Start to convert macros to callbacks
 - [x] Implement run mix task
 - [x] Implement run escript
+- [x] Get rid of warnings
+- [x] Add tests
 
 ## TBD
 
-- [ ] Get rid of warnings
-- [ ] Add tests
 - [ ] Finish convert macros to callbacks
-- [ ] Rename Playbook to Cell
+
+- [ ] Rename UberGen to Xtool (xtool.dev, xtool.tech)
+- [ ] Retain UberGen for generator vertical
 
 - [ ] Convert bash generators to UberGen
 

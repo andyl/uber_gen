@@ -182,31 +182,31 @@ defmodule UberGen.PlaybookMix do
   #   end
   # end
 
-  defp output_playbook_debug_info(playbook, args, proj) do
-    Mix.shell().info(
-      "** Running mix " <> playbook_to_string(playbook, args) <> project_to_string(proj)
-    )
-  end
+  # defp output_playbook_debug_info(playbook, args, proj) do
+  #   Mix.shell().info(
+  #     "** Running mix " <> playbook_to_string(playbook, args) <> project_to_string(proj)
+  #   )
+  # end
 
-  defp project_to_string(nil), do: ""
-  defp project_to_string(proj), do: " (inside #{inspect(proj)})"
+  # defp project_to_string(nil), do: ""
+  # defp project_to_string(proj), do: " (inside #{inspect(proj)})"
 
-  defp playbook_to_string(playbook, []), do: playbook
-  defp playbook_to_string(playbook, args), do: playbook <> " " <> Enum.join(args, " ")
+  # defp playbook_to_string(playbook, []), do: playbook
+  # defp playbook_to_string(playbook, args), do: playbook <> " " <> Enum.join(args, " ")
 
-  defp get_playbook_or_run(proj, playbook, fun) do
-    cond do
-      module = get(playbook) ->
-        module
-
-      proj ->
-        fun.()
-        nil
-
-      true ->
-        nil
-    end
-  end
+  # defp get_playbook_or_run(proj, playbook, fun) do
+  #   cond do
+  #     module = get(playbook) ->
+  #       module
+  #
+  #     proj ->
+  #       fun.()
+  #       nil
+  #
+  #     true ->
+  #       nil
+  #   end
+  # end
 
   @doc """
   Clears all invoked playbooks, allowing them to be reinvoked.

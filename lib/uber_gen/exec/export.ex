@@ -1,6 +1,6 @@
 defmodule UberGen.Exec.Export do
   
-  def guide(module) when is_tuple(module) do
+  def guide(module) when is_atom(module) do
     guide({module, %{}, module.steps(%{}, [])}, 1)
     |> String.replace(~r/\n\n[\n]+/, "\n\n")
   end
