@@ -110,13 +110,17 @@
 
 ## TBD
 
+- [ ] Get rid of warnings
 - [ ] Add tests
-
 - [ ] Finish convert macros to callbacks
+- [ ] Rename Playbook to Cell
+
 - [ ] Convert bash generators to UberGen
 
 - [ ] Get `mix ugen.base.help` working
 - [ ] Document playbooks
+
+- [ ] Build out Runner/REPL
 
 ## Questions
 
