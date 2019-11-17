@@ -22,7 +22,7 @@ defmodule Mix.Tasks.Ugen.Export do
 
     case mod do
       nil -> IO.puts("Playbook not found (#{arg})")
-      {module, _label} -> IO.puts(UberGen.Exec.Export.guide(module))
+      {module, _label} -> IO.puts(UberGen.Executor.Export.guide(module))
       _ -> "ERROR Export"
     end
   end

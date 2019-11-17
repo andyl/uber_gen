@@ -1,4 +1,4 @@
-defmodule UberGen.Exec.Run do
+defmodule UberGen.Executor.Run do
 
   import UberGen.Ctx
 
@@ -37,7 +37,7 @@ defmodule UberGen.Exec.Run do
     if module.test(ctx, opts) do
       children
       |> Enum.map(&child_module/1)
-      |> Enum.map(&(UberGen.Exec.Run.cmd(ctx, &1)))
+      |> Enum.map(&(UberGen.Executor.Run.cmd(ctx, &1)))
     else
       IO.puts("FAIL")
       module.guide(ctx, opts)

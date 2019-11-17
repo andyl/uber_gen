@@ -11,11 +11,11 @@ defmodule UberGen.Cli do
   # --------------------------------------------------
 
   def process(data, "export") do
-    IO.puts(UberGen.Exec.Export.guide(data))
+    IO.puts(UberGen.Executor.Export.guide(data))
   end
 
   def process(data, "run") do
-    UberGen.Exec.Run.cmd(data)
+    UberGen.Executor.Run.cmd(data)
   end
   
   # --------------------------------------------------

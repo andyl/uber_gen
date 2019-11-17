@@ -367,11 +367,11 @@ REPL Commands:
 - use neovim and mhinz/neovim-remote
 - editor and repl-runner side by side
 
-### Exex.Run.cmd Sequence
+### Executor.Run.cmd Sequence
 
-    def Exec.Run.cmd(module)
+    def Executor.Run.cmd(module)
 
-    def Exec.Run.cmd(ctx, {module, opts, children}) do
+    def Executor.Run.cmd(ctx, {module, opts, children}) do
       if module.test(ctx, opts) do
         IO.puts("PASS")
       else

@@ -98,8 +98,8 @@
 - [x] Create LiveView generator
 - [x] Design UberGen runner
 - [x] Rename 'Playbook.work' to 'Playbook.cmd'
-- [x] Create `Exec.Export.guide/1`
-- [x] Create `Exec.Run.cmd/1`
+- [x] Create `Executor.Export.guide/1`
+- [x] Create `Executor.Run.cmd/1`
 
 ## 2019 Nov 15 Fri
 

@@ -27,7 +27,7 @@ defmodule Mix.Tasks.Ugen.Run do
 
     case mod do
       nil -> IO.puts "Playbook not found (#{arg})"
-      {module, _label} -> UberGen.Exec.Run.cmd(module)
+      {module, _label} -> UberGen.Executor.Run.cmd(module)
       _ -> "ERROR Run"
     end
   end
