@@ -86,9 +86,9 @@ Rename Project
 
 Add Dependency
 
-## Scripting
+## Orchestration and Scripting
 
-### UberGen interpreter
+### UberGen Interpreter
 
 Takes a YAML file as input
 
@@ -142,15 +142,24 @@ more markdown ...
 
 It should be possible to extend `RST` or `Asciidoc` to work with UberGen.
 
+### Command-Line Invocation
+
+Using Playbooks (Xtools) on the command line or in a bash script: 
+- each playbook (xtool) should act as a standalone executable
+- context comes from STDIN or command-line param
+- params are command-line options
+
+    xt run | xt Util.TextBlock -header "asdfasdf" | xt Util.Command -command "ps"
+
 ## Use Cases
 
-## CREATING PLAYBOOKS
+### CREATING PLAYBOOKS
 
 - CODING: Using Text Editors and Elixir Tooling as we do now
 
 - COMPOSER UI: Could we create an authoring UI (or scripting language) that would allow someone to Assemble/Compose/Configure/Modify/Publish custom playbooks without coding?
 
-## USING PLAYBOOKS 
+### USING PLAYBOOKS 
 
 - STATIC OUTPUT: Right now I’m generating Markdown. PDF and HTML output ought to be straightforward.  We also need ExDoc integration.
 
@@ -320,3 +329,75 @@ Use Cases:
 
 Questions:
 - can a task be part of multiple checklists?
+
+
+## CLI Runner
+
+### CLI Options
+
+Command Line:
+
+    $ mix ugen.pb.run <playbook> [opts]
+
+Default behavior - similar to `ansible-playbook`:
+
+- runs commands and tests until fail
+- does not re-run commands where there was success (idempotent)
+- shows fail information (command to run, file to edit, etc.)
+
+Options:
+
+- repl - run in repl mode
+- watch - watch for file changes
+- force - force-run commands
+- editor <type> - specify editor (nvim, vim, etc.)
+
+### REPL Mode
+
+Basics:
+
+- command-line prompt 
+
+REPL Commands:
+- open file
+- rerun
+
+### Editor Integration
+
+- use neovim and mhinz/neovim-remote
+- editor and repl-runner side by side
+
+### Exex.Run.cmd Sequence
+
+    def Exec.Run.cmd(module)
+
+    def Exec.Run.cmd(ctx, {module, opts, children}) do
+      if module.test(ctx, opts) do
+        IO.puts("PASS")
+      else
+        module.cmd(ctx, opts)
+      end
+
+      if test(ctx, opts) do
+        children
+        |> Enum.map(&cmd(ctx, &1))
+      else
+        IO.puts("FAIL")
+        module.guide(ctx, opts) |> IO.puts()
+        halt(ctx)
+      end 
+    end
+
+## Context and Variables
+
+- context has an env block (host, app, elixir, orchestrator(command))
+- create env playbooks (host, elixir, node)
+
+- variable declaration
+
+    name, type, default: "xxx", required: true/false, description: ""
+
+TODO:
+- figure out how to use the '@' convention (for assigns)
+- create an `env` function
+- 

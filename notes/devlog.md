@@ -109,16 +109,21 @@
 - [x] Implement run escript
 - [x] Get rid of warnings
 - [x] Add tests
-- [x] Finish convert macros to callbacks
+- [x] Start convert macros to callbacks
+
+## 2019 Nov 17 Sun
+
+- [x] Do we need to define playbook variables and default values? (yes)
+- [x] Design a variable declaration callback (interface)
+- [x] Figure out how to handle dynamic variables in params block
+- [ ] Change "Exec" to "Executor"
 
 ## TBD
 
-- [ ] Do we need to define playbook variables and default values?
-
-- [ ] Update runner to read & write assigns
+- [ ] Migrate from macros to callbacks
+- [ ] "Export" writes to context
+- [ ] Update executor to read & write assigns
 - [ ] Add EEx interpolation for guide text
-- [ ] Design a variable declaration callback(?)
-- [ ] Figure out how to handle dynamic variables in params block
 
 - [ ] Finish Runner/REPL
 

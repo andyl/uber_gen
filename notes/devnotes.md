@@ -46,16 +46,16 @@ Playbooks must:
 - have the module-name prefix `UberGen.Playbooks`
 - add the line `use UberGen.Playbook`
 
-The `UberGen.Playbook` module provides macros for use in Playbooks.
+The `UberGen.Playbook` module provides callbacks for use in Playbooks.
 
-| Macro    | Arg(s)    | Returns            | Purpose                   |
-|----------|-----------|--------------------|---------------------------|
-| cmd/2    | ctx, opts | new_ctx            | executable playbook code  |
-| test/2   | ctx, opts | test status        | validation test           |
-| steps/2  | ctx, opts | list of PB Modules | list of playbook children |
-| guide/2  | ctx, opts | guide text         | playbook documentation    |
-| params/0 | TBD       | params             | declare param schema      |
-| verify/0 | TBD       | status             | cast and validate params  |
+| Callbacks   | Arg(s)    | Returns            | Purpose                       |
+|-------------|-----------|--------------------|-------------------------------|
+| command/2   | ctx, opts | new_ctx            | executable playbook code      |
+| test/2      | ctx, opts | test status        | validation test               |
+| guide/2     | ctx, opts | guide text         | playbook documentation        |
+| children/2  | ctx, opts | list of PB Modules | list of playbook children     |
+| interface/2 | ctx, opts | params             | schema for params and assigns |
+| sentry/0    | TBD       | status             | cast and validate params      |
 
 All of these macros are optional for any given playbook.
 
@@ -116,6 +116,7 @@ New possibilities:
 - HTTP-like playbook protocol with CGI 
 - IP-addressible Playbook Servers
 - Language-independent playbook implementation
+- CLI invocation and xtool pipelining
 
 Next step:
 - CLI interaction design for running playbooks
