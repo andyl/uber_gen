@@ -116,11 +116,12 @@
 - [x] Do we need to define playbook variables and default values? (yes)
 - [x] Design a variable declaration callback (interface)
 - [x] Figure out how to handle dynamic variables in params block
-- [ ] Change "Exec" to "Executor"
+- [x] Change "Exec" to "Executor"
+
+- [ ] Migrate from macros to callbacks
 
 ## TBD
 
-- [ ] Migrate from macros to callbacks
 - [ ] "Export" writes to context
 - [ ] Update executor to read & write assigns
 - [ ] Add EEx interpolation for guide text

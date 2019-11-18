@@ -400,4 +400,13 @@ REPL Commands:
 TODO:
 - figure out how to use the '@' convention (for assigns)
 - create an `env` function
-- 
+
+## Architectural Elements
+
+| Element      | Description              | Embodyments                    |
+|--------------|--------------------------|--------------------------------|
+| Orchestrator | composition/execution UI | mix, xt                        |
+| Playbook     | Pipeline of xtools       | yaml/json files, shell pipes   |
+| Executor     | Runs a playbook          | export, run                    |
+| Xtool        | Processing element       | Util.BlockInFile, Util.Command |
+| Helper       | Command helper           | create_directory, etc.         |
