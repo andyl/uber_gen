@@ -107,16 +107,28 @@ Configure with `.uber_gen.exs`: [DROP?]
 
 ## The UberGen Framework
 
-### Pipeline Execution
+### UberGen Actions
 
-UberGen scripts and playbooks compose processing tools in Plug-like pipelines.
+Actions are standalone components that operate like a Plug.
 
+Actions have three important callbacks:
+
+- Command - executes a command
+- Guide - emits a guide fragment
+- Test - executes a test
+    
     module UberGen.Actions.MyTool do
+      use UberGen.Action
+
       def command(context, options)
         ...perform some work 
         new_context
       end
     end
+
+UberGen Actions can be composed into Plug-like pipelines.
+
+    context |> Action1(opts) |> Action2(opts)
 
 ### UberGen Context
 
@@ -200,6 +212,8 @@ Actions are structured like Mix tasks - one module per playbook.
       end
     end
 
+### UberGen Playbooks
+
 UberGen playbooks are packaged in a standard Elixir application.  There can be
 many playbooks per application.  Actions can have dependencies.  UberGen will
 install playbook packages using the same loading techniques that are used for
@@ -225,6 +239,10 @@ Mix tasks.
 
 Action static files and templates are stored under the `priv/playbooks`
 directory.
+
+## UberGen Orchestrators
+
+TBD
 
 ## Using UberGen
 
