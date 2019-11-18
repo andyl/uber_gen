@@ -6,6 +6,6 @@ defmodule UberGen.Executor.ExportTest do
   end
 
   test "Export Guide" do
-    assert UberGen.Executor.Export.guide(UberGen.Playbooks.Util.Null)
+    assert UberGen.Executor.Export.guide(UberGen.Actions.Util.Null)
   end
 end

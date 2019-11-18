@@ -2,7 +2,7 @@
 
 ## Notes
 
-- a playbook is a module with `use UberGen.Playbook`
+- a playbook is a module with `use UberGen.Action`
 - a playbook registers itself, borrowing techniques from `Mix.Task`
 
 ## Directory Structure
@@ -97,7 +97,7 @@ Takes a YAML file as input
 - name: Install LivewView
   createdby: andyl
   createdon: 2019 jan 15
-  playbookname: MyNewPlaybook
+  playbookname: MyNewAction
   version: 0.0.1
   steps:
     - name: Introduction
@@ -144,7 +144,7 @@ It should be possible to extend `RST` or `Asciidoc` to work with UberGen.
 
 ### Command-Line Invocation
 
-Using Playbooks (Xtools) on the command line or in a bash script: 
+Using Actions (Xtools) on the command line or in a bash script: 
 - each playbook (xtool) should act as a standalone executable
 - context comes from STDIN or command-line param
 - params are command-line options
@@ -235,12 +235,12 @@ Questions:
 - how to structure navigation for web pages?
 - how to detect loops in pipeline?
 
-Playbook / Helper
-- Playbook / Helper collapsed into Playbooks
-- Playbooks can omit the `run` function for leaf operation
+Action / Helper
+- Action / Helper collapsed into Actions
+- Actions can omit the `run` function for leaf operation
 - Helper functions can still be used - w/o Doc or Test
 
-Playbook behavior:
+Action behavior:
 
 - run(cmd_line_opts)                    # call from Mix (optional)
 - help(cmd_line_opts)                   # Mix help
@@ -258,7 +258,7 @@ Notes:
 Example playbook:
 
     defmodule RenameProject do
-      use UberGen.Playbook
+      use UberGen.Action
 
       def run(cmd_line_opts) do
       end
@@ -306,12 +306,12 @@ perhaps we could hack together some Refactoring functions that are not based on
 AST manipulation.  Or perhaps we could pass on the whole project for now, wait
 awhile and see if some supporting tech emerges.
 
-## Playbook Server & CGI-style Interface
+## Action Server & CGI-style Interface
 
 New Features:
 - a CGI-style protocol definition
 - a server that serves playbooks (methods: command, guide, test)
-- Playbooks identified via Module name OR URL
+- Actions identified via Module name OR URL
 
 Goals:
 - decentralized playbook management
@@ -406,7 +406,7 @@ TODO:
 | Element      | Description              | Embodyments                    |
 |--------------|--------------------------|--------------------------------|
 | Orchestrator | composition/execution UI | mix, xt                        |
-| Playbook     | Pipeline of xtools       | yaml/json files, shell pipes   |
+| Action     | Pipeline of xtools       | yaml/json files, shell pipes   |
 | Executor     | Runs a playbook          | export, run                    |
 | Xtool        | Processing element       | Util.BlockInFile, Util.Command |
 | Helper       | Command helper           | create_directory, etc.         |

@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.Ugen.List do
   use Mix.Task
 
-  alias UberGen.PlaybookUtil
+  alias UberGen.ActionUtil
 
   @shortdoc "Prints help information for tasks"
 
@@ -11,12 +11,12 @@ defmodule Mix.Tasks.Ugen.List do
 
   @shortdoc "List all playbooks"
   def run(_arg) do
-    PlaybookUtil.loadpaths!()
-    modules = UberGen.PlaybookMix.load_all()
-    aliases = PlaybookUtil.load_aliases()
-    {docs, max} = PlaybookUtil.build_doc_list(modules, aliases)
+    ActionUtil.loadpaths!()
+    modules = UberGen.ActionMix.load_all()
+    aliases = ActionUtil.load_aliases()
+    {docs, max} = ActionUtil.build_doc_list(modules, aliases)
 
-    PlaybookUtil.display_doc_list(docs, max)
+    ActionUtil.display_doc_list(docs, max)
   end
 end
 

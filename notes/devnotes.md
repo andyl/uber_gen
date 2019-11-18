@@ -11,7 +11,7 @@ Exploratory Code
 | x3_guide    | 2019 Nov 01 | Document generation                 |
 | x4_macros   | 2019 Nov 03 | Use of macros in UberGen playbook   |
 | x5_liveview | 2019 Nov 07 | Write playbook for LiveViews        |
-| x6_schemas  | 2019 Nov 10 | Playbook schemas, nested playbooks  |
+| x6_schemas  | 2019 Nov 10 | Action schemas, nested playbooks  |
 
 ## 2019 Nov 01 Fri
 
@@ -37,16 +37,16 @@ Desired Features:
 
 Implementation Details:
 
-- All elements in the execution pipeline are Playbooks
-- Ad-hoc playbook elements are wrapped in `UberGen.Playbook.Util.Exec`
+- All elements in the execution pipeline are Actions
+- Ad-hoc playbook elements are wrapped in `UberGen.Action.Util.Exec`
 
 ## 2019 Nov 05 Tue
 
-Playbooks must:
-- have the module-name prefix `UberGen.Playbooks`
-- add the line `use UberGen.Playbook`
+Actions must:
+- have the module-name prefix `UberGen.Actions`
+- add the line `use UberGen.Action`
 
-The `UberGen.Playbook` module provides callbacks for use in Playbooks.
+The `UberGen.Action` module provides callbacks for use in Actions.
 
 | Callbacks   | Arg(s)    | Returns            | Purpose                       |
 |-------------|-----------|--------------------|-------------------------------|
@@ -59,9 +59,9 @@ The `UberGen.Playbook` module provides callbacks for use in Playbooks.
 
 All of these macros are optional for any given playbook.
 
-Calling a Playbook with an 'undefined' macro returns a default value.
+Calling a Action with an 'undefined' macro returns a default value.
 
-The `UberGen.Playbook` module provides introspection functions that show if a
+The `UberGen.Action` module provides introspection functions that show if a
 method is defined in a playbook: `has_run?/0`, `has_call?/0`, `has_test?/0`,
 `has_steps?/0`, `has_guide?/0`
 
@@ -98,7 +98,7 @@ UberGen has **playbooks** (created by Elixir-coders with elixir-coding tools)
 assembled into **guides** (by authors using the UberGen UI) that are distriuted
 to End Users.
 
-Playbooks are assembled into trees.  Branches for a playbook are specified as
+Actions are assembled into trees.  Branches for a playbook are specified as
 steps.  Each step takes configuration options - Ecto.Schemas and changesets!
 
 To setup an entire playbook tree with a single config file, we'll borrow ideas
@@ -114,7 +114,7 @@ New features:
 
 New possibilities:
 - HTTP-like playbook protocol with CGI 
-- IP-addressible Playbook Servers
+- IP-addressible Action Servers
 - Language-independent playbook implementation
 - CLI invocation and xtool pipelining
 

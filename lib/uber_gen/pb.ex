@@ -1,13 +1,13 @@
-# defmodule UberGen.Playbook do
+# defmodule UberGen.Action do
 #   @moduledoc """
 #   A module that provides conveniences for playbooks.
 #
-#   Playbooks must:
+#   Actions must:
 #
-#   - have the module-name prefix `UberGen.Playbooks`
-#   - add the line `use UberGen.Playbook`
+#   - have the module-name prefix `UberGen.Actions`
+#   - add the line `use UberGen.Action`
 #
-#   The `UberGen.Playbook` module provides five macros for use in Playbooks.
+#   The `UberGen.Action` module provides five macros for use in Actions.
 #
 #   | Macro    | Arg(s)    | Returns     | Purpose                   |
 #   |----------|-----------|-------------|---------------------------|
@@ -20,9 +20,9 @@
 #
 #   All of these macros are optional for any given playbook.
 #
-#   Calling a Playbook with an 'undefined' macro returns a default value.
+#   Calling a Action with an 'undefined' macro returns a default value.
 #
-#   The `UberGen.Playbook` module provides introspection functions that show if a
+#   The `UberGen.Action` module provides introspection functions that show if a
 #   method is defined in a playbook: `has_cmd?/0`, `has_call?/0`, `has_test?/0`,
 #   `has_steps?/0`, `has_guide?/0`
 #   """
@@ -61,13 +61,13 @@
 #
 #       use Ecto.Schema
 #       import Ecto.Changeset
-#       import UberGen.Playbook
+#       import UberGen.Action
 #       import UberGen.Ctx
 #     end
 #   end
 #
 #   @doc """
-#   Define Playbooks params.
+#   Define Actions params.
 #   """
 #   defmacro params(do: yeild) do
 #     quote do
@@ -78,7 +78,7 @@
 #   end
 #
 #   @doc """
-#   Verify Playbook params.
+#   Verify Action params.
 #   """
 #   defmacro verify(params, do: yeild) do
 #     quote do
@@ -107,7 +107,7 @@
 #         else
 #           """
 #           ---
-#           Playbook Error: Invalid Params (#{__MODULE__})
+#           Action Error: Invalid Params (#{__MODULE__})
 #
 #           ```
 #           #{inspect(changeset.errors)}
@@ -129,7 +129,7 @@
 #   end
 #
 #   @doc """
-#   Playbook steps.
+#   Action steps.
 #
 #   Bong bang bong.
 #   """

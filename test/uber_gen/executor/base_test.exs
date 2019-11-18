@@ -5,7 +5,7 @@ defmodule UberGen.Executor.BaseTest do
     assert 1 == 1
   end
 
-  @pb UberGen.Playbooks.Util.Null2
+  @pb UberGen.Actions.Util.Null2
 
   alias UberGen.Executor.Base
 

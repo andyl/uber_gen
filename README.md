@@ -111,7 +111,7 @@ Configure with `.uber_gen.exs`: [DROP?]
 
 UberGen scripts and playbooks compose processing tools in Plug-like pipelines.
 
-    module UberGen.Playbooks.MyTool do
+    module UberGen.Actions.MyTool do
       def command(context, options)
         ...perform some work 
         new_context
@@ -183,12 +183,12 @@ AST analysis and manipulation (which don't yet exist!):
 | extract_function | Extract an expression to a function |
 | ensure_config    | Set a config value                  |
 
-### UberGen Playbooks
+### UberGen Actions
 
-Playbooks are structured like Mix tasks - one module per playbook.
+Actions are structured like Mix tasks - one module per playbook.
 
-    defmodule UberGen.Playbooks.Myapp.Bootstrap4 do
-      use UberGen.Playbook
+    defmodule UberGen.Actions.Myapp.Bootstrap4 do
+      use UberGen.Action
 
       @depends_on [UberGen, :setup]
       @shortdoc "Install Bootstrap4 in your Phoenix project."
@@ -201,7 +201,7 @@ Playbooks are structured like Mix tasks - one module per playbook.
     end
 
 UberGen playbooks are packaged in a standard Elixir application.  There can be
-many playbooks per application.  Playbooks can have dependencies.  UberGen will
+many playbooks per application.  Actions can have dependencies.  UberGen will
 install playbook packages using the same loading techniques that are used for
 Mix tasks.
 
@@ -223,7 +223,7 @@ Mix tasks.
               templates/
                 bootstrap.css.eex
 
-Playbook static files and templates are stored under the `priv/playbooks`
+Action static files and templates are stored under the `priv/playbooks`
 directory.
 
 ## Using UberGen
@@ -281,7 +281,7 @@ Reading a HowTo Post:
 - Instant Working App 
 - Pina Coladas
 
-## Playbook Commands
+## Action Commands
 
 Export - Just output a static doc (Markdown, PDF, ExDoc)
 

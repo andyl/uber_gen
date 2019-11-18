@@ -1,10 +1,10 @@
-defmodule UberGen.NoPlaybookError do
+defmodule UberGen.NoActionError do
   defexception [:playbook, :message, mix: true]
 
   @impl true
   def exception(opts) do
     playbook = opts[:playbook]
-    %UberGen.NoPlaybookError{playbook: playbook, message: msg(playbook)}
+    %UberGen.NoActionError{playbook: playbook, message: msg(playbook)}
   end
 
   defp msg(playbook) do
@@ -26,10 +26,10 @@ defmodule UberGen.NoPlaybookError do
 
   defp did_you_mean(playbook) do
     # Ensure all playbooks are loaded
-    UberGen.PlaybookMix.load_all()
+    UberGen.ActionMix.load_all()
 
-    UberGen.PlaybookMix.all_modules()
-    |> Enum.map(&{&1, UberGen.PlaybookMix.playbook_name(&1)})
+    UberGen.ActionMix.all_modules()
+    |> Enum.map(&{&1, UberGen.ActionMix.playbook_name(&1)})
     |> Enum.reduce({nil, nil, 0}, &max_similar(&1, playbook, &2))
   end
 
@@ -39,17 +39,17 @@ defmodule UberGen.NoPlaybookError do
   end
 
   defp expected_mod_name(playbook) do
-    "UberGen.Playbooks." <> UberGen.Utils.command_to_module_name(playbook)
+    "UberGen.Actions." <> UberGen.Utils.command_to_module_name(playbook)
   end
 end
 
-defmodule UberGen.InvalidPlaybookError do
+defmodule UberGen.InvalidActionError do
   defexception [:playbook, :message, mix: true]
 
   @impl true
   def exception(opts) do
     playbook = opts[:playbook]
-    %UberGen.InvalidPlaybookError{playbook: playbook, message: "The playbook #{inspect(playbook)} does not export run/1"}
+    %UberGen.InvalidActionError{playbook: playbook, message: "The playbook #{inspect(playbook)} does not export run/1"}
   end
 end
 

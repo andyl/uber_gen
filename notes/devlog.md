@@ -4,7 +4,7 @@
 
 - [x] Make a working mixtask
 - [x] Install global mix tasks
-- [x] Register Playbooks - HowTo?
+- [x] Register Actions - HowTo?
 - [x] Create ugen.playbook task (list/run)
 - [x] Load playbooks
 - [x] Display playbooks (mix help)
@@ -44,7 +44,7 @@
 
 ## 2019 Nov 07 Thu
 
-- [x] Generate ExDoc documentation (esp for `Playbook`)
+- [x] Generate ExDoc documentation (esp for `Action`)
 - [x] Update README
 - [x] Add mix commands (run, export, serve)
 
@@ -59,8 +59,8 @@
 
 ## 2019 Nov 10 Sun 
 
-- [x] Add `params` and `changeset` macros to `Playbook`
-- [x] Create `Playbooks.Test.MultiText` playbook 
+- [x] Add `params` and `changeset` macros to `Action`
+- [x] Create `Actions.Test.MultiText` playbook 
 
 ## 2019 Nov 11 Mon
 
@@ -68,7 +68,7 @@
 - [x] Questions: How to expose the properties of a playbook?
 - [x] Questions: Do we need a construct like `ecto_changeset`?
 - [x] Questions: How to script a playbook?
-- [x] Remove `run` macro from Playbook
+- [x] Remove `run` macro from Action
 - [x] Rename `call` macro to `run`
 
 ## 2019 Nov 12 Tue
@@ -97,7 +97,7 @@
 - [x] Add ability to use YAML or JSON in playbook steps
 - [x] Create LiveView generator
 - [x] Design UberGen runner
-- [x] Rename 'Playbook.work' to 'Playbook.cmd'
+- [x] Rename 'Action.work' to 'Action.cmd'
 - [x] Create `Executor.Export.guide/1`
 - [x] Create `Executor.Run.cmd/1`
 
@@ -148,7 +148,7 @@
 - [ ] Is there a datastore for UberGen?
 - [ ] How to access-control for shared playbooks?
 - [ ] Use-cases for playbooks with multi-parents? (listeners, chat, comments)
-- [ ] What is a a URI-scheme for Playbooks?
+- [ ] What is a a URI-scheme for Actions?
 - [ ] Can we get CRDTs working for offline access?
 - [ ] How to generate event-streams?  
 - [ ] Are playbooks wrappered in a manipulation API?
@@ -163,7 +163,7 @@
 - [ ] WebUI: Design WebUI
 
 - [ ] Registry: Create Registry
-- [ ] Registry: External Playbooks - path / github deps
+- [ ] Registry: External Actions - path / github deps
 - [ ] Registry: Registry upload/download/search
 - [ ] Registry: How does PragDave install templates?
 - [ ] Registry: How does PragDave store templates?
@@ -172,7 +172,7 @@
 - [ ] Website: Learning Paths
 - [ ] Website: Time to Learn
 - [ ] Website: Credentialing
-- [ ] Website: Metrics: Frequency/RunTime per Playbook 
+- [ ] Website: Metrics: Frequency/RunTime per Action 
 
 - [ ] Community: who else is doing this now?
 - [ ] Community: who has the most experience?

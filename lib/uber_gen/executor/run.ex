@@ -7,7 +7,7 @@ defmodule UberGen.Executor.Run do
   end
   
   def cmd(input) when is_list(input) do
-    cmd(%{}, {UberGen.Playbooks.Util.Null, %{}, input})
+    cmd(%{}, {UberGen.Actions.Util.Null, %{}, input})
   end
 
   def cmd(ctx, {module, opts, []}) do
