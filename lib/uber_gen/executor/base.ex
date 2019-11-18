@@ -20,8 +20,8 @@ defmodule UberGen.Executor.Base do
     if module.has_interface?(), do: apply(module, :interface, [ctx, opts]), else: %{}
   end
 
-  def inspect(module, opts) do
-    if module.has_inspect?(), do: apply(module, :inspect, [opts]), else: ok(opts)
+  def inspect(module, params, opts) do
+    if module.has_inspect?(), do: apply(module, :inspect, [params, opts]), else: ok(opts)
   end
 
   # ----------------------------------------------------------------------------

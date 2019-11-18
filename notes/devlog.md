@@ -124,10 +124,9 @@
 
 - [ ] working `interface` function
 - [ ] working `inspect` function
-
 - [ ] "Export" writes to context
+
 - [ ] Update executor to read & write assigns
-- [ ] Add EEx interpolation for guide text
 
 - [ ] Finish Runner/REPL
 

@@ -37,7 +37,7 @@ defmodule UberGen.Executor.BaseTest do
     end
 
     test "test" do
-      assert Base.command(@pb, %{},%{}) == true
+      assert Base.command(@pb, %{},%{}) == %{}
     end
 
     test "guide" do
@@ -45,11 +45,11 @@ defmodule UberGen.Executor.BaseTest do
     end
 
     test "interface" do
-      assert Base.interface(@pb, %{},%{}) == []
+      assert Base.interface(@pb, %{},%{}) == %{}
     end
 
     test "inspect" do
-      assert Base.inspect(@pb, %{},%{}) == %{valid?: true, changes: opts}
+      assert Base.inspect(@pb, %{},%{}) == %{valid?: true, changes: %{}}
     end
   end
 end
