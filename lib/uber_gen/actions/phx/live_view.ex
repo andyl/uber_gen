@@ -1,22 +1,22 @@
-defmodule UberGen.Playbooks.Phx.LiveView do
+defmodule UberGen.Actions.Phx.LiveView do
 
-  use UberGen.Playbook
+  use UberGen.Action
 
   @moduledoc """
-  ConfigSettings Playbook
+  ConfigSettings Action
 
   Extensive text on config settings goes here.
   """
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  steps(_ctx, _opts) do
+  def children(_ctx, _opts) do
     "#{:code.priv_dir(:uber_gen)}/outlines/live_view.yaml"
     |> Util.Steps.file_data()
     |> Util.Steps.to_steps()
   end
 
-  guide(ctx, opts) do
+  def guide(_ctx, _opts) do
     header = "LiveView Installation Guide"
     body   = """
     While Phoenix LiveView is under heavy development, the installation

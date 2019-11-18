@@ -2,7 +2,7 @@
 
 ## Notes
 
-- a playbook is a module with `use UberGen.Playbook`
+- a playbook is a module with `use UberGen.Action`
 - a playbook registers itself, borrowing techniques from `Mix.Task`
 
 ## Directory Structure
@@ -86,9 +86,9 @@ Rename Project
 
 Add Dependency
 
-## Scripting
+## Orchestration and Scripting
 
-### UberGen interpreter
+### UberGen Interpreter
 
 Takes a YAML file as input
 
@@ -97,7 +97,7 @@ Takes a YAML file as input
 - name: Install LivewView
   createdby: andyl
   createdon: 2019 jan 15
-  playbookname: MyNewPlaybook
+  playbookname: MyNewAction
   version: 0.0.1
   steps:
     - name: Introduction
@@ -142,15 +142,24 @@ more markdown ...
 
 It should be possible to extend `RST` or `Asciidoc` to work with UberGen.
 
+### Command-Line Invocation
+
+Using Actions (Xtools) on the command line or in a bash script: 
+- each playbook (xtool) should act as a standalone executable
+- context comes from STDIN or command-line param
+- params are command-line options
+
+    xt run | xt Util.TextBlock -header "asdfasdf" | xt Util.Command -command "ps"
+
 ## Use Cases
 
-## CREATING PLAYBOOKS
+### CREATING PLAYBOOKS
 
 - CODING: Using Text Editors and Elixir Tooling as we do now
 
 - COMPOSER UI: Could we create an authoring UI (or scripting language) that would allow someone to Assemble/Compose/Configure/Modify/Publish custom playbooks without coding?
 
-## USING PLAYBOOKS 
+### USING PLAYBOOKS 
 
 - STATIC OUTPUT: Right now I’m generating Markdown. PDF and HTML output ought to be straightforward.  We also need ExDoc integration.
 
@@ -226,12 +235,12 @@ Questions:
 - how to structure navigation for web pages?
 - how to detect loops in pipeline?
 
-Playbook / Helper
-- Playbook / Helper collapsed into Playbooks
-- Playbooks can omit the `run` function for leaf operation
+Action / Helper
+- Action / Helper collapsed into Actions
+- Actions can omit the `run` function for leaf operation
 - Helper functions can still be used - w/o Doc or Test
 
-Playbook behavior:
+Action behavior:
 
 - run(cmd_line_opts)                    # call from Mix (optional)
 - help(cmd_line_opts)                   # Mix help
@@ -249,7 +258,7 @@ Notes:
 Example playbook:
 
     defmodule RenameProject do
-      use UberGen.Playbook
+      use UberGen.Action
 
       def run(cmd_line_opts) do
       end
@@ -297,12 +306,12 @@ perhaps we could hack together some Refactoring functions that are not based on
 AST manipulation.  Or perhaps we could pass on the whole project for now, wait
 awhile and see if some supporting tech emerges.
 
-## Playbook Server & CGI-style Interface
+## Action Server & CGI-style Interface
 
 New Features:
 - a CGI-style protocol definition
 - a server that serves playbooks (methods: command, guide, test)
-- Playbooks identified via Module name OR URL
+- Actions identified via Module name OR URL
 
 Goals:
 - decentralized playbook management
@@ -320,3 +329,84 @@ Use Cases:
 
 Questions:
 - can a task be part of multiple checklists?
+
+
+## CLI Runner
+
+### CLI Options
+
+Command Line:
+
+    $ mix ugen.pb.run <playbook> [opts]
+
+Default behavior - similar to `ansible-playbook`:
+
+- runs commands and tests until fail
+- does not re-run commands where there was success (idempotent)
+- shows fail information (command to run, file to edit, etc.)
+
+Options:
+
+- repl - run in repl mode
+- watch - watch for file changes
+- force - force-run commands
+- editor <type> - specify editor (nvim, vim, etc.)
+
+### REPL Mode
+
+Basics:
+
+- command-line prompt 
+
+REPL Commands:
+- open file
+- rerun
+
+### Editor Integration
+
+- use neovim and mhinz/neovim-remote
+- editor and repl-runner side by side
+
+### Executor.Run.cmd Sequence
+
+    def Executor.Run.cmd(module)
+
+    def Executor.Run.cmd(ctx, {module, opts, children}) do
+      if module.test(ctx, opts) do
+        IO.puts("PASS")
+      else
+        module.cmd(ctx, opts)
+      end
+
+      if test(ctx, opts) do
+        children
+        |> Enum.map(&cmd(ctx, &1))
+      else
+        IO.puts("FAIL")
+        module.guide(ctx, opts) |> IO.puts()
+        halt(ctx)
+      end 
+    end
+
+## Context and Variables
+
+- context has an env block (host, app, elixir, orchestrator(command))
+- create env playbooks (host, elixir, node)
+
+- variable declaration
+
+    name, type, default: "xxx", required: true/false, description: ""
+
+TODO:
+- figure out how to use the '@' convention (for assigns)
+- create an `env` function
+
+## Architectural Elements
+
+| Element      | Description              | Embodyments                    |
+|--------------|--------------------------|--------------------------------|
+| Orchestrator | composition/execution UI | mix, xt                        |
+| Action     | Pipeline of xtools       | yaml/json files, shell pipes   |
+| Executor     | Runs a playbook          | export, run                    |
+| Xtool        | Processing element       | Util.BlockInFile, Util.Command |
+| Helper       | Command helper           | create_directory, etc.         |

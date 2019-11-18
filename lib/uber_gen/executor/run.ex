@@ -1,13 +1,13 @@
-defmodule UberGen.Exec.Run do
+defmodule UberGen.Executor.Run do
 
   import UberGen.Ctx
 
-  def cmd(module) when is_tuple(module) do
+  def cmd(module) when is_atom(module) do
     cmd(%{}, {module, %{}, module.steps(%{}, [])})
   end
   
   def cmd(input) when is_list(input) do
-    cmd(%{}, {UberGen.Playbooks.Util.Null, %{}, input})
+    cmd(%{}, {UberGen.Actions.Util.Null, %{}, input})
   end
 
   def cmd(ctx, {module, opts, []}) do
@@ -37,7 +37,7 @@ defmodule UberGen.Exec.Run do
     if module.test(ctx, opts) do
       children
       |> Enum.map(&child_module/1)
-      |> Enum.map(&(UberGen.Exec.Run.cmd(ctx, &1)))
+      |> Enum.map(&(UberGen.Executor.Run.cmd(ctx, &1)))
     else
       IO.puts("FAIL")
       module.guide(ctx, opts)

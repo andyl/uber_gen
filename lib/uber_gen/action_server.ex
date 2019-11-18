@@ -1,4 +1,4 @@
-defmodule UberGen.PlaybookServer do
+defmodule UberGen.ActionServer do
   @moduledoc false
 
   use Agent

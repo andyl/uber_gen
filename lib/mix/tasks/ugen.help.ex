@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Ugen.Export do
+defmodule Mix.Tasks.Ugen.Help do
   use Mix.Task
 
   alias UberGen.ActionUtil
@@ -22,8 +22,8 @@ defmodule Mix.Tasks.Ugen.Export do
 
     case mod do
       nil -> IO.puts("Action not found (#{arg})")
-      {module, _label} -> IO.puts(UberGen.Executor.Export.guide(module))
-      _ -> "ERROR Export"
+      {module, _label} -> IO.puts(Mix.Task.moduledoc(module) || "No documentation")
+      _ -> "ERROR Help"
     end
   end
 end

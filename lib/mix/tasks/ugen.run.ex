@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.Ugen.Run do
   use Mix.Task
 
-  alias UberGen.PlaybookUtil
+  alias UberGen.ActionUtil
 
   @moduledoc """
   Run a playbook on the command-line.
@@ -17,17 +17,17 @@ defmodule Mix.Tasks.Ugen.Run do
   
   def run(args) do
     arg = List.first(args)
-    PlaybookUtil.loadpaths!()
+    ActionUtil.loadpaths!()
 
     mod =
-      UberGen.PlaybookMix.load_all()
-      |> UberGen.PlaybookUtil.build_playbook_list()
+      UberGen.ActionMix.load_all()
+      |> UberGen.ActionUtil.build_playbook_list()
       |> Enum.filter(&(elem(&1, 1) == arg))
       |> List.first()
 
     case mod do
-      nil -> IO.puts "Playbook not found (#{arg})"
-      {module, _label} -> UberGen.Exec.Run.cmd(module)
+      nil -> IO.puts "Action not found (#{arg})"
+      {module, _label} -> UberGen.Executor.Run.cmd(module)
       _ -> "ERROR Run"
     end
   end

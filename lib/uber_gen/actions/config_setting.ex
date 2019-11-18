@@ -1,9 +1,9 @@
-defmodule UberGen.Playbooks.ConfigSetting do
+defmodule UberGen.Actions.ConfigSetting do
 
-  use UberGen.Playbook
+  use UberGen.Action
 
   @moduledoc """
-  ConfigSettings Playbook
+  ConfigSettings Action
 
   Extensive text on config settings goes here.
   """
@@ -15,7 +15,7 @@ defmodule UberGen.Playbooks.ConfigSetting do
 
   asdf
   """
-  cmd(context, _options) do
+  def command(context, _options) do
     context
   end
 
@@ -24,7 +24,7 @@ defmodule UberGen.Playbooks.ConfigSetting do
 
   asdf
   """
-  test(_context, _options) do
+  def test(_context, _options) do
     true
   end
 
@@ -33,7 +33,7 @@ defmodule UberGen.Playbooks.ConfigSetting do
 
   asdf
   """
-  guide(ctx, opts) do
+  def guide(_ctx, _opts) do
     header = "HEADER FOR #{__MODULE__}"
     body   = "BODY FOR #{__MODULE__}"
     %{header: header, body: body}

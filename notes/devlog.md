@@ -4,7 +4,7 @@
 
 - [x] Make a working mixtask
 - [x] Install global mix tasks
-- [x] Register Playbooks - HowTo?
+- [x] Register Actions - HowTo?
 - [x] Create ugen.playbook task (list/run)
 - [x] Load playbooks
 - [x] Display playbooks (mix help)
@@ -44,7 +44,7 @@
 
 ## 2019 Nov 07 Thu
 
-- [x] Generate ExDoc documentation (esp for `Playbook`)
+- [x] Generate ExDoc documentation (esp for `Action`)
 - [x] Update README
 - [x] Add mix commands (run, export, serve)
 
@@ -59,8 +59,8 @@
 
 ## 2019 Nov 10 Sun 
 
-- [x] Add `params` and `changeset` macros to `Playbook`
-- [x] Create `Playbooks.Test.MultiText` playbook 
+- [x] Add `params` and `changeset` macros to `Action`
+- [x] Create `Actions.Test.MultiText` playbook 
 
 ## 2019 Nov 11 Mon
 
@@ -68,7 +68,7 @@
 - [x] Questions: How to expose the properties of a playbook?
 - [x] Questions: Do we need a construct like `ecto_changeset`?
 - [x] Questions: How to script a playbook?
-- [x] Remove `run` macro from Playbook
+- [x] Remove `run` macro from Action
 - [x] Rename `call` macro to `run`
 
 ## 2019 Nov 12 Tue
@@ -97,9 +97,9 @@
 - [x] Add ability to use YAML or JSON in playbook steps
 - [x] Create LiveView generator
 - [x] Design UberGen runner
-- [x] Rename 'Playbook.work' to 'Playbook.cmd'
-- [x] Create `Exec.Export.guide/1`
-- [x] Create `Exec.Run.cmd/1`
+- [x] Rename 'Action.work' to 'Action.cmd'
+- [x] Create `Executor.Export.guide/1`
+- [x] Create `Executor.Run.cmd/1`
 
 ## 2019 Nov 15 Fri
 
@@ -107,20 +107,40 @@
 - [x] Start to convert macros to callbacks
 - [x] Implement run mix task
 - [x] Implement run escript
+- [x] Get rid of warnings
+- [x] Add tests
+- [x] Start convert macros to callbacks
+
+## 2019 Nov 17 Sun
+
+- [x] Do we need to define playbook variables and default values? (yes)
+- [x] Design a variable declaration callback (interface)
+- [x] Figure out how to handle dynamic variables in params block
+- [x] Change "Exec" to "Executor"
+- [x] Get `mix ugen.help` working
+- [x] Migrate from macros to callbacks
+- [x] Cleanup code
+
+## 2019 Nov 18 Mon
+
+- [x] working `interface` options (params / assigns)
+- [x] working `inspect` options (params / assigns)
+- [x] rename playbook to action
+- [x] rename priv/scripts to playbooks
+
+- [ ] document action callbacks
+- [ ] document playbooks
 
 ## TBD
 
-- [ ] Get rid of warnings
-- [ ] Add tests
-- [ ] Finish convert macros to callbacks
-- [ ] Rename Playbook to Cell
+- [ ] "Export" writes to context
+- [ ] Guide calls inspect
 
-- [ ] Convert bash generators to UberGen
+- [ ] Finish Runner/REPL
 
-- [ ] Get `mix ugen.base.help` working
 - [ ] Document playbooks
 
-- [ ] Build out Runner/REPL
+- [ ] Convert bash generators to UberGen
 
 ## Questions
 
@@ -128,29 +148,31 @@
 - [ ] Is there a datastore for UberGen?
 - [ ] How to access-control for shared playbooks?
 - [ ] Use-cases for playbooks with multi-parents? (listeners, chat, comments)
-- [ ] What is a a URI-scheme for Playbooks?
+- [ ] What is a a URI-scheme for Actions?
 - [ ] Can we get CRDTs working for offline access?
 - [ ] How to generate event-streams?  
 - [ ] Are playbooks wrappered in a manipulation API?
 
-- [ ] Do we need to define playbook variables and default values?
-
-- [ ] How does PragDave install templates?
-- [ ] How does PragDave store templates?
+- [ ] Does this work with Sockets / GenStage?
 
 ## Futures
+
+- [ ] Naming: Rename UberGen to Xtool (xtool.dev, xtool.tech)
+- [ ] Naming: Retain UberGen for generator vertical
 
 - [ ] WebUI: Design WebUI
 
 - [ ] Registry: Create Registry
-- [ ] Registry: External Playbooks - path / github deps
+- [ ] Registry: External Actions - path / github deps
 - [ ] Registry: Registry upload/download/search
+- [ ] Registry: How does PragDave install templates?
+- [ ] Registry: How does PragDave store templates?
 
 - [ ] Website: A HowTo Blog
 - [ ] Website: Learning Paths
 - [ ] Website: Time to Learn
 - [ ] Website: Credentialing
-- [ ] Website: Metrics: Frequency/RunTime per Playbook 
+- [ ] Website: Metrics: Frequency/RunTime per Action 
 
 - [ ] Community: who else is doing this now?
 - [ ] Community: who has the most experience?

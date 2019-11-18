@@ -1,37 +1,37 @@
-defmodule UberGen.Playbooks.Util.BlockInFile do
+defmodule UberGen.Actions.Util.BlockInFile do
 
-  use UberGen.Playbook
+  use UberGen.Action
 
   @moduledoc """
   Add a text-block to a file.
   """
 
-  params do
-    field(:header, :string)
-    field(:instruction, :string)
-    field(:text_block, :string)
-    # field(:check_for, :map)
-    field(:target_file, :string)
-    field(:file_type, :string)
-  end
+  # params do
+  #   field(:header, :string)
+  #   field(:instruction, :string)
+  #   field(:text_block, :string)
+  #   # field(:check_for, :map)
+  #   field(:target_file, :string)
+  #   field(:file_type, :string)
+  # end
 
-  verify(params) do
-    %__MODULE__{}
-    |> cast(params, [:header, :instruction, :text_block, :target_file, :file_type])
-    |> validate_required([:text_block, :target_file])
-  end
-
+  # verify(params) do
+  #   %__MODULE__{}
+  #   |> cast(params, [:header, :instruction, :text_block, :target_file, :file_type])
+  #   |> validate_required([:text_block, :target_file])
+  # end
+   
   @shortdoc "ShortDoc for #{__MODULE__}"
-
+   
   @doc """
   Block in file.
   """
-  guide(ctx, opts) do
+  def guide(_ctx, opts) do
     instruction = opts[:instruction] 
     text_block  = opts[:text_block] 
     body = """
     #{instruction}
-    
+
     ```#{file_type(opts)}
     #{comment_file(opts)}
 

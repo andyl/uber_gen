@@ -1,4 +1,4 @@
-defmodule UberGen.PlaybookUtil do
+defmodule UberGen.ActionUtil do
 
   # Loadpaths without checks because tasks may be defined in deps.
   def loadpaths! do

@@ -1,6 +1,6 @@
-defmodule UberGen.Playbooks.Util.Null do
+defmodule UberGen.Actions.Util.Null do
 
-  use UberGen.Playbook
+  use UberGen.Action
 
   @moduledoc """
   Null playbook.

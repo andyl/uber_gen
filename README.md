@@ -61,6 +61,7 @@ There are many comparables:
 [ExDoc][exdoc],
 [Visual Basic][vbas],
 [Exercism][exer],
+[Linux Pipes][pipe],
 [Ansible][ansible], and more
 
 UberGen extends `Mix.Generate`, and borrows ideas from other tools:
@@ -70,6 +71,7 @@ UberGen extends `Mix.Generate`, and borrows ideas from other tools:
 - from [Orats][orats]: git helper functions
 - from [Exercism][exer]: guided refactoring
 - from [Ansible][ansible], the playbook execution model
+- from [Linux Pipes][pipes], small, composable elements
 
 [mixgen]:  https://hexdocs.pm/mix/Mix.Generator.html
 [pdgen]:   https://pragdave.me/blog/2017/04/18/elixir-project-generator.html
@@ -83,6 +85,7 @@ UberGen extends `Mix.Generate`, and borrows ideas from other tools:
 [vbas]:    https://en.wikipedia.org/wiki/Visual_Basic
 [litpro]:  https://en.wikipedia.org/wiki/Literate_programming
 [exer]:    https://exercism.io/
+[pipe]:    https://en.wikipedia.org/wiki/Pipeline_(Unix)
 [ansible]: https://www.ansible.com/
 
 ## Installing UberGen
@@ -104,24 +107,34 @@ Configure with `.uber_gen.exs`: [DROP?]
 
 ## The UberGen Framework
 
-### Code Style
+### Pipeline Execution
 
-UberGen scripts and playbooks use Plug-like pipelines:
+UberGen scripts and playbooks compose processing tools in Plug-like pipelines.
 
-    uber_gen_context
-    |> UberGen.mix("phx.new")
-    |> UberGen.Bootstrap4.apply()
-    |> MyCodegen.Bootstrap4.tweak()
-    |> LiveViewGen.install()
-    |> UberGen.mix("deps.get")
-    |> UberGen.mix("test")
+    module UberGen.Actions.MyTool do
+      def command(context, options)
+        ...perform some work 
+        new_context
+      end
+    end
 
 ### UberGen Context
 
 The UberGen Context is a Plug-like structure:
 
     %{
-      app_name: "TBD"
+      env: %{
+        app: %{
+          name: "TBD"
+        },
+        host: %{
+          name: "myhost",
+          arch: "x86_64"
+        }
+      }
+      assigns: %{
+        variable1: 42
+      }
     }
 
 ### UberGen Command Helpers 
@@ -170,18 +183,12 @@ AST analysis and manipulation (which don't yet exist!):
 | extract_function | Extract an expression to a function |
 | ensure_config    | Set a config value                  |
 
-There probably should be refactoring functions that work on other languages:
-- CSS
-- JSON
-- JavaScript
-- etc.
+### UberGen Actions
 
-### UberGen Playbooks
+Actions are structured like Mix tasks - one module per playbook.
 
-Playbooks are structured like Mix tasks - one module per playbook.
-
-    defmodule UberGen.Playbooks.Myapp.Bootstrap4 do
-      use UberGen.Playbook
+    defmodule UberGen.Actions.Myapp.Bootstrap4 do
+      use UberGen.Action
 
       @depends_on [UberGen, :setup]
       @shortdoc "Install Bootstrap4 in your Phoenix project."
@@ -194,7 +201,7 @@ Playbooks are structured like Mix tasks - one module per playbook.
     end
 
 UberGen playbooks are packaged in a standard Elixir application.  There can be
-many playbooks per application.  Playbooks can have dependencies.  UberGen will
+many playbooks per application.  Actions can have dependencies.  UberGen will
 install playbook packages using the same loading techniques that are used for
 Mix tasks.
 
@@ -216,7 +223,7 @@ Mix tasks.
               templates/
                 bootstrap.css.eex
 
-Playbook static files and templates are stored under the `priv/playbooks`
+Action static files and templates are stored under the `priv/playbooks`
 directory.
 
 ## Using UberGen
@@ -247,6 +254,16 @@ The `uber_gen` executable reads playbook configs from `yaml` or `json` files.
       ...
     end
 
+### UberGen on the Command Line
+
+You can invoke an xtool from the command line:
+
+    $ xt <playbook1> [options]
+
+You can connect playbooks together using pipes:
+
+    $ xt <playbook1> [options] | xt <playbook2> [options]
+
 ## UberGen Workflow
 
 ### With a HowTo Post
@@ -264,7 +281,7 @@ Reading a HowTo Post:
 - Instant Working App 
 - Pina Coladas
 
-## Playbook Commands
+## Action Commands
 
 Export - Just output a static doc (Markdown, PDF, ExDoc)
 
