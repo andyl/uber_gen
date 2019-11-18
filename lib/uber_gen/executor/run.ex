@@ -1,25 +1,26 @@
 defmodule UberGen.Executor.Run do
 
   import UberGen.Ctx
+  alias UberGen.Executor.Base
 
-  def cmd(module) when is_atom(module) do
-    cmd(%{}, {module, %{}, module.steps(%{}, [])})
+  def command(module) when is_atom(module) do
+    command(%{}, {module, %{}, Base.children(module, %{}, [])})
   end
   
-  def cmd(input) when is_list(input) do
-    cmd(%{}, {UberGen.Actions.Util.Null, %{}, input})
+  def command(input) when is_list(input) do
+    command(%{}, {UberGen.Actions.Util.Null, %{}, input})
   end
 
-  def cmd(ctx, {module, opts, []}) do
-    if module.test(ctx, opts) do
+  def command(ctx, {module, opts, []}) do
+    if Base.test(module, ctx, opts) do
       IO.puts("PASS (#{module})")
     else
-      module.cmd(ctx, opts)
+      Base.command(module, ctx, opts)
     end
 
-    unless module.test(ctx, opts) do
+    unless Base.test(module, ctx, opts) do
       IO.puts("FAIL")
-      module.guide(ctx, opts) |> IO.puts()
+      Base.guide(module, ctx, opts) |> IO.puts()
       halt(ctx)
     end
   end
@@ -27,20 +28,20 @@ defmodule UberGen.Executor.Run do
   # NOTE: the pipeline can be halted from within the command,
   # TODO: We should check for "HALT" before each test.
   
-  def cmd(ctx, {module, opts, children}) do
-    if module.test(ctx, opts) do
+  def command(ctx, {module, opts, children}) do
+    if Base.test(module, ctx, opts) do
       IO.puts("PASS (#{module})")
     else
-      module.cmd(ctx, opts)
+      Base.command(module, ctx, opts)
     end
 
-    if module.test(ctx, opts) do
+    if Base.test(module, ctx, opts) do
       children
       |> Enum.map(&child_module/1)
-      |> Enum.map(&(UberGen.Executor.Run.cmd(ctx, &1)))
+      |> Enum.map(&(UberGen.Executor.Run.command(ctx, &1)))
     else
       IO.puts("FAIL")
-      module.guide(ctx, opts)
+      Base.guide(module, ctx, opts)
       halt(ctx)
     end
   end

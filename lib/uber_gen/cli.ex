@@ -15,7 +15,7 @@ defmodule UberGen.Cli do
   end
 
   def process(data, "run") do
-    UberGen.Executor.Run.cmd(data)
+    UberGen.Executor.Run.command(data)
   end
   
   # --------------------------------------------------

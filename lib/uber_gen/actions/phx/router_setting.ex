@@ -10,7 +10,7 @@ defmodule UberGen.Actions.Phx.RouterSettings do
   #
   # @shortdoc "ShortDoc for #{__MODULE__}"
   #
-  # cmd(ctx, _opts) do
+  # command(ctx, _opts) do
   #   ctx
   # end
   #

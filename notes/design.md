@@ -242,8 +242,8 @@ Action / Helper
 
 Action behavior:
 
-- run(cmd_line_opts)                    # call from Mix (optional)
-- help(cmd_line_opts)                   # Mix help
+- run(command_line_opts)                    # call from Mix (optional)
+- help(command_line_opts)                   # Mix help
 - children()           -> [children]    # List Children
 - call(context, opts)  -> new_context   # execute pipeline until fail
 - doc(context, opts)   -> text          # generate documentation
@@ -260,10 +260,10 @@ Example playbook:
     defmodule RenameProject do
       use UberGen.Action
 
-      def run(cmd_line_opts) do
+      def run(command_line_opts) do
       end
 
-      def help(cmd_line_opts) do
+      def help(command_line_opts) do
       end
 
       def children do
@@ -367,20 +367,20 @@ REPL Commands:
 - use neovim and mhinz/neovim-remote
 - editor and repl-runner side by side
 
-### Executor.Run.cmd Sequence
+### Executor.Run.command Sequence
 
-    def Executor.Run.cmd(module)
+    def Executor.Run.command(module)
 
-    def Executor.Run.cmd(ctx, {module, opts, children}) do
+    def Executor.Run.command(ctx, {module, opts, children}) do
       if module.test(ctx, opts) do
         IO.puts("PASS")
       else
-        module.cmd(ctx, opts)
+        module.command(ctx, opts)
       end
 
       if test(ctx, opts) do
         children
-        |> Enum.map(&cmd(ctx, &1))
+        |> Enum.map(&command(ctx, &1))
       else
         IO.puts("FAIL")
         module.guide(ctx, opts) |> IO.puts()

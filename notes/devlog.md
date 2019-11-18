@@ -97,9 +97,9 @@
 - [x] Add ability to use YAML or JSON in playbook steps
 - [x] Create LiveView generator
 - [x] Design UberGen runner
-- [x] Rename 'Action.work' to 'Action.cmd'
+- [x] Rename 'Action.work' to 'Action.command'
 - [x] Create `Executor.Export.guide/1`
-- [x] Create `Executor.Run.cmd/1`
+- [x] Create `Executor.Run.command/1`
 
 ## 2019 Nov 15 Fri
 
