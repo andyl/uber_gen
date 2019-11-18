@@ -119,21 +119,23 @@
 - [x] Change "Exec" to "Executor"
 - [x] Get `mix ugen.help` working
 - [x] Migrate from macros to callbacks
+- [x] Cleanup code
 
 ## TBD
 
-- [ ] working `interface` function
-- [ ] working `inspect` function
-- [ ] "Export" writes to context
+- [ ] rename playbook to action
+- [ ] rename priv/scripts to playbooks
 
-- [ ] Update executor to read & write assigns
+- [ ] working `interface` function (params / assigns)
+- [ ] working `inspect` function (params / assigns)
+
+- [ ] "Export" writes to context
 
 - [ ] Finish Runner/REPL
 
-- [ ] Convert bash generators to UberGen
-
-- [ ] Cleanup code
 - [ ] Document playbooks
+
+- [ ] Convert bash generators to UberGen
 
 ## Questions
 
@@ -146,8 +148,7 @@
 - [ ] How to generate event-streams?  
 - [ ] Are playbooks wrappered in a manipulation API?
 
-- [ ] How does PragDave install templates?
-- [ ] How does PragDave store templates?
+- [ ] Does this work with Sockets / GenStage?
 
 ## Futures
 
@@ -159,6 +160,8 @@
 - [ ] Registry: Create Registry
 - [ ] Registry: External Playbooks - path / github deps
 - [ ] Registry: Registry upload/download/search
+- [ ] Registry: How does PragDave install templates?
+- [ ] Registry: How does PragDave store templates?
 
 - [ ] Website: A HowTo Blog
 - [ ] Website: Learning Paths
