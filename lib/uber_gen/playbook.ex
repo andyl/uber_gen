@@ -14,8 +14,8 @@ defmodule UberGen.Playbook do
   | guide/2     | ctx, opts | new_ctx     | playbook documentation    |
   | test/2      | ctx, opts | test status | validation test           |
   | children/2  | ctx, opts | child list  | list of playbook children |
-  | interface/2 | ctx, opts | schema      | params/assigns schema     |
-  | inspect/2   | TBD       | changeset   | casting and validation    |
+  | interface/3 | ctx, opts | schema      | params/assigns schema     |
+  | inspect/3   | TBD       | changeset   | casting and validation    |
 
   All of these macros are optional for any given playbook.
 
@@ -24,14 +24,14 @@ defmodule UberGen.Playbook do
   `has_test?/0`, `has_children?/0`, `has_interface?/0`, `has_inspect?/0`.
   """
 
-  @callback command(any(), any())        :: any()
-  @callback guide(any(), any())          :: any()
-  @callback test(any(), any())           :: any()
-  @callback children(any(), any())       :: any()
-  @callback interface(any(), any())      :: any()
-  @callback inspect(any(), any(), any()) :: any()
+  @callback command(any(), any())          :: any()
+  @callback guide(any(), any())            :: any()
+  @callback test(any(), any())             :: any()
+  @callback children(any(), any())         :: any()
+  @callback interface(any(), any(), any()) :: any()
+  @callback inspect(any(), any(), any())   :: any()
 
-  @optional_callbacks command: 2, guide: 2, test: 2, children: 2, interface: 2, inspect: 3
+  @optional_callbacks command: 2, guide: 2, test: 2, children: 2, interface: 3, inspect: 3
 
   @doc false
   defmacro __using__(_opts) do
@@ -47,7 +47,7 @@ defmodule UberGen.Playbook do
       @doc false
       def has_children?   , do: has?({:children, 2})
       @doc false
-      def has_interface?  , do: has?({:interface, 2})
+      def has_interface?  , do: has?({:interface, 3})
       @doc false
       def has_inspect?    , do: has?({:inspect, 3})
 

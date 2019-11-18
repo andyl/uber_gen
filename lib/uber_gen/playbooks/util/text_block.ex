@@ -10,16 +10,12 @@ defmodule UberGen.Playbooks.Util.TextBlock do
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  # def interface(_ctx, _opts) do
-  #   field(:header, :string)
-  #   field(:body,   :string)
-  #   %{
-  #     params: %{
-  #
-  #   }
-  # end
+  def interface(:params, _ctx, _opts) do
+    # field(:header, :string)
+    # field(:body,   :string)
+  end
 
-  # def inspect(params) do
+  # def inspect([params: values], _ctx, _opts) do
   #   %__MODULE__{}
   #   |> cast(params, [:header, :body])
   #   |> validate_one([:header, :body])

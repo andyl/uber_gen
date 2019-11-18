@@ -121,15 +121,20 @@
 - [x] Migrate from macros to callbacks
 - [x] Cleanup code
 
+## 2019 Nov 18 Mon
+
+- [x] working `interface` options (params / assigns)
+- [x] working `inspect` options (params / assigns)
+- [x] rename playbook to action
+- [x] rename priv/scripts to playbooks
+
+- [ ] document action callbacks
+- [ ] document playbooks
+
 ## TBD
 
-- [ ] rename playbook to action
-- [ ] rename priv/scripts to playbooks
-
-- [ ] working `interface` function (params / assigns)
-- [ ] working `inspect` function (params / assigns)
-
 - [ ] "Export" writes to context
+- [ ] Guide calls inspect
 
 - [ ] Finish Runner/REPL
 
