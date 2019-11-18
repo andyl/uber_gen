@@ -1,24 +1,31 @@
 defmodule UberGen.Executor.Base do
 
-  def command(mod, ctx, opts) do
-    if(mod.has_command?(), do: apply(mod, :command, [ctx, opts]), else: ctx)
+  def command(module, ctx, opts) do
+    if module.has_command?(), do: apply(module, :command, [ctx, opts]), else: ctx
   end
 
-  def test(mod, ctx, opts) do
-    if(mod.has_test?(), do: apply(mod, :test, [ctx, opts]), else: true)
+  def test(module, ctx, opts) do
+    if module.has_test?(), do: apply(module, :test, [ctx, opts]), else: true
   end
 
-  def guide(mod, ctx, opts) do
-    if(mod.has_guide?(), do: apply(mod, :guide, [ctx, opts]), else: "")
+  def guide(module, ctx, opts) do
+    if module.has_guide?(), do: apply(module, :guide, [ctx, opts]), else: ""
   end
 
-  def interface(mod, ctx, opts) do
-    if(mod.has_interface?(), do: apply(mod, :interface, [ctx, opts]), else: [])
+  def children(module, ctx, opts) do
+    if module.has_children?(), do: apply(module, :children, [ctx, opts]), else: []
   end
 
-  def sentry(mod, opts) do
-    if(mod.has_sentry?(), do: apply(mod, :sentry, [opts]), else: ok(opts))
+  def interface(module, ctx, opts) do
+    if module.has_interface?(), do: apply(module, :interface, [ctx, opts]), else: %{}
   end
 
+  def inspect(module, opts) do
+    if module.has_inspect?(), do: apply(module, :inspect, [opts]), else: ok(opts)
+  end
+
+  # ----------------------------------------------------------------------------
+  
   defp ok(opts)   , do: %{valid?: true, changes: opts}
+
 end

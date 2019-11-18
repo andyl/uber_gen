@@ -117,10 +117,13 @@
 - [x] Design a variable declaration callback (interface)
 - [x] Figure out how to handle dynamic variables in params block
 - [x] Change "Exec" to "Executor"
-
-- [ ] Migrate from macros to callbacks
+- [x] Get `mix ugen.help` working
+- [x] Migrate from macros to callbacks
 
 ## TBD
+
+- [ ] working `interface` function
+- [ ] working `inspect` function
 
 - [ ] "Export" writes to context
 - [ ] Update executor to read & write assigns
@@ -130,7 +133,6 @@
 
 - [ ] Convert bash generators to UberGen
 
-- [ ] Get `mix ugen.base.help` working
 - [ ] Cleanup code
 - [ ] Document playbooks
 

@@ -55,7 +55,7 @@ The `UberGen.Playbook` module provides callbacks for use in Playbooks.
 | guide/2     | ctx, opts | guide text         | playbook documentation        |
 | children/2  | ctx, opts | list of PB Modules | list of playbook children     |
 | interface/2 | ctx, opts | params             | schema for params and assigns |
-| sentry/0    | TBD       | status             | cast and validate params      |
+| inspector/2 | TBD       | status             | cast and validate params      |
 
 All of these macros are optional for any given playbook.
 

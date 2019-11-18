@@ -1,7 +1,9 @@
 defmodule UberGen.Executor.Export do
+
+  alias UberGen.Executor.Base
   
   def guide(module) when is_atom(module) do
-    guide({module, %{}, module.steps(%{}, [])}, 1)
+    guide({module, %{}, Base.children(module, %{}, [])}, 1)
     |> String.replace(~r/\n\n[\n]+/, "\n\n")
   end
   
@@ -27,13 +29,13 @@ defmodule UberGen.Executor.Export do
   end
 
   # if children are defined, use them
-  # otherwise, use the hard-coded steps as children
-  defp child_module({module, opts, children}), do: {module, opts, children}
-  defp child_module({module, opts}), do: {module, opts, module.steps(%{}, %{})}
-  defp child_module(module), do: {module, %{}, []}
+  # otherwise, use the hard-coded children
+  defp child_module({mod, opts, children}), do: {mod, opts, children}
+  defp child_module({mod, opts}), do: {mod, opts, Base.children(mod, %{}, %{})}
+  defp child_module(mod), do: {mod, %{}, []}
 
-  defp output({module, opts}, depth) do
-    doc = module.guide(%{}, opts)
+  defp output({mod, opts}, depth) do
+    doc = Base.guide(mod, %{}, opts)
     hdr = String.duplicate("#", depth)
     block_text(hdr, doc) 
   end
@@ -41,8 +43,6 @@ defmodule UberGen.Executor.Export do
   defp block_text(hdr,  %{header: header, body: body}), do: "#{hdr} #{header}\n\n#{body}"
   defp block_text(hdr,  %{header: header})            , do: "#{hdr} #{header}"
   defp block_text(_hdr, %{body: body})                , do: body
-  defp block_text(hdr,  [header: header, body: body]) , do: "#{hdr} #{header}\n\n#{body}"
-  defp block_text(hdr,  [header: header])             , do: "#{hdr} #{header}"
-  defp block_text(_hdr, [body: body])                 , do: body
+  defp block_text(_hdr, %{})                          , do: ""
   defp block_text(_hdr, body)                         , do: body
 end
