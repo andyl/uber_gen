@@ -11,7 +11,7 @@ defmodule UberGen.Actions.Phx.LiveView do
   @shortdoc "ShortDoc for #{__MODULE__}"
 
   def children(_ctx, _opts) do
-    "#{:code.priv_dir(:uber_gen)}/outlines/live_view.yaml"
+    "#{:code.priv_dir(:uber_gen)}/playbooks/live_view.yaml"
     |> Util.Steps.file_data()
     |> Util.Steps.to_steps()
   end

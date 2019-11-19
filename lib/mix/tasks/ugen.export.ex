@@ -2,6 +2,8 @@ defmodule Mix.Tasks.Ugen.Export do
   use Mix.Task
 
   alias UberGen.ActionUtil
+  alias UberGen.Executor.Export
+  alias UberGen.Presentor.Markdown
 
   @moduledoc """
   Export a Action.
@@ -22,7 +24,7 @@ defmodule Mix.Tasks.Ugen.Export do
 
     case mod do
       nil -> IO.puts("Action not found (#{arg})")
-      {module, _label} -> IO.puts(UberGen.Executor.Export.guide(module))
+      {module, _label} -> module |> Export.guide() |> Markdown.generate() |> IO.puts()
       _ -> "ERROR Export"
     end
   end
