@@ -132,22 +132,23 @@
 
 - [x] Executor.Export writes to context
 - [x] Executor.Run writes to context
+- [x] Typespecs for Action callbacks
 
 ## TBD
 
-- [ ] Write tests
+- [ ] Finish LiveView Action
 - [ ] Write markdown presentor
+- [ ] Write tests
 
-- [ ] Export and Run Guide calls inspect
 - [ ] Run stops on halt
+- [ ] Export and Run Guide calls inspect
 
-- [ ] Finish Runner/REPL
+- [ ] Write Runner/REPL
 - [ ] Create `ugen` escript
 
-- [ ] Finish LiveView Action
-
-- [ ] Typespecs for Action callbacks
 - [ ] Document action callbacks
+- [ ] Add type for guide output
+- [ ] Add type for child spec (mod, opts, [children])
 - [ ] Document playbooks
 - [ ] Document playbooks
 

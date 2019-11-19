@@ -24,38 +24,42 @@ defmodule UberGen.Action do
   `has_test?/0`, `has_children?/0`, `has_interface?/0`, `has_inspect?/0`.
   """
 
+  alias UberGen.Ctx
+
   @doc """
   Action command.  
 
   Commands must be idempotent.  Use your test to determine if you need to
   re-run command code.
   """
-  @callback command(any(), any())          :: any()
+  @callback command(Ctx.t, map())          :: Ctx.t
 
   @doc """
   Emit guide text.
   """
-  @callback guide(any(), any())            :: any()
+  @callback guide(Ctx.t, map())            :: map()
 
   @doc """
   Run a test.
   """
-  @callback test(any(), any())             :: any()
+  @callback test(Ctx.t, map())             :: :ok | {:error, String.t}
 
   @doc """
   Return list of children.
   """
-  @callback children(any(), any())         :: any()
+  @callback children(Ctx.t, map())         :: list()
 
   @doc """
   Define interface for params and assigns.
+
+  Atom is either `:params` or `:assigns`.
   """
-  @callback interface(any(), any(), any()) :: any()
+  @callback interface(atom(), Ctx.t, map()) :: any()
 
   @doc """
   Perform casting and validation on interface data.
   """
-  @callback inspect(any(), any(), any())   :: any()
+  @callback inspect(any(), Ctx.t, map())   :: any()
 
   @optional_callbacks command: 2, guide: 2, test: 2, children: 2, interface: 3, inspect: 3
 

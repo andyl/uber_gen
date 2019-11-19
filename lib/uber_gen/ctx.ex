@@ -1,7 +1,4 @@
 defmodule UberGen.Ctx do
-  defstruct [env: %{}, assigns: %{}, log: [], halted: false]
-
-  alias UberGen.Ctx
 
   @moduledoc """
   Context data for UberGen Actions.
@@ -16,6 +13,17 @@ defmodule UberGen.Ctx do
   - log: Action results (command / test / guide) - stored as nested map
   - halted: set to true if pipeline-error occurs
   """
+
+  alias UberGen.Ctx
+
+  defstruct [env: %{}, assigns: %{}, log: [], halted: false]
+
+  @type t :: %Ctx{
+    env: map(),
+    assigns: map(),
+    log: list(),
+    halted: boolean()
+  }
 
   @doc false
   defmacro __using__(_opts) do
