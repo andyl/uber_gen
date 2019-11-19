@@ -97,9 +97,9 @@
 - [x] Add ability to use YAML or JSON in playbook steps
 - [x] Create LiveView generator
 - [x] Design UberGen runner
-- [x] Rename 'Action.work' to 'Action.cmd'
+- [x] Rename 'Action.work' to 'Action.command'
 - [x] Create `Executor.Export.guide/1`
-- [x] Create `Executor.Run.cmd/1`
+- [x] Create `Executor.Run.command/1`
 
 ## 2019 Nov 15 Fri
 
@@ -128,16 +128,27 @@
 - [x] rename playbook to action
 - [x] rename priv/scripts to playbooks
 
-- [ ] document action callbacks
-- [ ] document playbooks
+## 2019 Nov 18 Mon
+
+- [x] Executor.Export writes to context
+- [x] Executor.Run writes to context
 
 ## TBD
 
-- [ ] "Export" writes to context
-- [ ] Guide calls inspect
+- [ ] Write tests
+- [ ] Write markdown presentor
+
+- [ ] Export and Run Guide calls inspect
+- [ ] Run stops on halt
 
 - [ ] Finish Runner/REPL
+- [ ] Create `ugen` escript
 
+- [ ] Finish LiveView Action
+
+- [ ] Typespecs for Action callbacks
+- [ ] Document action callbacks
+- [ ] Document playbooks
 - [ ] Document playbooks
 
 - [ ] Convert bash generators to UberGen
@@ -156,9 +167,6 @@
 - [ ] Does this work with Sockets / GenStage?
 
 ## Futures
-
-- [ ] Naming: Rename UberGen to Xtool (xtool.dev, xtool.tech)
-- [ ] Naming: Retain UberGen for generator vertical
 
 - [ ] WebUI: Design WebUI
 

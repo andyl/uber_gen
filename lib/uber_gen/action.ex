@@ -1,6 +1,6 @@
 defmodule UberGen.Action do
   @moduledoc """
-  A module that provides conveniences for playbooks.
+  A module that provides conveniences for actions.
 
       def MyAction do
         use UberGen.Action
@@ -8,27 +8,53 @@ defmodule UberGen.Action do
 
   The `UberGen.Action` behavior provides five callbacks for use in Actions.
 
-  | Callback    | Arg(s)    | Returns     | Purpose                   |
-  |-------------|-----------|-------------|---------------------------|
-  | command/2   | ctx, opts | new_ctx     | executable playbook code  |
-  | guide/2     | ctx, opts | new_ctx     | playbook documentation    |
-  | test/2      | ctx, opts | test status | validation test           |
-  | children/2  | ctx, opts | child list  | list of playbook children |
-  | interface/3 | ctx, opts | schema      | params/assigns schema     |
-  | inspect/3   | TBD       | changeset   | casting and validation    |
+  | Callback    | Arg(s)    | Returns     | Purpose                 |
+  |-------------|-----------|-------------|-------------------------|
+  | command/2   | ctx, opts | new_ctx     | executable action code  |
+  | guide/2     | ctx, opts | new_ctx     | action documentation    |
+  | test/2      | ctx, opts | test status | action test             |
+  | children/2  | ctx, opts | child list  | list of action children |
+  | interface/3 | ctx, opts | schema      | params/assigns schema   |
+  | inspect/3   | TBD       | changeset   | casting and validation  |
 
-  All of these macros are optional for any given playbook.
+  All of these macros are optional for any given action.
 
   The `UberGen.Action` module provides introspection functions that show if a
-  method is defined in a playbook: `has_command?/0`, `has_guide?/0`,
+  method is defined in a action: `has_command?/0`, `has_guide?/0`,
   `has_test?/0`, `has_children?/0`, `has_interface?/0`, `has_inspect?/0`.
   """
 
+  @doc """
+  Action command.  
+
+  Commands must be idempotent.  Use your test to determine if you need to
+  re-run command code.
+  """
   @callback command(any(), any())          :: any()
+
+  @doc """
+  Emit guide text.
+  """
   @callback guide(any(), any())            :: any()
+
+  @doc """
+  Run a test.
+  """
   @callback test(any(), any())             :: any()
+
+  @doc """
+  Return list of children.
+  """
   @callback children(any(), any())         :: any()
+
+  @doc """
+  Define interface for params and assigns.
+  """
   @callback interface(any(), any(), any()) :: any()
+
+  @doc """
+  Perform casting and validation on interface data.
+  """
   @callback inspect(any(), any(), any())   :: any()
 
   @optional_callbacks command: 2, guide: 2, test: 2, children: 2, interface: 3, inspect: 3
@@ -59,7 +85,6 @@ defmodule UberGen.Action do
       
       import UberGen.Ctx
       
-      import UberGen.Action
       @behaviour UberGen.Action
     end
   end

@@ -11,7 +11,7 @@
 #
 #   | Macro    | Arg(s)    | Returns     | Purpose                   |
 #   |----------|-----------|-------------|---------------------------|
-#   | cmd/2    | ctx, opts | new_ctx     | executable playbook code  |
+#   | command/2    | ctx, opts | new_ctx     | executable playbook code  |
 #   | test/2   | ctx, opts | test status | validation test           |
 #   | guide/2  | ctx, opts | guide text  | playbook documentation    |
 #   | steps/2  | ctx, opts | child list  | list of playbook children |
@@ -23,7 +23,7 @@
 #   Calling a Action with an 'undefined' macro returns a default value.
 #
 #   The `UberGen.Action` module provides introspection functions that show if a
-#   method is defined in a playbook: `has_cmd?/0`, `has_call?/0`, `has_test?/0`,
+#   method is defined in a playbook: `has_command?/0`, `has_call?/0`, `has_test?/0`,
 #   `has_steps?/0`, `has_guide?/0`
 #   """
 #
@@ -33,7 +33,7 @@
 #       Module.register_attribute(__MODULE__, :shortdoc, persist: true)
 #
 #       @doc false
-#       def has_cmd?    , do: has?({:_cmd, 2})
+#       def has_command?    , do: has?({:_command, 2})
 #       @doc false
 #       def has_test?   , do: has?({:_test, 2})
 #       @doc false
@@ -44,7 +44,7 @@
 #       def has_verify? , do: has?({:_verify, 1})
 #
 #       @doc false
-#       def cmd(ctx, opts)  , do: if has_cmd?()   , do: apply(mod(), :_cmd,    [ctx, opts]) , else: ctx
+#       def command(ctx, opts)  , do: if has_command?()   , do: apply(mod(), :_command,    [ctx, opts]) , else: ctx
 #       @doc false
 #       def test(ctx, opts) , do: if has_test?()  , do: apply(mod(), :_test,   [ctx, opts]) , else: true
 #       @doc false
@@ -89,9 +89,9 @@
 #   end
 #
 #   @doc false
-#   defmacro cmd(ctx, opts, do: yeild) do
+#   defmacro command(ctx, opts, do: yeild) do
 #     quote do
-#       def _cmd(unquote(ctx), unquote(opts)) do
+#       def _command(unquote(ctx), unquote(opts)) do
 #         unquote(yeild)
 #       end
 #     end

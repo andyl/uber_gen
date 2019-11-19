@@ -1,53 +1,65 @@
 defmodule UberGen.Executor.Run do
 
-  import UberGen.Ctx
+  @moduledoc """
+  Runs Action commands and tests, Exports an Action guide.
 
-  def cmd(module) when is_atom(module) do
-    cmd(%{}, {module, %{}, module.steps(%{}, [])})
-  end
-  
-  def cmd(input) when is_list(input) do
-    cmd(%{}, {UberGen.Actions.Util.Null, %{}, input})
-  end
+  The `Export.guide` function traverses an Action tree and saves guide
+  fragments into the `log` attribute of the `UberGen.Ctx`.
 
-  def cmd(ctx, {module, opts, []}) do
-    if module.test(ctx, opts) do
-      IO.puts("PASS (#{module})")
-    else
-      module.cmd(ctx, opts)
-    end
+  To generate output, pipe the result into an `UberGen.Presentor`:
 
-    unless module.test(ctx, opts) do
-      IO.puts("FAIL")
-      module.guide(ctx, opts) |> IO.puts()
-      halt(ctx)
-    end
+      UberGen.Executor.Export.guide(MyModule)
+      |> UberGen.Presentor.Markdown.to_stdout()
+  """
+  use UberGen.Ctx
+
+  alias UberGen.Executor.Base
+
+  def command(module) when is_atom(module) do
+    Base.default_ctx()
+    |> run_cmd({module, %{}, Base.children(module, %{}, [])})
+    |> package()
   end
 
-  # NOTE: the pipeline can be halted from within the command,
-  # TODO: We should check for "HALT" before each test.
-  
-  def cmd(ctx, {module, opts, children}) do
-    if module.test(ctx, opts) do
-      IO.puts("PASS (#{module})")
-    else
-      module.cmd(ctx, opts)
-    end
+  def command(child_list) when is_list(child_list) do
+    Base.default_ctx()
+    |> run_cmd({UberGen.Actions.Util.Null, %{}, child_list})
+    |> package()
+  end
 
-    if module.test(ctx, opts) do
+  defp run_cmd(ctx, {module, opts, []}) do
+    log(module, ctx, opts)
+  end
+
+  defp run_cmd(ctx, {module, opts, children}) do
+    {cx0, log} = log(module, ctx, opts)
+
+    {cx1, logs} =
       children
-      |> Enum.map(&child_module/1)
-      |> Enum.map(&(UberGen.Executor.Run.cmd(ctx, &1)))
-    else
-      IO.puts("FAIL")
-      module.guide(ctx, opts)
-      halt(ctx)
-    end
+      |> Enum.map(&Base.child_module/1)
+      |> Enum.reduce({cx0, []}, &process/2)
+
+    {cx1, %{log | children: logs}}
   end
 
-  # if children are defined, use them
-  # otherwise, use the hard-coded steps as children
-  defp child_module({module, opts, children}), do: {module, opts, children}
-  defp child_module({module, opts}), do: {module, opts, module.steps(%{}, %{})}
-  defp child_module(module), do: {module, %{}, []}
+  defp process({mod, opts}, {ctx, logs}) do
+    {cx0, log} = log(mod, ctx, opts)
+    {cx0, logs ++ [log]}
+  end
+
+  defp log(mod, ctx, opts) do
+    cx0 = Base.command(mod, ctx, opts)
+
+    log = %{
+      action: mod,
+      test: Base.test(mod, cx0, opts),
+      guide: Base.guide(mod, cx0, opts),
+      children: []
+    }
+
+    cx1 = if log.test == :ok, do: cx0, else: halt(cx0)
+    {cx1, log}
+  end
+
+  defp package({ctx, log}), do: %{ctx | log: log}
 end
