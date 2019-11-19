@@ -1,68 +1,65 @@
 defmodule UberGen.Executor.Run do
 
+  @moduledoc """
+  Runs Action commands and tests, Exports an Action guide.
+
+  The `Export.guide` function traverses an Action tree and saves guide
+  fragments into the `log` attribute of the `UberGen.Ctx`.
+
+  To generate output, pipe the result into an `UberGen.Presentor`:
+
+      UberGen.Executor.Export.guide(MyModule)
+      |> UberGen.Presentor.Markdown.to_stdout()
+  """
   use UberGen.Ctx
 
   alias UberGen.Executor.Base
 
   def command(module) when is_atom(module) do
-    default_ctx()
-    |> command({module, %{}, Base.children(module, %{}, [])})
+    Base.default_ctx()
+    |> run_cmd({module, %{}, Base.children(module, %{}, [])})
+    |> package()
   end
-  
+
   def command(child_list) when is_list(child_list) do
-    default_ctx()
-    |> command({UberGen.Actions.Util.Null, %{}, child_list})
+    Base.default_ctx()
+    |> run_cmd({UberGen.Actions.Util.Null, %{}, child_list})
+    |> package()
   end
 
-  def command(ctx, {module, opts, []}) do
-    if Base.test(module, ctx, opts) do
-      log(module, ctx, opts, "PASS(#{module})")
-    else
-      Base.command(module, ctx, opts)
-    end
-
-    unless Base.test(module, ctx, opts) do
-      log(module, ctx, opts, "FAIL (#{module})")
-      Base.guide(module, ctx, opts) |> IO.puts()
-      halt(ctx)
-    end
+  defp run_cmd(ctx, {module, opts, []}) do
+    log(module, ctx, opts)
   end
 
-  # NOTE: the pipeline can be halted from within the command,
-  # TODO: We should check for "HALT" before each test.
-  
-  def command(ctx, {module, opts, children}) do
-    if Base.test(module, ctx, opts) do
-      log(module, ctx, opts, "PASS(#{module})")
-    else
-      Base.command(module, ctx, opts)
-    end
+  defp run_cmd(ctx, {module, opts, children}) do
+    {cx0, log} = log(module, ctx, opts)
 
-    if Base.test(module, ctx, opts) do
+    {cx1, logs} =
       children
       |> Enum.map(&Base.child_module/1)
-      |> Enum.map(&(UberGen.Executor.Run.command(ctx, &1)))
-    else
-      log(module, ctx, opts, "FAIL (#{module})")
-      Base.guide(module, ctx, opts)
-      halt(ctx)
-    end
+      |> Enum.reduce({cx0, []}, &process/2)
+
+    {cx1, %{log | children: logs}}
   end
 
-  # ---------------------------------------------------------
+  defp process({mod, opts}, {ctx, logs}) do
+    {cx0, log} = log(mod, ctx, opts)
+    {cx0, logs ++ [log]}
+  end
 
-  defp log(mod, ctx, opts, msg) do
-    %{
+  defp log(mod, ctx, opts) do
+    cx0 = Base.command(mod, ctx, opts)
+
+    log = %{
       action: mod,
-      command: msg,
-      guide: Base.guide(mod, ctx, opts),
+      test: Base.test(mod, cx0, opts),
+      guide: Base.guide(mod, cx0, opts),
       children: []
     }
+
+    cx1 = if log.test == :ok, do: cx0, else: halt(cx0)
+    {cx1, log}
   end
 
-  defp default_ctx do
-    %Ctx{}
-    |> setenv(:executor, __MODULE__)
-  end
-
+  defp package({ctx, log}), do: %{ctx | log: log}
 end

@@ -48,14 +48,14 @@ Actions must:
 
 The `UberGen.Action` module provides callbacks for use in Actions.
 
-| Callbacks   | Arg(s)    | Returns            | Purpose                       |
-|-------------|-----------|--------------------|-------------------------------|
-| command/2   | ctx, opts | new_ctx            | executable playbook code      |
-| test/2      | ctx, opts | test status        | validation test               |
-| guide/2     | ctx, opts | guide text         | playbook documentation        |
-| children/2  | ctx, opts | list of PB Modules | list of playbook children     |
-| interface/2 | ctx, opts | params             | schema for params and assigns |
-| inspector/2 | TBD       | status             | cast and validate params      |
+| Callbacks   | Arg(s)            | Returns         | Purpose                       |
+|-------------|-------------------|-----------------|-------------------------------|
+| command/2   | ctx, opts         | new_ctx         | executable playbook code      |
+| test/2      | ctx, opts         | test status     | validation test               |
+| guide/2     | ctx, opts         | guide text      | playbook documentation        |
+| children/2  | ctx, opts         | {mod, opts, []} | default children              |
+| interface/3 | type, ctx, opts   | params          | schema for params and assigns |
+| inspect/3   | params, ctx, opts | status          | cast and validate params      |
 
 All of these macros are optional for any given playbook.
 
@@ -69,13 +69,13 @@ method is defined in a playbook: `has_run?/0`, `has_call?/0`, `has_test?/0`,
 
 `UberGen` Mix commands
 
-| Command             | Purpose                                   |
-|---------------------|-------------------------------------------|
-| mix ugen.base.help  | Display help text for a playbook          |
-| mix ugen.cache.list | Show locally cached playbooks             |
-| mix ugen.pb.export  | Export a static playbook to MD, HTML, PDF |
-| mix ugen.pb.run     | Run a playbook on the command line        |
-| mix ugen.pb.serve   | Serve a playbook for browser interaction  |
+| Command         | Purpose                                   |
+|-----------------|-------------------------------------------|
+| mix ugen.help   | Display help text for a playbook          |
+| mix ugen.list   | Show locally cached playbooks             |
+| mix ugen.export | Export a static playbook to MD, HTML, PDF |
+| mix ugen.run    | Run a playbook on the command line        |
+| mix ugen.serve  | Serve a playbook for browser interaction  |
 
 ## 2019 Nov 10 Sun
 
@@ -116,7 +116,7 @@ New possibilities:
 - HTTP-like playbook protocol with CGI 
 - IP-addressible Action Servers
 - Language-independent playbook implementation
-- CLI invocation and xtool pipelining
+- CLI invocation and action pipelining
 
 Next step:
 - CLI interaction design for running playbooks
@@ -124,10 +124,15 @@ Next step:
 - passing context during run (fail points, default values for variables)
 - envision the design for specifying and using `assigns`
 
-## 2019 Nov 16 Sat
+## 2019 Nov 19 Tue
 
-The playbook abstraction might work for many use cases: generators, tasks,
-contracts, wikis, etc.  We may change some of the terminology:
-- playbook -> xtool
-- retain UberGen for generators, with Xtool as a dependency
+Changes:
+- Playbook renamed to Action
+- Each action now returns a `Ctx`
+- Context struct contains a log field
+- Guide and Test output is stored in the log
+- Added an `Executor` layer with `Export` and `Run` modules.
+- Added a `Presentor` layer to convert Ctx to Markdown, PDF, etc.
+
+The core design is done.  Next steps are to write tests, docs, actions and playbooks.
 

@@ -128,10 +128,15 @@
 - [x] rename playbook to action
 - [x] rename priv/scripts to playbooks
 
+## 2019 Nov 18 Mon
+
+- [x] Executor.Export writes to context
+- [x] Executor.Run writes to context
+
 ## TBD
 
-- [ ] Executor.Export writes to context
-- [ ] Executor.Run writes to context
+- [ ] Write tests
+- [ ] Write markdown presentor
 
 - [ ] Export and Run Guide calls inspect
 - [ ] Run stops on halt

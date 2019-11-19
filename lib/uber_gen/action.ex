@@ -24,11 +24,37 @@ defmodule UberGen.Action do
   `has_test?/0`, `has_children?/0`, `has_interface?/0`, `has_inspect?/0`.
   """
 
+  @doc """
+  Action command.  
+
+  Commands must be idempotent.  Use your test to determine if you need to
+  re-run command code.
+  """
   @callback command(any(), any())          :: any()
+
+  @doc """
+  Emit guide text.
+  """
   @callback guide(any(), any())            :: any()
+
+  @doc """
+  Run a test.
+  """
   @callback test(any(), any())             :: any()
+
+  @doc """
+  Return list of children.
+  """
   @callback children(any(), any())         :: any()
+
+  @doc """
+  Define interface for params and assigns.
+  """
   @callback interface(any(), any(), any()) :: any()
+
+  @doc """
+  Perform casting and validation on interface data.
+  """
   @callback inspect(any(), any(), any())   :: any()
 
   @optional_callbacks command: 2, guide: 2, test: 2, children: 2, interface: 3, inspect: 3

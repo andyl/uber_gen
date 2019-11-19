@@ -144,12 +144,12 @@ It should be possible to extend `RST` or `Asciidoc` to work with UberGen.
 
 ### Command-Line Invocation
 
-Using Actions (Xtools) on the command line or in a bash script: 
-- each playbook (xtool) should act as a standalone executable
+Using Actions on the command line or in a bash script: 
+- each action should act as a standalone executable
 - context comes from STDIN or command-line param
 - params are command-line options
 
-    xt run | xt Util.TextBlock -header "asdfasdf" | xt Util.Command -command "ps"
+    uber_gen run | uber_gen Util.TextBlock -header "asdfasdf" | uber_gen Util.Command -command "ps"
 
 ## Use Cases
 
@@ -406,7 +406,8 @@ TODO:
 | Element      | Description              | Embodyments                    |
 |--------------|--------------------------|--------------------------------|
 | Orchestrator | composition/execution UI | mix, xt                        |
-| Action     | Pipeline of xtools       | yaml/json files, shell pipes   |
+| Playbook     | Pipeline of actions      | yaml/json files, shell pipes   |
+| Presentor    | CONTEXT -> OUTPUT        | TBD                            |
 | Executor     | Runs a playbook          | export, run                    |
-| Xtool        | Processing element       | Util.BlockInFile, Util.Command |
+| Action       | Processing element       | Util.BlockInFile, Util.Command |
 | Helper       | Command helper           | create_directory, etc.         |

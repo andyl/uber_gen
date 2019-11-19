@@ -16,6 +16,7 @@ defmodule UberGen.Executor.Base do
   (`Executor.Export` and `Executor.Run`).
   """
 
+  use UberGen.Ctx
   alias UberGen.Executor.Base
 
   def command(module, ctx, opts) do
@@ -56,6 +57,11 @@ defmodule UberGen.Executor.Base do
   def child_module({module, opts, children}), do: {module, opts, children}
   def child_module({module, opts}), do: {module, opts, Base.children(module, %{}, %{})}
   def child_module(module), do: {module, %{}, Base.children(module, %{}, %{})}
+
+  def default_ctx do
+    %Ctx{}
+    |> setenv(:executor, __MODULE__)
+  end
 
   # ----------------------------------------------------------------------------
   

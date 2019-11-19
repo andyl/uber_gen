@@ -16,34 +16,40 @@ defmodule UberGen.Executor.Export do
   use UberGen.Ctx
 
   alias UberGen.Executor.Base
-  
+
   def guide(module) when is_atom(module) do
-    guide({module, %{}, Base.children(module, %{}, [])})
+    ctx = Base.default_ctx()
+    log = guide_log(ctx, {module, %{}, Base.children(module, %{}, [])})
+    %{ctx | log: log}
   end
-  
+
+  # TODO: add function variants for tuple arg
+
   def guide(child_list) when is_list(child_list) do
-    guide({UberGen.Actions.Util.Null, %{}, child_list})
+    ctx = Base.default_ctx()
+    log = guide_log(ctx, {UberGen.Actions.Util.Null, %{}, child_list})
+    %{ctx | log: log}
   end
 
-  def guide({module, opts, []}) do
-    log(module, opts)
+  defp guide_log(ctx, {module, opts, []}) do
+    log(module, ctx, opts)
   end
 
-  def guide({module, opts, children}) do
-    base = log(module, opts)
+  defp guide_log(ctx, {module, opts, children}) do
+    base = log(module, ctx, opts)
 
     alt =
       children
       |> Enum.map(&Base.child_module/1)
-      |> Enum.map(&guide(&1))
+      |> Enum.map(&guide_log(ctx, &1))
 
     %{base | children: alt}
   end
 
-  defp log(mod, opts) do
+  defp log(mod, ctx, opts) do
     %{
       action: mod,
-      guide: Base.guide(mod, %{}, opts),
+      guide: Base.guide(mod, ctx, opts),
       children: []
     }
   end

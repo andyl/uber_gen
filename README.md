@@ -1,9 +1,7 @@
 # UberGen
 
 UberGen is a scriptable code generator for Elixir, motivated by a thread on
-[Elixir Forum][f].  Using `Readme Driven Development`, this doc contains
-pseudocode for a possible implementation.  We will explore design alternatives
-before committing to actually writing the code.  
+[Elixir Forum][f].  
 
 [f]: https://elixirforum.com/t/what-would-you-think-about-a-new-web-framework-that-extends-phoenix-with-rails-like-or-django-like-built-in-features/26371/8
 
@@ -18,7 +16,9 @@ manual installation.
 [pow]: https://github.com/danschultzer/pow
 
 **The problem:** manual install instructions can be hard to follow.  
+
 **Evidence:** innumerable `HowTos` with complicated instructions.  
+
 **Examples:**
 - [How to install Bootstrap on a Phoenix 1.4 project][1] 
 - [LiveView Installation][2] 
@@ -28,11 +28,11 @@ manual installation.
 [2]: https://github.com/phoenixframework/phoenix_live_view/blob/master/guides/introduction/installation.md
 [3]: https://experimentingwithcode.com/phoenix-authentication-with-pow-part-1/
 
-Firstly - thank you authors for your invaluable HowTo guides!  Keep them coming!
+Firstly - thank you authors for these invaluable HowTo guides!  Keep them coming!
 
 But there are problems with **HowTo Driven Generation**:
 
-- time consuming - some installations can literally take days
+- some installations can literally take days
 - manual configuration is error-prone
 - written instructions become out-of-date with tools
 - no feedback mechanism for bugs and improvements
@@ -67,11 +67,10 @@ There are many comparables:
 UberGen extends `Mix.Generate`, and borrows ideas from other tools:
 - from [Mix.Generate][mixgen]: helper functions like `copy_file` 
 - from [PragDave][pdgen]: template trees, template installation and discovery
-- from [Ansible][ansible]: idempotent helper functions, composable playbooks
 - from [Orats][orats]: git helper functions
 - from [Exercism][exer]: guided refactoring
 - from [Ansible][ansible], the playbook execution model
-- from [Linux Pipes][pipes], small, composable elements
+- from [Linux Pipes][pipes], small, composable actions
 
 [mixgen]:  https://hexdocs.pm/mix/Mix.Generator.html
 [pdgen]:   https://pragdave.me/blog/2017/04/18/elixir-project-generator.html
@@ -274,13 +273,13 @@ The `uber_gen` executable reads playbook configs from `yaml` or `json` files.
 
 ### UberGen on the Command Line
 
-You can invoke an xtool from the command line:
+You can invoke an action from the command line:
 
-    $ xt <playbook1> [options]
+    $ uber_gen <playbook1> [options]
 
-You can connect playbooks together using pipes:
+You can join actions together using pipes:
 
-    $ xt <playbook1> [options] | xt <playbook2> [options]
+    $ uber_gen <playbook1> [options] | uber_gen <playbook2> [options]
 
 ## UberGen Workflow
 
