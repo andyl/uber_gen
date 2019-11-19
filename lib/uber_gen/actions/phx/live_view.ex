@@ -12,8 +12,8 @@ defmodule UberGen.Actions.Phx.LiveView do
 
   def children(_ctx, _opts) do
     "#{:code.priv_dir(:uber_gen)}/playbooks/live_view.yaml"
-    |> Util.Steps.file_data()
-    |> Util.Steps.to_steps()
+    |> Util.Children.file_data()
+    |> Util.Children.to_children()
   end
 
   def guide(_ctx, _opts) do

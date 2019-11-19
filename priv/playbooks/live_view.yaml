@@ -1,5 +1,5 @@
 ---
-- playbook: Util.BlockInFile
+- action: Util.BlockInFile
   params:
     header: Install Dependencies
     instruction: >
@@ -15,7 +15,7 @@
       - phoenix_live_view
       - floki
     target_file: mix.exs
-- playbook: Util.TextBlock
+- action: Util.TextBlock
   params:
     body: >
       If you want the latest features, instaoo from GitHub:
@@ -28,11 +28,11 @@
         ]
       end
       ```
-- playbook: Util.Command
+- action: Util.Command
   params:
     instruction: "Now install dependencies:"
     command: "mix deps.get"
-- playbook: Util.BlockInFile
+- action: Util.BlockInFile
   params:
     instruction: >
       Once installed, update your endpoint's configuration to
@@ -47,7 +47,7 @@
       - live_view
       - signing_salt
     target_file: config/config.exs
-- playbook: Util.BlockInFile
+- action: Util.BlockInFile
   params:
     instruction: >
       Next, add the LiveView flash plug to your browser pipeline, after `:fetch_flash`:
@@ -60,7 +60,7 @@
     check_for:
       - Phoenix.LivewView.Flash
     target_file: lib/my_app_web/router.ex
-- playbook: Util.BlockInFile
+- action: Util.BlockInFile
   params:
     instruction: >
       Add LiveView NPM dependencies. For a regular project, do:
@@ -76,7 +76,7 @@
     check_for: 
       - phoenix_live_view
       - phoenix_html
-- playbook: Util.BlockInFile
+- action: Util.BlockInFile
   params:
     instruction: >
       For an umbrella project, the dependency paths should be modified:
@@ -92,19 +92,33 @@
     check_for: 
       - phoenix_live_view
       - phoenix_html
-- playbook: Util.Command
+- action: Util.Command
   params:
     instruction: "Then install the new npm dependency."
     command: "npm install --prefix assets"
-- playbook: Util.TextBlock
+- action: Util.TextBlock
   params:
     body: >
       or `cd assets && npm install` for windows users if --prefix doesn't work
-- playbook: Util.Command
+- action: Util.Command
   params:
     instruction: >
       If you had previously installed `phoenix_live_view` and want to get the latest javascript,
       then force an install.
     command: "cd assets && npm install --force phoenix_live_view"
+- action: Util.BlockInFile
+  params: 
+    instruction: "Enable connectinng to a LiveView socket."
+    text_block: >
+      import {Socket} from "phoenix"
+      import LiveSocket from "phoenix_live_view"
+      
+      let liveSocket = new LiveSocket("/live", Socket)
+      liveSocket.connect()
+    check_for:
+      - LiveSocket
+      - phoenix_live_view
+    target_file: assets/js/app.js
+    
 
 

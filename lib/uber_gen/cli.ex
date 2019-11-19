@@ -3,8 +3,8 @@ defmodule UberGen.Cli do
     opts = args |> parse_args()
 
     opts.filename 
-    |> Util.Steps.file_data()
-    |> Util.Steps.to_steps()
+    |> Util.Children.file_data()
+    |> Util.Children.to_children()
     |> process(opts.command)
   end
 
@@ -32,7 +32,7 @@ defmodule UberGen.Cli do
 
     %{
       filename: Enum.at(words, 0),
-      filetype: Enum.at(words, 0) |> Util.Steps.file_type(),
+      filetype: Enum.at(words, 0) |> Util.Children.file_type(),
       command: Enum.at(words, 1)
     }
   end

@@ -133,11 +133,13 @@
 - [x] Executor.Export writes to context
 - [x] Executor.Run writes to context
 - [x] Typespecs for Action callbacks
+- [x] Run LiveView exporter
+- [x] Write markdown presentor
+
+- [ ] Finish LiveView Action
 
 ## TBD
 
-- [ ] Finish LiveView Action
-- [ ] Write markdown presentor
 - [ ] Write tests
 
 - [ ] Run stops on halt
