@@ -108,7 +108,7 @@
     command: "cd assets && npm install --force phoenix_live_view"
 - action: Util.BlockInFile
   params: 
-    instruction: "Enable connectinng to a LiveView socket."
+    instruction: "Enable connecting to a LiveView socket."
     text_block: >
       import {Socket} from "phoenix"
       import LiveSocket from "phoenix_live_view"
@@ -119,6 +119,26 @@
       - LiveSocket
       - phoenix_live_view
     target_file: assets/js/app.js
+- action: Util.BlockInFile
+  params: 
+    instruction: >
+      You can also optionally import the style for the default CSS classes.
+      For a regular project -
+    text_block: >
+      @import "../../deps/phoenix_live_view/assets/css/live_view.css";
+    check_for:
+      - live_view.css
+      - phoenix_live_view
+    target_file: assets/css/app.css
+- action: Util.BlockInFile
+  params: 
+    instruction: >
+      However, if you're adding `phoenix_live_view` to an umbrella project, the
+      import link should be modified appropriately -
+    text_block: >
+      @import "../../../../deps/phoenix_live_view/assets/css/live_view.css";
+    check_for:
+      - live_view.css
+      - phoenix_live_view
+    target_file: assets/css/app.css
     
-
-

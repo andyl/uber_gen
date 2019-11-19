@@ -135,8 +135,7 @@
 - [x] Typespecs for Action callbacks
 - [x] Run LiveView exporter
 - [x] Write markdown presentor
-
-- [ ] Finish LiveView Action
+- [x] Finish LiveView Action
 
 ## TBD
 
@@ -151,8 +150,8 @@
 - [ ] Document action callbacks
 - [ ] Add type for guide output
 - [ ] Add type for child spec (mod, opts, [children])
-- [ ] Document playbooks
-- [ ] Document playbooks
+- [ ] Document Actions
+- [ ] Add comments to Playbooks
 
 - [ ] Convert bash generators to UberGen
 
