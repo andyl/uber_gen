@@ -1,4 +1,4 @@
-defmodule UberGen.Executor.Run do
+defmodule UberGen.Presentor.Run do
 
   use UberGen.Ctx
 
@@ -16,13 +16,13 @@ defmodule UberGen.Executor.Run do
 
   def command(ctx, {module, opts, []}) do
     if Base.test(module, ctx, opts) do
-      log(module, ctx, opts, "PASS(#{module})")
+      IO.puts("PASS (#{module})")
     else
       Base.command(module, ctx, opts)
     end
 
     unless Base.test(module, ctx, opts) do
-      log(module, ctx, opts, "FAIL (#{module})")
+      IO.puts("FAIL")
       Base.guide(module, ctx, opts) |> IO.puts()
       halt(ctx)
     end
@@ -33,7 +33,7 @@ defmodule UberGen.Executor.Run do
   
   def command(ctx, {module, opts, children}) do
     if Base.test(module, ctx, opts) do
-      log(module, ctx, opts, "PASS(#{module})")
+      IO.puts("PASS (#{module})")
     else
       Base.command(module, ctx, opts)
     end
@@ -43,7 +43,7 @@ defmodule UberGen.Executor.Run do
       |> Enum.map(&Base.child_module/1)
       |> Enum.map(&(UberGen.Executor.Run.command(ctx, &1)))
     else
-      log(module, ctx, opts, "FAIL (#{module})")
+      IO.puts("FAIL")
       Base.guide(module, ctx, opts)
       halt(ctx)
     end
@@ -51,18 +51,8 @@ defmodule UberGen.Executor.Run do
 
   # ---------------------------------------------------------
 
-  defp log(mod, ctx, opts, msg) do
-    %{
-      action: mod,
-      command: msg,
-      guide: Base.guide(mod, ctx, opts),
-      children: []
-    }
-  end
-
   defp default_ctx do
     %Ctx{}
     |> setenv(:executor, __MODULE__)
   end
-
 end

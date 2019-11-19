@@ -128,16 +128,22 @@
 - [x] rename playbook to action
 - [x] rename priv/scripts to playbooks
 
-- [ ] document action callbacks
-- [ ] document playbooks
-
 ## TBD
 
-- [ ] "Export" writes to context
-- [ ] Guide calls inspect
+- [ ] Executor.Export writes to context
+- [ ] Executor.Run writes to context
+
+- [ ] Export and Run Guide calls inspect
+- [ ] Run stops on halt
 
 - [ ] Finish Runner/REPL
+- [ ] Create `ugen` escript
 
+- [ ] Finish LiveView Action
+
+- [ ] Typespecs for Action callbacks
+- [ ] Document action callbacks
+- [ ] Document playbooks
 - [ ] Document playbooks
 
 - [ ] Convert bash generators to UberGen
@@ -156,9 +162,6 @@
 - [ ] Does this work with Sockets / GenStage?
 
 ## Futures
-
-- [ ] Naming: Rename UberGen to Xtool (xtool.dev, xtool.tech)
-- [ ] Naming: Retain UberGen for generator vertical
 
 - [ ] WebUI: Design WebUI
 
