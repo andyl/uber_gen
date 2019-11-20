@@ -1,4 +1,4 @@
-defmodule UberGen.Presentor.Markdown do
+defmodule UberGen.Presentor.GuideMarkdown do
   @moduledoc """
   Generates Markdown output.
   """
@@ -6,7 +6,7 @@ defmodule UberGen.Presentor.Markdown do
   alias UberGen.Ctx
 
   @doc """
-  Generate markdown output.
+  Generate Guide Markdown output.
 
   Raw input data is in nested map in `ctx.log` (the guide field).
   """

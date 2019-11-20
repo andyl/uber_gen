@@ -136,6 +136,12 @@
 - [x] Run LiveView exporter
 - [x] Write markdown presentor
 - [x] Finish LiveView Action
+- [x] Add option parser for mix tasks
+- [x] Mix tasks: ugen -> uber_gen - with alias
+- [x] Presentor: guide_html
+- [x] Presentor: ctx_inspect
+- [x] Presentor: log_inspect
+- [x] Presentor: action_tree
 
 ## TBD
 
