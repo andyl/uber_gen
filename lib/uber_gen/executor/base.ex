@@ -5,7 +5,7 @@ defmodule UberGen.Executor.Base do
 
   Actions have five optional callbacks: `command`, `test`, `guide`, `children`,
   `interface`, and `inspect`.  This module provides default values for Action
-  callbacks.
+  callbacks if they are not defined.
 
   Note that Action callbacks should not be called directly.  Invoke a callback
   using `Executor.Base`:
@@ -18,6 +18,23 @@ defmodule UberGen.Executor.Base do
 
   use UberGen.Ctx
   alias UberGen.Executor.Base
+
+  @doc false
+  defmacro __using__(_opts) do
+    quote do
+      use UberGen.Ctx
+      alias UberGen.Executor.Base
+
+      @doc """
+      Create the default context for an Executor module.
+
+      """
+      def default_ctx do
+        %Ctx{}
+        |> setenv(:executor, __MODULE__)
+      end
+    end
+  end
 
   def command(module, ctx, opts) do
     if module.has_command?(), do: apply(module, :command, [ctx, opts]), else: ctx
@@ -45,12 +62,10 @@ defmodule UberGen.Executor.Base do
 
   @doc """
   Cast the input param into a child-module tuple.
-
   The child-module tuple has the following elements:
   - the module
   - the module options
   - the module children
-
   If children are passed as an option, use them.  Otherwise, use the values
   that are hard-coded into the `children` callback.
   """

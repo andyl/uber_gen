@@ -8,14 +8,14 @@ defmodule UberGen.Action do
 
   The `UberGen.Action` behavior provides five callbacks for use in Actions.
 
-  | Callback    | Arg(s)    | Returns     | Purpose                 |
-  |-------------|-----------|-------------|-------------------------|
-  | command/2   | ctx, opts | new_ctx     | executable action code  |
-  | guide/2     | ctx, opts | new_ctx     | action documentation    |
-  | test/2      | ctx, opts | test status | action test             |
-  | children/2  | ctx, opts | child list  | list of action children |
-  | interface/3 | ctx, opts | schema      | params/assigns schema   |
-  | inspect/3   | TBD       | changeset   | casting and validation  |
+  | Callback    | Arg(s)    | Returns | Purpose                 |
+  |-------------|-----------|---------|-------------------------|
+  | command/2   | ctx, opts | new_ctx | executable action code  |
+  | guide/2     | ctx, opts | map     | action documentation    |
+  | test/2      | ctx, opts | status  | action test             |
+  | children/2  | ctx, opts | list    | list of action children |
+  | interface/2 | ctx, opts | schema  | params/assigns schema   |
+  | inspect/2   | ctx, opts | report  | casting and validation  |
 
   All of these macros are optional for any given action.
 
@@ -54,14 +54,14 @@ defmodule UberGen.Action do
 
   Atom is either `:params` or `:assigns`.
   """
-  @callback interface(atom(), Ctx.t, map()) :: any()
+  @callback interface(Ctx.t, map()) :: any()
 
   @doc """
   Perform casting and validation on interface data.
   """
-  @callback inspect(any(), Ctx.t, map())   :: any()
+  @callback inspect(Ctx.t, map())   :: any()
 
-  @optional_callbacks command: 2, guide: 2, test: 2, children: 2, interface: 3, inspect: 3
+  @optional_callbacks command: 2, guide: 2, test: 2, children: 2, interface: 2, inspect: 2
 
   @doc false
   defmacro __using__(_opts) do
@@ -77,9 +77,9 @@ defmodule UberGen.Action do
       @doc false
       def has_children?   , do: has?({:children, 2})
       @doc false
-      def has_interface?  , do: has?({:interface, 3})
+      def has_interface?  , do: has?({:interface, 2})
       @doc false
-      def has_inspect?    , do: has?({:inspect, 3})
+      def has_inspect?    , do: has?({:inspect, 2})
 
       defp flist      , do: __MODULE__.__info__(:functions)
       defp has?(tuple), do: Enum.any?(flist(), &(&1 == tuple))

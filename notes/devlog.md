@@ -128,7 +128,7 @@
 - [x] rename playbook to action
 - [x] rename priv/scripts to playbooks
 
-## 2019 Nov 18 Mon
+## 2019 Nov 19 Tue
 
 - [x] Executor.Export writes to context
 - [x] Executor.Run writes to context
@@ -142,6 +142,9 @@
 - [x] Presentor: ctx_inspect
 - [x] Presentor: log_inspect
 - [x] Presentor: action_tree
+
+## 2019 Nov 21 Thu
+
 
 ## TBD
 

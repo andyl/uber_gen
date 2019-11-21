@@ -13,9 +13,7 @@ defmodule UberGen.Executor.Export do
 
   """
 
-  use UberGen.Ctx
-
-  alias UberGen.Executor.Base
+  use UberGen.Executor.Base
 
   def guide(module) when is_atom(module) do
     ctx = Base.default_ctx()

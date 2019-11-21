@@ -11,12 +11,11 @@ defmodule UberGen.Executor.Run do
       UberGen.Executor.Export.guide(MyModule)
       |> UberGen.Presentor.Markdown.to_stdout()
   """
-  use UberGen.Ctx
 
-  alias UberGen.Executor.Base
+  use UberGen.Executor.Base
 
   def command(module) when is_atom(module) do
-    Base.default_ctx()
+    default_ctx()
     |> run_cmd({module, %{}, Base.children(module, %{}, [])})
     |> package()
   end
