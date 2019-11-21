@@ -8,14 +8,14 @@ defmodule UberGen.Action do
 
   The `UberGen.Action` behavior provides five callbacks for use in Actions.
 
-  | Callback    | Arg(s)    | Returns | Purpose                 |
-  |-------------|-----------|---------|-------------------------|
-  | command/2   | ctx, opts | new_ctx | executable action code  |
-  | guide/2     | ctx, opts | map     | action documentation    |
-  | test/2      | ctx, opts | status  | action test             |
-  | children/2  | ctx, opts | list    | list of action children |
-  | interface/2 | ctx, opts | schema  | params/assigns schema   |
-  | inspect/2   | ctx, opts | report  | casting and validation  |
+  | Callback    | Arg(s)    | Returns  | Purpose                |
+  |-------------|-----------|----------|------------------------|
+  | command/2   | ctx, opts | new_ctx  | executable action code |
+  | guide/2     | ctx, opts | fragment | action documentation   |
+  | test/2      | ctx, opts | status   | action test            |
+  | children/2  | ctx, opts | list     | list of action specs   |
+  | interface/2 | ctx, opts | schema   | params/assigns schema  |
+  | inspect/2   | ctx, opts | report   | casting and validation |
 
   All of these macros are optional for any given action.
 
@@ -24,7 +24,7 @@ defmodule UberGen.Action do
   `has_test?/0`, `has_children?/0`, `has_interface?/0`, `has_inspect?/0`.
   """
 
-  alias UberGen.Ctx
+  alias UberGen.Data.{Ctx, Report}
 
   @doc """
   Action command.  
@@ -58,8 +58,16 @@ defmodule UberGen.Action do
 
   @doc """
   Perform casting and validation on interface data.
+
+  This can be done on *either* the Ctx[:assigns] values, or the params.
+
+  You can optionally use ecto validations.
+
+  You can optionally update the ctx assigns.
+
+  See the Executor modules (Run, Export) to see how the inspect function is used.
   """
-  @callback inspect(Ctx.t, map())   :: any()
+  @callback inspect(Ctx.t, map())   :: Report.t
 
   @optional_callbacks command: 2, guide: 2, test: 2, children: 2, interface: 2, inspect: 2
 
@@ -87,7 +95,7 @@ defmodule UberGen.Action do
       use Ecto.Schema
       import Ecto.Changeset
       
-      import UberGen.Ctx
+      import UberGen.Data.Ctx
       
       @behaviour UberGen.Action
     end

@@ -1,5 +1,4 @@
-defmodule UberGen.Executor.Base do
-
+defmodule UberGen.Executor.Util.Base do
   @moduledoc """
   Function invocation for Action Callbacks with default values.
 
@@ -12,24 +11,21 @@ defmodule UberGen.Executor.Base do
 
       UberGen.Executor.Base.command(module, ctx, opts)
 
-  This module is designed to be used mainly by "high level" executor modules
-  (`Executor.Export` and `Executor.Run`).
+  This module is designed to be used by "high level" `Executor.*` modules:
+
+      use UberGen.Executor.Util.Base
   """
 
-  use UberGen.Ctx
-  alias UberGen.Executor.Base
+  use UberGen.Data.Ctx
+  alias UberGen.Executor.Util.Base
 
   @doc false
   defmacro __using__(_opts) do
     quote do
-      use UberGen.Ctx
-      alias UberGen.Executor.Base
+      use UberGen.Data.Ctx
+      alias UberGen.Executor.Util.Base
 
-      @doc """
-      Create the default context for an Executor module.
-
-      """
-      def default_ctx do
+      defp default_ctx do
         %Ctx{}
         |> setenv(:executor, __MODULE__)
       end
@@ -57,29 +53,21 @@ defmodule UberGen.Executor.Base do
   end
 
   def inspect(module, params, opts) do
-    if module.has_inspect?(), do: apply(module, :inspect, [params, opts]), else: ok(opts)
+    if module.has_inspect?(),
+      do: apply(module, :inspect, [params, opts]),
+      else: %UberGen.Data.Report{}
   end
 
   @doc """
-  Cast the input param into a child-module tuple.
-  The child-module tuple has the following elements:
-  - the module
-  - the module options
-  - the module children
+  Cast the input param into an ActionSpec.
+
+  The ActionSpec tuple has the following elements: module, module options,
+  module children.
+
   If children are passed as an option, use them.  Otherwise, use the values
   that are hard-coded into the `children` callback.
   """
-  def child_module({module, opts, children}), do: {module, opts, children}
-  def child_module({module, opts}), do: {module, opts, Base.children(module, %{}, %{})}
-  def child_module(module), do: {module, %{}, Base.children(module, %{}, %{})}
-
-  def default_ctx do
-    %Ctx{}
-    |> setenv(:executor, __MODULE__)
-  end
-
-  # ----------------------------------------------------------------------------
-  
-  defp ok(opts)   , do: %{valid?: true, changes: opts}
-
+  def action_spec({module, opts, children}), do: {module, opts, children}
+  def action_spec({module, opts}), do: {module, opts, Base.children(module, %{}, %{})}
+  def action_spec(module), do: {module, %{}, Base.children(module, %{}, %{})}
 end

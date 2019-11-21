@@ -3,7 +3,7 @@ defmodule UberGen.Presentor.LogJson do
   Converts the context to an inspectable string.
   """
 
-  alias UberGen.Ctx
+  alias UberGen.Data.Ctx
 
   @doc """
   Inspect ctx log.

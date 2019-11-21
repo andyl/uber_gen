@@ -3,7 +3,7 @@ defmodule UberGen.Presentor.GuideMarkdown do
   Generates Markdown output.
   """
 
-  alias UberGen.Ctx
+  alias UberGen.Data.Ctx
 
   @doc """
   Generate Guide Markdown output.

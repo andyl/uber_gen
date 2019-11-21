@@ -3,7 +3,7 @@ defmodule UberGen.Presentor.ActionTree do
   Shows an Action Tree
   """
 
-  alias UberGen.Ctx
+  alias UberGen.Data.Ctx
 
   @doc """
   Generate markdown output.

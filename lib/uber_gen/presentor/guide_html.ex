@@ -3,7 +3,7 @@ defmodule UberGen.Presentor.GuideHtml do
   Converts the context to an inspectable string.
   """
 
-  alias UberGen.Ctx
+  alias UberGen.Data.Ctx
 
   @doc """
   Generate Guide HTML output.

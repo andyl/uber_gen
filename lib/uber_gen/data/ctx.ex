@@ -1,11 +1,11 @@
-defmodule UberGen.Ctx do
+defmodule UberGen.Data.Ctx do
 
   @moduledoc """
   Context data for UberGen Actions.
 
   Add this line to your module:
 
-      use UberGen.Ctx
+      use UberGen.Data.Ctx
 
   Ctx fields:
   - env: environment data - executor / host / os / lang / et.
@@ -14,7 +14,7 @@ defmodule UberGen.Ctx do
   - halted: set to true if pipeline-error occurs
   """
 
-  alias UberGen.Ctx
+  alias UberGen.Data.Ctx
 
   defstruct [env: %{}, assigns: %{}, log: [], halted: false]
 
@@ -28,8 +28,8 @@ defmodule UberGen.Ctx do
   @doc false
   defmacro __using__(_opts) do
     quote do
-      import UberGen.Ctx
-      alias UberGen.Ctx
+      import UberGen.Data.Ctx
+      alias UberGen.Data.Ctx
     end
   end
   

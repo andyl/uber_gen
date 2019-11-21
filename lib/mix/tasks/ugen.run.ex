@@ -31,7 +31,7 @@ defmodule Mix.Tasks.Ugen.Run do
 
     case mod do
       nil -> IO.puts "Action not found (#{tgt})"
-      {module, _label} -> Run.command(module) |> presentor.generate() |> IO.puts()
+      {module, _label} -> Run.with(module) |> presentor.generate() |> IO.puts()
       _ -> "ERROR Run"
     end
   end

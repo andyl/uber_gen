@@ -8,6 +8,6 @@ defmodule UberGen.Executor.RunTest do
   end
 
   test "Run Command" do
-    assert capture_io(fn -> UberGen.Executor.Run.command(UberGen.Actions.Util.Null) end) != nil
+    assert capture_io(fn -> UberGen.Executor.Run.with(UberGen.Actions.Util.Null) end) != nil
   end
 end
