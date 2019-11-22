@@ -148,9 +148,11 @@
 - [x] Refactor executors
 - [x] Export and Run calls Base.inspect
 
-## TBD
+## 2019 Nov 22 Fri
 
-- [ ] Add TAILOR executor
+- [x] Add TAILOR executor
+
+## TBD
 
 - [ ] LvRun: ENV.ASSIGN / Create Action 
 - [ ] LvRun: UTIL.COMMAND / Command
