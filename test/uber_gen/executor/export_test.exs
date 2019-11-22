@@ -8,4 +8,10 @@ defmodule UberGen.Executor.ExportTest do
   test "Export Guide" do
     assert UberGen.Executor.Export.with(UberGen.Actions.Util.Null)
   end
+
+  test "CtxAssign" do
+    ctx = UberGen.Executor.Export.with({UberGen.Actions.Ctx.Assign, %{a: 1, b: 2}}) 
+    assert ctx.assigns.a == 1
+    assert ctx.assigns.b == 2
+  end
 end

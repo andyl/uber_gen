@@ -31,7 +31,17 @@ defmodule UberGen.Executor.Util.ExecTree do
         |> package()
       end
 
-      # TODO: add function variants for ActionSpecs
+      def with({module, opts}) when is_atom(module) and is_map(opts) do
+        default_ctx()
+        |> invoke({module, opts, []})
+        |> package()
+      end
+
+      def with({module, opts, children}) when is_atom(module) and is_map(opts) and is_list(children) do
+        default_ctx()
+        |> invoke({module, opts, children})
+        |> package()
+      end
 
       def with(child_list) when is_list(child_list) do
         default_ctx()

@@ -26,7 +26,10 @@ defmodule UberGen.Executor.Run do
       children: []
     }
 
-    cx2 = if log.test == :ok, do: cx1, else: halt(cx0)
+    cx2 = case log.test do
+      {:error, _} -> halt(cx0)
+      _ -> cx1
+    end
     {cx2, log}
   end
 

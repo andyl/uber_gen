@@ -151,13 +151,20 @@
 ## 2019 Nov 22 Fri
 
 - [x] Add TAILOR executor
+- [x] LvRun: ENV.ASSIGN / Create Action 
 
 ## TBD
 
-- [ ] LvRun: ENV.ASSIGN / Create Action 
-- [ ] LvRun: UTIL.COMMAND / Command
-- [ ] LvRun: UTIL.COMMAND / Test
-- [ ] LvRun: UTIL.BlockInFile / Test
+- [ ] LvRun: UTIL.COMMAND / Implement Command
+- [ ] LvRun: UTIL.COMMAND / Implement Test
+- [ ] LvRun: UTIL.BlockInFile / Implement Test
+
+- [ ] Add "when" and "unless" constructs for conditional execution
+
+- [ ] TAILOR/LV: quit unless proper elxir env
+- [ ] TAILOR/LV: quit unless in-project
+- [ ] TAILOR/LV: set ElixirEnv(version), AppEnv(name, in-umbrella)
+- [ ] TAILOR/LV: create Checklist/TOC w/tests
 
 - [ ] Write tests
 
