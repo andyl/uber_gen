@@ -128,28 +128,48 @@
 - [x] rename playbook to action
 - [x] rename priv/scripts to playbooks
 
-## 2019 Nov 18 Mon
+## 2019 Nov 19 Tue
 
 - [x] Executor.Export writes to context
 - [x] Executor.Run writes to context
+- [x] Typespecs for Action callbacks
+- [x] Run LiveView exporter
+- [x] Write markdown presentor
+- [x] Finish LiveView Action
+- [x] Add option parser for mix tasks
+- [x] Mix tasks: ugen -> uber_gen - with alias
+- [x] Presentor: guide_html
+- [x] Presentor: ctx_inspect
+- [x] Presentor: log_inspect
+- [x] Presentor: action_tree
+
+## 2019 Nov 21 Thu
+
+- [x] Refactor executors
+- [x] Export and Run calls Base.inspect
 
 ## TBD
 
+- [ ] Add TAILOR executor
+
+- [ ] LvRun: ENV.ASSIGN / Create Action 
+- [ ] LvRun: UTIL.COMMAND / Command
+- [ ] LvRun: UTIL.COMMAND / Test
+- [ ] LvRun: UTIL.BlockInFile / Test
+
 - [ ] Write tests
-- [ ] Write markdown presentor
 
-- [ ] Export and Run Guide calls inspect
-- [ ] Run stops on halt
-
-- [ ] Finish Runner/REPL
-- [ ] Create `ugen` escript
-
-- [ ] Finish LiveView Action
-
-- [ ] Typespecs for Action callbacks
+- [ ] Cleanup `ExecTree` callback (`exec_log`)
 - [ ] Document action callbacks
-- [ ] Document playbooks
-- [ ] Document playbooks
+- [ ] Add type for guide output
+- [ ] Add type for child spec (mod, opts, [children])
+- [ ] Document Actions
+- [ ] Add comments to Playbooks
+
+- [ ] Run stops on halt
+- [ ] Add RUN/REPL exectutor
+
+- [ ] Create `ugen` escript (with Bash pipelining)
 
 - [ ] Convert bash generators to UberGen
 

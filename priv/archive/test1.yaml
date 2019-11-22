@@ -5,7 +5,7 @@ playbook: Util.TextBlock
 params:
   header: "YAML MultiText"
   body: "Just a simple test of MultiText from YAML"
-steps:
+children:
   - name: Item 1.0
     playbook: Util.TextBlock
     params: 
@@ -16,7 +16,7 @@ steps:
     params: 
       header: qwer
       body: HELLO BODY SECOND ITEM
-    steps:
+    children:
       - name: Item 2.1
         playbook: Util.TextBlock
         params:

@@ -4,7 +4,7 @@ defmodule UberGen.Executor.Export do
   Exports an Action guide.
 
   The `Export.guide` function traverses an Action tree and saves guide
-  fragments into the `log` attribute of the `UberGen.Ctx`.
+  fragments into the `log` attribute of the `UberGen.Data.Ctx`.
 
   To generate output, pipe the result into an `UberGen.Presentor`:
 
@@ -13,44 +13,20 @@ defmodule UberGen.Executor.Export do
 
   """
 
-  use UberGen.Ctx
+  use UberGen.Executor.Util.ExecTree
 
-  alias UberGen.Executor.Base
+  defp exec_log(mod, ctx, opts) do
 
-  def guide(module) when is_atom(module) do
-    ctx = Base.default_ctx()
-    log = guide_log(ctx, {module, %{}, Base.children(module, %{}, [])})
-    %{ctx | log: log}
-  end
-
-  # TODO: add function variants for tuple arg
-
-  def guide(child_list) when is_list(child_list) do
-    ctx = Base.default_ctx()
-    log = guide_log(ctx, {UberGen.Actions.Util.Null, %{}, child_list})
-    %{ctx | log: log}
-  end
-
-  defp guide_log(ctx, {module, opts, []}) do
-    log(module, ctx, opts)
-  end
-
-  defp guide_log(ctx, {module, opts, children}) do
-    base = log(module, ctx, opts)
-
-    alt =
-      children
-      |> Enum.map(&Base.child_module/1)
-      |> Enum.map(&guide_log(ctx, &1))
-
-    %{base | children: alt}
-  end
-
-  defp log(mod, ctx, opts) do
-    %{
+    report = Base.inspect(mod, ctx, opts)
+    ctx_v2 = report.ctx || ctx  
+    
+    log = %{
       action: mod,
-      guide: Base.guide(mod, ctx, opts),
+      guide: Base.guide(mod, ctx_v2, opts),
       children: []
     }
+
+    {ctx_v2, log}
   end
+
 end

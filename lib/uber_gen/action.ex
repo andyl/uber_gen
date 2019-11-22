@@ -8,14 +8,14 @@ defmodule UberGen.Action do
 
   The `UberGen.Action` behavior provides five callbacks for use in Actions.
 
-  | Callback    | Arg(s)    | Returns     | Purpose                 |
-  |-------------|-----------|-------------|-------------------------|
-  | command/2   | ctx, opts | new_ctx     | executable action code  |
-  | guide/2     | ctx, opts | new_ctx     | action documentation    |
-  | test/2      | ctx, opts | test status | action test             |
-  | children/2  | ctx, opts | child list  | list of action children |
-  | interface/3 | ctx, opts | schema      | params/assigns schema   |
-  | inspect/3   | TBD       | changeset   | casting and validation  |
+  | Callback    | Arg(s)    | Returns  | Purpose                |
+  |-------------|-----------|----------|------------------------|
+  | command/2   | ctx, opts | new_ctx  | executable action code |
+  | guide/2     | ctx, opts | fragment | action documentation   |
+  | test/2      | ctx, opts | status   | action test            |
+  | children/2  | ctx, opts | list     | list of action specs   |
+  | interface/2 | ctx, opts | schema   | params/assigns schema  |
+  | inspect/2   | ctx, opts | report   | casting and validation |
 
   All of these macros are optional for any given action.
 
@@ -24,40 +24,52 @@ defmodule UberGen.Action do
   `has_test?/0`, `has_children?/0`, `has_interface?/0`, `has_inspect?/0`.
   """
 
+  alias UberGen.Data.{Ctx, Report}
+
   @doc """
   Action command.  
 
   Commands must be idempotent.  Use your test to determine if you need to
   re-run command code.
   """
-  @callback command(any(), any())          :: any()
+  @callback command(Ctx.t, map())          :: Ctx.t
 
   @doc """
   Emit guide text.
   """
-  @callback guide(any(), any())            :: any()
+  @callback guide(Ctx.t, map())            :: map()
 
   @doc """
   Run a test.
   """
-  @callback test(any(), any())             :: any()
+  @callback test(Ctx.t, map())             :: :ok | {:error, String.t}
 
   @doc """
   Return list of children.
   """
-  @callback children(any(), any())         :: any()
+  @callback children(Ctx.t, map())         :: list()
 
   @doc """
   Define interface for params and assigns.
+
+  Atom is either `:params` or `:assigns`.
   """
-  @callback interface(any(), any(), any()) :: any()
+  @callback interface(Ctx.t, map()) :: any()
 
   @doc """
   Perform casting and validation on interface data.
-  """
-  @callback inspect(any(), any(), any())   :: any()
 
-  @optional_callbacks command: 2, guide: 2, test: 2, children: 2, interface: 3, inspect: 3
+  This can be done on *either* the Ctx[:assigns] values, or the params.
+
+  You can optionally use ecto validations.
+
+  You can optionally update the ctx assigns.
+
+  See the Executor modules (Run, Export) to see how the inspect function is used.
+  """
+  @callback inspect(Ctx.t, map())   :: Report.t
+
+  @optional_callbacks command: 2, guide: 2, test: 2, children: 2, interface: 2, inspect: 2
 
   @doc false
   defmacro __using__(_opts) do
@@ -73,9 +85,9 @@ defmodule UberGen.Action do
       @doc false
       def has_children?   , do: has?({:children, 2})
       @doc false
-      def has_interface?  , do: has?({:interface, 3})
+      def has_interface?  , do: has?({:interface, 2})
       @doc false
-      def has_inspect?    , do: has?({:inspect, 3})
+      def has_inspect?    , do: has?({:inspect, 2})
 
       defp flist      , do: __MODULE__.__info__(:functions)
       defp has?(tuple), do: Enum.any?(flist(), &(&1 == tuple))
@@ -83,7 +95,7 @@ defmodule UberGen.Action do
       use Ecto.Schema
       import Ecto.Changeset
       
-      import UberGen.Ctx
+      import UberGen.Data.Ctx
       
       @behaviour UberGen.Action
     end

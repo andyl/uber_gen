@@ -5,9 +5,9 @@ defmodule UberGen.Executor.BaseTest do
     assert 1 == 1
   end
 
-  @pb UberGen.Actions.Util.Null2
+  @pb UberGen.Actions.Util.Null
 
-  alias UberGen.Executor.Base
+  alias UberGen.Executor.Util.Base
 
   describe "function predicates" do
     test "has_command" do
@@ -49,7 +49,7 @@ defmodule UberGen.Executor.BaseTest do
     end
 
     test "inspect" do
-      assert Base.inspect(@pb, %{},%{}) == %{valid?: true, changes: %{}}
+      assert Base.inspect(@pb, %{},%{})
     end
   end
 end

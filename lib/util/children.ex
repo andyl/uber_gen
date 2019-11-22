@@ -1,4 +1,4 @@
-defmodule Util.Steps do
+defmodule Util.Children do
 
   def file_data(filename) do
     file_data(filename, file_type(filename))
@@ -20,23 +20,23 @@ defmodule Util.Steps do
 
   # --------------------------------------------------
 
-  def to_steps(input) when is_map(input) do
-    mod = "Elixir.UberGen.Actions.#{input[:playbook]}" |> String.to_existing_atom()
+  def to_children(input) when is_map(input) do
+    mod = "Elixir.UberGen.Actions.#{input[:action]}" |> String.to_existing_atom()
     opt = input[:params] || %{}
-    chr = input[:steps] || %{}
-    to_steps(mod, opt, chr)
+    chr = input[:children] || []
+    to_children(mod, opt, chr)
   end
 
-  def to_steps(input) when is_list(input) do
-    input |> Enum.map(&to_steps/1)
+  def to_children(input) when is_list(input) do
+    input |> Enum.map(&to_children/1)
   end
 
-  defp to_steps(mod, opt, []) do
+  defp to_children(mod, opt, []) do
     {mod, opt, []}
   end
 
-  defp to_steps(mod, opt, children) do
-    offspring = children |> Enum.map(&to_steps(&1))
+  defp to_children(mod, opt, children) do
+    offspring = children |> Enum.map(&to_children(&1))
     {mod, opt, offspring}
   end
 

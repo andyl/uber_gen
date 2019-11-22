@@ -31,6 +31,7 @@ defmodule UberGen.MixProject do
       {:yaml_elixir, "~> 2.4.0"},
       {:jason, "~> 1.1"},
       {:ecto, "~> 3.0"},
+      {:earmark, "~> 1.4.2"},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false}
     ]

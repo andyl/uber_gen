@@ -4,7 +4,7 @@ defmodule UberGen.Actions.Test.MultiText do
   alias UberGen.Actions
 
   @moduledoc """
-  Test playbook contains multiple `TextBlock` steps.
+  Test playbook contains multiple `TextBlock` children.
   """
 
   @shortdoc "ShortDoc for #{__MODULE__}"
