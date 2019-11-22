@@ -36,6 +36,7 @@ But there are problems with **HowTo Driven Generation**:
 - manual configuration is error-prone
 - written instructions become out-of-date with tools
 - no feedback mechanism for bugs and improvements
+- no systematic usage metrics for HowTo authors
 - barrier to entry for new programmers
 - friction discourages new code exploration
 

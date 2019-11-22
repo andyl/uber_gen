@@ -145,22 +145,31 @@
 
 ## 2019 Nov 21 Thu
 
+- [x] Refactor executors
+- [x] Export and Run calls Base.inspect
 
 ## TBD
 
+- [ ] Add TAILOR executor
+
+- [ ] LvRun: ENV.ASSIGN / Create Action 
+- [ ] LvRun: UTIL.COMMAND / Command
+- [ ] LvRun: UTIL.COMMAND / Test
+- [ ] LvRun: UTIL.BlockInFile / Test
+
 - [ ] Write tests
 
-- [ ] Run stops on halt
-- [ ] Export and Run Guide calls inspect
-
-- [ ] Write Runner/REPL
-- [ ] Create `ugen` escript
-
+- [ ] Cleanup `ExecTree` callback (`exec_log`)
 - [ ] Document action callbacks
 - [ ] Add type for guide output
 - [ ] Add type for child spec (mod, opts, [children])
 - [ ] Document Actions
 - [ ] Add comments to Playbooks
+
+- [ ] Run stops on halt
+- [ ] Add RUN/REPL exectutor
+
+- [ ] Create `ugen` escript (with Bash pipelining)
 
 - [ ] Convert bash generators to UberGen
 

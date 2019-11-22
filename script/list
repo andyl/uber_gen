@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+cmd="mix ugen.list"
+
+cat << EOF >&2
+---------------------------------------
+COMMAND: $cmd
+List all Actions to stdout
+---------------------------------------
+EOF
+
+$cmd
