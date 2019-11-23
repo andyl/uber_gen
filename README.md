@@ -1,7 +1,7 @@
 # UberGen
 
 UberGen is a scriptable code generator for Elixir, motivated by a thread on
-[Elixir Forum][f].  
+[Elixir Forum][f].  UberGen is pre-Alpha - not yet ready for live use.
 
 [f]: https://elixirforum.com/t/what-would-you-think-about-a-new-web-framework-that-extends-phoenix-with-rails-like-or-django-like-built-in-features/26371/8
 
