@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Ugen.Run do
+defmodule Mix.Tasks.Atree.Run do
   use Mix.Task
 
   alias UberGen.ActionUtil

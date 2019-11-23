@@ -1,13 +1,13 @@
-defmodule Mix.Tasks.Ugen.Tailor do
+defmodule Mix.Tasks.Atree.Export do
   use Mix.Task
 
   alias UberGen.ActionUtil
-  alias UberGen.Executor.Tailor
+  alias UberGen.Executor.Export
 
   @moduledoc """
-  Taior an Action guide to your codebase.
+  Export a Action.
 
-  Tailor a Action Guide and emit to Markdown, PDF, HTML, etc.
+  Export a Action to Markdown, PDF, HTML, or ExDoc
 
   Options:
     --format <format>   # output with an alternative format
@@ -39,7 +39,7 @@ defmodule Mix.Tasks.Ugen.Tailor do
 
     case mod do
       nil -> IO.puts("Action not found (#{tgt})")
-      {module, _label} -> module |> Tailor.with() |> presentor.generate() |> IO.puts()
+      {module, _label} -> module |> Export.with() |> presentor.generate() |> IO.puts()
       _ -> "ERROR Export"
     end
   end

@@ -1,6 +1,6 @@
-defmodule Mix.UberGen.Util do
+defmodule Mix.Atree.Util do
 
-  alias UberGen.Presentor
+  alias Atree.Presentor
 
   def parse(argv) do
     switches = [
