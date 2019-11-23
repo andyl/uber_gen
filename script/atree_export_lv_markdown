@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+cmd="./atree priv/playbooks/live_view.yaml export"
+
+cat << EOF >&2
+---------------------------------------
+COMMAND: $cmd
+Run atree to export live_view to markdown
+---------------------------------------
+EOF
+
+$cmd

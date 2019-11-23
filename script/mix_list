@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-cmd="mix ugen.export test.test2 --format action_tree"
+cmd="mix atree.list"
 
 cat << EOF >&2
 ---------------------------------------
 COMMAND: $cmd
-Export Nested Test to ActionTree
+List all Actions to stdout
 ---------------------------------------
 EOF
 

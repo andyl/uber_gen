@@ -71,11 +71,11 @@ method is defined in a playbook: `has_run?/0`, `has_call?/0`, `has_test?/0`,
 
 | Command         | Purpose                                   |
 |-----------------|-------------------------------------------|
-| mix ugen.help   | Display help text for a playbook          |
-| mix ugen.list   | Show locally cached playbooks             |
-| mix ugen.export | Export a static playbook to MD, HTML, PDF |
-| mix ugen.run    | Run a playbook on the command line        |
-| mix ugen.serve  | Serve a playbook for browser interaction  |
+| mix atree.help   | Display help text for a playbook          |
+| mix atree.list   | Show locally cached playbooks             |
+| mix atree.export | Export a static playbook to MD, HTML, PDF |
+| mix atree.run    | Run a playbook on the command line        |
+| mix atree.serve  | Serve a playbook for browser interaction  |
 
 ## 2019 Nov 10 Sun
 
@@ -110,7 +110,7 @@ New features:
 - Ecto-style schemas and option validation
 - Ability to configure nested trees of playbooks
 - Ability to specify tree configuration in YAML or JSON docs
-- A standalone executable `uber_gen` that reads config files.
+- A standalone executable `atree` that reads config files.
 
 New possibilities:
 - HTTP-like playbook protocol with CGI 

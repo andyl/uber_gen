@@ -11,11 +11,15 @@ defmodule Atree.Cli do
   # --------------------------------------------------
 
   def process(data, "export") do
-    IO.puts(Atree.Executor.Export.with(data))
+    Atree.Executor.Export.with(data)
+    |> Atree.Presentor.GuideMarkdown.generate()
+    |> IO.puts()
   end
 
   def process(data, "run") do
     Atree.Executor.Run.with(data)
+    |> Atree.Presentor.GuideMarkdown.generate()
+    |> IO.puts()
   end
   
   # --------------------------------------------------
@@ -61,7 +65,7 @@ defmodule Atree.Cli do
   end
 
   defp abort do
-    IO.puts("Usage: uber_gen <file> [export|run]")
+    IO.puts("Usage: atree <file> [export|run]")
     System.halt()
   end
 end

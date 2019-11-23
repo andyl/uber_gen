@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+script/atree_export_lv_markdown &&
+script/atree_export_test2_markdown &&
+script/mix_export_lv_html &&
+script/mix_export_lv_json &&
+script/mix_export_lv_markdown &&
+script/mix_export_nested_markdown &&
+script/mix_export_nested_tree &&
+script/mix_list

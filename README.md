@@ -90,20 +90,20 @@ Atree extends `Mix.Generate`, and borrows ideas from other tools:
 
 ## Installing Atree
 
-To install `uber_gen`:
+To install `atree`:
 
-    mix archive.install github andyl/uber_gen
+    mix archive.install github andyl/atree
 
-Configure with `.uber_gen.exs`: [DROP?]
+Configure with `.atree.exs`: [DROP?]
 
     import Atree
 
-    config :uber_gen, playbooks: [
+    config :atree, playbooks: [
       {:live_view_gen, "~> 0.4.0"},
       {:my_codegen, path: "~/src/CG/my_lv_tweaks"}
     ]
 
-    include_uber_gen "~/.uber_gen/phoenix_css_setup.exs"
+    include_atree "~/.atree/phoenix_css_setup.exs"
 
 ## Action Trees
 
@@ -288,7 +288,7 @@ Authoring a HowTo Post:
 Reading a HowTo Post:
 
 - Reader views the post in the browser
-- From the reader terminal: `$ uber_gen run https://gist.github.com/howto_script.uber_gen`
+- From the reader terminal: `$ atree run https://gist.github.com/howto_script.atree`
 - Instant Working App 
 - Pina Coladas
 

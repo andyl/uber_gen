@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-cmd="mix ugen.list"
+cmd="mix atree.export phx.live_view --format guide_html"
 
 cat << EOF >&2
 ---------------------------------------
 COMMAND: $cmd
-List all Actions to stdout
+Export LiveView Install Guide to HTML
 ---------------------------------------
 EOF
 

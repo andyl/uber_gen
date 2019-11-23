@@ -39,7 +39,8 @@ defmodule Atree.MixProject do
 
   defp escript do
     [
-      main_module: Atree.Cli
+      main_module: Atree.Cli,
+      name: "atree"
     ]
   end
 end

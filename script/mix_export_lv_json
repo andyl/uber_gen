@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-cmd="mix ugen.export test.test2"
+cmd="mix atree.export phx.live_view --format guide_json"
 
 cat << EOF >&2
 ---------------------------------------
 COMMAND: $cmd
-Export Nested Test to Markdown
+Export LiveView Install Guide to JSON
 ---------------------------------------
 EOF
 

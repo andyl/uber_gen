@@ -12,12 +12,12 @@
         tasks/
           task1.ex
           task2.ex
-      uber_gen/
+      atree/
         playbooks/
           playbook1.ex
           playbook2.ex
     priv/
-      uber_gen/
+      atree/
         playbooks/
           playbook1/
             templates/
@@ -26,24 +26,48 @@
 
 ## MIX CLI
 
-mix ugen.base
-mix ugen.base.help
+mix atree.base
+mix atree.base.help
 
-mix ugen.cache.list                     # list all cached playbooks
-mix ugen.cache.install <playbook>       # install a playbook to cache
-mix ugen.cache.remove                   # remove a playbook from cache
+mix atree.cache.list                     # list all cached playbooks
+mix atree.cache.install <playbook>       # install a playbook to cache
+mix atree.cache.remove                   # remove a playbook from cache
 
-mix ugen.registry.list                  # list playbooks in registry
-mix ugen.registry.publish <playbook>    # push a local playbook to registry
-mix ugen.registry.remove                # remove a playbook from registry
+mix atree.registry.list                  # list playbooks in registry
+mix atree.registry.publish <playbook>    # push a local playbook to registry
+mix atree.registry.remove                # remove a playbook from registry
 
-mix ugen.pb.run <playbook> <opts>           # run playbook on the command line
-mix ugen.pb.serve <playbook>                # serve playbook in a browser
-mix ugen.pb.export <playbook> [--format md] # build playbook guide
+mix atree.pb.run <playbook> <opts>           # run playbook on the command line
+mix atree.pb.serve <playbook>                # serve playbook in a browser
+mix atree.pb.export <playbook> [--format md] # build playbook guide
 
 Run behavior - run until:
 - failed test (code red)
 - wait for manual input (code yellow)
+
+## Escript
+
+method: EXPORT | TAILOR | RUN | SERVE
+target: playbook | action
+ctxsrc: stdin | saved_file [default: stdin]
+output: PresentorName [default: ctx_json]
+params: -p KEY=VAL -p KEY=VAL
+save:   -s PRESENTOR1=<filename> -s PRESENTOR2=<filename>
+
+Guidelines:
+- ctxsrc: read context from STDIN -or- saved file
+- target: give playbook name *or* action name
+- write context to stdout *or* saved file
+- write output to stdout *or* saved file
+
+TODO:
+- Append to log with existing entries
+- Generate outputs from log-list not from one entry
+
+Future:
+- bash completion 
+
+    atree <method> [<target>] [--ctx_src <filename>] ...
 
 ## Guide Return Values
 
@@ -54,7 +78,7 @@ Run behavior - run until:
 - %{body: "body"}
 - %{header: "header", body: "body"}
 
-## .uber_gen.exs
+## .atree.exs
 
     playbooks = [
       
@@ -149,7 +173,7 @@ Using Actions on the command line or in a bash script:
 - context comes from STDIN or command-line param
 - params are command-line options
 
-    uber_gen run | uber_gen Util.TextBlock -header "asdfasdf" | uber_gen Util.Command -command "ps"
+    atree run | atree Util.TextBlock -header "asdfasdf" | atree Util.Command -command "ps"
 
 ## Use Cases
 
@@ -213,7 +237,7 @@ A default doc is auto-generated from the playbooks.
 
 There is a mix task to serve the doc on the local machine.
 
-The ugen server detects filesystem changes and dynamically updates the
+The atree server detects filesystem changes and dynamically updates the
 web page (using LiveView).
 
 There are server plugins for common editors: emacs, vim, vscode.
@@ -228,8 +252,8 @@ Add a command to export docs in various formats:
 - dynamically served
 
 Mix commands:
-- mix ugen.export <playbook>   # write markdown to stdout
-- mix ugen.serve <playbook>    # start a webserver / file-listener
+- mix atree.export <playbook>   # write markdown to stdout
+- mix atree.serve <playbook>    # start a webserver / file-listener
 
 Questions:
 - how to structure navigation for web pages?
@@ -337,7 +361,7 @@ Questions:
 
 Command Line:
 
-    $ mix ugen.pb.run <playbook> [opts]
+    $ mix atree.pb.run <playbook> [opts]
 
 Default behavior - similar to `ansible-playbook`:
 

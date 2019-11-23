@@ -5,7 +5,7 @@
 - [x] Make a working mixtask
 - [x] Install global mix tasks
 - [x] Register Actions - HowTo?
-- [x] Create ugen.playbook task (list/run)
+- [x] Create atree.playbook task (list/run)
 - [x] Load playbooks
 - [x] Display playbooks (mix help)
 - [x] Create a Gen.Phx playbook
@@ -55,7 +55,7 @@
 - [x] Add assign and halt functions to `Atree.Ctx`
 - [x] Add `Util.Command` playbook
 - [x] Add `Util.BlockInFile` playbook
-- [x] LiveView: working `mix ugen.pb.export` command
+- [x] LiveView: working `mix atree.pb.export` command
 
 ## 2019 Nov 10 Sun 
 
@@ -93,7 +93,7 @@
 ## 2019 Nov 14 Thu
 
 - [x] Tag and Consolidate Branches
-- [x] Don't show playbook in `ugen.cache.list` unless `has_work?` or `--all`
+- [x] Don't show playbook in `atree.cache.list` unless `has_work?` or `--all`
 - [x] Add ability to use YAML or JSON in playbook steps
 - [x] Create LiveView generator
 - [x] Design Atree runner
@@ -117,7 +117,7 @@
 - [x] Design a variable declaration callback (interface)
 - [x] Figure out how to handle dynamic variables in params block
 - [x] Change "Exec" to "Executor"
-- [x] Get `mix ugen.help` working
+- [x] Get `mix atree.help` working
 - [x] Migrate from macros to callbacks
 - [x] Cleanup code
 
@@ -137,7 +137,7 @@
 - [x] Write markdown presentor
 - [x] Finish LiveView Action
 - [x] Add option parser for mix tasks
-- [x] Mix tasks: ugen -> uber_gen - with alias
+- [x] Mix tasks: atree -> atree - with alias
 - [x] Presentor: guide_html
 - [x] Presentor: ctx_inspect
 - [x] Presentor: log_inspect
@@ -153,7 +153,13 @@
 - [x] Add TAILOR executor
 - [x] LvRun: ENV.ASSIGN / Create Action 
 
+## 2019 Nov 23 Sat
+
+- [x] Refactor UberGen -> Atree
+
 ## TBD
+
+- [ ] CLI: Working CLI pipes 
 
 - [ ] LvRun: UTIL.COMMAND / Implement Command
 - [ ] LvRun: UTIL.COMMAND / Implement Test
@@ -178,7 +184,7 @@
 - [ ] Run stops on halt
 - [ ] Add RUN/REPL exectutor
 
-- [ ] Create `ugen` escript (with Bash pipelining)
+- [ ] Create `atree` escript (with Bash pipelining)
 
 - [ ] Convert bash generators to Atree
 

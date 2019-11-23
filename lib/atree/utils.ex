@@ -4,18 +4,18 @@ defmodule Atree.Utils do
   @doc """
   Gets the Atree home.
 
-  It uses the the locations `uber_gen_HOME`, `XDG_DATA_HOME/uber_gen`,
-  `~/.uber_gen` with decreasing priority.
+  It uses the the locations `atree_HOME`, `XDG_DATA_HOME/atree`,
+  `~/.atree` with decreasing priority.
 
   Developers should only store entries in the
-  `uber_gen_HOME` directory which are guaranteed to
+  `atree_HOME` directory which are guaranteed to
   work across multiple Elixir versions, as it is
-  not recommended to swap the `uber_gen_HOME` directory
+  not recommended to swap the `atree_HOME` directory
   as configuration and other important data may be
   stored there.
   """
-  def uber_gen_home do
-    uber_gen_home_xdg_lookup("XDG_DATA_HOME")
+  def atree_home do
+    atree_home_xdg_lookup("XDG_DATA_HOME")
   end
 
   @doc """
@@ -23,31 +23,31 @@ defmodule Atree.Utils do
 
   Possible locations:
 
-   * `~/.uber_gen`
-   * `uber_gen_HOME`
-   * `XDG_CONFIG_HOME/uber_gen`
+   * `~/.atree`
+   * `atree_HOME`
+   * `XDG_CONFIG_HOME/atree`
 
   """
-  def uber_gen_config do
-    uber_gen_home_xdg_lookup("XDG_CONFIG_HOME")
+  def atree_config do
+    atree_home_xdg_lookup("XDG_CONFIG_HOME")
   end
 
-  defp uber_gen_home_xdg_lookup(xdg) do
-    case {System.get_env("uber_gen_HOME"), System.get_env(xdg)} do
+  defp atree_home_xdg_lookup(xdg) do
+    case {System.get_env("atree_HOME"), System.get_env(xdg)} do
       {directory, _} when is_binary(directory) -> directory
-      {nil, directory} when is_binary(directory) -> Path.join(directory, "uber_gen")
-      {nil, nil} -> Path.expand("~/.uber_gen")
+      {nil, directory} when is_binary(directory) -> Path.join(directory, "atree")
+      {nil, nil} -> Path.expand("~/.atree")
     end
   end
 
   @doc """
-  Gets all paths defined in the uber_gen_PATH env variable.
+  Gets all paths defined in the atree_PATH env variable.
 
-  `uber_gen_PATH` may contain multiple paths. If on Windows, those
+  `atree_PATH` may contain multiple paths. If on Windows, those
   paths should be separated by `;`, if on Unix systems, use `:`.
   """
-  def uber_gen_paths do
-    if path = System.get_env("uber_gen_PATH") do
+  def atree_paths do
+    if path = System.get_env("atree_PATH") do
       String.split(path, path_separator())
     else
       []
@@ -581,7 +581,7 @@ defmodule Atree.Utils do
 
     # Starting an HTTP client profile allows us to scope
     # the effects of using an HTTP proxy to this function
-    {:ok, _pid} = :inets.start(:httpc, [{:profile, :uber_gen}])
+    {:ok, _pid} = :inets.start(:httpc, [{:profile, :atree}])
 
     headers = [{'user-agent', 'Atree/#{System.version()}'}]
     request = {:binary.bin_to_list(path), headers}
@@ -594,7 +594,7 @@ defmodule Atree.Utils do
     # If a proxy environment variable was supplied add a proxy to httpc.
     http_options = [relaxed: true] ++ proxy_config(path)
 
-    case :httpc.request(:get, request, http_options, [body_format: :binary], :uber_gen) do
+    case :httpc.request(:get, request, http_options, [body_format: :binary], :atree) do
       {:ok, {{_, status, _}, _, body}} when status in 200..299 ->
         {:ok, body}
 
@@ -605,7 +605,7 @@ defmodule Atree.Utils do
         {:remote, "httpc request failed with: #{inspect(reason)}"}
     end
   after
-    :inets.stop(:httpc, :uber_gen)
+    :inets.stop(:httpc, :atree)
   end
 
   defp file?(path) do
@@ -649,7 +649,7 @@ defmodule Atree.Utils do
 
     if uri.host && uri.port do
       host = String.to_charlist(uri.host)
-      :httpc.set_options([{proxy_scheme(scheme), {{host, uri.port}, no_proxy}}], :uber_gen)
+      :httpc.set_options([{proxy_scheme(scheme), {{host, uri.port}, no_proxy}}], :atree)
     end
 
     uri

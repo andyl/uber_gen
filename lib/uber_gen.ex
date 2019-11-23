@@ -1,4 +1,4 @@
-defmodule Atree do
+defmodule UberGen do
   @moduledoc """
   Documentation for Atree.
   """
