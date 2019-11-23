@@ -47,7 +47,7 @@ Run behavior - run until:
 
 ## Escript
 
-Standalong Usage:
+Standalone Usage:
 
     $ atree [<method>] [<target>] [--ctx_src <filename>] ...
 
