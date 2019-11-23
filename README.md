@@ -118,18 +118,20 @@ key callbacks:
 - Guide - emits a guide fragment
 - Test - executes a test
     
-    module Atree.Actions.Phoenix.Bootstrap4 do
-      use Atree.Action
+```elixir
+module Atree.Actions.Phoenix.Bootstrap4 do
+  use Atree.Action
 
-      @shortdoc "Install Bootstrap4 in your Phoenix project."
-      
-      def command(context, options)
-        context
-        |> assign(tgt_file, "output.css")
-        |> copy_file(ctx.source_file, ctx.tgt_file)
-        |> git_commit("Add output.css to repo")
-      end
-    end
+  @shortdoc "Install Bootstrap4 in your Phoenix project."
+  
+  def command(context, options)
+    context
+    |> assign(tgt_file, "output.css")
+    |> copy_file(ctx.source_file, ctx.tgt_file)
+    |> git_commit("Add output.css to repo")
+  end
+end
+```
 
 Actions can be composed into Plug-like pipelines.
 
@@ -244,14 +246,14 @@ Use Atree as a mix task:
 
     $ mix atree.help
 
-    $ mix atree.export <playbook>
-    $ mix atree.tailor <playbook>
-    $ mix atree.run <playbook>
-    $ mix atree.serve <playbook>
+    $ mix atree.export <action>
+    $ mix atree.tailor <action>
+    $ mix atree.run <action>
+    $ mix atree.serve <action>
 
     $ mix atree.action list
-    $ mix atree.action install <playbook>
-    $ mix atree.action remove <playbook>
+    $ mix atree.action install <action>
+    $ mix atree.action remove <action>
 
 You can generate output in markdown, html, and other format.
 
