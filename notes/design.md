@@ -51,12 +51,13 @@ Usage:
 
     atree [<method>] [<target>] [--ctx_src <filename>] ...
 
-method: EXPORT | TAILOR | RUN | SERVE
-target: playbook | action
-ctxsrc: stdin | saved_file [default: stdin]
-output: PresentorName [default: ctx_json]
-params: -p KEY=VAL -p KEY=VAL
-save:   -s PRESENTOR1=<filename> -s PRESENTOR2=<filename>
+Elements:
+- method: EXPORT | TAILOR | RUN | SERVE
+- target: playbook | action
+- ctxsrc: stdin | saved_file [default: stdin]
+- output: PresentorName [default: ctx_json]
+- params: -p KEY=VAL -p KEY=VAL
+- save:   -s PRESENTOR1=<filename> -s PRESENTOR2=<filename>
 
 Guidelines:
 - ctxsrc: read context from STDIN -or- saved file
