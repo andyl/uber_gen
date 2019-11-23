@@ -1,7 +1,9 @@
 # UberGen
 
 UberGen is a scriptable code generator for Elixir, motivated by a thread on
-[Elixir Forum][f].  UberGen is pre-Alpha - not yet ready for live use.
+[Elixir Forum][f].  
+
+UberGen is pre-Alpha - not yet ready for live use.
 
 [f]: https://elixirforum.com/t/what-would-you-think-about-a-new-web-framework-that-extends-phoenix-with-rails-like-or-django-like-built-in-features/26371/8
 
@@ -17,9 +19,8 @@ manual installation.
 
 **The problem:** manual install instructions can be hard to follow.  
 
-**Evidence:** innumerable `HowTos` with complicated instructions.  
+**Evidence:** innumerable `HowTos` with complicated instructions.  Here are some examples:
 
-**Examples:**
 - [How to install Bootstrap on a Phoenix 1.4 project][1] 
 - [LiveView Installation][2] 
 - [Phoenix Authentication with Pow - Part 1][3]
