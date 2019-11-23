@@ -1,4 +1,4 @@
-defmodule UberGen.Executor.RunTest do
+defmodule Atree.Executor.RunTest do
   use ExUnit.Case
 
   import ExUnit.CaptureIO
@@ -8,6 +8,12 @@ defmodule UberGen.Executor.RunTest do
   end
 
   test "Run Command" do
-    assert capture_io(fn -> UberGen.Executor.Run.with(UberGen.Actions.Util.Null) end) != nil
+    assert Atree.Executor.Run.with(Atree.Actions.Util.Null)
+  end
+
+  test "CtxAssign" do
+    ctx = Atree.Executor.Run.with({Atree.Actions.Ctx.Assign, %{a: 1, b: 2}}) 
+    assert ctx.assigns.a == 1
+    assert ctx.assigns.b == 2
   end
 end

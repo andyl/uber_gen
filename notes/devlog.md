@@ -1,11 +1,11 @@
-# UberGen DEVLOG
+# Atree DEVLOG
 
 ## 2019 Oct 28 Mon
 
 - [x] Make a working mixtask
 - [x] Install global mix tasks
 - [x] Register Actions - HowTo?
-- [x] Create ugen.playbook task (list/run)
+- [x] Create atree.playbook task (list/run)
 - [x] Load playbooks
 - [x] Display playbooks (mix help)
 - [x] Create a Gen.Phx playbook
@@ -50,12 +50,12 @@
 
 ## 2019 Nov 08 Fri 
 
-- [x] Add `UberGen.Ctx`
+- [x] Add `Atree.Ctx`
 - [x] Add `Util.Command` playbook
-- [x] Add assign and halt functions to `UberGen.Ctx`
+- [x] Add assign and halt functions to `Atree.Ctx`
 - [x] Add `Util.Command` playbook
 - [x] Add `Util.BlockInFile` playbook
-- [x] LiveView: working `mix ugen.pb.export` command
+- [x] LiveView: working `mix atree.pb.export` command
 
 ## 2019 Nov 10 Sun 
 
@@ -93,10 +93,10 @@
 ## 2019 Nov 14 Thu
 
 - [x] Tag and Consolidate Branches
-- [x] Don't show playbook in `ugen.cache.list` unless `has_work?` or `--all`
+- [x] Don't show playbook in `atree.cache.list` unless `has_work?` or `--all`
 - [x] Add ability to use YAML or JSON in playbook steps
 - [x] Create LiveView generator
-- [x] Design UberGen runner
+- [x] Design Atree runner
 - [x] Rename 'Action.work' to 'Action.command'
 - [x] Create `Executor.Export.guide/1`
 - [x] Create `Executor.Run.command/1`
@@ -117,7 +117,7 @@
 - [x] Design a variable declaration callback (interface)
 - [x] Figure out how to handle dynamic variables in params block
 - [x] Change "Exec" to "Executor"
-- [x] Get `mix ugen.help` working
+- [x] Get `mix atree.help` working
 - [x] Migrate from macros to callbacks
 - [x] Cleanup code
 
@@ -137,7 +137,7 @@
 - [x] Write markdown presentor
 - [x] Finish LiveView Action
 - [x] Add option parser for mix tasks
-- [x] Mix tasks: ugen -> uber_gen - with alias
+- [x] Mix tasks: atree -> atree - with alias
 - [x] Presentor: guide_html
 - [x] Presentor: ctx_inspect
 - [x] Presentor: log_inspect
@@ -148,14 +148,33 @@
 - [x] Refactor executors
 - [x] Export and Run calls Base.inspect
 
+## 2019 Nov 22 Fri
+
+- [x] Add TAILOR executor
+- [x] LvRun: ENV.ASSIGN / Create Action 
+
+## 2019 Nov 23 Sat
+
+- [x] Refactor UberGen -> Atree
+
 ## TBD
 
-- [ ] Add TAILOR executor
+- [ ] Executors should take context input, or generate default context
+- [ ] Executors should append logs to existing logs
+- [ ] Presentors should handle a list of logs
+  
+- [ ] CLI: Updated eScript with Working CLI pipes 
 
-- [ ] LvRun: ENV.ASSIGN / Create Action 
-- [ ] LvRun: UTIL.COMMAND / Command
-- [ ] LvRun: UTIL.COMMAND / Test
-- [ ] LvRun: UTIL.BlockInFile / Test
+- [ ] LvRun: UTIL.COMMAND / Implement Command
+- [ ] LvRun: UTIL.COMMAND / Implement Test
+- [ ] LvRun: UTIL.BlockInFile / Implement Test
+
+- [ ] Add "when" and "unless" constructs for conditional execution
+
+- [ ] TAILOR/LV: quit unless proper elxir env
+- [ ] TAILOR/LV: quit unless in-project
+- [ ] TAILOR/LV: set ElixirEnv(version), AppEnv(name, in-umbrella)
+- [ ] TAILOR/LV: create Checklist/TOC w/tests
 
 - [ ] Write tests
 
@@ -169,14 +188,14 @@
 - [ ] Run stops on halt
 - [ ] Add RUN/REPL exectutor
 
-- [ ] Create `ugen` escript (with Bash pipelining)
+- [ ] Create `atree` escript (with Bash pipelining)
 
-- [ ] Convert bash generators to UberGen
+- [ ] Convert bash generators to Atree
 
 ## Questions
 
 - [ ] How to manage long-running state?  (like tasks)
-- [ ] Is there a datastore for UberGen?
+- [ ] Is there a datastore for Atree?
 - [ ] How to access-control for shared playbooks?
 - [ ] Use-cases for playbooks with multi-parents? (listeners, chat, comments)
 - [ ] What is a a URI-scheme for Actions?

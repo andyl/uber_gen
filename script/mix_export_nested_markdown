@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+cmd="mix atree.export test.test2"
+
+cat << EOF >&2
+---------------------------------------
+COMMAND: $cmd
+Export Nested Test to Markdown
+---------------------------------------
+EOF
+
+$cmd

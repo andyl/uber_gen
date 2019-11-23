@@ -1,0 +1,10 @@
+---
+- action: Util.TextBlock
+  params:
+    header: HEADER
+    body: BODY
+  children:
+    - action: Ctx.Assign
+      params:
+        data1: "HELLO"
+        data2: "WORLD"

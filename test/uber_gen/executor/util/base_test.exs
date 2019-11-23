@@ -1,13 +1,13 @@
-defmodule UberGen.Executor.BaseTest do
+defmodule Atree.Executor.BaseTest do
   use ExUnit.Case
 
   test "Hello World" do
     assert 1 == 1
   end
 
-  @pb UberGen.Actions.Util.Null
+  @pb Atree.Actions.Util.Null
 
-  alias UberGen.Executor.Util.Base
+  alias Atree.Executor.Util.Base
 
   describe "function predicates" do
     test "has_command" do

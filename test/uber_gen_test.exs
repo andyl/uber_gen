@@ -1,8 +1,8 @@
-defmodule UberGenTest do
+defmodule AtreeTest do
   use ExUnit.Case
-  doctest UberGen
+  doctest Atree
 
   test "greets the world" do
-    assert UberGen.hello() == :world
+    assert Atree.hello() == :world
   end
 end

@@ -8,4 +8,5 @@ erl_crash.dump
 *.tar
 /.elixir_ls/
 /uber_gen
+/atree
 

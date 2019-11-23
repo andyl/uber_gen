@@ -1,6 +1,6 @@
 defmodule UberGen do
   @moduledoc """
-  Documentation for UberGen.
+  Documentation for Atree.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule UberGen do
 
   ## Examples
 
-      iex> UberGen.hello()
+      iex> Atree.hello()
       :world
 
   """
