@@ -1,6 +1,6 @@
-# Atree
+# UberGen
 
-Atree is a scriptable code generator for Elixir, motivated by a thread on
+UberGen is a scriptable code generator for Elixir, motivated by a thread on
 [Elixir Forum][f].  
 
 [f]: https://elixirforum.com/t/what-would-you-think-about-a-new-web-framework-that-extends-phoenix-with-rails-like-or-django-like-built-in-features/26371/8
@@ -45,7 +45,7 @@ With a single command, you could download and run the generator, then tweak and
 share the generator with your friends.  
 
 We know the value of `automated tests` and `automated package managers`.
-Atree is scriptable `automated generation` for Elixir developers.
+UberGen is scriptable `automated generation` for Elixir developers.
 
 ## Comparables
 
@@ -65,13 +65,13 @@ There are many comparables:
 [Linux Pipes][pipe],
 [Ansible][ansible], and more
 
-Atree extends `Mix.Generate`, and borrows ideas from other tools:
+UberGen extends `Mix.Generate`, and borrows ideas from other tools:
 - from [Mix.Generate][mixgen]: helper functions like `copy_file` 
 - from [PragDave][pdgen]: template trees, template installation and discovery
 - from [Orats][orats]: git helper functions
 - from [Exercism][exer]: guided refactoring
 - from [Ansible][ansible], the playbook execution model
-- from [Linux Pipes][pipes], small, composable actions
+- from [Linux Pipes][pipe], small, composable actions
 
 [mixgen]:  https://hexdocs.pm/mix/Mix.Generator.html
 [pdgen]:   https://pragdave.me/blog/2017/04/18/elixir-project-generator.html
@@ -88,26 +88,26 @@ Atree extends `Mix.Generate`, and borrows ideas from other tools:
 [pipe]:    https://en.wikipedia.org/wiki/Pipeline_(Unix)
 [ansible]: https://www.ansible.com/
 
-## Installing Atree
+## Installing UgerGen
 
-To install `atree`:
+To install `uber_gen`:
 
-    mix archive.install github andyl/atree
+    mix archive.install github andyl/uber_gen
 
-Configure with `.atree.exs`: [DROP?]
+Configure with `.uber_gen.exs`: [DROP?]
 
-    import Atree
+    import UberGen
 
-    config :atree, playbooks: [
+    config :uber_gen, playbooks: [
       {:live_view_gen, "~> 0.4.0"},
       {:my_codegen, path: "~/src/CG/my_lv_tweaks"}
     ]
 
-    include_atree "~/.atree/phoenix_css_setup.exs"
+    include_uber_gen "~/.uber_gen/phoenix_css_setup.exs"
 
-## Action Trees
+## UberGen Architecture
 
-Atree is built on a data abstration called an "Action Tree" (`atree`).
+UberGen is built on a data abstration called an "Action Tree" (`atree`).
 
 ### Atree Actions
 
