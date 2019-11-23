@@ -57,7 +57,7 @@ Elements:
 - ctxsrc: stdin | saved_file [default: stdin]
 - output: PresentorName [default: ctx_json]
 - params: -p KEY=VAL -p KEY=VAL
-- save:   -s PRESENTOR1=<filename> -s PRESENTOR2=<filename>
+- save:   -s PRESENTOR1=FILENAME -s PRESENTOR2=FILENAME
 
 Guidelines:
 - ctxsrc: read context from STDIN -or- saved file
