@@ -105,32 +105,37 @@ Configure with `.uber_gen.exs`: [DROP?]
 
     include_uber_gen "~/.uber_gen/phoenix_css_setup.exs"
 
-## The UberGen Framework
+## Action Trees
 
-### UberGen Actions
+UberGen is built on a data abstration called an "Action Tree" (`atree`).
 
-Actions are standalone components that operate like a Plug.
+### Atree Actions
 
-Actions have three important callbacks:
+Actions are composable modules that implement a standard behavior with three
+key callbacks:
 
 - Command - executes a command
 - Guide - emits a guide fragment
 - Test - executes a test
     
-    module UberGen.Actions.MyTool do
-      use UberGen.Action
+    module Atree.Actions.Phoenix.Bootstrap4 do
+      use Atree.Action
 
+      @shortdoc "Install Bootstrap4 in your Phoenix project."
+      
       def command(context, options)
-        ...perform some work 
-        new_context
+        context
+        |> assign(tgt_file, "output.css")
+        |> copy_file(ctx.source_file, ctx.tgt_file)
+        |> git_commit("Add output.css to repo")
       end
     end
 
-UberGen Actions can be composed into Plug-like pipelines.
+Actions can be composed into Plug-like pipelines.
 
     context |> Action1(opts) |> Action2(opts)
 
-### UberGen Context
+### Atree Context
 
 The UberGen Context is a Plug-like structure:
 
@@ -146,12 +151,21 @@ The UberGen Context is a Plug-like structure:
       }
       assigns: %{
         variable1: 42
-      }
+      },
+      log: [
+        %{
+          action: Atree.Actions.Phoenix.Bootstrap4,
+          guide: %{header: "Install Bootstrap", body: "body text"},
+          test: :ok,
+          children: []
+        }
+      ]
+        
     }
 
-### UberGen Command Helpers 
+### Atree Command Helpers 
 
-UberGen command helpers are conveniences for working with paths and generating content.
+Atree command helpers are conveniences for working with paths and generating content.
 
 From Mix.Generator:
 
@@ -195,92 +209,71 @@ AST analysis and manipulation (which don't yet exist!):
 | extract_function | Extract an expression to a function |
 | ensure_config    | Set a config value                  |
 
-### UberGen Actions
+### Atree Playbooks
 
-Actions are structured like Mix tasks - one module per playbook.
+Atree playbooks are yaml or json files for composing Actions.
 
-    defmodule UberGen.Actions.Myapp.Bootstrap4 do
-      use UberGen.Action
+    ---
+    - action: Util.TextBlock
+      params: 
+        header: Introduction
+        body: >
+          This is an introductory paragraph for my HowTo Guide.
+        children:
+          - action: Util.Command
+            params:
+              instruction: "Create a setup directory"
+              command: mkdir /tmp/setup_dir
+              creates: /tmp/setup_dir
+          - action: Util.BlockInFile
+            params:
+              instruction: "Add this text"
+              block_text: >
+                config :myapp, :key, "value"
+              tgt_file: config/config.exs
+              check_for:
+                - myapp
+                - key
+                - value
 
-      @depends_on [UberGen, :setup]
-      @shortdoc "Install Bootstrap4 in your Phoenix project."
-      task run(ctx, _opts) do
-        ctx
-        |> assign(tgt_file, "output.css")
-        |> copy_file(ctx.source_file, ctx.tgt_file)
-        |> git_commit("Add output.css to repo")
-      end
-    end
-
-### UberGen Playbooks
-
-UberGen playbooks are packaged in a standard Elixir application.  There can be
-many playbooks per application.  Actions can have dependencies.  UberGen will
-install playbook packages using the same loading techniques that are used for
-Mix tasks.
-
-    myapp/
-      lib/
-        mix/
-          tasks/
-            mytask.ex
-        uber_gen
-          playbooks/
-            myapp/
-              bootstrap4.ex
-      priv/
-        playbooks/
-          apps/ 
-            bootstrap4/
-              files/
-                bootstrap_config.css
-              templates/
-                bootstrap.css.eex
-
-Action static files and templates are stored under the `priv/playbooks`
-directory.
-
-## UberGen Orchestrators
-
-TBD
-
-## Using UberGen
+## Using Atree
 
 ### As a Mix Task
 
-UberGen is accessible as a mix task:
+Use Atree as a mix task:
 
-    $ mix ugen.help
-    $ mix ugen.run <playbook> <options>
-    $ mix ugen.playbook list
-    $ mix ugen.playbook install <playbook>
-    $ mix ugen.playbook remove <playbook>
-    $ mix ugen.playbook export <playbook>
-    $ mix ugen.playbook run <playbook>
+    $ mix atree.help
 
-### The UberGen eScript
+    $ mix atree.export <playbook>
+    $ mix atree.tailor <playbook>
+    $ mix atree.run <playbook>
+    $ mix atree.serve <playbook>
 
-The `uber_gen` executable reads playbook configs from `yaml` or `json` files.
+    $ mix atree.action list
+    $ mix atree.action install <playbook>
+    $ mix atree.action remove <playbook>
 
-    $ uber_gen <playbook>.yaml export
-    $ uber_gen <playbook>.yaml serve
-    $ uber_gen <playbook>.yaml run
+You can generate output in markdown, html, and other format.
 
-### UberGen in Elixir Source
+### The Atree Escript
+
+The `atree` executable reads playbook configs from `yaml` or `json` files.
+You can invoke an action from the command line:
+
+    $ atree <playbook>.yaml export
+    $ atree <playbook>.yaml tailor
+    $ atree <playbook>.yaml serve
+    $ atree <playbook>.yaml run
+
+You can join actions together using pipes:
+
+    $ atree <playbook1> [options] | atree <playbook2> [options]
+
+### Atree in Elixir Source
 
     defmodule MyMod do
       ...
     end
-
-### UberGen on the Command Line
-
-You can invoke an action from the command line:
-
-    $ uber_gen <playbook1> [options]
-
-You can join actions together using pipes:
-
-    $ uber_gen <playbook1> [options] | uber_gen <playbook2> [options]
 
 ## UberGen Workflow
 
@@ -299,12 +292,3 @@ Reading a HowTo Post:
 - Instant Working App 
 - Pina Coladas
 
-## Action Commands
-
-Export - Just output a static doc (Markdown, PDF, ExDoc)
-
-Run - CLI checks your environment every run
-- generates guide text
-- validates each step
-
-Serve - starts a webserver and a file watcher
