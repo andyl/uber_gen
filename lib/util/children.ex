@@ -21,7 +21,7 @@ defmodule Util.Children do
   # --------------------------------------------------
 
   def to_children(input) when is_map(input) do
-    mod = "Elixir.UberGen.Actions.#{input[:action]}" |> String.to_existing_atom()
+    mod = "Elixir.Atree.Actions.#{input[:action]}" |> String.to_existing_atom()
     opt = input[:params] || %{}
     chr = input[:children] || []
     to_children(mod, opt, chr)

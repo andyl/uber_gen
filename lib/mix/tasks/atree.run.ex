@@ -1,8 +1,8 @@
 defmodule Mix.Tasks.Atree.Run do
   use Mix.Task
 
-  alias UberGen.ActionUtil
-  alias UberGen.Executor.Run
+  alias Atree.ActionUtil
+  alias Atree.Executor.Run
 
   @moduledoc """
   Run a playbook on the command-line.
@@ -17,15 +17,15 @@ defmodule Mix.Tasks.Atree.Run do
   @shortdoc "Run a playbook"
   
   def run(argv) do
-    {opts, vals, _rejects} = Mix.UberGen.Util.parse(argv)
+    {opts, vals, _rejects} = Mix.Atree.Util.parse(argv)
     tgt = List.first(vals)
-    presentor = Mix.UberGen.Util.presentor(opts[:format] || "ctx_inspect")
+    presentor = Mix.Atree.Util.presentor(opts[:format] || "ctx_inspect")
 
     ActionUtil.loadpaths!()
 
     mod =
-      UberGen.ActionMix.load_all()
-      |> UberGen.ActionUtil.build_playbook_list()
+      Atree.ActionMix.load_all()
+      |> Atree.ActionUtil.build_playbook_list()
       |> Enum.filter(&(elem(&1, 1) == tgt))
       |> List.first()
 

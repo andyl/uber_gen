@@ -2,7 +2,7 @@
 
 ## Notes
 
-- a playbook is a module with `use UberGen.Action`
+- a playbook is a module with `use Atree.Action`
 - a playbook registers itself, borrowing techniques from `Mix.Task`
 
 ## Directory Structure
@@ -88,7 +88,7 @@ Add Dependency
 
 ## Orchestration and Scripting
 
-### UberGen Interpreter
+### Atree Interpreter
 
 Takes a YAML file as input
 
@@ -104,7 +104,7 @@ Takes a YAML file as input
       playbook: TextBlock 
       params:
         header: Install LiveView
-        body: We can install LiveView using UberGen.
+        body: We can install LiveView using Atree.
       steps:
         - playbook: TextBlock
           params:
@@ -140,7 +140,7 @@ more markdown ...
 
 ### Other Markup Formats
 
-It should be possible to extend `RST` or `Asciidoc` to work with UberGen.
+It should be possible to extend `RST` or `Asciidoc` to work with Atree.
 
 ### Command-Line Invocation
 
@@ -258,7 +258,7 @@ Notes:
 Example playbook:
 
     defmodule RenameProject do
-      use UberGen.Action
+      use Atree.Action
 
       def run(command_line_opts) do
       end
@@ -284,7 +284,7 @@ code-refactoring helpers over time.
 
 ## Refactoring Tech
 
-At this point, all the supporting tech is readily at hand to build UberGen -
+At this point, all the supporting tech is readily at hand to build Atree -
 except one.  Refactoring.  We need flexible, robust, easy to use functions to
 refactor Elixir code.  
 

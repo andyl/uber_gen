@@ -1,8 +1,8 @@
 defmodule Mix.Tasks.Atree.Tailor do
   use Mix.Task
 
-  alias UberGen.ActionUtil
-  alias UberGen.Executor.Tailor
+  alias Atree.ActionUtil
+  alias Atree.Executor.Tailor
 
   @moduledoc """
   Taior an Action guide to your codebase.
@@ -25,15 +25,15 @@ defmodule Mix.Tasks.Atree.Tailor do
 
   @shortdoc "Export a playbook"
   def run(argv) do
-    {opts, vals, _rejects} = Mix.UberGen.Util.parse(argv)
+    {opts, vals, _rejects} = Mix.Atree.Util.parse(argv)
     tgt = List.first(vals)
-    presentor = Mix.UberGen.Util.presentor(opts[:format] || "guide_markdown") 
+    presentor = Mix.Atree.Util.presentor(opts[:format] || "guide_markdown") 
 
     ActionUtil.loadpaths!()
 
     mod =
-      UberGen.ActionMix.load_all()
-      |> UberGen.ActionUtil.build_playbook_list()
+      Atree.ActionMix.load_all()
+      |> Atree.ActionUtil.build_playbook_list()
       |> Enum.filter(&(elem(&1, 1) == tgt))
       |> List.first()
 

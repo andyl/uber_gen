@@ -1,6 +1,6 @@
-# UberGen Demo Scripts
+# Atree Demo Scripts
 
-Here are some simple scripts to illustrate using UberGen mix tasks.
+Here are some simple scripts to illustrate using Atree mix tasks.
 
 Usage examples:
 

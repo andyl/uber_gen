@@ -1,4 +1,4 @@
-# UberGen DevNotes
+# Atree DevNotes
 
 ## Overview
 
@@ -9,7 +9,7 @@ Exploratory Code
 | x1_master   | 2019 Oct 20 | Just a README stating overall goals |
 | x2_test     | 2019 Oct 25 | Mix-style playbook structure        |
 | x3_guide    | 2019 Nov 01 | Document generation                 |
-| x4_macros   | 2019 Nov 03 | Use of macros in UberGen playbook   |
+| x4_macros   | 2019 Nov 03 | Use of macros in Atree playbook   |
 | x5_liveview | 2019 Nov 07 | Write playbook for LiveViews        |
 | x6_schemas  | 2019 Nov 10 | Action schemas, nested playbooks  |
 
@@ -38,15 +38,15 @@ Desired Features:
 Implementation Details:
 
 - All elements in the execution pipeline are Actions
-- Ad-hoc playbook elements are wrapped in `UberGen.Action.Util.Exec`
+- Ad-hoc playbook elements are wrapped in `Atree.Action.Util.Exec`
 
 ## 2019 Nov 05 Tue
 
 Actions must:
-- have the module-name prefix `UberGen.Actions`
-- add the line `use UberGen.Action`
+- have the module-name prefix `Atree.Actions`
+- add the line `use Atree.Action`
 
-The `UberGen.Action` module provides callbacks for use in Actions.
+The `Atree.Action` module provides callbacks for use in Actions.
 
 | Callbacks   | Arg(s)            | Returns         | Purpose                       |
 |-------------|-------------------|-----------------|-------------------------------|
@@ -61,13 +61,13 @@ All of these macros are optional for any given playbook.
 
 Calling a Action with an 'undefined' macro returns a default value.
 
-The `UberGen.Action` module provides introspection functions that show if a
+The `Atree.Action` module provides introspection functions that show if a
 method is defined in a playbook: `has_run?/0`, `has_call?/0`, `has_test?/0`,
 `has_steps?/0`, `has_guide?/0`
 
 ## 2019 Nov 07 Thu
 
-`UberGen` Mix commands
+`Atree` Mix commands
 
 | Command         | Purpose                                   |
 |-----------------|-------------------------------------------|
@@ -88,14 +88,14 @@ In the long term, schemas will be used for:
 - guiding the editor interfaces of composer UIs
 - validating playbook scripts
 
-The structure of the UberGen toolchain would borrow themes from VisualBasic.
+The structure of the Atree toolchain would borrow themes from VisualBasic.
 
 VisualBasic has **components** (created by C-coders with c-coding tools)
 assembled into **applications** (by VB Developers using the VB UI) that are
 distributed to End Users.
 
-UberGen has **playbooks** (created by Elixir-coders with elixir-coding tools)
-assembled into **guides** (by authors using the UberGen UI) that are distriuted
+Atree has **playbooks** (created by Elixir-coders with elixir-coding tools)
+assembled into **guides** (by authors using the Atree UI) that are distriuted
 to End Users.
 
 Actions are assembled into trees.  Branches for a playbook are specified as

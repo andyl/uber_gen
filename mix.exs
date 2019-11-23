@@ -1,4 +1,4 @@
-defmodule UberGen.MixProject do
+defmodule Atree.MixProject do
   use Mix.Project
 
   @version "0.0.1"
@@ -39,7 +39,7 @@ defmodule UberGen.MixProject do
 
   defp escript do
     [
-      main_module: UberGen.Cli
+      main_module: Atree.Cli
     ]
   end
 end

@@ -1,4 +1,4 @@
-defmodule UberGen.Executor.ExportTest do
+defmodule Atree.Executor.ExportTest do
   use ExUnit.Case
 
   test "Hello World" do
@@ -6,11 +6,11 @@ defmodule UberGen.Executor.ExportTest do
   end
 
   test "Export Guide" do
-    assert UberGen.Executor.Export.with(UberGen.Actions.Util.Null)
+    assert Atree.Executor.Export.with(Atree.Actions.Util.Null)
   end
 
   test "CtxAssign" do
-    ctx = UberGen.Executor.Export.with({UberGen.Actions.Ctx.Assign, %{a: 1, b: 2}}) 
+    ctx = Atree.Executor.Export.with({Atree.Actions.Ctx.Assign, %{a: 1, b: 2}}) 
     assert ctx.assigns.a == 1
     assert ctx.assigns.b == 2
   end

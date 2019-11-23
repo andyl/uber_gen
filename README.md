@@ -1,6 +1,6 @@
-# UberGen
+# Atree
 
-UberGen is a scriptable code generator for Elixir, motivated by a thread on
+Atree is a scriptable code generator for Elixir, motivated by a thread on
 [Elixir Forum][f].  
 
 [f]: https://elixirforum.com/t/what-would-you-think-about-a-new-web-framework-that-extends-phoenix-with-rails-like-or-django-like-built-in-features/26371/8
@@ -45,7 +45,7 @@ With a single command, you could download and run the generator, then tweak and
 share the generator with your friends.  
 
 We know the value of `automated tests` and `automated package managers`.
-UberGen is scriptable `automated generation` for Elixir developers.
+Atree is scriptable `automated generation` for Elixir developers.
 
 ## Comparables
 
@@ -65,7 +65,7 @@ There are many comparables:
 [Linux Pipes][pipe],
 [Ansible][ansible], and more
 
-UberGen extends `Mix.Generate`, and borrows ideas from other tools:
+Atree extends `Mix.Generate`, and borrows ideas from other tools:
 - from [Mix.Generate][mixgen]: helper functions like `copy_file` 
 - from [PragDave][pdgen]: template trees, template installation and discovery
 - from [Orats][orats]: git helper functions
@@ -88,7 +88,7 @@ UberGen extends `Mix.Generate`, and borrows ideas from other tools:
 [pipe]:    https://en.wikipedia.org/wiki/Pipeline_(Unix)
 [ansible]: https://www.ansible.com/
 
-## Installing UberGen
+## Installing Atree
 
 To install `uber_gen`:
 
@@ -96,7 +96,7 @@ To install `uber_gen`:
 
 Configure with `.uber_gen.exs`: [DROP?]
 
-    import UberGen
+    import Atree
 
     config :uber_gen, playbooks: [
       {:live_view_gen, "~> 0.4.0"},
@@ -107,7 +107,7 @@ Configure with `.uber_gen.exs`: [DROP?]
 
 ## Action Trees
 
-UberGen is built on a data abstration called an "Action Tree" (`atree`).
+Atree is built on a data abstration called an "Action Tree" (`atree`).
 
 ### Atree Actions
 
@@ -137,7 +137,7 @@ Actions can be composed into Plug-like pipelines.
 
 ### Atree Context
 
-The UberGen Context is a Plug-like structure:
+The Atree Context is a Plug-like structure:
 
     %{
       env: %{
@@ -275,15 +275,15 @@ You can join actions together using pipes:
       ...
     end
 
-## UberGen Workflow
+## Atree Workflow
 
 ### With a HowTo Post
 
 Authoring a HowTo Post:
 
 - Author writes a blog post with manual install instructions
-- Author creates gist with a UberGen generator script
-- Author adds the address of the UberGen script to the blog post
+- Author creates gist with a Atree generator script
+- Author adds the address of the Atree script to the blog post
 
 Reading a HowTo Post:
 

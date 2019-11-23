@@ -1,4 +1,4 @@
-# UberGen DEVLOG
+# Atree DEVLOG
 
 ## 2019 Oct 28 Mon
 
@@ -50,9 +50,9 @@
 
 ## 2019 Nov 08 Fri 
 
-- [x] Add `UberGen.Ctx`
+- [x] Add `Atree.Ctx`
 - [x] Add `Util.Command` playbook
-- [x] Add assign and halt functions to `UberGen.Ctx`
+- [x] Add assign and halt functions to `Atree.Ctx`
 - [x] Add `Util.Command` playbook
 - [x] Add `Util.BlockInFile` playbook
 - [x] LiveView: working `mix ugen.pb.export` command
@@ -96,7 +96,7 @@
 - [x] Don't show playbook in `ugen.cache.list` unless `has_work?` or `--all`
 - [x] Add ability to use YAML or JSON in playbook steps
 - [x] Create LiveView generator
-- [x] Design UberGen runner
+- [x] Design Atree runner
 - [x] Rename 'Action.work' to 'Action.command'
 - [x] Create `Executor.Export.guide/1`
 - [x] Create `Executor.Run.command/1`
@@ -180,12 +180,12 @@
 
 - [ ] Create `ugen` escript (with Bash pipelining)
 
-- [ ] Convert bash generators to UberGen
+- [ ] Convert bash generators to Atree
 
 ## Questions
 
 - [ ] How to manage long-running state?  (like tasks)
-- [ ] Is there a datastore for UberGen?
+- [ ] Is there a datastore for Atree?
 - [ ] How to access-control for shared playbooks?
 - [ ] Use-cases for playbooks with multi-parents? (listeners, chat, comments)
 - [ ] What is a a URI-scheme for Actions?

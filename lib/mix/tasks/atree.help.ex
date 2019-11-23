@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.Atree.Help do
   use Mix.Task
 
-  alias UberGen.ActionUtil
+  alias Atree.ActionUtil
 
   @moduledoc """
   Export a Action.
@@ -15,8 +15,8 @@ defmodule Mix.Tasks.Atree.Help do
     ActionUtil.loadpaths!()
 
     mod =
-      UberGen.ActionMix.load_all()
-      |> UberGen.ActionUtil.build_playbook_list()
+      Atree.ActionMix.load_all()
+      |> Atree.ActionUtil.build_playbook_list()
       |> Enum.filter(&(elem(&1, 1) == arg))
       |> List.first()
 
