@@ -47,9 +47,15 @@ Run behavior - run until:
 
 ## Escript
 
-Usage:
+Standalong Usage:
 
-    atree [<method>] [<target>] [--ctx_src <filename>] ...
+    $ atree [<method>] [<target>] [--ctx_src <filename>] ...
+
+Usage in Pipes:
+
+    $ atree EXPORT playbook1.json | 
+      atree util.text_block -p body="Thanks for reading!" |
+      atree -s ctx_json=/tmp/context.json --output guide_html
 
 Elements:
 - method: EXPORT | TAILOR | RUN | SERVE
