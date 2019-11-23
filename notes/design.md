@@ -47,6 +47,10 @@ Run behavior - run until:
 
 ## Escript
 
+Usage:
+
+    atree [<method>] [<target>] [--ctx_src <filename>] ...
+
 method: EXPORT | TAILOR | RUN | SERVE
 target: playbook | action
 ctxsrc: stdin | saved_file [default: stdin]
@@ -64,10 +68,16 @@ TODO:
 - Append to log with existing entries
 - Generate outputs from log-list not from one entry
 
+Notes:
+- don't allow updating the method in a pipeline
+- default method is EXPORT(?)
+- issue a warning if the method updates
+
 Future:
 - bash completion 
 
-    atree <method> [<target>] [--ctx_src <filename>] ...
+Questions:
+- how to LIST actions, query registry, download/save
 
 ## Guide Return Values
 
@@ -390,27 +400,6 @@ REPL Commands:
 
 - use neovim and mhinz/neovim-remote
 - editor and repl-runner side by side
-
-### Executor.Run.command Sequence
-
-    def Executor.Run.command(module)
-
-    def Executor.Run.command(ctx, {module, opts, children}) do
-      if module.test(ctx, opts) do
-        IO.puts("PASS")
-      else
-        module.command(ctx, opts)
-      end
-
-      if test(ctx, opts) do
-        children
-        |> Enum.map(&command(ctx, &1))
-      else
-        IO.puts("FAIL")
-        module.guide(ctx, opts) |> IO.puts()
-        halt(ctx)
-      end 
-    end
 
 ## Context and Variables
 

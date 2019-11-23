@@ -159,7 +159,11 @@
 
 ## TBD
 
-- [ ] CLI: Working CLI pipes 
+- [ ] Executors should take context input, or generate default context
+- [ ] Executors should append logs to existing logs
+- [ ] Presentors should handle a list of logs
+  
+- [ ] CLI: Updated eScript with Working CLI pipes 
 
 - [ ] LvRun: UTIL.COMMAND / Implement Command
 - [ ] LvRun: UTIL.COMMAND / Implement Test
