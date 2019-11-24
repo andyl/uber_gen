@@ -21,7 +21,7 @@ defmodule Atree.Data.Ctx do
   @type t :: %Ctx{
     env: map(),
     assigns: map(),
-    log: Log.t,
+    log: list(Log.t),
     halted: boolean()
   }
 

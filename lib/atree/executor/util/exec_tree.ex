@@ -27,29 +27,30 @@ defmodule Atree.Executor.Util.ExecTree do
       """
 
       def with_action(module) do
-        with_action(module, default_ctx())
+        with_action(default_ctx(), module)
       end
 
-      def with_action(module, ctx) when is_atom(module) do
+      def with_action(ctx, module) when is_atom(module) do
         ctx
         |> invoke({module, %{}, Base.children(module, %{}, [])})
         |> package()
       end
 
-      def with_action({module, opts}, ctx) when is_atom(module) and is_map(opts) do
+      def with_action(ctx, {module, opts}) 
+          when is_atom(module) and is_map(opts) do
         ctx
         |> invoke({module, opts, []})
         |> package()
       end
 
-      def with_action({mod, opts, child}, ctx)
+      def with_action(ctx, {mod, opts, child})
           when is_atom(mod) and is_map(opts) and is_list(child) do
         ctx
         |> invoke({mod, opts, child})
         |> package()
       end
 
-      def with_action(child_list, ctx) when is_list(child_list) do
+      def with_action(ctx, child_list) when is_list(child_list) do
         ctx
         |> invoke({Atree.Actions.Util.Null, %{}, child_list})
         |> package()
@@ -75,7 +76,10 @@ defmodule Atree.Executor.Util.ExecTree do
         {cx0, logs ++ [log]}
       end
 
-      defp package({ctx, log}), do: %{ctx | log: log}
+      defp package({ctx, log}) do
+        newlog = ctx.log ++ [log]
+        %{ctx | log: newlog}
+      end
     end
   end
 end
