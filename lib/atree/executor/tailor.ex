@@ -7,7 +7,7 @@ defmodule Atree.Executor.Tailor do
 
   use Atree.Executor.Util.ExecTree
 
-  defp exec_log(mod, ctx, opts) do
+  def exec_log(mod, ctx, opts) do
 
     report = Base.inspect(mod, ctx, opts)
     ctx_v2 = report.ctx || ctx  

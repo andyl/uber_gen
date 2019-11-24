@@ -157,13 +157,19 @@
 
 - [x] Refactor UberGen -> Atree
 
-## TBD
+## 2019 Nov 24 Sun
+
+- [ ] Add log struct
 
 - [ ] Executors should take context input, or generate default context
 - [ ] Executors should append logs to existing logs
 - [ ] Presentors should handle a list of logs
   
+- [ ] Add tests for log-list
+
 - [ ] CLI: Updated eScript with Working CLI pipes 
+
+## TBD
 
 - [ ] LvRun: UTIL.COMMAND / Implement Command
 - [ ] LvRun: UTIL.COMMAND / Implement Test

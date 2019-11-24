@@ -14,7 +14,7 @@ defmodule Atree.Executor.Run do
 
   use Atree.Executor.Util.ExecTree
 
-  defp exec_log(mod, ctx, opts) do
+  def exec_log(mod, ctx, opts) do
     report = Base.inspect(mod, ctx, opts)
     cx0 = report.ctx || ctx
     cx1 = Base.command(mod, cx0, opts)
