@@ -6,11 +6,12 @@ defmodule Atree.Data.Log do
 
   alias Atree.Data.{Log, Guide}
 
-  defstruct [action: nil, guide: nil, children: []]
+  defstruct [action: nil, guide: nil, test: nil, children: []]
 
   @type t :: %Log{
     action: atom(),
     guide: Guide.t,
+    test: any(),
     children: list(Log.t)
   }
 end

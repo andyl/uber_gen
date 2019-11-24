@@ -31,7 +31,7 @@ defmodule Mix.Tasks.Atree.Run do
 
     case mod do
       nil -> IO.puts "Action not found (#{tgt})"
-      {module, _label} -> Run.with(module) |> presentor.generate() |> IO.puts()
+      {module, _label} -> Run.with_action(module) |> presentor.generate() |> IO.puts()
       _ -> "ERROR Run"
     end
   end

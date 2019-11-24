@@ -24,7 +24,7 @@ defmodule Atree.Action do
   `has_test?/0`, `has_children?/0`, `has_interface?/0`, `has_inspect?/0`.
   """
 
-  alias Atree.Data.{Ctx, Report}
+  alias Atree.Data.{Ctx, Report, Guide}
 
   @doc """
   Action command.  
@@ -37,7 +37,7 @@ defmodule Atree.Action do
   @doc """
   Emit guide text.
   """
-  @callback guide(Ctx.t, map())            :: map()
+  @callback guide(Ctx.t, map())            :: Guide.t
 
   @doc """
   Run a test.
@@ -51,8 +51,6 @@ defmodule Atree.Action do
 
   @doc """
   Define interface for params and assigns.
-
-  Atom is either `:params` or `:assigns`.
   """
   @callback interface(Ctx.t, map()) :: any()
 

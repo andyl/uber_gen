@@ -11,13 +11,13 @@ defmodule Atree.Cli do
   # --------------------------------------------------
 
   def process(data, "export") do
-    Atree.Executor.Export.with(data)
+    Atree.Executor.Export.with_action(data)
     |> Atree.Presentor.GuideMarkdown.generate()
     |> IO.puts()
   end
 
   def process(data, "run") do
-    Atree.Executor.Run.with(data)
+    Atree.Executor.Run.with_action(data)
     |> Atree.Presentor.GuideMarkdown.generate()
     |> IO.puts()
   end

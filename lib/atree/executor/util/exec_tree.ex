@@ -25,26 +25,32 @@ defmodule Atree.Executor.Util.ExecTree do
           exec_log(module, context, options) -> {new_context, log}
 
       """
-      def with(module) when is_atom(module) do
-        default_ctx()
+
+      def with_action(module) do
+        with_action(module, default_ctx())
+      end
+
+      def with_action(module, ctx) when is_atom(module) do
+        ctx
         |> invoke({module, %{}, Base.children(module, %{}, [])})
         |> package()
       end
 
-      def with({module, opts}) when is_atom(module) and is_map(opts) do
-        default_ctx()
+      def with_action({module, opts}, ctx) when is_atom(module) and is_map(opts) do
+        ctx
         |> invoke({module, opts, []})
         |> package()
       end
 
-      def with({module, opts, children}) when is_atom(module) and is_map(opts) and is_list(children) do
-        default_ctx()
-        |> invoke({module, opts, children})
+      def with_action({mod, opts, child}, ctx)
+          when is_atom(mod) and is_map(opts) and is_list(child) do
+        ctx
+        |> invoke({mod, opts, child})
         |> package()
       end
 
-      def with(child_list) when is_list(child_list) do
-        default_ctx()
+      def with_action(child_list, ctx) when is_list(child_list) do
+        ctx
         |> invoke({Atree.Actions.Util.Null, %{}, child_list})
         |> package()
       end

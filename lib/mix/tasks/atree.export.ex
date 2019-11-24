@@ -39,7 +39,7 @@ defmodule Mix.Tasks.Atree.Export do
 
     case mod do
       nil -> IO.puts("Action not found (#{tgt})")
-      {module, _label} -> module |> Export.with() |> presentor.generate() |> IO.puts()
+      {module, _label} -> module |> Export.with_action() |> presentor.generate() |> IO.puts()
       _ -> "ERROR Export"
     end
   end
