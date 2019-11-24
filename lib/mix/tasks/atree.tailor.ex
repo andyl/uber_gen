@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.Atree.Tailor do
   use Mix.Task
 
-  alias Atree.ActionUtil
+  alias Atree.Util.Util
   alias Atree.Executor.Tailor
 
   @moduledoc """
@@ -29,11 +29,11 @@ defmodule Mix.Tasks.Atree.Tailor do
     tgt = List.first(vals)
     presentor = Mix.Atree.Util.presentor(opts[:format] || "guide_markdown") 
 
-    ActionUtil.loadpaths!()
+    Util.loadpaths!()
 
     mod =
-      Atree.ActionMix.load_all()
-      |> Atree.ActionUtil.build_playbook_list()
+      Atree.Util.Mix.load_all()
+      |> Atree.Util.Util.build_playbook_list()
       |> Enum.filter(&(elem(&1, 1) == tgt))
       |> List.first()
 

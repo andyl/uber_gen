@@ -14,14 +14,14 @@ defmodule Atree.Data.Ctx do
   - halted: set to true if pipeline-error occurs
   """
 
-  alias Atree.Data.Ctx
+  alias Atree.Data.{Ctx, Log}
 
   defstruct [env: %{}, assigns: %{}, log: [], halted: false]
 
   @type t :: %Ctx{
     env: map(),
     assigns: map(),
-    log: list(),
+    log: Log.t,
     halted: boolean()
   }
 

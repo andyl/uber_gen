@@ -1,4 +1,4 @@
-defmodule Atree.ActionMix do
+defmodule Atree.Util.Mix do
   @moduledoc """
   A module that provides conveniences for playbooks.
   """
@@ -143,7 +143,7 @@ defmodule Atree.ActionMix do
   """
   @spec clear :: :ok
   def clear do
-    Atree.ActionServer.clear()
+    Atree.Util.Server.clear()
   end
 
   @doc """

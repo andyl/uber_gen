@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.Atree.List do
   use Mix.Task
 
-  alias Atree.ActionUtil
+  alias Atree.Util.Util
 
   @shortdoc "Prints help information for tasks"
 
@@ -11,12 +11,12 @@ defmodule Mix.Tasks.Atree.List do
 
   @shortdoc "List all playbooks"
   def run(_arg) do
-    ActionUtil.loadpaths!()
-    modules = Atree.ActionMix.load_all()
-    aliases = ActionUtil.load_aliases()
-    {docs, max} = ActionUtil.build_doc_list(modules, aliases)
+    Util.loadpaths!()
+    modules = Atree.Util.Mix.load_all()
+    aliases = Util.load_aliases()
+    {docs, max} = Util.build_doc_list(modules, aliases)
 
-    ActionUtil.display_doc_list(docs, max)
+    Util.display_doc_list(docs, max)
   end
 end
 

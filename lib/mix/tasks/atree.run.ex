@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.Atree.Run do
   use Mix.Task
 
-  alias Atree.ActionUtil
+  alias Atree.Util.Util
   alias Atree.Executor.Run
 
   @moduledoc """
@@ -21,11 +21,11 @@ defmodule Mix.Tasks.Atree.Run do
     tgt = List.first(vals)
     presentor = Mix.Atree.Util.presentor(opts[:format] || "ctx_inspect")
 
-    ActionUtil.loadpaths!()
+    Util.loadpaths!()
 
     mod =
-      Atree.ActionMix.load_all()
-      |> Atree.ActionUtil.build_playbook_list()
+      Atree.Util.Mix.load_all()
+      |> Atree.Util.Util.build_playbook_list()
       |> Enum.filter(&(elem(&1, 1) == tgt))
       |> List.first()
 
