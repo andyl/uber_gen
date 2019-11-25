@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.Atree.Help do
   use Mix.Task
 
-  alias Atree.ActionUtil
+  alias Atree.Util.Util
 
   @moduledoc """
   Export a Action.
@@ -12,11 +12,11 @@ defmodule Mix.Tasks.Atree.Help do
   @shortdoc "Export a playbook"
   def run(args) do
     arg = List.first(args)
-    ActionUtil.loadpaths!()
+    Util.loadpaths!()
 
     mod =
-      Atree.ActionMix.load_all()
-      |> Atree.ActionUtil.build_playbook_list()
+      Atree.Util.Mix.load_all()
+      |> Atree.Util.Util.build_playbook_list()
       |> Enum.filter(&(elem(&1, 1) == arg))
       |> List.first()
 

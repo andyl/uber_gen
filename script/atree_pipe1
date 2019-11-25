@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-cmd="./atree priv/playbooks/live_view.yaml export"
+cmd="./bin/atree | ./bin/atree -c stdin"
 
 cat << EOF >&2
 ---------------------------------------
 COMMAND: $cmd
-Run atree to export live_view to markdown
+Demonstrate bash pipelining with one pipe element
 ---------------------------------------
 EOF
 
-$cmd
+eval $cmd

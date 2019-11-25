@@ -4,7 +4,6 @@ defmodule Mix.Atree.Util do
 
   def parse(argv) do
     switches = [
-      aliases: [h: :help, f: :format],
       format: :string,
       help: :boolean
     ]

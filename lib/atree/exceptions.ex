@@ -26,10 +26,10 @@ defmodule Atree.NoActionError do
 
   defp did_you_mean(playbook) do
     # Ensure all playbooks are loaded
-    Atree.ActionMix.load_all()
+    Atree.Util.Mix.load_all()
 
-    Atree.ActionMix.all_modules()
-    |> Enum.map(&{&1, Atree.ActionMix.playbook_name(&1)})
+    Atree.Util.Mix.all_modules()
+    |> Enum.map(&{&1, Atree.Util.Mix.playbook_name(&1)})
     |> Enum.reduce({nil, nil, 0}, &max_similar(&1, playbook, &2))
   end
 

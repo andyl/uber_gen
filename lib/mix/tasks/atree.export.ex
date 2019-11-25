@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.Atree.Export do
   use Mix.Task
 
-  alias Atree.ActionUtil
+  alias Atree.Util.Util
   alias Atree.Executor.Export
 
   @moduledoc """
@@ -29,17 +29,17 @@ defmodule Mix.Tasks.Atree.Export do
     tgt = List.first(vals)
     presentor = Mix.Atree.Util.presentor(opts[:format] || "guide_markdown") 
 
-    ActionUtil.loadpaths!()
+    Util.loadpaths!()
 
     mod =
-      Atree.ActionMix.load_all()
-      |> Atree.ActionUtil.build_playbook_list()
+      Atree.Util.Mix.load_all()
+      |> Atree.Util.Util.build_playbook_list()
       |> Enum.filter(&(elem(&1, 1) == tgt))
       |> List.first()
 
     case mod do
       nil -> IO.puts("Action not found (#{tgt})")
-      {module, _label} -> module |> Export.with() |> presentor.generate() |> IO.puts()
+      {module, _label} -> module |> Export.with_action() |> presentor.generate() |> IO.puts()
       _ -> "ERROR Export"
     end
   end

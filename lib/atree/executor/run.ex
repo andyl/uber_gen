@@ -14,12 +14,14 @@ defmodule Atree.Executor.Run do
 
   use Atree.Executor.Util.ExecTree
 
-  defp exec_log(mod, ctx, opts) do
+  alias Atree.Data.Log
+
+  def exec_log(mod, ctx, opts) do
     report = Base.inspect(mod, ctx, opts)
     cx0 = report.ctx || ctx
     cx1 = Base.command(mod, cx0, opts)
 
-    log = %{
+    log = %Log{
       action: mod,
       test: Base.test(mod, cx1, opts),
       guide: Base.guide(mod, cx1, opts),

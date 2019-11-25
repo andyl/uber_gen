@@ -12,7 +12,13 @@ defmodule Atree.Presentor.ActionTree do
   """
   @spec generate(Ctx.t()) :: String.t()
   def generate(ctx) do
-    to_s(ctx.log, 1)
+    ctx.log
+    |> Enum.map(&process_one_log/1)
+    |> Enum.join("\n")
+  end
+
+  defp process_one_log(log) do
+    to_s(log, 1)
   end
 
   defp to_s(%{children: []} = log, depth) do

@@ -1,4 +1,4 @@
-defmodule Atree.ActionServer do
+defmodule Atree.Util.Server do
   @moduledoc false
 
   use Agent

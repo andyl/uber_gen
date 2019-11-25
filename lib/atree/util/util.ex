@@ -1,4 +1,4 @@
-defmodule Atree.ActionUtil do
+defmodule Atree.Util.Util do
 
   # Loadpaths without checks because tasks may be defined in deps.
   def loadpaths! do
