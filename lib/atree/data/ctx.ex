@@ -16,6 +16,8 @@ defmodule Atree.Data.Ctx do
 
   alias Atree.Data.{Ctx, Log}
 
+  @derive Jason.Encoder
+
   defstruct [env: %{}, assigns: %{}, log: [], halted: false]
 
   @type t :: %Ctx{

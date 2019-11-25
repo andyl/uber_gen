@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-script/atree_export_lv_markdown &&
-script/atree_export_test2_markdown &&
+script/atree
+script/atree_pipe1
+script/atree_pipe2
 script/mix_export_lv_html &&
 script/mix_export_lv_json &&
 script/mix_export_lv_markdown &&

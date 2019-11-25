@@ -9,4 +9,6 @@ erl_crash.dump
 /.elixir_ls/
 /uber_gen
 /atree
+/bin/uber_gen
+/bin/atree
 

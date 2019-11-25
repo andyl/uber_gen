@@ -159,15 +159,15 @@
 
 ## 2019 Nov 24 Sun
 
-- [ ] Add log struct
+- [x] Add log struct
+- [x] Executors should take context input, or generate default context
+- [x] Executors should append logs to existing logs
+- [x] Presentors should handle a list of logs
+- [x] Add tests for log-list
 
-- [ ] Executors should take context input, or generate default context
-- [ ] Executors should append logs to existing logs
-- [ ] Presentors should handle a list of logs
-  
-- [ ] Add tests for log-list
+## 2019 Nov 25 Mon
 
-- [ ] CLI: Updated eScript with Working CLI pipes 
+- [x] Create `atree` escript (with Bash pipelining)
 
 ## TBD
 
@@ -193,8 +193,6 @@
 
 - [ ] Run stops on halt
 - [ ] Add RUN/REPL exectutor
-
-- [ ] Create `atree` escript (with Bash pipelining)
 
 - [ ] Convert bash generators to Atree
 

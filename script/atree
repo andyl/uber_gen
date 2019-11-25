@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-cmd="./atree"
+cmd="./bin/atree"
 
 cat << EOF >&2
 ---------------------------------------
 COMMAND: $cmd
-Run atree to view command-line options
+Write a json context to stdout
 ---------------------------------------
 EOF
 
