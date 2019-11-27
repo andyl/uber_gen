@@ -24,13 +24,36 @@ defmodule Atree.Cli do
   end
 
   def process(data = %{method: "list"}) do
-    IO.inspect(data)
-    IO.puts "LIST"
+    list(data, data.action)
   end
 
   def process(data) do
     IO.inspect(data)
     IO.puts("No method found")
+  end
+
+  # --------------------------------------------------
+
+  def list(_data, "playbooks") do
+    Atree.Util.Registry.Playbooks.playbooks()
+    |> Enum.join("\n")
+    |> IO.puts()
+  end
+
+  def list(_data, "actions") do
+    Atree.Util.Util.loadpaths!()
+    modules = Atree.Util.Mix.load_all()
+    aliases = Atree.Util.Util.load_aliases()
+    {docs, max} = Atree.Util.Util.build_doc_list(modules, aliases)
+
+    Util.display_doc_list(docs, max)
+  end
+
+  def list(data, nil) do
+    IO.puts("PLAYBOOK")
+    list(data, "playbooks")
+    IO.puts("\nACTIONS")
+    list(data, "actions")
   end
 
   def generate_outputs(ctx, data) do
