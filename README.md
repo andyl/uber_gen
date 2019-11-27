@@ -68,7 +68,7 @@ There are many comparables:
 
 UberGen extends `Mix.Generate`, and borrows ideas from other tools:
 - from [Mix.Generate][mixgen]: helper functions like `copy_file` 
-- from [PragDave][pdgen]: template trees, template installation and discovery
+- from [PragDave][pdgen]: template trees, installation and discovery
 - from [Orats][orats]: git helper functions
 - from [Exercism][exer]: guided refactoring
 - from [Ansible][ansible], the playbook execution model
@@ -97,16 +97,30 @@ To install `uber_gen`:
 
 ## UberGen Architecture
 
-UberGen is built on a data abstration called an "Action Tree" (`atree`).
+UberGen uses a data abstration called an "Action Tree" - an `atree`.
 
 ### Atree Actions
 
-Actions are composable modules that implement a standard behavior with three
-key callbacks:
+Atree Actions are independent modules that can be composed into trees:
+
+    root_action
+      - mid_level_action
+        - leaf_action
+        - leaf_action
+      - mid_level_action
+        - leaf_action
+        - leaf_action
+
+The structure of the Action Tree somewhat resembles the HTML document object
+model.  Each node implements a type, takes parameters, can be traversed and
+updated dynamically.
+
+Actions implement a behavior with standard set of callback functions:
 
 - Command - executes a command
 - Guide - emits a guide fragment
 - Test - executes a test
+- Children - returns a list of children
     
 ```elixir
 module Atree.Actions.Phoenix.Bootstrap4 do
@@ -205,28 +219,30 @@ AST analysis and manipulation (which don't yet exist!):
 
 Atree playbooks are yaml or json files for composing Actions.
 
-    ---
-    - action: Util.TextBlock
-      params: 
-        header: Introduction
-        body: >
-          This is an introductory paragraph for my HowTo Guide.
-        children:
-          - action: Util.Command
-            params:
-              instruction: "Create a setup directory"
-              command: mkdir /tmp/setup_dir
-              creates: /tmp/setup_dir
-          - action: Util.BlockInFile
-            params:
-              instruction: "Add this text"
-              block_text: >
-                config :myapp, :key, "value"
-              tgt_file: config/config.exs
-              check_for:
-                - myapp
-                - key
-                - value
+```yaml
+---
+- action: Util.TextBlock
+  params: 
+    header: Introduction
+    body: >
+      This is an introductory paragraph for my HowTo Guide.
+  children:
+    - action: Util.Command
+      params:
+        instruction: "Create a setup directory"
+        command: mkdir /tmp/setup_dir
+        creates: /tmp/setup_dir
+    - action: Util.BlockInFile
+      params:
+        instruction: "Add this text"
+        block_text: >
+          config :myapp, :key, "value"
+        tgt_file: config/config.exs
+        check_for:
+          - myapp
+          - key
+          - value
+```
 
 ## Using Atree
 
@@ -266,21 +282,4 @@ You can join actions together using pipes:
     defmodule MyMod do
       ...
     end
-
-## Atree Workflow
-
-### With a HowTo Post
-
-Authoring a HowTo Post:
-
-- Author writes a blog post with manual install instructions
-- Author creates gist with a Atree generator script
-- Author adds the address of the Atree script to the blog post
-
-Reading a HowTo Post:
-
-- Reader views the post in the browser
-- From the reader terminal: `$ atree run https://gist.github.com/howto_script.atree`
-- Instant Working App 
-- Pina Coladas
 

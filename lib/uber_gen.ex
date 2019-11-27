@@ -1,17 +1,7 @@
 defmodule UberGen do
-  @moduledoc """
-  Documentation for Atree.
-  """
 
-  @doc """
-  Hello world.
+  @moduledoc false
 
-  ## Examples
-
-      iex> Atree.hello()
-      :world
-
-  """
   def hello do
     :world
   end

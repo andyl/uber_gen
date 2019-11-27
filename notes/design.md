@@ -412,3 +412,21 @@ TODO:
 | Executor     | Runs a playbook          | export, run                    |
 | Action       | Processing element       | Util.BlockInFile, Util.Command |
 | Helper       | Command helper           | create_directory, etc.         |
+
+## Atree Workflow
+
+### With a HowTo Post
+
+Authoring a HowTo Post:
+
+- Author writes a blog post with manual install instructions
+- Author creates gist with a Atree generator script
+- Author adds the address of the Atree script to the blog post
+
+Reading a HowTo Post:
+
+- Reader views the post in the browser
+- From the reader terminal: `$ atree run https://gist.github.com/howto_script.atree`
+- Instant Working App 
+- Pina Coladas
+

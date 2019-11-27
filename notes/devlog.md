@@ -178,12 +178,18 @@
 - [x] atree: add LIST placeholder
 - [x] atree: add HELP placeholder
 
-## TBD
+## 2019 Nov 27 Wed
+
+- [ ] atree: list playbooks
+- [ ] atree: list actions
 
 - [ ] atree: specify action or playbook
 - [ ] atree: handle params
+
 - [ ] atree: unify escript and mix task
 - [ ] atree: add .atree/playbooks to playbook path
+
+## TBD
 
 - [ ] LvRun: UTIL.COMMAND / Implement Command
 - [ ] LvRun: UTIL.COMMAND / Implement Test

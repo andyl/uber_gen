@@ -1,4 +1,7 @@
 defmodule Atree.CliOld do
+
+  @moduledoc false
+
   def main(args \\ []) do
     opts = args |> parse_args()
 
