@@ -9,4 +9,4 @@ List all Actions to stdout
 ---------------------------------------
 EOF
 
-$cmd
+eval $cmd

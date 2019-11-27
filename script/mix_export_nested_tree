@@ -9,4 +9,4 @@ Export Nested Test to ActionTree
 ---------------------------------------
 EOF
 
-$cmd
+eval $cmd

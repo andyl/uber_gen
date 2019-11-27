@@ -29,6 +29,9 @@ defmodule Atree.Action do
   @doc """
   Action command.  
 
+  The primary purpose of the Command method is to perform an operation that
+  generates a state change in the target system.  
+
   Commands must be idempotent.  Use your test to determine if you need to
   re-run command code.
   """
@@ -50,12 +53,17 @@ defmodule Atree.Action do
   @callback children(Ctx.t, map())         :: list()
 
   @doc """
-  Define interface for params and assigns.
+  Define interface for params.
+
+  Primary uses for the interface data: documentation, introspection and
+  form-building.
   """
-  @callback interface(Ctx.t, map()) :: any()
+  @callback interface(Ctx.t, map()) :: map()
 
   @doc """
   Perform casting and validation on interface data.
+
+  Primary uses: data casting, data validation, form validation.
 
   This can be done on *either* the Ctx[:assigns] values, or the params.
 

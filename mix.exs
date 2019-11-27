@@ -27,11 +27,12 @@ defmodule Atree.MixProject do
 
   defp deps do
     [
-      {:version_tasks, "~> 0.11.3"},
-      {:yaml_elixir, "~> 2.4.0"},
+      {:version_tasks, "~> 0.11"},
+      {:yaml_elixir, "~> 2.4"},
       {:jason, "~> 1.1"},
       {:ecto, "~> 3.0"},
-      {:earmark, "~> 1.4.2"},
+      {:earmark, "~> 1.4"},
+      {:rambo, "~> 0.2"},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false}
     ]

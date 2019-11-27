@@ -95,17 +95,6 @@ To install `uber_gen`:
 
     mix archive.install github andyl/uber_gen
 
-Configure with `.uber_gen.exs`: [DROP?]
-
-    import UberGen
-
-    config :uber_gen, playbooks: [
-      {:live_view_gen, "~> 0.4.0"},
-      {:my_codegen, path: "~/src/CG/my_lv_tweaks"}
-    ]
-
-    include_uber_gen "~/.uber_gen/phoenix_css_setup.exs"
-
 ## UberGen Architecture
 
 UberGen is built on a data abstration called an "Action Tree" (`atree`).

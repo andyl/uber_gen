@@ -10,7 +10,7 @@ defmodule Atree.Actions.Util.TextBlock do
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  def interface(:params, _ctx, _opts) do
+  def interface(_ctx, _opts) do
     # field(:header, :string)
     # field(:body,   :string)
   end

@@ -169,13 +169,31 @@
 
 - [x] Create `atree` escript (with Bash pipelining)
 
+## 2019 Nov 26 Tue
+
+- [x] atree: fix context pipelining
+- [x] atree: setup output presentors
+- [x] atree: file_save presentors
+- [x] atree: read context from file
+- [x] atree: add LIST placeholder
+- [x] atree: add HELP placeholder
+
 ## TBD
+
+- [ ] atree: specify action or playbook
+- [ ] atree: handle params
+- [ ] atree: unify escript and mix task
+- [ ] atree: add .atree/playbooks to playbook path
 
 - [ ] LvRun: UTIL.COMMAND / Implement Command
 - [ ] LvRun: UTIL.COMMAND / Implement Test
 - [ ] LvRun: UTIL.BlockInFile / Implement Test
+- [ ] Add "when" and "unless" constructs 
 
-- [ ] Add "when" and "unless" constructs for conditional execution
+- [ ] Implement interface
+- [ ] Implement inspect
+- [ ] Write interface tests
+- [ ] Write inspect tests
 
 - [ ] TAILOR/LV: quit unless proper elxir env
 - [ ] TAILOR/LV: quit unless in-project

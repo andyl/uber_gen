@@ -9,4 +9,4 @@ Export Nested Test to Markdown
 ---------------------------------------
 EOF
 
-$cmd
+eval $cmd

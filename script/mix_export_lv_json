@@ -9,4 +9,4 @@ Export LiveView Install Guide to JSON
 ---------------------------------------
 EOF
 
-$cmd
+eval $cmd

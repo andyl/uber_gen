@@ -5,26 +5,9 @@
 - a playbook is a module with `use Atree.Action`
 - a playbook registers itself, borrowing techniques from `Mix.Task`
 
-## Directory Structure
+## CLI
 
-    lib/
-      mix/
-        tasks/
-          task1.ex
-          task2.ex
-      atree/
-        playbooks/
-          playbook1.ex
-          playbook2.ex
-    priv/
-      atree/
-        playbooks/
-          playbook1/
-            templates/
-            files/
-            docs/
-
-## MIX CLI
+### MIX 
 
 mix atree.base
 mix atree.base.help
@@ -45,7 +28,7 @@ Run behavior - run until:
 - failed test (code red)
 - wait for manual input (code yellow)
 
-## Escript
+### Escript
 
 Standalone Usage:
 
@@ -86,6 +69,29 @@ Future:
 Questions:
 - how to LIST actions, query registry, download/save
 
+Using Actions on the command line or in a bash script: 
+- each action should act as a standalone executable
+- context comes from STDIN or command-line param
+- params are command-line options
+
+    atree run | atree Util.TextBlock -header "asdfasdf" | atree Util.Command -command "ps"
+
+## Validation / Interface / Inspect
+
+Uses Cases
+- validating assigns and params 
+- providing data for form-builders
+
+Design Comparables  
+- elixir structs
+- vex
+- ecto
+
+Design Considerations
+- language-independence
+- default values
+- setting context assigns
+
 ## Guide Return Values
 
 - nil
@@ -94,12 +100,6 @@ Questions:
 - %{header: "header"}
 - %{body: "body"}
 - %{header: "header", body: "body"}
-
-## .atree.exs
-
-    playbooks = [
-      
-    ]
 
 ## Systems
 
@@ -127,11 +127,11 @@ Rename Project
 
 Add Dependency
 
-## Orchestration and Scripting
+## Playbooks, Orchestration and Scripting
 
 ### Atree Interpreter
 
-Takes a YAML file as input
+Takes a Playbook as a YAML file:
 
 ```yaml
 ---
@@ -157,16 +157,6 @@ Takes a YAML file as input
             creates: "/tmp/asdf.txt"
 ```
 
-Using the Command-Line Interpreter
-
-```
-$ ubergen myfile.yaml export  # writes markdown to stdout
-$ ubergen myfile.yaml run     # start the ubergen runner
-$ ubergen myfile.yaml serve   # start the ubergen server
-$ ubergen myfile.yaml save    # save as reusable playbook in the registry
-$ ubergen myfile.yaml gen     # generate an elixir module from the yaml 
-```
-
 ### Markdown-Embedded Tags
 
 Comparables: Gatsby, React-Components Markdown, MDX, ReactStatic
@@ -183,33 +173,28 @@ more markdown ...
 
 It should be possible to extend `RST` or `Asciidoc` to work with Atree.
 
-### Command-Line Invocation
-
-Using Actions on the command line or in a bash script: 
-- each action should act as a standalone executable
-- context comes from STDIN or command-line param
-- params are command-line options
-
-    atree run | atree Util.TextBlock -header "asdfasdf" | atree Util.Command -command "ps"
-
 ## Use Cases
 
 ### CREATING PLAYBOOKS
 
 - CODING: Using Text Editors and Elixir Tooling as we do now
 
-- COMPOSER UI: Could we create an authoring UI (or scripting language) that would allow someone to Assemble/Compose/Configure/Modify/Publish custom playbooks without coding?
+- COMPOSER UI: Could we create an authoring UI (or scripting language) that
+  would allow someone to Assemble/Compose/Configure/Modify/Publish custom
+  playbooks without coding?
 
 ### USING PLAYBOOKS 
 
-- STATIC OUTPUT: Right now I’m generating Markdown. PDF and HTML output ought to be straightforward.  We also need ExDoc integration.
+- STATIC OUTPUT: Right now I’m generating Markdown. PDF and HTML output ought
+  to be straightforward.  We also need ExDoc integration.
 
-- DIRECTOR UI: Could we create a Web-UI for guided refactoring that reruns the playbook tests every time the code-base was updated?
+- DIRECTOR UI: Could we create a Web-UI for guided refactoring that reruns the
+  playbook tests every time the code-base was updated?
 
 ## UPDATING PLAYBOOKS
 
-- What is the best way to report playbook issues, to fork/clone/pr/version, etc. How would we support updates in the Composer/Director UI?
-
+- What is the best way to report playbook issues, to fork/clone/pr/version,
+  etc. How would we support updates in the Composer/Director UI?
 
 # Guided Refactoring
 
@@ -325,9 +310,7 @@ code-refactoring helpers over time.
 
 ## Refactoring Tech
 
-At this point, all the supporting tech is readily at hand to build Atree -
-except one.  Refactoring.  We need flexible, robust, easy to use functions to
-refactor Elixir code.  
+We need flexible, robust, easy to use functions to refactor Elixir code.  
 
 Refactoring works in many IDEs - especially for Java.  Refactoring libraries
 exist for JavaScript [CLI][cli] and [Editors][edi].  The [Language Server
@@ -371,7 +354,6 @@ Use Cases:
 Questions:
 - can a task be part of multiple checklists?
 
-
 ## CLI Runner
 
 ### CLI Options
@@ -396,7 +378,6 @@ Options:
 ### REPL Mode
 
 Basics:
-
 - command-line prompt 
 
 REPL Commands:

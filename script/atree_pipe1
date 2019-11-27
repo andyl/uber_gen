@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cmd="./bin/atree | ./bin/atree -c stdin"
+cmd="./bin/atree | ./bin/atree -"
 
 cat << EOF >&2
 ---------------------------------------

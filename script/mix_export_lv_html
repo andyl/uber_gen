@@ -9,4 +9,4 @@ Export LiveView Install Guide to HTML
 ---------------------------------------
 EOF
 
-$cmd
+eval $cmd
