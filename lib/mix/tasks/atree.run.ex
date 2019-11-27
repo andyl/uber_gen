@@ -21,8 +21,6 @@ defmodule Mix.Tasks.Atree.Run do
     tgt = List.first(vals)
     presentor = Mix.Atree.Util.presentor(opts[:format] || "ctx_inspect")
 
-    Util.loadpaths!()
-
     mod =
       Atree.Util.Mix.load_all()
       |> Atree.Util.Util.build_playbook_list()

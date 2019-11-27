@@ -12,7 +12,6 @@ defmodule Mix.Tasks.Atree.Help do
   @shortdoc "Export a playbook"
   def run(args) do
     arg = List.first(args)
-    Util.loadpaths!()
 
     mod =
       Atree.Util.Mix.load_all()

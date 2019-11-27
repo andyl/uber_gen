@@ -41,12 +41,9 @@ defmodule Atree.Cli do
   end
 
   def list(_data, "actions") do
-    Atree.Util.Util.loadpaths!()
-    modules = Atree.Util.Mix.load_all()
-    aliases = Atree.Util.Util.load_aliases()
-    {docs, max} = Atree.Util.Util.build_doc_list(modules, aliases)
+    {docs, max} = Atree.Util.Registry.Actions.doclist()
 
-    Util.display_doc_list(docs, max)
+    Atree.Util.Util.display_doc_list(docs, max)
   end
 
   def list(data, nil) do

@@ -1,18 +1,9 @@
 defmodule Atree.Util.Util do
 
-  # Loadpaths without checks because tasks may be defined in deps.
-  def loadpaths! do
-    args = ["--no-elixir-version-check", "--no-deps-check", "--no-archives-check"]
-    Mix.Task.run("loadpaths", args)
-    Mix.Task.reenable("loadpaths")
-    Mix.Task.reenable("deps.loadpaths")
-  end
-
-  def load_aliases() do
-    aliases = Mix.Project.config()[:aliases]
-
-    Map.new(aliases, fn {alias_name, alias_tasks} -> {Atom.to_string(alias_name), alias_tasks} end)
-  end
+  # def load_aliases() do
+  #   aliases = []
+  #   Map.new(aliases, fn {alias_name, alias_tasks} -> {Atom.to_string(alias_name), alias_tasks} end)
+  # end
 
   def build_doc_list(modules, aliases) do
     {task_docs, task_max} = build_task_doc_list(modules)

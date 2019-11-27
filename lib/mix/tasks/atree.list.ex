@@ -11,12 +11,7 @@ defmodule Mix.Tasks.Atree.List do
 
   @shortdoc "List all playbooks"
   def run(_arg) do
-    Util.loadpaths!()
-    modules = Atree.Util.Mix.load_all()
-    aliases = Util.load_aliases()
-    {docs, max} = Util.build_doc_list(modules, aliases)
-
+    {docs, max} = Atree.Util.Registry.Actions.doclist()
     Util.display_doc_list(docs, max)
   end
 end
-

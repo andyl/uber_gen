@@ -43,7 +43,7 @@ defmodule Atree.Util.Registry.Playbooks do
     path
     |> ls_r()
     |> Enum.filter(&(Regex.match?(~r/(\.json)$|(\.yaml)$/, &1)))
-    |> Enum.map(&({&1, String.replace(&1, path, "")}))
+    |> Enum.map(&({&1, String.replace(&1, "#{path}/", "")}))
   end
 
   defp ls_r(path) do
