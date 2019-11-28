@@ -1,4 +1,7 @@
 defmodule Util.Svc do
+
+  @moduledoc false
+
   @doc """
   Changes String Map to Map of Atoms 
     

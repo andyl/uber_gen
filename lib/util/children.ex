@@ -1,5 +1,7 @@
 defmodule Util.Children do
 
+  @moduledoc false
+
   def file_data(filename) do
     file_data(filename, file_type(filename))
     |> Util.Svc.convert_to_atom_map()

@@ -1,6 +1,6 @@
 defmodule Atree.Helpers do
 
-  # ----- from Mix.Generate
+  @moduledoc false
 
   def copy_file(ctx) do
     ctx

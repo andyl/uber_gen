@@ -250,16 +250,7 @@ Atree playbooks are yaml or json files for composing Actions.
 
 Use Atree as a mix task:
 
-    $ mix atree.help
-
-    $ mix atree.export <action>
-    $ mix atree.tailor <action>
-    $ mix atree.run <action>
-    $ mix atree.serve <action>
-
-    $ mix atree.action list
-    $ mix atree.action install <action>
-    $ mix atree.action remove <action>
+    $ mix atree help
 
 You can generate output in markdown, html, and other format.
 
@@ -268,10 +259,7 @@ You can generate output in markdown, html, and other format.
 The `atree` executable reads playbook configs from `yaml` or `json` files.
 You can invoke an action from the command line:
 
-    $ atree <playbook>.yaml export
-    $ atree <playbook>.yaml tailor
-    $ atree <playbook>.yaml serve
-    $ atree <playbook>.yaml run
+    $ atree help
 
 You can join actions together using pipes:
 
