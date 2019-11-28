@@ -19,8 +19,7 @@ defmodule Atree.Cli do
   end
 
   def process(data = %{method: "help"}) do
-    IO.inspect(data)
-    IO.puts "HELP"
+    Atree.Util.Help.output(data)
   end
 
   def process(data = %{method: "list"}) do
@@ -47,7 +46,7 @@ defmodule Atree.Cli do
   end
 
   def list(data, nil) do
-    IO.puts("PLAYBOOK")
+    IO.puts("PLAYBOOKS")
     list(data, "playbooks")
     IO.puts("\nACTIONS")
     list(data, "actions")
@@ -55,7 +54,7 @@ defmodule Atree.Cli do
 
   def generate_outputs(ctx, data) do
     data.writes
-    |> Enum.each(&(write_file(&1, ctx)))
+    |> Enum.each(&write_file(&1, ctx))
 
     ctx
     |> data.output.generate()
@@ -69,7 +68,8 @@ defmodule Atree.Cli do
   end
 
   defp setup_args(args) do
-    method = args.method || "export"
+    method = args.method || "help"
+
     %{
       method: method,
       writes: args.writes,
@@ -125,14 +125,14 @@ defmodule Atree.Cli do
   def setup_output(item) when is_atom(item), do: Atom.to_string(item) |> setup_output()
 
   def setup_output(format) do
-    case format do 
-      "action_tree"    -> Atree.Presentor.ActionTree
-      "ctx_inspect"    -> Atree.Presentor.CtxInspect
-      "ctx_json"       -> Atree.Presentor.CtxJson
-      "guide_html"     -> Atree.Presentor.GuideHtml
+    case format do
+      "action_tree" -> Atree.Presentor.ActionTree
+      "ctx_inspect" -> Atree.Presentor.CtxInspect
+      "ctx_json" -> Atree.Presentor.CtxJson
+      "guide_html" -> Atree.Presentor.GuideHtml
       "guide_markdown" -> Atree.Presentor.GuideMarkdown
-      "log_inspect"    -> Atree.Presentor.LogInspect
-      "log_json"       -> Atree.Presentor.LogJson
+      "log_inspect" -> Atree.Presentor.LogInspect
+      "log_json" -> Atree.Presentor.LogJson
       _ -> Atree.Presentor.CtxJson
     end
   end
@@ -173,19 +173,30 @@ defmodule Atree.Cli do
     OptionParser.parse(argv, switches: switches, aliases: aliases)
   end
 
-  @target_args ["export", "run", "help", "list"]
+  @target_args ["export", "tailor", "run", "serve", "help", "list"]
 
   defp get_method(args) do
-    args
-    |> Enum.map(&String.downcase/1)
-    |> Enum.find(&Enum.member?(@target_args, &1))
+    if Enum.member?(args, "help") do
+      "help"
+    else
+      args
+      |> Enum.map(&String.downcase/1)
+      |> Enum.find(&Enum.member?(@target_args, &1))
+    end
   end
 
   defp get_action(args) do
-    args
-    |> Enum.filter(&("-" != &1))
-    |> Enum.filter(&(!Enum.member?(@target_args, &1)))
-    |> List.first()
+    if Enum.member?(args, "help") do
+      args
+      |> Enum.filter(&(&1 != "-"))
+      |> Enum.filter(&(&1 != "help"))
+      |> List.first()
+    else
+      args
+      |> Enum.filter(&(&1 != "-"))
+      |> Enum.filter(&(!Enum.member?(@target_args, &1)))
+      |> List.first()
+    end
   end
 
   defp breakout({_key, val}) do

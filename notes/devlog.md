@@ -181,13 +181,13 @@
 ## 2019 Nov 27 Wed
 
 - [x] atree: list playbooks
+- [x] atree: list actions
+- [x] atree: help
 
-- [ ] atree: list actions
+## TBD
 
 - [ ] atree: specify action or playbook
 - [ ] atree: handle params
-
-## TBD
 
 - [ ] LvRun: UTIL.COMMAND / Implement Command
 - [ ] LvRun: UTIL.COMMAND / Implement Test
