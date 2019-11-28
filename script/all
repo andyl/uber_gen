@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-script/all
 script/export_lv_html
 script/export_lv_json
 script/export_lv_markdown

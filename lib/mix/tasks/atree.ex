@@ -1,7 +1,5 @@
-defmodule Mix.Tasks.At do
+defmodule Mix.Tasks.Atree do
   use Mix.Task
-
-  alias Atree.Util.Util
 
   @moduledoc """
   Perform all Atree actions.
