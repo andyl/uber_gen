@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-cmd="./bin/atree"
+cmd="mix atree export | mix atree export - | mix atree export -"
 
 cat << EOF >&2
 ---------------------------------------
 COMMAND: $cmd
-Write a json context to stdout
+Demonstrate bash pipelining with two pipe elements
 ---------------------------------------
 EOF
 
-$cmd
+eval $cmd

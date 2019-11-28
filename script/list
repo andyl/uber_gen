@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-cmd="mix atree.export phx.live_view"
+cmd="mix atree list"
 
 cat << EOF >&2
 ---------------------------------------
 COMMAND: $cmd
-Export LiveView Install Guide to Markdown
+List all Actions to stdout
 ---------------------------------------
 EOF
 

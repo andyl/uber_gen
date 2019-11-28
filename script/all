@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
-script/atree
-script/atree_pipe1
-script/atree_pipe2
-script/mix_export_lv_html &&
-script/mix_export_lv_json &&
-script/mix_export_lv_markdown &&
-script/mix_export_nested_markdown &&
-script/mix_export_nested_tree &&
-script/mix_list
+script/all
+script/export_lv_html
+script/export_lv_json
+script/export_lv_markdown
+script/export_nested_markdown
+script/export_nested_tree
+script/list
+script/pipe0
+script/pipe1
+script/pipe2

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-cmd="mix atree.export test.test2"
+cmd="mix atree export | mix atree export -"
 
 cat << EOF >&2
 ---------------------------------------
 COMMAND: $cmd
-Export Nested Test to Markdown
+Demonstrate bash pipelining with one pipe element
 ---------------------------------------
 EOF
 

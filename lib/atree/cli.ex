@@ -118,9 +118,26 @@ defmodule Atree.Cli do
   end
 
   defp setup_action(_, args) do
-    args.action
-    |> Util.Children.file_data()
-    |> Util.Children.to_children()
+    cond do
+      Regex.match?(~r/(\.json)$|(\.yaml)$/, args.action) -> 
+        Atree.Util.Registry.Playbooks.full_playbooks()
+        |> Enum.find(&(args.action == elem(&1, 1)))
+        |> elem(0)
+        |> Util.Children.file_data()
+        |> Util.Children.to_children()
+      true ->
+        mod =
+          Atree.Util.Mix.load_all()
+          |> Atree.Util.Util.build_playbook_list()
+          |> Enum.filter(&(elem(&1, 1) == args.action))
+          |> List.first()
+
+        case mod do
+          nil -> IO.puts("Action not found (#{args.action})")
+          {module, _label} -> 
+            module 
+        end
+    end
   end
 
   def setup_output(nil), do: setup_output("ctx_json")
