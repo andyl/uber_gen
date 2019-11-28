@@ -1,10 +1,5 @@
 defmodule Atree.Util.Util do
 
-  # def load_aliases() do
-  #   aliases = []
-  #   Map.new(aliases, fn {alias_name, alias_tasks} -> {Atom.to_string(alias_name), alias_tasks} end)
-  # end
-
   def build_doc_list(modules, aliases) do
     {task_docs, task_max} = build_task_doc_list(modules)
     {alias_docs, alias_max} = build_alias_doc_list(aliases)

@@ -46,7 +46,7 @@ defmodule Atree.Util.Registry.Playbooks do
     |> Enum.map(&({&1, String.replace(&1, "#{path}/", "")}))
   end
 
-  defp ls_r(path) do
+  def ls_r(path) do
     cond do
       File.regular?(path) -> [path]
       File.dir?(path) ->

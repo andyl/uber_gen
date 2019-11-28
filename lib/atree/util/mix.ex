@@ -6,11 +6,30 @@ defmodule Atree.Util.Mix do
   @type playbook_name :: String.t() | atom
   @type playbook_module :: atom
 
+  def code_paths do
+    :code.get_path() ++ ebins(["."])
+    |> List.flatten() 
+    |> Enum.sort() 
+    |> Enum.uniq() 
+  end
+
+  def ebins(list) do
+    list
+    |> Enum.filter(&is_binary/1)
+    |> Enum.filter(&(byte_size(&1) > 1))
+    |> Enum.map(&Path.expand/1)
+    |> Enum.map(&(Path.wildcard("#{&1}/_build/dev/**/*ebin")))
+    |> List.flatten()
+  end
+
   @doc """
   Loads all playbooks in all code paths.
   """
   @spec load_all() :: [playbook_module]
-  def load_all, do: load_playbooks(:code.get_path())
+  def load_all do
+    :code.get_path()
+    |> load_playbooks()
+  end
 
   @doc """
   Loads all playbooks in the given `paths`.

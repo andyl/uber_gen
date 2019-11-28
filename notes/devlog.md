@@ -180,14 +180,12 @@
 
 ## 2019 Nov 27 Wed
 
-- [ ] atree: list playbooks
+- [x] atree: list playbooks
+
 - [ ] atree: list actions
 
 - [ ] atree: specify action or playbook
 - [ ] atree: handle params
-
-- [ ] atree: unify escript and mix task
-- [ ] atree: add .atree/playbooks to playbook path
 
 ## TBD
 
