@@ -190,21 +190,14 @@
 - [x] atree: handle params
 - [x] atree: help on playbooks
 - [x] atree: help on actions
-- [ ] atree: playbooks in ~/.atree/playbooks
-
-Needs:
-- [ ] Playbook Lookup Function
-- [ ] Action Lookup Function
-
-Help Playbook:
-- [ ] file path
-
-Help Action:
-- [ ] Doc: Mix.Task.moduledoc(module)
-- [ ] Interface: IO.inspect(module.interface)
-- [ ] Module: module 
-- [ ] Action Name: Mix.Task.task_name(module)
-
+- [x] atree: playbooks in ~/.atree/playbooks
+- [x] Playbook Lookup Function
+- [x] Action Lookup Function
+- [x] file path
+- [x] Doc: Mix.Task.moduledoc(module)
+- [x] Interface: IO.inspect(module.interface)
+- [x] Module: module 
+- [x] Action Name: Mix.Task.task_name(module)
 
 ## TBD
 
