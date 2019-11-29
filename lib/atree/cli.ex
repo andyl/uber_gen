@@ -1,4 +1,7 @@
 defmodule Atree.Cli do
+
+  @moduledoc false
+  
   def main(args \\ []) do
     args
     |> parse_args()
@@ -10,14 +13,20 @@ defmodule Atree.Cli do
 
   def process(data = %{method: "export"}) do
     Atree.Executor.Export.with_action(data.context, data.action)
-    |> Atree.Presentor.CtxJson.generate()
-    |> IO.puts()
+    |> generate_outputs(data)
   end
 
   def process(data = %{method: "run"}) do
     Atree.Executor.Run.with_action(data.context, data.action)
-    |> Atree.Presentor.CtxJson.generate()
-    |> IO.puts()
+    |> generate_outputs(data)
+  end
+
+  def process(data = %{method: "help"}) do
+    Atree.Util.Help.output(data)
+  end
+
+  def process(data = %{method: "list"}) do
+    list(data, data.action)
   end
 
   def process(data) do
@@ -26,19 +35,50 @@ defmodule Atree.Cli do
   end
 
   # --------------------------------------------------
-  # TODO: 
-  # - if input is a playbook, ignore the params
-  # - if input is an action, use the params (if they exist)
-  # - write output files
-  # --------------------------------------------------
+
+  def list(_data, "playbooks") do
+    Atree.Util.Registry.Playbooks.playbooks()
+    |> Enum.join("\n")
+    |> IO.puts()
+  end
+
+  def list(_data, "actions") do
+    {docs, max} = Atree.Util.Registry.Actions.doclist()
+
+    Atree.Util.Util.display_doc_list(docs, max)
+  end
+
+  def list(data, nil) do
+    IO.puts("PLAYBOOKS")
+    list(data, "playbooks")
+    IO.puts("\nACTIONS")
+    list(data, "actions")
+  end
+
+  def generate_outputs(ctx, data) do
+    data.writes
+    |> Enum.each(&write_file(&1, ctx))
+
+    ctx
+    |> data.output.generate()
+    |> IO.puts()
+  end
+
+  def write_file({processor, filename}, ctx) do
+    process_module = setup_output(processor)
+    data = ctx |> process_module.generate()
+    File.write(filename, data)
+  end
 
   defp setup_args(args) do
+    method = args.method || "help"
+
     %{
-      method: args.method || "export",
-      stdout: args.stdout || "ctx_json",
-      context: setup_context(args),
-      action: setup_action(args),
-      writes: args.writes
+      method: method,
+      writes: args.writes,
+      output: setup_output(args.output),
+      action: setup_action(method, args),
+      context: setup_context(args)
     }
   end
 
@@ -47,26 +87,69 @@ defmodule Atree.Cli do
   end
 
   defp setup_context(%{context: "stdin"}) do
-    IO.read(:stdio, :all)
+    :stdio
+    |> IO.read(:all)
     |> Jason.decode!()
     |> Util.Svc.convert_to_atom_map()
   end
 
   defp setup_context(%{context: ctx_file}) do
-    IO.inspect ctx_file
     ctx_file
     |> File.read()
+    |> elem(1)
     |> Jason.decode!()
+    |> Util.Svc.convert_to_atom_map()
   end
 
-  defp setup_action(%{action: nil}) do
+  defp setup_action("help", args) do
+    args.action
+  end
+
+  defp setup_action("list", args) do
+    args.action
+  end
+
+  defp setup_action(_, %{action: nil}) do
     Atree.Actions.Util.Null
   end
 
-  defp setup_action(args) do
-    args.action
-    |> Util.Children.file_data()
-    |> Util.Children.to_children()
+  defp setup_action(_, %{method: "help"}) do
+    Atree.Actions.Util.Null
+  end
+
+  defp setup_action(_, args) do
+    cond do
+      Regex.match?(~r/(\.json)$|(\.yaml)$/, args.action) -> 
+
+        Atree.Util.Registry.Playbooks.find(args.action)
+        |> Util.Children.file_data()
+        |> Util.Children.to_children()
+      true ->
+        mod = Atree.Util.Registry.Actions.find(args.action)
+
+        case mod do
+          nil -> IO.puts("Action not found (#{args.action})")
+          {module, _label} -> 
+            {module, args.params}
+        end
+    end
+  end
+
+  def setup_output(nil), do: setup_output("ctx_json")
+
+  def setup_output(item) when is_atom(item), do: Atom.to_string(item) |> setup_output()
+
+  def setup_output(format) do
+    case format do
+      "action_tree" -> Atree.Presentor.ActionTree
+      "ctx_inspect" -> Atree.Presentor.CtxInspect
+      "ctx_json" -> Atree.Presentor.CtxJson
+      "guide_html" -> Atree.Presentor.GuideHtml
+      "guide_markdown" -> Atree.Presentor.GuideMarkdown
+      "log_inspect" -> Atree.Presentor.LogInspect
+      "log_json" -> Atree.Presentor.LogJson
+      _ -> Atree.Presentor.CtxJson
+    end
   end
 
   # --------------------------------------------------
@@ -79,43 +162,56 @@ defmodule Atree.Cli do
       action: get_action(args),
       writes: get_writes(switches),
       params: get_params(switches),
-      stdout: get_stdout(switches),
-      context: get_context(switches)
+      output: get_output(switches),
+      context: get_context(args, switches)
     }
   end
 
   # --------------------------------------------------
 
   defp extract_args(argv) do
+    # :keep means keep multiple instances (string type)
     switches = [
       param: :keep,
-      stdout: :string,
+      output: :string,
       write_file: :keep,
-      context_file: :string
+      context_src: :string
     ]
 
     aliases = [
       p: :param,
-      s: :stdout,
+      o: :output,
       w: :write_file,
-      c: :context_file
+      c: :context_src
     ]
 
     OptionParser.parse(argv, switches: switches, aliases: aliases)
   end
 
-  @target_args ["export", "run"]
+  @target_args ["export", "tailor", "run", "serve", "help", "list"]
 
   defp get_method(args) do
-    args
-    |> Enum.map(&String.downcase/1)
-    |> Enum.find(&Enum.member?(@target_args, &1))
+    if Enum.member?(args, "help") do
+      "help"
+    else
+      args
+      |> Enum.map(&String.downcase/1)
+      |> Enum.find(&Enum.member?(@target_args, &1))
+    end
   end
 
   defp get_action(args) do
-    args
-    |> Enum.filter(&(!Enum.member?(@target_args, &1)))
-    |> List.first()
+    if Enum.member?(args, "help") do
+      args
+      |> Enum.filter(&(&1 != "-"))
+      |> Enum.filter(&(&1 != "help"))
+      |> List.first()
+    else
+      args
+      |> Enum.filter(&(&1 != "-"))
+      |> Enum.filter(&(!Enum.member?(@target_args, &1)))
+      |> List.first()
+    end
   end
 
   defp breakout({_key, val}) do
@@ -139,17 +235,22 @@ defmodule Atree.Cli do
     |> Enum.into(%{})
   end
 
-  defp get_context(switches) do
-    switches
-    |> Enum.filter(&(elem(&1, 0) == :context_file))
-    |> Enum.map(&elem(&1, 1))
-    |> List.first()
+  defp get_context(args, switches) do
+    if Enum.member?(args, "-") do
+      "stdin"
+    else
+      switches
+      |> Enum.filter(&(elem(&1, 0) == :context_src))
+      |> Enum.map(&elem(&1, 1))
+      |> Enum.map(&if "-" == &1, do: "stdin", else: &1)
+      |> List.first()
+    end
   end
 
-  defp get_stdout(switches) do
+  defp get_output(switches) do
     switches
-    |> Enum.filter(&(elem(&1, 0) == :stdout))
-    |> Enum.map(&elem(&1, 0))
+    |> Enum.filter(&(elem(&1, 0) == :output))
+    |> Enum.map(&elem(&1, 1))
     |> List.first()
   end
 end

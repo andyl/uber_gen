@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-cmd="mix atree.export phx.live_view --format guide_html"
+cmd="mix atree export test2.yaml $*"
 
 cat << EOF >&2
 ---------------------------------------
 COMMAND: $cmd
-Export LiveView Install Guide to HTML
+Export Playbook
 ---------------------------------------
 EOF
 
-$cmd
+eval $cmd

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+cmd="mix atree export phx.live_view --output guide_json $*"
+
+cat << EOF >&2
+---------------------------------------
+COMMAND: $cmd
+Export LiveView Install Guide to JSON
+---------------------------------------
+EOF
+
+eval $cmd

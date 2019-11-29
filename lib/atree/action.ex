@@ -14,7 +14,7 @@ defmodule Atree.Action do
   | guide/2     | ctx, opts | fragment | action documentation   |
   | test/2      | ctx, opts | status   | action test            |
   | children/2  | ctx, opts | list     | list of action specs   |
-  | interface/2 | ctx, opts | schema   | params/assigns schema  |
+  | interface/2 | ctx, opts | schema   | list of propdefs       |
   | inspect/2   | ctx, opts | report   | casting and validation |
 
   All of these macros are optional for any given action.
@@ -24,10 +24,13 @@ defmodule Atree.Action do
   `has_test?/0`, `has_children?/0`, `has_interface?/0`, `has_inspect?/0`.
   """
 
-  alias Atree.Data.{Ctx, Report, Guide}
+  alias Atree.Data.{Ctx, Report, Guide, Prop}
 
   @doc """
   Action command.  
+
+  The primary purpose of the Command method is to perform an operation that
+  generates a state change in the target system.  
 
   Commands must be idempotent.  Use your test to determine if you need to
   re-run command code.
@@ -50,12 +53,17 @@ defmodule Atree.Action do
   @callback children(Ctx.t, map())         :: list()
 
   @doc """
-  Define interface for params and assigns.
+  Define interface for action - returns a list of propdefs.
+
+  Primary uses for the interface data: documentation, introspection and
+  form-building.
   """
-  @callback interface(Ctx.t, map()) :: any()
+  @callback interface(Ctx.t, map()) :: [Prop.t]
 
   @doc """
   Perform casting and validation on interface data.
+
+  Primary uses: data casting, data validation, form validation.
 
   This can be done on *either* the Ctx[:assigns] values, or the params.
 

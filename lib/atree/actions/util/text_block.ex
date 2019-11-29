@@ -1,6 +1,7 @@
 defmodule Atree.Actions.Util.TextBlock do
 
   use Atree.Action
+  alias Atree.Data.{Prop, Guide}
 
   @moduledoc """
   Basic Text Block.
@@ -10,9 +11,17 @@ defmodule Atree.Actions.Util.TextBlock do
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  def interface(:params, _ctx, _opts) do
-    # field(:header, :string)
-    # field(:body,   :string)
+  def interface(_ctx, _props) do
+    [
+      %Prop{
+        name: "header",
+        type: "string"
+      },
+      %Prop{
+        name: "body",
+        type: "string"
+      }
+    ]
   end
 
   # def inspect([params: values], _ctx, _opts) do
@@ -24,13 +33,13 @@ defmodule Atree.Actions.Util.TextBlock do
   @doc """
   Guide text.
   """
-  def guide(_ctx, opts) do
-    opts
+  def guide(_ctx, props) do
+    struct(Guide, Map.from_struct(props))
   end
 
   # ----------------------------------
 
-  # defp validate_one(changeset, params) do
+  # defp validate_one(changeset, params) do.
   #   if Enum.any?(params, &(present?(changeset, &1))) do
   #     changeset
   #   else

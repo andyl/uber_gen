@@ -49,7 +49,7 @@ defmodule Atree.Executor.Util.Base do
   end
 
   def interface(module, ctx, opts) do
-    if module.has_interface?(), do: apply(module, :interface, [ctx, opts]), else: %{}
+    if module.has_interface?(), do: apply(module, :interface, [ctx, opts]), else: []
   end
 
   def inspect(module, params, opts) do

@@ -1,7 +1,7 @@
 defmodule Atree.Executor.RunTest do
   use ExUnit.Case
 
-  import ExUnit.CaptureIO
+  # import ExUnit.CaptureIO
 
   test "Hello World" do
     assert 1 == 1

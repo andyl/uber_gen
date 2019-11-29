@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-cmd="mix atree.export test.test2"
+cmd="mix atree export phx.live_view $*"
 
 cat << EOF >&2
 ---------------------------------------
 COMMAND: $cmd
-Export Nested Test to Markdown
+Export LiveView Install Guide to Json
 ---------------------------------------
 EOF
 
-$cmd
+eval $cmd

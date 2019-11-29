@@ -1,5 +1,7 @@
 defmodule Mix.Atree.Util do
 
+  @moduledoc false
+
   alias Atree.Presentor
 
   def parse(argv) do

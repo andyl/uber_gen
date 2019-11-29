@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-cmd="mix atree.export phx.live_view --format guide_json"
+cmd="mix atree export | mix atree export - | mix atree export - $*"
 
 cat << EOF >&2
 ---------------------------------------
 COMMAND: $cmd
-Export LiveView Install Guide to JSON
+Demonstrate bash pipelining with two pipe elements
 ---------------------------------------
 EOF
 
-$cmd
+eval $cmd

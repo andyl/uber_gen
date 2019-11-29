@@ -5,24 +5,33 @@ defmodule Atree.Actions.Util.Command do
   Run a command.
   """
 
-  # params do
-  #   field(:header, :string)
-  #   field(:instruction, :string)
-  #   field(:command, :string)
-  #   field(:creates, :string)
-  # end
-
-  # verify(params) do
-  #   %__MODULE__{}
-  #   |> cast(params, [:header, :instruction, :command, :creates])
-  #   |> validate_required([:command])
-  # end
-
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  @doc """
-  Run command
-  """
+  def interface(_ctx, _opts) do
+    %{
+      header: :string,
+      instruction: :string,
+      command: :string,
+      creates: [:string]
+    }
+  end
+
+  def inspect(_ctx, _opts) do
+    #%__MODULE__{}
+    #|> cast(params, [:header, :instruction, :command, :creates])
+    #|> validate_required([:command])
+   %Atree.Data.Report{} 
+  end
+
+  def command(ctx, opts) do
+    Rambo.run(opts.command)
+    ctx
+  end
+
+  def test(_ctx, _opts) do
+
+  end
+
   def guide(_ctx, opts) do
     body = """
     #{opts[:instruction]}
