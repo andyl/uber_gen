@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cmd="mix atree export test2.yaml"
+cmd="mix atree export test2.yaml $*"
 
 cat << EOF >&2
 ---------------------------------------

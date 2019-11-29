@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cmd="mix atree export phx.live_view --output guide_html"
+cmd="mix atree export phx.live_view --output guide_html $*"
 
 cat << EOF >&2
 ---------------------------------------

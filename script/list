@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cmd="mix atree list"
+cmd="mix atree list $*"
 
 cat << EOF >&2
 ---------------------------------------

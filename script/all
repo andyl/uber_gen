@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-script/export_lv_html
-script/export_lv_json
-script/export_lv_markdown
-script/export_nested_markdown
-script/export_nested_tree
-script/list
-script/pipe0
-script/pipe1
-script/pipe2
+script/export_lv_html &&
+script/export_lv_json &&
+script/export_lv_markdown &&
+script/export_nested_markdown &&
+script/export_nested_tree &&
+script/list &&
+script/pipe0 &&
+script/pipe1 &&
+script/pipe2 

@@ -45,7 +45,7 @@ defmodule Atree.Executor.BaseTest do
     end
 
     test "interface" do
-      assert Base.interface(@pb, %{},%{}) == %{}
+      assert Base.interface(@pb, %{},%{}) == []
     end
 
     test "inspect" do

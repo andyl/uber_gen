@@ -10,4 +10,4 @@ Usage examples:
 
 Also try:
 
-    $ mix at help
+    $ mix atree help

@@ -1,9 +1,39 @@
 # DESIGN
 
-## Notes
+## Roadmap
 
-- a playbook is a module with `use Atree.Action`
-- a playbook registers itself, borrowing techniques from `Mix.Task`
+### Questions
+
+- [ ] How to manage long-running state?  (like tasks)
+- [ ] Is there a datastore for Atree?
+- [ ] How to access-control for shared playbooks?
+- [ ] Use-cases for playbooks with multi-parents? (listeners, chat, comments)
+- [ ] What is a a URI-scheme for Actions?
+- [ ] Can we get CRDTs working for offline access?
+- [ ] How to generate event-streams?  
+- [ ] Are playbooks wrappered in a manipulation API?
+
+- [ ] Does this work with Sockets / GenStage?
+
+### Futures
+
+- [ ] WebUI: Design WebUI
+
+- [ ] Registry: Create Registry
+- [ ] Registry: External Actions - path / github deps
+- [ ] Registry: Registry upload/download/search
+- [ ] Registry: How does PragDave install templates?
+- [ ] Registry: How does PragDave store templates?
+
+- [ ] Website: A HowTo Blog
+- [ ] Website: Learning Paths
+- [ ] Website: Time to Learn
+- [ ] Website: Credentialing
+- [ ] Website: Metrics: Frequency/RunTime per Action 
+
+- [ ] Community: who else is doing this now?
+- [ ] Community: who has the most experience?
+- [ ] Community: who is willing to mentor?
 
 ## CLI
 

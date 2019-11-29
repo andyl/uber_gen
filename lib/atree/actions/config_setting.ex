@@ -15,23 +15,26 @@ defmodule Atree.Actions.ConfigSetting do
 
   asdf
   """
-  def command(context, _options) do
+  def command(context, _props) do
     context
   end
 
   @doc """
-  Test ConfigSettings
-
-  asdf
+  ConfigSettings Interface
   """
-  def test(_context, _options) do
+  def interface(_ctx, _props) do
+    []
+  end
+
+  @doc """
+  Test ConfigSettings
+  """
+  def test(_context, _props) do
     true
   end
 
   @doc """
   Guide ConfigSettings
-
-  asdf
   """
   def guide(_ctx, _opts) do
     header = "HEADER FOR #{__MODULE__}"

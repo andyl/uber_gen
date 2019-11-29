@@ -198,18 +198,16 @@
 - [x] Interface: IO.inspect(module.interface)
 - [x] Module: module 
 - [x] Action Name: Mix.Task.task_name(module)
+- [x] Implement interface
+- [x] Implement inspect
 
 ## TBD
 
+- [ ] LvRun: UTIL.TextBlock / Implement Inspect
 - [ ] LvRun: UTIL.COMMAND / Implement Command
 - [ ] LvRun: UTIL.COMMAND / Implement Test
 - [ ] LvRun: UTIL.BlockInFile / Implement Test
 - [ ] Add "when" and "unless" constructs 
-
-- [ ] Implement interface
-- [ ] Implement inspect
-- [ ] Write interface tests
-- [ ] Write inspect tests
 
 - [ ] TAILOR/LV: quit unless proper elxir env
 - [ ] TAILOR/LV: quit unless in-project
@@ -230,35 +228,3 @@
 
 - [ ] Convert bash generators to Atree
 
-## Questions
-
-- [ ] How to manage long-running state?  (like tasks)
-- [ ] Is there a datastore for Atree?
-- [ ] How to access-control for shared playbooks?
-- [ ] Use-cases for playbooks with multi-parents? (listeners, chat, comments)
-- [ ] What is a a URI-scheme for Actions?
-- [ ] Can we get CRDTs working for offline access?
-- [ ] How to generate event-streams?  
-- [ ] Are playbooks wrappered in a manipulation API?
-
-- [ ] Does this work with Sockets / GenStage?
-
-## Futures
-
-- [ ] WebUI: Design WebUI
-
-- [ ] Registry: Create Registry
-- [ ] Registry: External Actions - path / github deps
-- [ ] Registry: Registry upload/download/search
-- [ ] Registry: How does PragDave install templates?
-- [ ] Registry: How does PragDave store templates?
-
-- [ ] Website: A HowTo Blog
-- [ ] Website: Learning Paths
-- [ ] Website: Time to Learn
-- [ ] Website: Credentialing
-- [ ] Website: Metrics: Frequency/RunTime per Action 
-
-- [ ] Community: who else is doing this now?
-- [ ] Community: who has the most experience?
-- [ ] Community: who is willing to mentor?
