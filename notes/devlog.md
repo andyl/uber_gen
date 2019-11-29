@@ -184,10 +184,29 @@
 - [x] atree: list actions
 - [x] atree: help
 
-## TBD
+## 2019 Nov 28 Thu
 
-- [ ] atree: specify action or playbook
-- [ ] atree: handle params
+- [x] atree: specify action or playbook
+- [x] atree: handle params
+- [x] atree: help on playbooks
+- [x] atree: help on actions
+- [ ] atree: playbooks in ~/.atree/playbooks
+
+Needs:
+- [ ] Playbook Lookup Function
+- [ ] Action Lookup Function
+
+Help Playbook:
+- [ ] file path
+
+Help Action:
+- [ ] Doc: Mix.Task.moduledoc(module)
+- [ ] Interface: IO.inspect(module.interface)
+- [ ] Module: module 
+- [ ] Action Name: Mix.Task.task_name(module)
+
+
+## TBD
 
 - [ ] LvRun: UTIL.COMMAND / Implement Command
 - [ ] LvRun: UTIL.COMMAND / Implement Test

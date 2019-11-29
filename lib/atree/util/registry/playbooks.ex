@@ -16,6 +16,12 @@ defmodule Atree.Util.Registry.Playbooks do
     [priv_dir(), home_dir()]
   end
 
+  def find(name) do
+    Atree.Util.Registry.Playbooks.full_playbooks()
+    |> Enum.find(&(name == elem(&1, 1)))
+    |> elem(0)
+  end
+
   def full_playbooks do
     path()
     |> ensure_created()

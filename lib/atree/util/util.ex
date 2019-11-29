@@ -14,7 +14,7 @@ defmodule Atree.Util.Util do
   def build_task_doc_list(modules) do
     Enum.reduce(modules, {[], 0}, fn module, {docs, max} ->
       if doc = Mix.Task.shortdoc(module) do
-        task = "mix " <> Mix.Task.task_name(module)
+        task = Mix.Task.task_name(module)
         {[{task, doc} | docs], max(byte_size(task), max)}
       else
         {docs, max}
@@ -25,7 +25,7 @@ defmodule Atree.Util.Util do
   def build_alias_doc_list(aliases) do
     Enum.reduce(aliases, {[], 0}, fn {alias_name, _task_name}, {docs, max} ->
       doc = "Alias defined in mix.exs"
-      task = "mix " <> alias_name
+      task = alias_name
       {[{task, doc} | docs], max(byte_size(task), max)}
     end)
   end

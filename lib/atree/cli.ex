@@ -120,22 +120,17 @@ defmodule Atree.Cli do
   defp setup_action(_, args) do
     cond do
       Regex.match?(~r/(\.json)$|(\.yaml)$/, args.action) -> 
-        Atree.Util.Registry.Playbooks.full_playbooks()
-        |> Enum.find(&(args.action == elem(&1, 1)))
-        |> elem(0)
+
+        Atree.Util.Registry.Playbooks.find(args.action)
         |> Util.Children.file_data()
         |> Util.Children.to_children()
       true ->
-        mod =
-          Atree.Util.Mix.load_all()
-          |> Atree.Util.Util.build_playbook_list()
-          |> Enum.filter(&(elem(&1, 1) == args.action))
-          |> List.first()
+        mod = Atree.Util.Registry.Actions.find(args.action)
 
         case mod do
           nil -> IO.puts("Action not found (#{args.action})")
           {module, _label} -> 
-            module 
+            {module, args.params}
         end
     end
   end
