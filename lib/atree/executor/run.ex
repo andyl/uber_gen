@@ -12,19 +12,22 @@ defmodule Atree.Executor.Run do
       |> Atree.Presentor.Markdown.to_stdout()
   """
 
+  alias Atree.Executor.Util.Helpers
+  alias Atree.Data.Log
   use Atree.Executor.Util.ExecTree
 
-  alias Atree.Data.Log
-
-  def exec_log(mod, ctx, opts) do
-    report = Base.inspect(mod, ctx, opts)
+  def exec_log(mod, ctx, props) do
+    report = Base.inspect(mod, ctx, props) 
     cx0 = report.ctx || ctx
-    cx1 = Base.command(mod, cx0, opts)
+    cx1 = Base.command(mod, cx0, props) 
+    new_props = report.props || props
+
+    guide = Helpers.gen_guide(report, mod, cx1, new_props)
 
     log = %Log{
       action: mod,
-      test: Base.test(mod, cx1, opts),
-      guide: Base.guide(mod, cx1, opts),
+      test: Base.test(mod, cx1, props),
+      guide: guide,
       children: []
     }
 

@@ -1,19 +1,19 @@
 defmodule Atree.Actions.Util.Command do
-
   @moduledoc """
   Run a command.
   """
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  alias Atree.Data.{Report, Prop}
+  alias Atree.Data.{Prop}
+
   use Atree.Action,
-    [
-      %Prop{ name: "header",      type: "string"},
-      %Prop{ name: "instruction", type: "string"},
-      %Prop{ name: "command",     type: "string"},
-      %Prop{ name: "creates",     type: "string"}
-    ]
+      [
+        %Prop{name: "header", type: "string"},
+        %Prop{name: "instruction", type: "string"},
+        %Prop{name: "command", type: "string"},
+        %Prop{name: "creates", type: "string"}
+      ]
 
   def inspect(ctx, props) do
     %__MODULE__{}
@@ -22,13 +22,22 @@ defmodule Atree.Actions.Util.Command do
     |> changeset_report(ctx)
   end
 
-  def command(ctx, opts) do
-    Rambo.run(opts.command)
+  def command(ctx, props) do
+    [head | args] = String.split(props.command, " ")
+    Rambo.run(head, args || [])
     ctx
   end
 
-  def test(_ctx, _opts) do
+  def test(_ctx, %{creates: tgt}) do
+    if File.exists?(tgt) do
+      :ok
+    else
+      {:error, "Not created (#{tgt})"}
+    end
+  end
 
+  def test(_ctx, _props) do
+    :ok
   end
 
   def guide(_ctx, opts) do

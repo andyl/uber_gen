@@ -10,4 +10,23 @@ defmodule Atree.Executor.Util.Helpers do
       changeset: changeset
     }
   end
+
+  def gen_guide(report, mod, ctx, props) do
+    if report.valid? do
+      Atree.Executor.Util.Base.guide(mod, ctx, props)
+    else
+      body = """
+      ```
+      -----------------------------
+      INVALID PROPS
+      #{inspect(props)}
+      -----
+      #{inspect(report.errors())}
+      -----------------------------
+      ```
+      """
+
+      %{body: body}
+    end
+  end
 end
