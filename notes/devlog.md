@@ -206,12 +206,16 @@
 - [x] Implement `__struct__` and `__changesets__` in `Action.__using__`
 - [x] LvRun: UTIL.TextBlock / Implement Inspect
 
-## TBD
+## 2019 Nov 30 Sat
+
+- [x] Add ExUnit tests for UTIL.TextBlock
 
 - [ ] LvRun: UTIL.COMMAND / Implement Command
 - [ ] LvRun: UTIL.COMMAND / Implement Test
 - [ ] LvRun: UTIL.BlockInFile / Implement Test
 - [ ] Add "when" and "unless" constructs 
+
+## TBD
 
 - [ ] TAILOR/LV: quit unless proper elxir env
 - [ ] TAILOR/LV: quit unless in-project

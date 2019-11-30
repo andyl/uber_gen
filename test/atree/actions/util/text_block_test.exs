@@ -17,4 +17,10 @@ defmodule Atree.Actions.Util.TextBlockTest do
     assert log.guide.body == "qwer"
     assert log.guide.header == "asdf"
   end
+
+  test "No props" do
+    ctx = Atree.Executor.Export.with_action({TextBlock, %{}}) 
+    log = List.first(ctx.log)
+    refute log.report.valid?
+  end
 end

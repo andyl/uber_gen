@@ -1,5 +1,4 @@
 defmodule Atree.Actions.Util.Command do
-  use Atree.Action
 
   @moduledoc """
   Run a command.
@@ -7,20 +6,20 @@ defmodule Atree.Actions.Util.Command do
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  def interface(_ctx, _opts) do
-    %{
-      header: :string,
-      instruction: :string,
-      command: :string,
-      creates: [:string]
-    }
-  end
+  alias Atree.Data.{Report, Prop}
+  use Atree.Action,
+    [
+      %Prop{ name: "header",      type: "string"},
+      %Prop{ name: "instruction", type: "string"},
+      %Prop{ name: "command",     type: "string"},
+      %Prop{ name: "creates",     type: "string"}
+    ]
 
-  def inspect(_ctx, _opts) do
-    #%__MODULE__{}
-    #|> cast(params, [:header, :instruction, :command, :creates])
-    #|> validate_required([:command])
-   %Atree.Data.Report{} 
+  def inspect(ctx, props) do
+    %__MODULE__{}
+    |> cast(props, [:header, :instruction, :command, :creates])
+    |> validate_required([:command])
+    |> changeset_report(ctx)
   end
 
   def command(ctx, opts) do

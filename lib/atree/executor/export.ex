@@ -1,5 +1,4 @@
 defmodule Atree.Executor.Export do
-
   @moduledoc """
   Exports an Action guide.
 
@@ -16,17 +15,33 @@ defmodule Atree.Executor.Export do
   use Atree.Executor.Util.ExecTree
 
   def exec_log(mod, ctx, props) do
-
     report = Base.inspect(mod, ctx, props)
-    ctx_v2 = report.ctx || ctx  
+    new_ctx = report.ctx || ctx
+    new_props = report.props || props
 
-    log = %{
-      action: mod,
-      guide: Base.guide(mod, ctx_v2, props),
-      children: []
-    }
+    guide = gen_guide(report, mod, new_ctx, new_props)
 
-    {ctx_v2, log}
+    log = %{action: mod, guide: guide, report: %{report|changeset: %{}}, children: []}
+
+    {new_ctx, log}
   end
 
+  defp gen_guide(report, mod, ctx, props) do
+    if report.valid? do
+      Base.guide(mod, ctx, props)
+    else
+      body = """
+      ```
+      -----------------------------
+      INVALID PROPS
+      #{inspect(props)}
+      -----
+      #{inspect(report.errors())}
+      -----------------------------
+      ```
+      """
+
+      %{body: body}
+    end
+  end
 end

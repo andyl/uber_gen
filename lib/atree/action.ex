@@ -6,7 +6,7 @@ defmodule Atree.Action do
         use Atree.Action
       end
 
-  Optionally, you can define Propdefs:
+  Optionally, you can supply Propspecs:
 
       def MyAction do
         use Atree.Action, 
@@ -21,8 +21,8 @@ defmodule Atree.Action do
           ]
       end
 
-  The Propdefs are accessible via the Module attribute `@propdefs`. (default
-  `[]`)
+  The Propspecs are accessible via the Module attribute `@propspecs`. (default
+  `[]`), and also the `propspecs` function.
 
   The `Atree.Action` behavior provides five callbacks for use in Actions.
 
@@ -89,9 +89,10 @@ defmodule Atree.Action do
     quote do
       use Ecto.Schema
       import Ecto.Changeset
+      import Atree.Executor.Util.Helpers
       import Atree.Data.Ctx
 
-      @propdefs unquote(opts)
+      @propspecs unquote(opts)
 
       tuple_list =
         Enum.map(unquote(opts), fn %{name: name, type: type} ->
@@ -105,6 +106,9 @@ defmodule Atree.Action do
       end
 
       Module.register_attribute(__MODULE__, :shortdoc, persist: true)
+
+      @doc false
+      def propspecs, do: @propspecs
 
       @doc false
       def has_command?, do: has?({:command, 2})

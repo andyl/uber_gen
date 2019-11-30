@@ -102,9 +102,8 @@ defmodule Atree.Util.Help do
         
         Documentation:
         #{Mix.Task.moduledoc(module)}
-        
-        Interface:
-        #{inspect(Atree.Executor.Util.Base.interface(module,%{}, %{}), pretty: true, width: 40)}
+        Propspecs:
+        #{inspect(module.propspecs(), pretty: true, width: 40)}
         """
     end
   end

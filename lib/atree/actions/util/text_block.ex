@@ -1,6 +1,4 @@
 defmodule Atree.Actions.Util.TextBlock do
-  alias Atree.Data.{Report, Prop, Guide}
-
   @moduledoc """
   Basic Text Block with header and body.
 
@@ -10,6 +8,8 @@ defmodule Atree.Actions.Util.TextBlock do
   """
 
   @shortdoc "Simple TextBlock"
+
+  alias Atree.Data.{Prop, Guide}
 
   use Atree.Action,
       [
@@ -24,18 +24,10 @@ defmodule Atree.Actions.Util.TextBlock do
       ]
 
   def inspect(ctx, props) do
-    changeset =
-      %__MODULE__{}
-      |> cast(props, [:header, :body])
-      |> validate_one([:header, :body])
-
-    %Report{
-      ctx: ctx,
-      props: changeset.changes,
-      valid?: changeset.valid?,
-      errors: changeset.errors,
-      changeset: changeset
-    }
+    %__MODULE__{}
+    |> cast(props, [:header, :body])
+    |> validate_one([:header, :body])
+    |> changeset_report(ctx)
   end
 
   def guide(_ctx, props) do

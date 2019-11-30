@@ -12,6 +12,8 @@ defmodule Atree.Data.Report do
   - changeset: an updated changeset
   """
 
+  @derive Jason.Encoder
+
   alias Atree.Data.Report
 
   defstruct [ctx: nil, props: %{}, valid?: true, errors: %{}, changeset: %{}]
