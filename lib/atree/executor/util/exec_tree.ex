@@ -6,7 +6,6 @@ defmodule Atree.Executor.Util.ExecTree do
   Executor.Export).
 
       use Atree.Executor.Util.ExecTree
-
   """
 
   use Atree.Data.Ctx
@@ -25,7 +24,6 @@ defmodule Atree.Executor.Util.ExecTree do
           exec_log(module, context, options) -> {new_context, log}
 
       """
-
       def with_action(module) do
         with_action(default_ctx(), module)
       end

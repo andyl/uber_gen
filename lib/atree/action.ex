@@ -93,13 +93,13 @@ defmodule Atree.Action do
 
       @propdefs unquote(opts)
 
-      glist =
+      tuple_list =
         Enum.map(unquote(opts), fn %{name: name, type: type} ->
           {String.to_atom(name), String.to_atom(type)}
         end)
 
       embedded_schema do
-        Enum.each(glist, fn({name, type}) ->
+        Enum.each(tuple_list, fn({name, type}) ->
           field(name, type)
         end)
       end
@@ -117,8 +117,8 @@ defmodule Atree.Action do
       @doc false
       def has_inspect?, do: has?({:inspect, 2})
 
-      defp flist, do: __MODULE__.__info__(:functions)
-      defp has?(tuple), do: Enum.any?(flist(), &(&1 == tuple))
+      defp func_list, do: __MODULE__.__info__(:functions)
+      defp has?(tuple), do: Enum.any?(func_list(), &(&1 == tuple))
 
       @behaviour Atree.Action
     end

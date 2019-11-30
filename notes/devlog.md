@@ -201,11 +201,13 @@
 - [x] Implement interface
 - [x] Implement inspect
 
+## 2019 Nov 29 Fri
+
+- [x] Implement `__struct__` and `__changesets__` in `Action.__using__`
+- [x] LvRun: UTIL.TextBlock / Implement Inspect
+
 ## TBD
 
-- [ ] Implement `__struct__` and `__changesets__` in `Action.__using__`
-
-- [ ] LvRun: UTIL.TextBlock / Implement Inspect
 - [ ] LvRun: UTIL.COMMAND / Implement Command
 - [ ] LvRun: UTIL.COMMAND / Implement Test
 - [ ] LvRun: UTIL.BlockInFile / Implement Test

@@ -1,6 +1,16 @@
 defmodule Atree.Actions.Util.TextBlock do
   alias Atree.Data.{Report, Prop, Guide}
 
+  @moduledoc """
+  Basic Text Block with header and body.
+
+  Either a body or a header must be supplied.
+
+  Body can be any markdown text.
+  """
+
+  @shortdoc "Simple TextBlock"
+
   use Atree.Action,
       [
         %Prop{
@@ -12,16 +22,6 @@ defmodule Atree.Actions.Util.TextBlock do
           type: "string"
         }
       ]
-
-  @moduledoc """
-  Basic Text Block with header and body.
-
-  Either a body or a header must be supplied.
-
-  Body can be any markdown text.
-  """
-
-  @shortdoc "Simple TextBlock"
 
   def inspect(ctx, props) do
     changeset =

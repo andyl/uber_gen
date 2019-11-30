@@ -15,14 +15,14 @@ defmodule Atree.Executor.Export do
 
   use Atree.Executor.Util.ExecTree
 
-  def exec_log(mod, ctx, opts) do
+  def exec_log(mod, ctx, props) do
 
-    report = Base.inspect(mod, ctx, opts)
+    report = Base.inspect(mod, ctx, props)
     ctx_v2 = report.ctx || ctx  
 
     log = %{
       action: mod,
-      guide: Base.guide(mod, ctx_v2, opts),
+      guide: Base.guide(mod, ctx_v2, props),
       children: []
     }
 
