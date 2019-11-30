@@ -22,10 +22,6 @@ defmodule Atree.Executor.BaseTest do
       refute @pb.has_guide?()
     end
 
-    test "has_interface" do
-      refute @pb.has_interface?()
-    end
-
     test "has_inspect" do
       refute @pb.has_inspect?()
     end
@@ -42,10 +38,6 @@ defmodule Atree.Executor.BaseTest do
 
     test "guide" do
       assert Base.guide(@pb, %{},%{}) == ""
-    end
-
-    test "interface" do
-      assert Base.interface(@pb, %{},%{}) == []
     end
 
     test "inspect" do

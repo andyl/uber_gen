@@ -13,7 +13,7 @@ defmodule Atree.Executor.Util.ExecTree do
   alias Atree.Executor.Util.Base
 
   @doc false
-  defmacro __using__(_opts) do
+  defmacro __using__(_props) do
     quote do
       use Atree.Executor.Util.Base
 
@@ -36,17 +36,17 @@ defmodule Atree.Executor.Util.ExecTree do
         |> package()
       end
 
-      def with_action(ctx, {module, opts}) 
-          when is_atom(module) and is_map(opts) do
+      def with_action(ctx, {module, props}) 
+          when is_atom(module) and is_map(props) do
         ctx
-        |> invoke({module, opts, []})
+        |> invoke({module, props, []})
         |> package()
       end
 
-      def with_action(ctx, {mod, opts, child})
-          when is_atom(mod) and is_map(opts) and is_list(child) do
+      def with_action(ctx, {mod, props, child})
+          when is_atom(mod) and is_map(props) and is_list(child) do
         ctx
-        |> invoke({mod, opts, child})
+        |> invoke({mod, props, child})
         |> package()
       end
 
@@ -56,12 +56,12 @@ defmodule Atree.Executor.Util.ExecTree do
         |> package()
       end
 
-      defp invoke(ctx, {module, opts, []}) do
-        exec_log(module, ctx, opts)
+      defp invoke(ctx, {module, props, []}) do
+        exec_log(module, ctx, props)
       end
 
-      defp invoke(ctx, {module, opts, children}) do
-        {cx0, log} = exec_log(module, ctx, opts)
+      defp invoke(ctx, {module, props, children}) do
+        {cx0, log} = exec_log(module, ctx, props)
 
         {cx1, logs} =
           children

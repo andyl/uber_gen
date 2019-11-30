@@ -3,8 +3,8 @@ defmodule Atree.Executor.Util.Base do
   Function invocation for Action Callbacks with default values.
 
   Actions have five optional callbacks: `command`, `test`, `guide`, `children`,
-  `interface`, and `inspect`.  This module provides default values for Action
-  callbacks if they are not defined.
+  and `inspect`.  This module provides default values for Action callbacks if
+  they are not defined.
 
   Note that Action callbacks should not be called directly.  Invoke a callback
   using `Executor.Base`:
@@ -46,10 +46,6 @@ defmodule Atree.Executor.Util.Base do
 
   def children(module, ctx, opts) do
     if module.has_children?(), do: apply(module, :children, [ctx, opts]), else: []
-  end
-
-  def interface(module, ctx, opts) do
-    if module.has_interface?(), do: apply(module, :interface, [ctx, opts]), else: []
   end
 
   def inspect(module, params, opts) do

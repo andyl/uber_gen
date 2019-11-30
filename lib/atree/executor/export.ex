@@ -19,7 +19,7 @@ defmodule Atree.Executor.Export do
 
     report = Base.inspect(mod, ctx, opts)
     ctx_v2 = report.ctx || ctx  
-    
+
     log = %{
       action: mod,
       guide: Base.guide(mod, ctx_v2, opts),
