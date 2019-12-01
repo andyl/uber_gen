@@ -5,15 +5,11 @@ defmodule Atree.Actions.Util.Command do
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  alias Atree.Data.{Prop}
-
-  use Atree.Action,
-      [
-        %Prop{name: "header", type: "string"},
-        %Prop{name: "instruction", type: "string"},
-        %Prop{name: "command", type: "string"},
-        %Prop{name: "creates", type: ["string"]}
-      ]
+  use Atree.Action, 
+    header: [], 
+    instruction: [], 
+    command: [], 
+    creates: [type: [:string]]
 
   def inspect(ctx, props) do
     %__MODULE__{}

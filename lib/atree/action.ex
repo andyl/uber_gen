@@ -10,15 +10,9 @@ defmodule Atree.Action do
 
       def MyAction do
         use Atree.Action, 
-          [
-            %Prop{
-              name: "header",
-              type: "string"
-            }
-            %Prop{
-              name: "body",
-              type: "string"
-          ]
+          header: [type: :string],
+          body: [type: :string]
+
       end
 
   The Propspecs are accessible via the Module attribute `@propspecs`. (default
@@ -95,13 +89,14 @@ defmodule Atree.Action do
       @propspecs unquote(opts)
 
       gentype = fn
-        [type] -> {:array, String.to_atom(type)}
-        type -> String.to_atom(type)
+        nil -> :string
+        [type] -> {:array, type}
+        type -> type
       end
 
       tuple_list =
-        Enum.map(unquote(opts), fn %{name: name, type: type} ->
-          {String.to_atom(name), gentype.(type)}
+        Enum.map(unquote(opts), fn {name, opts} ->
+          {name, gentype.(Keyword.get(opts, :type))}
         end)
 
       embedded_schema do

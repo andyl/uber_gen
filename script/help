@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+cmd="mix atree help $*"
+
+cat << EOF >&2
+---------------------------------------
+COMMAND: $cmd
+Run help comand
+---------------------------------------
+EOF
+
+eval $cmd

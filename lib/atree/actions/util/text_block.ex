@@ -9,19 +9,9 @@ defmodule Atree.Actions.Util.TextBlock do
 
   @shortdoc "Simple TextBlock"
 
-  alias Atree.Data.{Prop, Guide}
+  alias Atree.Data.{Guide}
 
-  use Atree.Action,
-      [
-        %Prop{
-          name: "body",
-          type: "string"
-        },
-        %Prop{
-          name: "header",
-          type: "string"
-        }
-      ]
+  use Atree.Action, body: [], header: []
 
   def inspect(ctx, props) do
     %__MODULE__{}

@@ -212,11 +212,13 @@
 - [x] LvRun: UTIL.COMMAND / Implement Command
 - [x] LvRun: UTIL.COMMAND / Implement Test
 
-- [ ] Handle array of props
-- [ ] LvRun: UTIL.BlockInFile / Implement Test
-- [ ] Add "when" and "unless" constructs 
-
 ## TBD
+
+- [ ] Simplify Propspecs - use Keyword List
+- [ ] LvRun: UTIL.BlockInFile / Implement Test
+- [ ] Handle array of props
+
+- [ ] Add "when" and "unless" constructs 
 
 - [ ] TAILOR/LV: quit unless proper elxir env
 - [ ] TAILOR/LV: quit unless in-project

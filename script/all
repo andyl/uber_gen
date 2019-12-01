@@ -5,6 +5,9 @@ script/export_lv_json &&
 script/export_lv_markdown &&
 script/export_nested_markdown &&
 script/export_nested_tree &&
+script/help &&
+script/help_action &&
+script/help_playbook &&
 script/list &&
 script/pipe0 &&
 script/pipe1 &&

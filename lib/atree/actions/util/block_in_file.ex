@@ -5,35 +5,13 @@ defmodule Atree.Actions.Util.BlockInFile do
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  alias Atree.Data.{Prop}
-
   use Atree.Action,
-      [
-        %Prop{
-          name: "header",
-          type: "string"
-        },
-        %Prop{
-          name: "instruction",
-          type: "string"
-        },
-        %Prop{
-          name: "text_block",
-          type: "string"
-        },
-        %Prop{
-          name: "check_for",
-          type: ["string"]
-        },
-        %Prop{
-          name: "target_file",
-          type: "string"
-        },
-        %Prop{
-          name: "file_type",
-          type: "string"
-        }
-      ]
+    header: [], 
+    instruction: [], 
+    text_block: [], 
+    check_for: [type: [:string]], 
+    target_file: [],
+    file_type: []
 
   def inspect(ctx, props) do
     %__MODULE__{}
