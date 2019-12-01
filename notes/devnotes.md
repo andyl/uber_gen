@@ -9,9 +9,9 @@ Exploratory Code
 | x1_master   | 2019 Oct 20 | Just a README stating overall goals |
 | x2_test     | 2019 Oct 25 | Mix-style playbook structure        |
 | x3_guide    | 2019 Nov 01 | Document generation                 |
-| x4_macros   | 2019 Nov 03 | Use of macros in Atree playbook   |
+| x4_macros   | 2019 Nov 03 | Use of macros in Atree playbook     |
 | x5_liveview | 2019 Nov 07 | Write playbook for LiveViews        |
-| x6_schemas  | 2019 Nov 10 | Action schemas, nested playbooks  |
+| x6_schemas  | 2019 Nov 10 | Action schemas, nested playbooks    |
 
 ## 2019 Nov 01 Fri
 
@@ -69,13 +69,13 @@ method is defined in a playbook: `has_run?/0`, `has_call?/0`, `has_test?/0`,
 
 `Atree` Mix commands
 
-| Command         | Purpose                                   |
-|-----------------|-------------------------------------------|
-| mix atree.help   | Display help text for a playbook          |
-| mix atree.list   | Show locally cached playbooks             |
-| mix atree.export | Export a static playbook to MD, HTML, PDF |
-| mix atree.run    | Run a playbook on the command line        |
-| mix atree.serve  | Serve a playbook for browser interaction  |
+| Command          | Purpose                                   |
+|------------------|-------------------------------------------|
+| mix atree help   | Display help text for a playbook          |
+| mix atree list   | Show locally cached playbooks             |
+| mix atree export | Export a static playbook to MD, HTML, PDF |
+| mix atree run    | Run a playbook on the command line        |
+| mix atree serve  | Serve a playbook for browser interaction  |
 
 ## 2019 Nov 10 Sun
 

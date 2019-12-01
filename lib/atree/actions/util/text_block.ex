@@ -9,19 +9,17 @@ defmodule Atree.Actions.Util.TextBlock do
 
   @shortdoc "Simple TextBlock"
 
-  alias Atree.Data.{Guide}
-
   use Atree.Action, body: [], header: []
+
+  def guide(_ctx, props) do
+    struct(Atree.Data.Guide, props)
+  end
 
   def inspect(ctx, props) do
     %__MODULE__{}
     |> cast(props, [:header, :body])
     |> validate_one([:header, :body])
     |> changeset_report(ctx)
-  end
-
-  def guide(_ctx, props) do
-    struct(Guide, props)
   end
 
   # ----------------------------------

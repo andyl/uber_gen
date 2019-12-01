@@ -211,12 +211,14 @@
 - [x] Add ExUnit tests for UTIL.TextBlock
 - [x] LvRun: UTIL.COMMAND / Implement Command
 - [x] LvRun: UTIL.COMMAND / Implement Test
+- [x] Simplify Propspecs - use Keyword List
+- [x] LvRun: UTIL.BlockInFile / Implement Test
 
 ## TBD
 
-- [ ] Simplify Propspecs - use Keyword List
-- [ ] LvRun: UTIL.BlockInFile / Implement Test
-- [ ] Handle array of props
+- [ ] Handle array of props (BlockInFile - with tests)
+
+- [ ] Playbooks: change 'params' to 'props'
 
 - [ ] Add "when" and "unless" constructs 
 
@@ -225,17 +227,13 @@
 - [ ] TAILOR/LV: set ElixirEnv(version), AppEnv(name, in-umbrella)
 - [ ] TAILOR/LV: create Checklist/TOC w/tests
 
-- [ ] Write tests
+- [ ] RUN executor
+- [ ] REPL executor
 
-- [ ] Cleanup `ExecTree` callback (`exec_log`)
-- [ ] Document action callbacks
-- [ ] Add type for guide output
-- [ ] Add type for child spec (mod, opts, [children])
-- [ ] Document Actions
-- [ ] Add comments to Playbooks
+- [ ] Write tests
+- [ ] Documentation (Actions, Playbook comments, Action callbacks)
 
 - [ ] Run stops on halt
-- [ ] Add RUN/REPL exectutor
 
 - [ ] Convert bash generators to Atree
 
