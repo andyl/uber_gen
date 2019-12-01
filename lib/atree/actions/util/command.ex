@@ -12,7 +12,7 @@ defmodule Atree.Actions.Util.Command do
         %Prop{name: "header", type: "string"},
         %Prop{name: "instruction", type: "string"},
         %Prop{name: "command", type: "string"},
-        %Prop{name: "creates", type: "string"}
+        %Prop{name: "creates", type: ["string"]}
       ]
 
   def inspect(ctx, props) do
@@ -26,6 +26,14 @@ defmodule Atree.Actions.Util.Command do
     [head | args] = String.split(props.command, " ")
     Rambo.run(head, args || [])
     ctx
+  end
+
+  def test(_ctx, %{creates: tgt}) when is_list(tgt) do
+    if File.exists?(tgt) do
+      :ok
+    else
+      {:error, "Not created (#{tgt})"}
+    end
   end
 
   def test(_ctx, %{creates: tgt}) do

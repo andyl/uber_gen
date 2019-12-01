@@ -94,9 +94,14 @@ defmodule Atree.Action do
 
       @propspecs unquote(opts)
 
+      gentype = fn
+        [type] -> {:array, String.to_atom(type)}
+        type -> String.to_atom(type)
+      end
+
       tuple_list =
         Enum.map(unquote(opts), fn %{name: name, type: type} ->
-          {String.to_atom(name), String.to_atom(type)}
+          {String.to_atom(name), gentype.(type)}
         end)
 
       embedded_schema do

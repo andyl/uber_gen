@@ -209,9 +209,10 @@
 ## 2019 Nov 30 Sat
 
 - [x] Add ExUnit tests for UTIL.TextBlock
+- [x] LvRun: UTIL.COMMAND / Implement Command
+- [x] LvRun: UTIL.COMMAND / Implement Test
 
-- [ ] LvRun: UTIL.COMMAND / Implement Command
-- [ ] LvRun: UTIL.COMMAND / Implement Test
+- [ ] Handle array of props
 - [ ] LvRun: UTIL.BlockInFile / Implement Test
 - [ ] Add "when" and "unless" constructs 
 
