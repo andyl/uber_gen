@@ -16,6 +16,7 @@ defmodule Atree.Actions.Util.BlockInFileTest do
       ctx = Atree.Executor.Export.with_action({BlockInFile, %{header: "asdf", body: "qwer"}})
       log = List.first(ctx.log)
       refute log.report.valid?
+      refute ctx.halted
     end
 
     test "No Props" do
@@ -35,26 +36,27 @@ defmodule Atree.Actions.Util.BlockInFileTest do
     end
   end
 
-  # describe "Run" do
-  #   @tstdir "/tmp/testdir"
-  #
-  #   setup do
-  #     if File.exists?(@tstdir), do: File.rmdir(@tstdir)
-  #     :ok
-  #   end
-  #
-  #   test "Good Props" do
-  #     ctx = Atree.Executor.Run.with_action({BlockInFile, %{command: "mkdir -p #{@tstdir}", creates: @tstdir}})
-  #     log = List.first(ctx.log)
-  #     refute ctx.halted
-  #     assert log.test == :ok
-  #   end
-  #
-  #   test "Bad Props" do
-  #     ctx = Atree.Executor.Run.with_action({BlockInFile, %{command: "_bad_command_", creates: @tstdir}})
-  #     log = List.first(ctx.log)
-  #     assert ctx.halted
-  #     refute log.test == :ok
-  #   end
-  # end
+  describe "Run" do
+    @tgtfile "/tmp/testfile.txt"
+
+    setup do
+      if File.exists?(@tgtfile), do: File.rmdir(@tgtfile)
+      :ok
+    end
+
+    test "Bad Props" do
+      ctx = Atree.Executor.Run.with_action({BlockInFile, %{command: "mkdir -p #{@tgtfile}"}})
+      log = List.first(ctx.log)
+      assert ctx.halted
+      assert log.test == {:error, ["Invalid props"]}
+    end
+
+    test "Good Props, No File" do
+      ctx = Atree.Executor.Run.with_action({BlockInFile, %{text_block: "block", target_file: @tgtfile}})
+      log = List.first(ctx.log)
+      assert ctx.halted
+      refute log.test == :ok
+      assert List.first(elem(log.test, 1)) =~ "File does not exist"
+    end
+  end
 end

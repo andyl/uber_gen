@@ -24,7 +24,7 @@ defmodule Util.Children do
 
   def to_children(input) when is_map(input) do
     mod = "Elixir.Atree.Actions.#{input[:action]}" |> String.to_existing_atom()
-    opt = input[:params] || %{}
+    opt = input[:params] || input[:props] || %{}
     chr = input[:children] || []
     to_children(mod, opt, chr)
   end

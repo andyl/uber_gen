@@ -1,6 +1,6 @@
 ---
 - action: Util.TextBlock
-  params:
+  props:
     header: HEADER
     body: BODY
   children:

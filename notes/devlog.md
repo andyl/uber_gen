@@ -213,14 +213,25 @@
 - [x] LvRun: UTIL.COMMAND / Implement Test
 - [x] Simplify Propspecs - use Keyword List
 - [x] LvRun: UTIL.BlockInFile / Implement Test
+- [x] Playbooks: change 'params' to 'props'
+
+## 2019 Dec 01 Sun
+
+- [x] Handle array of props (BlockInFile - with tests)
+- [x] Design for "when" and "unless" constructs 
 
 ## TBD
 
-- [ ] Handle array of props (BlockInFile - with tests)
-
-- [ ] Playbooks: change 'params' to 'props'
-
-- [ ] Add "when" and "unless" constructs 
+- [ ] AUTH: add to ChildSpec
+- [ ] AUTH: update in ExecTree
+- [ ] AUTH: add to ToChildren
+- [ ] AUTH: add 'when' handler
+- [ ] AUTH: add 'unless' handler
+- [ ] AUTH: update Run executor
+- [ ] AUTH: update Export executor
+- [ ] AUTH: update Tailor executor
+- [ ] AUTH: need an evaluator function that returns T/F (with message?)
+- [ ] AUTH: update documentation
 
 - [ ] TAILOR/LV: quit unless proper elxir env
 - [ ] TAILOR/LV: quit unless in-project

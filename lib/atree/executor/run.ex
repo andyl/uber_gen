@@ -19,14 +19,16 @@ defmodule Atree.Executor.Run do
   def exec_log(mod, ctx, props) do
     report = Base.inspect(mod, ctx, props) 
     cx0 = report.ctx || ctx
-    cx1 = Base.command(mod, cx0, props) 
+    cx1 = if report.valid?, do: Base.command(mod, cx0, props), else: cx0
     new_props = report.props || props
 
     guide = Helpers.gen_guide(report, mod, cx1, new_props)
 
+    vtest = if report.valid?, do: Base.test(mod, cx1, props), else: {:error, ["Invalid props"]}
+
     log = %Log{
       action: mod,
-      test: Base.test(mod, cx1, props),
+      test: vtest,
       guide: guide,
       children: []
     }

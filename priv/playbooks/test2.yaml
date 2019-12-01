@@ -1,34 +1,37 @@
 ---
 - action: Util.TextBlock
-  params:
+  props:
     header: HEADERn
     body: BODYn
   children:
     - action: Util.TextBlock
-      params:
+      exec:
+        when: true
+      props:
         header: HEADER11
         body: BODY11
       children:
         - action: Util.TextBlock
-          params:
+          props:
             header: HEADER111
             body: BODY111
           children:
             - action: Util.TextBlock
-              params:
+              props:
                 header: HEADER1111
                 body: BODY1111
     - action: Util.TextBlock
-      params:
+      when: false
+      props:
         header: HEADER22
         body: BODY22
       children:
         - action: Util.TextBlock
-          params:
+          props:
             header: HEADER222
             body: BODY222
           children:
             - action: Util.TextBlock
-              params:
+              props:
                 header: HEADER2222
                 body: BODY2222

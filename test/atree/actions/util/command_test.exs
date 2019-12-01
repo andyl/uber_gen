@@ -42,8 +42,8 @@ defmodule Atree.Actions.Util.CommandTest do
     test "Good Props" do
       ctx = Atree.Executor.Run.with_action({Command, %{command: "mkdir -p #{@tstdir}", creates: @tstdir}})
       log = List.first(ctx.log)
-      refute ctx.halted
-      assert log.test == :ok
+      assert ctx.halted
+      assert log.test == {:error, ["Invalid props"]}
     end
 
     test "Bad Props" do

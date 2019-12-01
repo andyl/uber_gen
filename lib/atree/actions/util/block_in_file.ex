@@ -20,6 +20,13 @@ defmodule Atree.Actions.Util.BlockInFile do
     |> changeset_report(ctx)
   end
 
+  def test(_ctx, props) do
+    []
+    |> file_exists(props[:target_file])
+    |> file_contains(props[:target_file], props[:check_for])
+    |> test_results()
+  end
+
   def guide(_ctx, opts) do
     instruction = opts[:instruction]
     text_block = opts[:text_block]
