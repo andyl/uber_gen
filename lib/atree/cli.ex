@@ -123,7 +123,7 @@ defmodule Atree.Cli do
 
         Atree.Util.Registry.Playbooks.find(args.action)
         |> Util.Children.file_data()
-        |> Util.Children.to_children()
+        |> Atree.Data.ChildSpec.to_childspec()
       true ->
         mod = Atree.Util.Registry.Actions.find(args.action)
 

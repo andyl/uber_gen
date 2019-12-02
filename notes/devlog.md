@@ -219,18 +219,23 @@
 
 - [x] Handle array of props (BlockInFile - with tests)
 - [x] Design for "when" and "unless" constructs 
+- [x] AUTH: add ChildSpec (action, props, auth, children)
+- [x] AUTH: add AuthSpec (when, unless)
+
+## 2019 Dec 02 Mon
+
+- [x] AUTH: update in ToChildren
+- [x] AUTH: children function returns ChildSpec
 
 ## TBD
 
-- [ ] AUTH: add to ChildSpec
 - [ ] AUTH: update in ExecTree
-- [ ] AUTH: add to ToChildren
 - [ ] AUTH: add 'when' handler
 - [ ] AUTH: add 'unless' handler
 - [ ] AUTH: update Run executor
 - [ ] AUTH: update Export executor
 - [ ] AUTH: update Tailor executor
-- [ ] AUTH: need an evaluator function that returns T/F (with message?)
+- [ ] AUTH: need an evaluator function that returns T/F (with message?) auth(ctx, props, auth)
 - [ ] AUTH: update documentation
 
 - [ ] TAILOR/LV: quit unless proper elxir env

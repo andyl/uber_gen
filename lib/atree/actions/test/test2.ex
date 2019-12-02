@@ -11,7 +11,7 @@ defmodule Atree.Actions.Test.Test2 do
   def children(_ctx, _opts) do
     "#{:code.priv_dir(:uber_gen)}/playbooks/test2.yaml"
     |> Util.Children.file_data()
-    |> Util.Children.to_children()
+    |> Atree.Data.ChildSpec.to_childspec()
   end
 
   def guide(_ctx, _opts) do
