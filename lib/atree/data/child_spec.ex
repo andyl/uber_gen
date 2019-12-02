@@ -3,7 +3,7 @@ defmodule Atree.Data.ChildSpec do
   Atree ChildSpec.
   """
 
-  alias Atree.Data.{ChildSpec}
+  alias Atree.Data.{AuthSpec, ChildSpec}
 
   @derive Jason.Encoder
 
@@ -12,7 +12,7 @@ defmodule Atree.Data.ChildSpec do
   @type t :: %ChildSpec{
           action: any(),
           props: any(),
-          auth: any(),
+          auth: AuthSpec.t,
           children: any()
         }
 
