@@ -12,7 +12,7 @@ defmodule Atree.Util.Help do
       help [<method>|<playbook>|<action>] 
 
     options:
-      -p --param KEY=VAL     # define key/val params for an action
+      -p --prop KEY=VAL      # define key/val props for an action
       -w --write FORMAT=FILE # write formatted text to files
       -o --output FORMAT     # write formatted text to STDOUT
       -c --context FILE      # read context from file
@@ -102,9 +102,8 @@ defmodule Atree.Util.Help do
         
         Documentation:
         #{Mix.Task.moduledoc(module)}
-        
-        Interface:
-        #{inspect(Atree.Executor.Util.Base.interface(module,%{}, %{}), pretty: true, width: 40)}
+        Propspecs:
+        #{inspect(module.propspecs(), pretty: true, width: 40)}
         """
     end
   end

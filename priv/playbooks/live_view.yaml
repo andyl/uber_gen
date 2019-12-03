@@ -1,6 +1,6 @@
 ---
 - action: Util.BlockInFile
-  params:
+  props:
     header: Install Dependencies
     instruction: >
       Install Dependencies from Hex, with the latest version:
@@ -16,7 +16,7 @@
       - floki
     target_file: mix.exs
 - action: Util.TextBlock
-  params:
+  props:
     body: >
       If you want the latest features, instaoo from GitHub:
 
@@ -29,11 +29,11 @@
       end
       ```
 - action: Util.Command
-  params:
+  props:
     instruction: "Now install dependencies:"
     command: "mix deps.get"
 - action: Util.BlockInFile
-  params:
+  props:
     instruction: >
       Once installed, update your endpoint's configuration to
       include a signing salt.  You can generate a signing salt
@@ -48,7 +48,7 @@
       - signing_salt
     target_file: config/config.exs
 - action: Util.BlockInFile
-  params:
+  props:
     instruction: >
       Next, add the LiveView flash plug to your browser pipeline, after `:fetch_flash`:
     text_block: >
@@ -61,7 +61,7 @@
       - Phoenix.LivewView.Flash
     target_file: lib/my_app_web/router.ex
 - action: Util.BlockInFile
-  params:
+  props:
     instruction: >
       Add LiveView NPM dependencies. For a regular project, do:
     text_block: >
@@ -77,7 +77,7 @@
       - phoenix_live_view
       - phoenix_html
 - action: Util.BlockInFile
-  params:
+  props:
     instruction: >
       For an umbrella project, the dependency paths should be modified:
     text_block: >
@@ -93,21 +93,21 @@
       - phoenix_live_view
       - phoenix_html
 - action: Util.Command
-  params:
+  props:
     instruction: "Then install the new npm dependency."
     command: "npm install --prefix assets"
 - action: Util.TextBlock
-  params:
+  props:
     body: >
       or `cd assets && npm install` for windows users if --prefix doesn't work
 - action: Util.Command
-  params:
+  props:
     instruction: >
       If you had previously installed `phoenix_live_view` and want to get the latest javascript,
       then force an install.
     command: "cd assets && npm install --force phoenix_live_view"
 - action: Util.BlockInFile
-  params: 
+  props: 
     instruction: "Enable connecting to a LiveView socket."
     text_block: >
       import {Socket} from "phoenix"
@@ -120,7 +120,7 @@
       - phoenix_live_view
     target_file: assets/js/app.js
 - action: Util.BlockInFile
-  params: 
+  props: 
     instruction: >
       You can also optionally import the style for the default CSS classes.
       For a regular project -
@@ -131,7 +131,7 @@
       - phoenix_live_view
     target_file: assets/css/app.css
 - action: Util.BlockInFile
-  params: 
+  props: 
     instruction: >
       However, if you're adding `phoenix_live_view` to an umbrella project, the
       import link should be modified appropriately -

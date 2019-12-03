@@ -18,7 +18,7 @@ defmodule Atree.Presentor.GuideMarkdown do
   end
   
   defp process_one_log(log) do
-    to_s(log, 1)
+    to_s(log, 1) || ""
     |> String.replace(~r/\n\n[\n]+/, "\n\n")
   end
 

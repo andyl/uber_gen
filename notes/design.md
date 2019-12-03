@@ -4,6 +4,8 @@
 
 ### Questions
 
+- [ ] Do actions get an instance ID?
+
 - [ ] How to manage long-running state?  (like tasks)
 - [ ] Is there a datastore for Atree?
 - [ ] How to access-control for shared playbooks?
@@ -13,7 +15,16 @@
 - [ ] How to generate event-streams?  
 - [ ] Are playbooks wrappered in a manipulation API?
 
-- [ ] Does this work with Sockets / GenStage?
+- [ ] Does this work with Sockets / GenStage / Broadway?
+
+- [ ] What are the use-cases for Transformations?
+- [ ] What are the atomic Transformation operations?
+- [ ] How to capture Transformation history?
+- [ ] How to version an Atree?
+
+- [ ] What is the best term for MultiParent trees? (polytrees?)
+- [ ] What are the use-cases for polytrees (monitoring, alerting)
+- [ ] What are the outside systems could reference an Atree? (bidding)
 
 ### Futures
 
@@ -31,9 +42,21 @@
 - [ ] Website: Credentialing
 - [ ] Website: Metrics: Frequency/RunTime per Action 
 
+- [ ] LiveView: LiveView components
+
 - [ ] Community: who else is doing this now?
 - [ ] Community: who has the most experience?
 - [ ] Community: who is willing to mentor?
+
+- [ ] Server: AWS Lambda design
+- [ ] Server: docker design
+- [ ] Server: SAAS design
+
+- [ ] Identity: team use-cases
+- [ ] Identity: multi-team use-cases
+
+- [ ] Interop: calendar and events
+- [ ] Interop: IAM
 
 ## CLI
 
@@ -58,7 +81,7 @@ Run behavior - run until:
 - failed test (code red)
 - wait for manual input (code yellow)
 
-### Escript
+### Escript [DONE]
 
 Standalone Usage:
 

@@ -1,35 +1,47 @@
 defmodule Atree.Actions.Util.Command do
-  use Atree.Action
-
   @moduledoc """
   Run a command.
   """
 
   @shortdoc "ShortDoc for #{__MODULE__}"
 
-  def interface(_ctx, _opts) do
-    %{
-      header: :string,
-      instruction: :string,
-      command: :string,
-      creates: [:string]
-    }
+  use Atree.Action, 
+    header: [], 
+    instruction: [], 
+    command: [], 
+    creates: [type: [:string]]
+
+  def inspect(ctx, props) do
+    %__MODULE__{}
+    |> cast(props, [:header, :instruction, :command, :creates])
+    |> validate_required([:command])
+    |> changeset_report(ctx)
   end
 
-  def inspect(_ctx, _opts) do
-    #%__MODULE__{}
-    #|> cast(params, [:header, :instruction, :command, :creates])
-    #|> validate_required([:command])
-   %Atree.Data.Report{} 
-  end
-
-  def command(ctx, opts) do
-    Rambo.run(opts.command)
+  def command(ctx, props) do
+    [head | args] = String.split(props.command, " ")
+    Rambo.run(head, args || [])
     ctx
   end
 
-  def test(_ctx, _opts) do
+  def test(_ctx, %{creates: tgt}) when is_list(tgt) do
+    if File.exists?(tgt) do
+      :ok
+    else
+      {:error, "Not created (#{tgt})"}
+    end
+  end
 
+  def test(_ctx, %{creates: tgt}) do
+    if File.exists?(tgt) do
+      :ok
+    else
+      {:error, "Not created (#{tgt})"}
+    end
+  end
+
+  def test(_ctx, _props) do
+    :ok
   end
 
   def guide(_ctx, opts) do

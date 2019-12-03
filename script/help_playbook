@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+cmd="mix atree help live_view.yaml $*"
+
+cat << EOF >&2
+---------------------------------------
+COMMAND: $cmd
+Run help comand on a playbook
+---------------------------------------
+EOF
+
+eval $cmd

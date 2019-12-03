@@ -112,14 +112,15 @@ Atree Actions are independent modules that can be composed into trees:
         - leaf_action
 
 The structure of the Action Tree somewhat resembles the HTML document object
-model.  Each node implements a type, takes parameters, can be traversed and
+model.  Each node implements a type, takes properties, can be traversed and
 updated dynamically.
 
 Actions implement a behavior with standard set of callback functions:
 
-- Command - executes a command
+- Inspect - checks property validity
 - Guide - emits a guide fragment
-- Test - executes a test
+- Command - executes a command
+- Test - tests command results
 - Children - returns a list of children
     
 ```elixir
@@ -128,10 +129,10 @@ module Atree.Actions.Phoenix.Bootstrap4 do
 
   @shortdoc "Install Bootstrap4 in your Phoenix project."
   
-  def command(context, options)
+  def command(context, props)
     context
     |> assign(tgt_file, "output.css")
-    |> copy_file(ctx.source_file, ctx.tgt_file)
+    |> copy_file(props.source_file, props.tgt_file)
     |> git_commit("Add output.css to repo")
   end
 end
@@ -139,7 +140,7 @@ end
 
 Actions can be composed into Plug-like pipelines.
 
-    context |> Action1(opts) |> Action2(opts)
+    context |> Action1(props) |> Action2(props)
 
 ### Atree Context
 
@@ -222,18 +223,20 @@ Atree playbooks are yaml or json files for composing Actions.
 ```yaml
 ---
 - action: Util.TextBlock
-  params: 
+  props: 
     header: Introduction
     body: >
       This is an introductory paragraph for my HowTo Guide.
   children:
     - action: Util.Command
-      params:
+      auth:
+        when: sky=blue
+      props:
         instruction: "Create a setup directory"
         command: mkdir /tmp/setup_dir
         creates: /tmp/setup_dir
     - action: Util.BlockInFile
-      params:
+      props:
         instruction: "Add this text"
         block_text: >
           config :myapp, :key, "value"

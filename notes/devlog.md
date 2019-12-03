@@ -201,30 +201,56 @@
 - [x] Implement interface
 - [x] Implement inspect
 
+## 2019 Nov 29 Fri
+
+- [x] Implement `__struct__` and `__changesets__` in `Action.__using__`
+- [x] LvRun: UTIL.TextBlock / Implement Inspect
+
+## 2019 Nov 30 Sat
+
+- [x] Add ExUnit tests for UTIL.TextBlock
+- [x] LvRun: UTIL.COMMAND / Implement Command
+- [x] LvRun: UTIL.COMMAND / Implement Test
+- [x] Simplify Propspecs - use Keyword List
+- [x] LvRun: UTIL.BlockInFile / Implement Test
+- [x] Playbooks: change 'params' to 'props'
+
+## 2019 Dec 01 Sun
+
+- [x] Handle array of props (BlockInFile - with tests)
+- [x] Design for "when" and "unless" constructs 
+- [x] AUTH: add ExecPlan (action, props, auth, children)
+- [x] AUTH: add ExecPlan (when, unless)
+
+## 2019 Dec 02 Mon
+
+- [x] AUTH: update in ToChildren
+
+## 2019 Dec 03 Tue
+
+- [x] AUTH: update in ExecTree
+- [x] AUTH: update Run executor
+- [x] AUTH: update Export executor
+- [x] AUTH: update Tailor executor
+- [x] AUTH: need an evaluator function that returns T/F (with message?) auth(ctx, props, auth)
+- [x] AUTH: add 'when' handler
+- [x] AUTH: add 'unless' handler
+- [x] AUTH: update documentation
+
 ## TBD
 
-- [ ] LvRun: UTIL.TextBlock / Implement Inspect
-- [ ] LvRun: UTIL.COMMAND / Implement Command
-- [ ] LvRun: UTIL.COMMAND / Implement Test
-- [ ] LvRun: UTIL.BlockInFile / Implement Test
-- [ ] Add "when" and "unless" constructs 
-
-- [ ] TAILOR/LV: quit unless proper elxir env
+- [ ] TAILOR/LV: quit unless proper elixir env
 - [ ] TAILOR/LV: quit unless in-project
 - [ ] TAILOR/LV: set ElixirEnv(version), AppEnv(name, in-umbrella)
 - [ ] TAILOR/LV: create Checklist/TOC w/tests
 
-- [ ] Write tests
+- [ ] RUN executor
+- [ ] REPL executor
 
-- [ ] Cleanup `ExecTree` callback (`exec_log`)
-- [ ] Document action callbacks
-- [ ] Add type for guide output
-- [ ] Add type for child spec (mod, opts, [children])
-- [ ] Document Actions
-- [ ] Add comments to Playbooks
+- [ ] Write tests
+- [ ] Documentation (Actions, Playbook comments, Action callbacks)
 
 - [ ] Run stops on halt
-- [ ] Add RUN/REPL exectutor
 
 - [ ] Convert bash generators to Atree
 

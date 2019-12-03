@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+cmd="mix atree help util.text_block $*"
+
+cat << EOF >&2
+---------------------------------------
+COMMAND: $cmd
+Run help comand for an action
+---------------------------------------
+EOF
+
+eval $cmd

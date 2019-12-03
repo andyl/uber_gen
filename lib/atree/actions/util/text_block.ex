@@ -1,54 +1,39 @@
 defmodule Atree.Actions.Util.TextBlock do
-
-  use Atree.Action
-  alias Atree.Data.{Prop, Guide}
-
   @moduledoc """
-  Basic Text Block.
+  Basic Text Block with header and body.
 
-  Basic text block.  No code, no tests.
+  Either a body or a header must be supplied.
+
+  Body can be any markdown text.
   """
 
-  @shortdoc "ShortDoc for #{__MODULE__}"
+  @shortdoc "Simple TextBlock"
 
-  def interface(_ctx, _props) do
-    [
-      %Prop{
-        name: "header",
-        type: "string"
-      },
-      %Prop{
-        name: "body",
-        type: "string"
-      }
-    ]
+  use Atree.Action, body: [], header: []
+
+  def guide(_ctx, props) do
+    struct(Atree.Data.Guide, props)
   end
 
-  # def inspect([params: values], _ctx, _opts) do
-  #   %__MODULE__{}
-  #   |> cast(params, [:header, :body])
-  #   |> validate_one([:header, :body])
-  # end
-
-  @doc """
-  Guide text.
-  """
-  def guide(_ctx, props) do
-    struct(Guide, Map.from_struct(props))
+  def inspect(ctx, props) do
+    %__MODULE__{}
+    |> cast(props, [:header, :body])
+    |> validate_one([:header, :body])
+    |> changeset_report(ctx)
   end
 
   # ----------------------------------
 
-  # defp validate_one(changeset, params) do.
-  #   if Enum.any?(params, &(present?(changeset, &1))) do
-  #     changeset
-  #   else
-  #     add_error(changeset, hd(params), "One of these params must be present: #{inspect params}")
-  #   end
-  # end
-  
-  # defp present?(changeset, param) do
-  #   value = get_field(changeset, param) 
-  #   value && value != ""
-  # end
+  defp validate_one(changeset, props) do
+    if Enum.any?(props, &present?(changeset, &1)) do
+      changeset
+    else
+      add_error(changeset, hd(props), "One of these props must be present: #{inspect(props)}")
+    end
+  end
+
+  defp present?(changeset, param) do
+    value = get_field(changeset, param)
+    value && value != ""
+  end
 end

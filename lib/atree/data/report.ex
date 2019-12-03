@@ -12,12 +12,17 @@ defmodule Atree.Data.Report do
   - changeset: an updated changeset
   """
 
+  @derive Jason.Encoder
+
   alias Atree.Data.Report
 
-  defstruct [ctx: nil, changeset: nil]
+  defstruct [ctx: nil, props: %{}, valid?: true, errors: %{}, changeset: %{}]
 
   @type t :: %Report{
     ctx: Atree.Data.Ctx.t,
+    props: map(),
+    valid?: boolean(),
+    errors: map(),
     changeset: map()
   }
 
@@ -28,12 +33,4 @@ defmodule Atree.Data.Report do
       alias Atree.Data.Report
     end
   end
-  
-  # @doc """
-  # Set an env value to a key in the context.
-  # """
-  # def setenv(%Report{env: env} = ctx, key, value) when is_atom(key) do
-  #   %{ctx | env: Map.put(env, key, value)}
-  # end
-
 end
