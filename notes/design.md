@@ -17,6 +17,15 @@
 
 - [ ] Does this work with Sockets / GenStage / Broadway?
 
+- [ ] What are the use-cases for Transformations?
+- [ ] What are the atomic Transformation operations?
+- [ ] How to capture Transformation history?
+- [ ] How to version an Atree?
+
+- [ ] What is the best term for MultiParent trees? (polytrees?)
+- [ ] What are the use-cases for polytrees (monitoring, alerting)
+- [ ] What are the outside systems could reference an Atree? (bidding)
+
 ### Futures
 
 - [ ] WebUI: Design WebUI

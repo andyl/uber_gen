@@ -235,11 +235,11 @@
 - [x] AUTH: need an evaluator function that returns T/F (with message?) auth(ctx, props, auth)
 - [x] AUTH: add 'when' handler
 - [x] AUTH: add 'unless' handler
-- [ ] AUTH: update documentation
+- [x] AUTH: update documentation
 
 ## TBD
 
-- [ ] TAILOR/LV: quit unless proper elxir env
+- [ ] TAILOR/LV: quit unless proper elixir env
 - [ ] TAILOR/LV: quit unless in-project
 - [ ] TAILOR/LV: set ElixirEnv(version), AppEnv(name, in-umbrella)
 - [ ] TAILOR/LV: create Checklist/TOC w/tests

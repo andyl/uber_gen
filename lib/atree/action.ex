@@ -2,13 +2,13 @@ defmodule Atree.Action do
   @moduledoc """
   A module that provides conveniences for actions.
 
-      def MyAction do
+      def Atree.Actions.MyAction do
         use Atree.Action
       end
 
   Optionally, you can supply Propspecs:
 
-      def MyAction do
+      def Atree.Actions.MyAction do
         use Atree.Action, 
           header: [type: :string],
           body: [type: :string]
@@ -20,13 +20,13 @@ defmodule Atree.Action do
 
   The `Atree.Action` behavior provides five callbacks for use in Actions.
 
-  | Callback   | Arg(s)    | Returns  | Purpose                |
-  |------------|-----------|----------|------------------------|
-  | command/2  | ctx, opts | new_ctx  | executable action code |
-  | guide/2    | ctx, opts | fragment | action documentation   |
-  | test/2     | ctx, opts | status   | action test            |
-  | children/2 | ctx, opts | list     | list of children       |
-  | inspect/2  | ctx, opts | report   | prop validation        |
+  | Callback   | Arg(s)     | Returns  | Purpose                |
+  |------------|------------|----------|------------------------|
+  | inspect/2  | ctx, props | report   | prop validation        |
+  | command/2  | ctx, props | new_ctx  | executable action code |
+  | guide/2    | ctx, props | fragment | action documentation   |
+  | test/2     | ctx, props | status   | action test            |
+  | children/2 | ctx, props | list     | list of children       |
 
   All of these callbacks are optional for any given action.
   """
@@ -45,7 +45,7 @@ defmodule Atree.Action do
   @callback command(Ctx.t(), map()) :: Ctx.t()
 
   @doc """
-  Emit guide text.
+  Emit guide fragment.
   """
   @callback guide(Ctx.t(), map()) :: Guide.t()
 
@@ -79,14 +79,14 @@ defmodule Atree.Action do
   @optional_callbacks command: 2, guide: 2, test: 2, children: 2, inspect: 2
 
   @doc false
-  defmacro __using__(opts \\ []) do
+  defmacro __using__(props \\ []) do
     quote do
       use Ecto.Schema
       import Ecto.Changeset
       import Atree.Executor.Util.Helpers
       import Atree.Data.Ctx
 
-      @propspecs unquote(opts)
+      @propspecs unquote(props)
 
       gentype = fn
         nil -> :string
@@ -95,8 +95,8 @@ defmodule Atree.Action do
       end
 
       tuple_list =
-        Enum.map(unquote(opts), fn {name, opts} ->
-          {name, gentype.(Keyword.get(opts, :type))}
+        Enum.map(unquote(props), fn {name, props} ->
+          {name, gentype.(Keyword.get(props, :type))}
         end)
 
       embedded_schema do
