@@ -57,13 +57,12 @@ defmodule Atree.Executor.Util.Base do
   @doc """
   Cast the input param into an ActionSpec.
 
-  The ActionSpec tuple has the following elements: module, module options,
-  module children.
+  The ActionSpec tuple has the following elements: module, props, children.
 
   If children are passed as an option, use them.  Otherwise, use the values
   that are hard-coded into the `children` callback.
   """
-  def action_spec({module, opts, children}), do: {module, opts, children}
-  def action_spec({module, opts}), do: {module, opts, Base.children(module, %{}, %{})}
+  def action_spec({module, props, children}), do: {module, props, children}
+  def action_spec({module, props}), do: {module, props, Base.children(module, %{}, %{})}
   def action_spec(module), do: {module, %{}, Base.children(module, %{}, %{})}
 end

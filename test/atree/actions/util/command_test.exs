@@ -2,29 +2,29 @@ defmodule Atree.Actions.Util.CommandTest do
   use ExUnit.Case
 
   alias Atree.Actions.Util.Command
+  alias Atree.Data.ExecPlan
 
   describe "Export" do
     test "Export Guide" do
-      assert Atree.Executor.Export.with_action({Command, %{header: "asdf", body: "qwer"}})
+      assert Atree.Executor.Export.auth_action({Command, %{header: "asdf", body: "qwer"}})
     end
 
     test "Bad Props" do
-      ctx = Atree.Executor.Export.with_action({Command, %{header: "asdf", body: "qwer"}})
+      ctx = Atree.Executor.Export.auth_action({Command, %{header: "asdf", body: "qwer"}})
       log = List.first(ctx.log)
       refute log.report.valid?
     end
 
     test "No Props" do
-      ctx = Atree.Executor.Export.with_action({Command, %{}})
+      ctx = Atree.Executor.Export.auth_action({Command, %{}})
       log = List.first(ctx.log)
       refute log.report.valid?
     end
 
     test "Good Props" do
       ctx =
-        Atree.Executor.Export.with_action(
-          {Command, %{instruction: "run whoami", command: "whoami"}}
-        )
+        {Command, %{instruction: "run whoami", command: "whoami"}}
+        |> Atree.Executor.Export.auth_action()
 
       log = List.first(ctx.log)
       assert log.report.valid?
@@ -40,14 +40,14 @@ defmodule Atree.Actions.Util.CommandTest do
     end
 
     test "Good Props" do
-      ctx = Atree.Executor.Run.with_action({Command, %{command: "mkdir -p #{@tstdir}", creates: @tstdir}})
+      ctx = Atree.Executor.Run.auth_action({Command, %{command: "mkdir -p #{@tstdir}", creates: @tstdir}})
       log = List.first(ctx.log)
       assert ctx.halted
       assert log.test == {:error, ["Invalid props"]}
     end
 
     test "Bad Props" do
-      ctx = Atree.Executor.Run.with_action({Command, %{command: "_bad_command_", creates: @tstdir}})
+      ctx = Atree.Executor.Run.auth_action({Command, %{command: "_bad_command_", creates: @tstdir}})
       log = List.first(ctx.log)
       assert ctx.halted
       refute log.test == :ok

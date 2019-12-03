@@ -15,7 +15,9 @@ defmodule Atree.Executor.Export do
   alias Atree.Executor.Util.Helpers
   use Atree.Executor.Util.ExecTree
 
-  def exec_log(mod, ctx, props) do
+  def exec_log(ctx, plan) do 
+    mod = plan.action
+    props = plan.props
     report = Base.inspect(mod, ctx, props)
     new_ctx = report.ctx || ctx
     new_props = report.props || props

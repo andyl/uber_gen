@@ -12,8 +12,8 @@ defmodule Atree.Actions.Phx.LiveView do
 
   def children(_ctx, _opts) do
     "#{:code.priv_dir(:uber_gen)}/playbooks/live_view.yaml"
-    |> Util.Children.file_data()
-    |> Atree.Data.ChildSpec.to_childspec()
+    |> Util.Playbook.file_data()
+    |> Atree.Data.ExecPlan.build()
   end
 
   def guide(_ctx, _opts) do

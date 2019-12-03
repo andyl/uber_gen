@@ -25,13 +25,13 @@ defmodule Atree.Action do
   | command/2  | ctx, opts | new_ctx  | executable action code |
   | guide/2    | ctx, opts | fragment | action documentation   |
   | test/2     | ctx, opts | status   | action test            |
-  | children/2 | ctx, opts | list     | list of child specs    |
+  | children/2 | ctx, opts | list     | list of children       |
   | inspect/2  | ctx, opts | report   | prop validation        |
 
   All of these callbacks are optional for any given action.
   """
 
-  alias Atree.Data.{Ctx, Report, Guide, ChildSpec}
+  alias Atree.Data.{Ctx, Report, Guide}
 
   @doc """
   Action command.  
@@ -59,7 +59,7 @@ defmodule Atree.Action do
 
   The default children can be over-ridden by Playbooks and in parent actions.
   """
-  @callback children(Ctx.t(), map()) :: list(ChildSpec.t)
+  @callback children(Ctx.t(), map()) :: list()
 
   @doc """
   Perform casting and validation on Props.

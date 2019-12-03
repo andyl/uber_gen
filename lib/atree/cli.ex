@@ -12,12 +12,12 @@ defmodule Atree.Cli do
   # --------------------------------------------------
 
   def process(data = %{method: "export"}) do
-    Atree.Executor.Export.with_action(data.context, data.action)
+    Atree.Executor.Export.auth_action(data.context, data.action)
     |> generate_outputs(data)
   end
 
   def process(data = %{method: "run"}) do
-    Atree.Executor.Run.with_action(data.context, data.action)
+    Atree.Executor.Run.auth_action(data.context, data.action)
     |> generate_outputs(data)
   end
 
@@ -55,6 +55,8 @@ defmodule Atree.Cli do
     list(data, "actions")
   end
 
+  # --------------------------------------------------
+
   def generate_outputs(ctx, data) do
     data.writes
     |> Enum.each(&write_file(&1, ctx))
@@ -69,6 +71,8 @@ defmodule Atree.Cli do
     data = ctx |> process_module.generate()
     File.write(filename, data)
   end
+
+  # --------------------------------------------------
 
   defp setup_args(args) do
     method = args.method || "help"
@@ -122,8 +126,8 @@ defmodule Atree.Cli do
       Regex.match?(~r/(\.json)$|(\.yaml)$/, args.action) -> 
 
         Atree.Util.Registry.Playbooks.find(args.action)
-        |> Util.Children.file_data()
-        |> Atree.Data.ChildSpec.to_childspec()
+        |> Util.Playbook.file_data()
+        |> Atree.Data.ExecPlan.build()
       true ->
         mod = Atree.Util.Registry.Actions.find(args.action)
 

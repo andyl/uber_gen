@@ -6,7 +6,7 @@ defmodule Atree.Presentor.ActionTreeTest do
   end
 
   test "Run Command" do
-    assert Atree.Executor.Run.with_action(Atree.Actions.Util.Null)
+    assert Atree.Executor.Run.auth_action(Atree.Actions.Util.Null)
            |> Atree.Presentor.ActionTree.generate()
   end
 end
