@@ -17,13 +17,12 @@ defmodule Atree.Executor.Util.Base do
   """
 
   use Atree.Data.Ctx
-  alias Atree.Executor.Util.Base
 
   @doc false
   defmacro __using__(_opts) do
     quote do
       use Atree.Data.Ctx
-      alias Atree.Executor.Util.Base
+      alias Atree.Executor.Util.Base  
 
       defp default_ctx do
         %Ctx{}
@@ -53,16 +52,4 @@ defmodule Atree.Executor.Util.Base do
       do: apply(module, :inspect, [params, opts]),
       else: %Atree.Data.Report{}
   end
-
-  @doc """
-  Cast the input param into an ActionSpec.
-
-  The ActionSpec tuple has the following elements: module, props, children.
-
-  If children are passed as an option, use them.  Otherwise, use the values
-  that are hard-coded into the `children` callback.
-  """
-  def action_spec({module, props, children}), do: {module, props, children}
-  def action_spec({module, props}), do: {module, props, Base.children(module, %{}, %{})}
-  def action_spec(module), do: {module, %{}, Base.children(module, %{}, %{})}
 end

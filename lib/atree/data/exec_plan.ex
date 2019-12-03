@@ -1,6 +1,17 @@
 defmodule Atree.Data.ExecPlan do
   @moduledoc """
-  Atree plan.
+  Atree ExecPlan.
+
+  The ExecPlan is a bundle of attributes used to execute an action.
+
+    | Attribute | Desc          | Purpose                                |
+    |-----------|---------------|----------------------------------------|
+    | action    | action module | specifies which action should be used  |
+    | props     | action props  | passed to action for execution         |
+    | auth      | auth spec     | determines if the action should be run |
+    | children  | child list    | list of action children                |
+
+  Use `ExecPlan#build` to generate an ExecPlan.
   """
 
   alias Atree.Data.{ExecPlan}
@@ -16,8 +27,9 @@ defmodule Atree.Data.ExecPlan do
           children: list()
         }
 
-  # --------------------------------------------------
-
+  @doc """
+  Creates an ExecPlan.
+  """
   def build(input), do: input |> to_plan()
 
   defp to_plan(input) when is_atom(input) do

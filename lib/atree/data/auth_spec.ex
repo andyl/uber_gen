@@ -1,6 +1,6 @@
 defmodule Atree.Data.AuthSpec do
   @moduledoc """
-  Atree AuthSpec.
+  Atree Auth.
   """
 
   alias Atree.Data.{AuthSpec}

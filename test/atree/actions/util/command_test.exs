@@ -2,7 +2,6 @@ defmodule Atree.Actions.Util.CommandTest do
   use ExUnit.Case
 
   alias Atree.Actions.Util.Command
-  alias Atree.Data.ExecPlan
 
   describe "Export" do
     test "Export Guide" do
