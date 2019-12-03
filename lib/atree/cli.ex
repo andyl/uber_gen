@@ -12,12 +12,12 @@ defmodule Atree.Cli do
   # --------------------------------------------------
 
   def process(data = %{method: "export"}) do
-    Atree.Executor.Export.auth_action(data.context, data.action)
+    Atree.Executor.Export.with_action(data.context, data.action)
     |> generate_outputs(data)
   end
 
   def process(data = %{method: "run"}) do
-    Atree.Executor.Run.auth_action(data.context, data.action)
+    Atree.Executor.Run.with_action(data.context, data.action)
     |> generate_outputs(data)
   end
 

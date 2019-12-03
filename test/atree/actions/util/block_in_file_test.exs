@@ -9,25 +9,25 @@ defmodule Atree.Actions.Util.BlockInFileTest do
 
   describe "Export" do
     test "Export Guide" do
-      assert Atree.Executor.Export.auth_action({BlockInFile, %{text_block: "asdf", target_file: "qwer"}})
+      assert Atree.Executor.Export.with_action({BlockInFile, %{text_block: "asdf", target_file: "qwer"}})
     end
 
     test "Bad Props" do
-      ctx = Atree.Executor.Export.auth_action({BlockInFile, %{header: "asdf", body: "qwer"}})
+      ctx = Atree.Executor.Export.with_action({BlockInFile, %{header: "asdf", body: "qwer"}})
       log = List.first(ctx.log)
       refute log.report.valid?
       refute ctx.halted
     end
 
     test "No Props" do
-      ctx = Atree.Executor.Export.auth_action({BlockInFile, %{}})
+      ctx = Atree.Executor.Export.with_action({BlockInFile, %{}})
       log = List.first(ctx.log)
       refute log.report.valid?
     end
 
     test "Good Props" do
       ctx =
-        Atree.Executor.Export.auth_action(
+        Atree.Executor.Export.with_action(
           {BlockInFile, %{text_block: "run whoami", target_file: "whoami"}}
         )
 
@@ -45,14 +45,14 @@ defmodule Atree.Actions.Util.BlockInFileTest do
     end
 
     test "Bad Props" do
-      ctx = Atree.Executor.Run.auth_action({BlockInFile, %{command: "mkdir -p #{@tgtfile}"}})
+      ctx = Atree.Executor.Run.with_action({BlockInFile, %{command: "mkdir -p #{@tgtfile}"}})
       log = List.first(ctx.log)
       assert ctx.halted
       assert log.test == {:error, ["Invalid props"]}
     end
 
     test "Good Props, No File" do
-      ctx = Atree.Executor.Run.auth_action({BlockInFile, %{text_block: "block", target_file: @tgtfile}})
+      ctx = Atree.Executor.Run.with_action({BlockInFile, %{text_block: "block", target_file: @tgtfile}})
       log = List.first(ctx.log)
       assert ctx.halted
       refute log.test == :ok
