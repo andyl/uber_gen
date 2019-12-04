@@ -12,11 +12,11 @@ defmodule Atree.Executor.Export do
 
   """
 
-  alias Atree.Data.ExecPlan
+  alias Atree.Data.PlanAction
   alias Atree.Executor.Util.Helpers
   use Atree.Executor.Util.ExecTree
 
-  def exec_log(ctx, %ExecPlan{action: act, props: props}) do 
+  def exec_log(ctx, %PlanAction{action: act, props: props}) do 
     report = Base.inspect(act, ctx, props)
     ctx_v2 = report.ctx || ctx
     xprops = report.props || props

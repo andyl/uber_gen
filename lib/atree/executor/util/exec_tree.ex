@@ -14,9 +14,9 @@ defmodule Atree.Executor.Util.ExecTree do
   The `action` argument can be:
   - an action module
   - a tuple {ActionModule, %{prop1: "value", prop2: "value"}
-  - an ExecPlan
+  - an PlanAction
 
-  See `ExecPlan#build` for more info...
+  See `PlanAction#build` for more info...
 
   Each `Executor` module implements a callback `exec_log` with an execution
   strategy, using the `guide`, `command` and `test` functions to achieve some
@@ -25,7 +25,7 @@ defmodule Atree.Executor.Util.ExecTree do
 
   use Atree.Data.Ctx
   alias Atree.Actions
-  alias Atree.Data.{ExecPlan, Log}
+  alias Atree.Data.{PlanAction, Log}
   alias Atree.Executor.Util.Auth
 
   @doc false
@@ -35,6 +35,8 @@ defmodule Atree.Executor.Util.ExecTree do
 
       def with(input) do
       end
+
+      # ------------------------------------------------------------------
 
       def with_playbook(playbook) do
       end
@@ -47,7 +49,7 @@ defmodule Atree.Executor.Util.ExecTree do
       end
 
       def with_action(ctx, action_list) when is_list(action_list) do
-        plan = %ExecPlan{action: Actions.Util.Null, children: action_list}
+        plan = %PlanAction{action: Actions.Util.Null, children: action_list}
 
         ctx
         |> invoke(plan)
@@ -56,7 +58,7 @@ defmodule Atree.Executor.Util.ExecTree do
 
       def with_action(ctx, action) do
         ctx
-        |> invoke(ExecPlan.build(action))
+        |> invoke(PlanAction.build(action))
         |> package()
       end
 
@@ -66,7 +68,7 @@ defmodule Atree.Executor.Util.ExecTree do
         if Auth.check(ctx, plan), do: exec(ctx, plan), else: skip(ctx, plan)
       end
 
-      defp exec(ctx, plan = %ExecPlan{children: []}) do
+      defp exec(ctx, plan = %PlanAction{children: []}) do
         exec_log(ctx, plan)
       end
 
@@ -75,7 +77,7 @@ defmodule Atree.Executor.Util.ExecTree do
 
         {cx1, logs} =
           plan.children
-          |> Enum.map(&ExecPlan.build/1)
+          |> Enum.map(&PlanAction.build/1)
           |> Enum.reduce({cx0, []}, &process/2)
 
         {cx1, %{log | children: logs}}

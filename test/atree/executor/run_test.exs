@@ -1,7 +1,7 @@
 defmodule Atree.Executor.RunTest do
   use ExUnit.Case
 
-  alias Atree.Data.ExecPlan
+  alias Atree.Data.PlanAction
 
   test "Hello World" do
     assert 1 == 1
@@ -12,7 +12,7 @@ defmodule Atree.Executor.RunTest do
   end
 
   test "CtxAssign" do
-    plan = %ExecPlan{action: Atree.Actions.Ctx.Assign, props: %{a: 1, b: 2}}
+    plan = %PlanAction{action: Atree.Actions.Ctx.Assign, props: %{a: 1, b: 2}}
     ctx = Atree.Executor.Run.with_action(plan)
     assert ctx.assigns.a == 1
     assert ctx.assigns.b == 2

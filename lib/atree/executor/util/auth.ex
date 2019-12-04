@@ -7,7 +7,7 @@ defmodule Atree.Executor.Util.Auth do
   - unless
   """
 
-  def check(ctx, plan = %Atree.Data.ExecPlan{auth: auth}) do
+  def check(ctx, plan = %Atree.Data.PlanAction{auth: auth}) do
     validate(ctx, plan, auth)
   end
 

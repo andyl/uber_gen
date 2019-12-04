@@ -127,7 +127,7 @@ defmodule Atree.Cli do
 
         Atree.Util.Registry.Playbooks.find(args.action)
         |> Util.Playbook.file_data()
-        |> Atree.Data.ExecPlan.build()
+        |> Atree.Data.PlanAction.build()
       true ->
         mod = Atree.Util.Registry.Actions.find(args.action)
 
