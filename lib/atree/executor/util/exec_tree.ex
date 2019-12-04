@@ -6,17 +6,19 @@ defmodule Atree.Executor.Util.ExecTree do
 
       use Atree.Executor.Util.ExecTree
 
-  The key method `with_action` can be called by client-code:
+  The key method `with_input` can be called by client-code:
 
-      context1 = Atree.Executor.Export.with_action(MyAction)
-      context2 = Atree.Executor.Run.with_action(MyAction)
+      context1 = Atree.Executor.Export.with_input(MyAction)
+      context2 = Atree.Executor.Run.with_input(MyAction)
 
   The `action` argument can be:
   - an action module
   - a tuple {ActionModule, %{prop1: "value", prop2: "value"}
   - an PlanAction
+  - a playbook
+  - a PlanPlaybook
 
-  See `PlanAction#build` for more info...
+  See `Plan#expand` for more info...
 
   Each `Executor` module implements a callback `exec_log` with an execution
   strategy, using the `guide`, `command` and `test` functions to achieve some
@@ -25,7 +27,7 @@ defmodule Atree.Executor.Util.ExecTree do
 
   use Atree.Data.Ctx
   alias Atree.Actions
-  alias Atree.Data.{PlanAction, Log}
+  alias Atree.Data.{Plan, PlanAction, Log}
   alias Atree.Executor.Util.Auth
 
   @doc false
@@ -33,51 +35,48 @@ defmodule Atree.Executor.Util.ExecTree do
     quote do
       use Atree.Executor.Util.Base
 
-      def with(input) do
-      end
-
-      # ------------------------------------------------------------------
-
-      def with_playbook(playbook) do
-      end
-
-      # ------------------------------------------------------------------
-
-      def with_action(action) do
+      def with_input(input) do
         default_ctx()
-        |> with_action(action)
+        |> with_input(input)
       end
 
-      def with_action(ctx, action_list) when is_list(action_list) do
-        plan = %PlanAction{action: Actions.Util.Null, children: action_list}
+      def with_input(ctx, input_list) when is_list(input_list) do
+        plan = %PlanAction{action: Actions.Util.Null, children: input_list}
 
         ctx
         |> invoke(plan)
         |> package()
       end
 
-      def with_action(ctx, action) do
+      def with_input(ctx, input) do
         ctx
-        |> invoke(PlanAction.build(action))
+        |> invoke(Plan.expand(input))
         |> package()
       end
 
       # ------------------------------------------------------------------
 
-      defp invoke(ctx, plan) do
-        if Auth.check(ctx, plan), do: exec(ctx, plan), else: skip(ctx, plan)
+
+      # ------------------------------------------------------------------
+
+      defp invoke(ctx, plan_action = %PlanAction{}) do
+        if Auth.check(ctx, plan_action) do
+          exec(ctx, plan_action)
+        else 
+          skip(ctx, plan_action)
+        end
       end
 
       defp exec(ctx, plan = %PlanAction{children: []}) do
         exec_log(ctx, plan)
       end
 
-      defp exec(ctx, plan) do
+      defp exec(ctx, plan = %PlanAction{}) do
         {cx0, log} = exec_log(ctx, plan)
 
         {cx1, logs} =
           plan.children
-          |> Enum.map(&PlanAction.build/1)
+          |> Enum.map(&Plan.expand/1)
           |> Enum.reduce({cx0, []}, &process/2)
 
         {cx1, %{log | children: logs}}

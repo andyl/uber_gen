@@ -1,0 +1,7 @@
+---
+- action: Util.TextBlock
+  props:
+    header: MIXED1
+    body: MIXED1_BODY
+  children:
+    - playbook: mixed2.yaml

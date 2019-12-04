@@ -7,7 +7,7 @@ defmodule Atree.Executor.Export do
 
   To generate output, pipe the result into an `Atree.Presentor`:
 
-      Atree.Executor.Export.with_action(Atree.Actions.MyAction)
+      Atree.Executor.Export.with_input(Atree.Actions.MyAction)
       |> Atree.Presentor.Markdown.to_stdout()
 
   """

@@ -240,9 +240,11 @@
 - [x] Implement StockAction
 - [x] Implement StockPlaybook
 
-## TBD
+## 2019 Dec 04 Wed
 
-- [ ] Implement: Playbooks as Children
+- [x] Implement: Playbooks as Children
+
+## TBD
 
 - [ ] TAILOR/LV: quit unless proper elixir env
 - [ ] TAILOR/LV: quit unless in-project
