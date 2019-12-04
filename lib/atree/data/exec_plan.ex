@@ -85,13 +85,4 @@ defmodule Atree.Data.ExecPlan do
 
     "Elixir.Atree.Actions.#{base}" |> String.to_existing_atom()
   end
-
-  # defp to_plan(act, props, auths, []) do
-  #   %plan{action: act, props: props, auth: auths, children: []}
-  # end
-  #
-  # defp to_plan(act, props, auths, children) do
-  #   offspring = children |> Enum.map(&to_plan(&1))
-  #   %plan{action: act, props: props, auth: auths, children: offspring}
-  # end
 end

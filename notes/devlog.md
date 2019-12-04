@@ -236,8 +236,13 @@
 - [x] AUTH: add 'when' handler
 - [x] AUTH: add 'unless' handler
 - [x] AUTH: update documentation
+- [x] Design: Playbooks as Children
+- [x] Implement StockAction
+- [x] Implement StockPlaybook
 
 ## TBD
+
+- [ ] Implement: Playbooks as Children
 
 - [ ] TAILOR/LV: quit unless proper elixir env
 - [ ] TAILOR/LV: quit unless in-project

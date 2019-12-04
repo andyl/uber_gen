@@ -33,6 +33,14 @@ defmodule Atree.Executor.Util.ExecTree do
     quote do
       use Atree.Executor.Util.Base
 
+      def with(input) do
+      end
+
+      def with_playbook(playbook) do
+      end
+
+      # ------------------------------------------------------------------
+
       def with_action(action) do
         default_ctx()
         |> with_action(action)
@@ -51,6 +59,8 @@ defmodule Atree.Executor.Util.ExecTree do
         |> invoke(ExecPlan.build(action))
         |> package()
       end
+
+      # ------------------------------------------------------------------
 
       defp invoke(ctx, plan) do
         if Auth.check(ctx, plan), do: exec(ctx, plan), else: skip(ctx, plan)
