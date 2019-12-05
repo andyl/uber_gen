@@ -47,9 +47,9 @@ defmodule Atree.Executor.Util.Base do
     if module.has_children?(), do: apply(module, :children, [ctx, opts]), else: []
   end
 
-  def inspect(module, params, opts) do
-    if module.has_inspect?(),
-      do: apply(module, :inspect, [params, opts]),
+  def screen(module, params, opts) do
+    if module.has_screen?(),
+      do: apply(module, :screen, [params, opts]),
       else: %Atree.Data.Report{}
   end
 end

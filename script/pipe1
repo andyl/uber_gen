@@ -4,6 +4,7 @@ cmd="mix atree export | mix atree export - $*"
 
 cat << EOF >&2
 ---------------------------------------
+ SCRIPT: $0
 COMMAND: $cmd
 Demonstrate bash pipelining with one pipe element
 ---------------------------------------

@@ -15,7 +15,7 @@ defmodule Atree.Actions.Util.TextBlock do
     struct(Atree.Data.Guide, props)
   end
 
-  def inspect(ctx, props) do
+  def screen(ctx, props) do
     %__MODULE__{}
     |> cast(props, [:header, :body])
     |> validate_one([:header, :body])

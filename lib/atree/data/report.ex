@@ -1,7 +1,7 @@
 defmodule Atree.Data.Report do
 
   @moduledoc """
-  Return data from Action#inspect/2
+  Return data from Action#screen/2
 
   Add this line to your module:
 
@@ -12,7 +12,7 @@ defmodule Atree.Data.Report do
   - changeset: an updated changeset
   """
 
-  @derive Jason.Encoder
+  @derive {Jason.Encoder, only: [:props, :valid?, :errors]}
 
   alias Atree.Data.Report
 

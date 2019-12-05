@@ -4,6 +4,7 @@ cmd="mix atree export test2.yaml $*"
 
 cat << EOF >&2
 ---------------------------------------
+ SCRIPT: $0
 COMMAND: $cmd
 Export Playbook
 ---------------------------------------

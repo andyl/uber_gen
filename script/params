@@ -4,6 +4,7 @@ cmd="mix atree export util.text_block -p header='asdf' -p body='qwer' $*"
 
 cat << EOF >&2
 ---------------------------------------
+ SCRIPT: $0
 COMMAND: $cmd
 Demonstrate use of parameters with text_block
 ---------------------------------------

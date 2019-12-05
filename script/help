@@ -4,6 +4,7 @@ cmd="mix atree help $*"
 
 cat << EOF >&2
 ---------------------------------------
+ SCRIPT: $0
 COMMAND: $cmd
 Run help comand
 ---------------------------------------

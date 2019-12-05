@@ -4,6 +4,7 @@ cmd="mix atree help util.text_block $*"
 
 cat << EOF >&2
 ---------------------------------------
+ SCRIPT: $0
 COMMAND: $cmd
 Run help comand for an action
 ---------------------------------------

@@ -4,6 +4,7 @@ cmd="mix atree export phx.live_view $*"
 
 cat << EOF >&2
 ---------------------------------------
+ SCRIPT: $0
 COMMAND: $cmd
 Export LiveView Install Guide to Json
 ---------------------------------------

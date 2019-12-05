@@ -11,7 +11,7 @@ defmodule Atree.Actions.Util.Command do
     command: [], 
     creates: [type: [:string]]
 
-  def inspect(ctx, props) do
+  def screen(ctx, props) do
     %__MODULE__{}
     |> cast(props, [:header, :instruction, :command, :creates])
     |> validate_required([:command])

@@ -117,7 +117,7 @@ updated dynamically.
 
 Actions implement a behavior with standard set of callback functions:
 
-- Inspect - checks property validity
+- Screen - checks property validity
 - Guide - emits a guide fragment
 - Command - executes a command
 - Test - tests command results

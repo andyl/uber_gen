@@ -4,6 +4,7 @@ cmd="mix atree export test.test2 --output action_tree $*"
 
 cat << EOF >&2
 ---------------------------------------
+ SCRIPT: $0
 COMMAND: $cmd
 Export Nested Test to ActionTree
 ---------------------------------------

@@ -22,7 +22,7 @@ defmodule Atree.Action do
 
   | Callback   | Arg(s)     | Returns  | Purpose                |
   |------------|------------|----------|------------------------|
-  | inspect/2  | ctx, props | report   | prop validation        |
+  | screen/2   | ctx, props | report   | prop validation        |
   | command/2  | ctx, props | new_ctx  | executable action code |
   | guide/2    | ctx, props | fragment | action documentation   |
   | test/2     | ctx, props | status   | action test            |
@@ -72,11 +72,11 @@ defmodule Atree.Action do
 
   You can optionally update the ctx assigns.
 
-  See the Executor modules (Run, Export) to see how the inspect function is used.
+  See the Executor modules (Run, Export) to see how the screen function is used.
   """
-  @callback inspect(Ctx.t(), map()) :: Report.t()
+  @callback screen(Ctx.t(), map()) :: Report.t()
 
-  @optional_callbacks command: 2, guide: 2, test: 2, children: 2, inspect: 2
+  @optional_callbacks command: 2, guide: 2, test: 2, children: 2, screen: 2
 
   @doc false
   defmacro __using__(props \\ []) do
@@ -119,7 +119,7 @@ defmodule Atree.Action do
       @doc false
       def has_children?, do: has?({:children, 2})
       @doc false
-      def has_inspect?, do: has?({:inspect, 2})
+      def has_screen?, do: has?({:screen, 2})
 
       defp func_list, do: __MODULE__.__info__(:functions)
       defp has?(tuple), do: Enum.any?(func_list(), &(&1 == tuple))

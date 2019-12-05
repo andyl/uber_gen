@@ -14,7 +14,7 @@ defmodule Atree.Actions.Ctx.Assign do
       {Ctx.Assign, %{a: 1, b: 2), []}
 
   """
-  def inspect(ctx, opts) do
+  def screen(ctx, opts) do
     ctx2 = Enum.reduce(opts, ctx, fn({key, val}, acc) -> assign(acc, key, val) end)
     %Atree.Data.Report{ctx: ctx2}
   end

@@ -83,7 +83,7 @@ defmodule Atree.Executor.Util.ExecTree do
           |> Enum.map(&Plan.expand/1)
           |> Enum.reduce({cx0, []}, &process/2)
 
-        {cx1, %{log | children: logs}}
+        {cx1, %Log{log | children: logs}}
       end
 
       defp skip(ctx, plan) do
