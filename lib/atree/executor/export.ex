@@ -7,25 +7,28 @@ defmodule Atree.Executor.Export do
 
   To generate output, pipe the result into an `Atree.Presentor`:
 
-      Atree.Executor.Export.guide(MyModule)
+      Atree.Executor.Export.with_input(Atree.Actions.MyAction)
       |> Atree.Presentor.Markdown.to_stdout()
 
   """
 
+  alias Atree.Data.PlanAction
   alias Atree.Executor.Util.Helpers
   use Atree.Executor.Util.ExecTree
 
-  def exec_log(ctx, plan) do 
-    mod = plan.action
-    props = plan.props
-    report = Base.inspect(mod, ctx, props)
-    new_ctx = report.ctx || ctx
-    new_props = report.props || props
+  def exec_log(ctx, %PlanAction{action: act, props: props}) do 
+    report = Base.inspect(act, ctx, props)
+    ctx_v2 = report.ctx || ctx
+    xprops = report.props || props
+    xguide = Helpers.gen_guide(report, act, ctx_v2, xprops)
 
-    guide = Helpers.gen_guide(report, mod, new_ctx, new_props)
+    log = %{
+      action: act, 
+      guide: xguide, 
+      report: %{report | changeset: nil},
+      children: []
+    }
 
-    log = %{action: mod, guide: guide, report: %{report|changeset: %{}}, children: []}
-
-    {new_ctx, log}
+    {ctx_v2, log}
   end
 end

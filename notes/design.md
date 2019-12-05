@@ -26,6 +26,9 @@
 - [ ] What are the use-cases for polytrees (monitoring, alerting)
 - [ ] What are the outside systems could reference an Atree? (bidding)
 
+- [ ] How can atrees be integrated with social media?
+- [ ] How can atrees be a form of media?
+
 ### Futures
 
 - [ ] WebUI: Design WebUI
@@ -57,6 +60,50 @@
 
 - [ ] Interop: calendar and events
 - [ ] Interop: IAM
+
+## Intermixing Actions and Playbooks
+
+Playbook Source:
+
+    action: TextBlock
+    props: 
+      header: INTRO TEXT
+      body: BODY TEXT
+    children:
+      - playbook: bingo.json
+        auth:
+          when: SKY=BLUE
+      - action: TextBlock
+        props:
+          header: INTRO
+          body: BODY
+
+Children Sources:
+
+    [
+      {TextBlock, %{header: INTRO, body: TEXT}, [ bingo.json, TextBlock]},
+      bongo.yaml,
+      %{playbook: "bingo.yaml", auth: %{when: SKY=BLUE}},
+      Command
+    ]
+
+CLI Sources:
+
+    atree export bongo.yaml
+    atree export TextBlock
+
+Dataflow:
+
+- StockAction
+- StockPlaybook
+- expand
+    
+Refactoring Points:
+
+- cli.ex
+- ExecPlan#build
+- ExecTree
+- ExecPlan
 
 ## CLI
 

@@ -1,8 +1,8 @@
-defmodule Atree.Data.ExecPlan do
+defmodule Atree.Data.PlanAction do
   @moduledoc """
-  Atree ExecPlan.
+  Atree PlanAction.
 
-  The ExecPlan is a bundle of attributes used to execute an action.
+  The PlanAction is a bundle of attributes used to execute an action.
 
     | Attribute | Desc          | Purpose                                |
     |-----------|---------------|----------------------------------------|
@@ -11,16 +11,16 @@ defmodule Atree.Data.ExecPlan do
     | auth      | auth spec     | determines if the action should be run |
     | children  | child list    | list of action children                |
 
-  Use `ExecPlan#build` to generate an ExecPlan.
+  Use `PlanAction#build` to generate an PlanAction.
   """
 
-  alias Atree.Data.{ExecPlan}
+  alias Atree.Data.{Plan, PlanAction}
 
   @derive Jason.Encoder
 
   defstruct action: nil, props: nil, auth: nil, children: []
 
-  @type t :: %ExecPlan{
+  @type t :: %PlanAction{
           action: any(),
           props: any(),
           auth: any(),
@@ -28,16 +28,16 @@ defmodule Atree.Data.ExecPlan do
         }
 
   @doc """
-  Creates an ExecPlan.
+  Creates an PlanAction.
   """
   def build(input), do: input |> to_plan()
 
   defp to_plan(input) when is_atom(input) do
-    %ExecPlan{action: expand(input)}
+    %PlanAction{action: expand(input)}
   end
 
   defp to_plan({mod, props}) when is_atom(mod) and is_map(props) do
-    %ExecPlan{
+    %PlanAction{
       action: mod |> expand(),
       props: props
     }
@@ -45,23 +45,23 @@ defmodule Atree.Data.ExecPlan do
 
   defp to_plan({mod, props, children})
        when is_atom(mod) and is_map(props) and is_list(children) do
-    %ExecPlan{
+    %PlanAction{
       action: mod |> expand(),
       props: props,
       children: children |> Enum.map(&to_plan/1)
     }
   end
 
-  defp to_plan(input = %ExecPlan{}), do: input
+  defp to_plan(input = %PlanAction{}), do: input
 
   defp to_plan(input) when is_map(input) do
     clist = input[:children] || []
 
-    %ExecPlan{
+    %PlanAction{
       action: input[:action] |> expand(),
       props: input[:props] || input[:params] || %{},
       auth: input[:auths] || input[:auth] || [],
-      children: Enum.map(clist, &to_plan/1)
+      children: Enum.map(clist, &Plan.expand/1)
     }
   end
 
@@ -85,13 +85,4 @@ defmodule Atree.Data.ExecPlan do
 
     "Elixir.Atree.Actions.#{base}" |> String.to_existing_atom()
   end
-
-  # defp to_plan(act, props, auths, []) do
-  #   %plan{action: act, props: props, auth: auths, children: []}
-  # end
-  #
-  # defp to_plan(act, props, auths, children) do
-  #   offspring = children |> Enum.map(&to_plan(&1))
-  #   %plan{action: act, props: props, auth: auths, children: offspring}
-  # end
 end

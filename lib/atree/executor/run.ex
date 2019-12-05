@@ -32,6 +32,7 @@ defmodule Atree.Executor.Run do
       action: mod,
       test: vtest,
       guide: guide,
+      report: %{report | changeset: nil},
       children: []
     }
 

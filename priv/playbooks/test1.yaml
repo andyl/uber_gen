@@ -1,5 +1,5 @@
 ---
 - action: Util.TextBlock
   props:
-    header: HEADER
-    body: BODY
+    header: TEST1
+    body: TEST1_BODY

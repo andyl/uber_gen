@@ -12,12 +12,12 @@ defmodule Atree.Cli do
   # --------------------------------------------------
 
   def process(data = %{method: "export"}) do
-    Atree.Executor.Export.with_action(data.context, data.action)
+    Atree.Executor.Export.with_input(data.context, data.action)
     |> generate_outputs(data)
   end
 
   def process(data = %{method: "run"}) do
-    Atree.Executor.Run.with_action(data.context, data.action)
+    Atree.Executor.Run.with_input(data.context, data.action)
     |> generate_outputs(data)
   end
 
@@ -127,7 +127,7 @@ defmodule Atree.Cli do
 
         Atree.Util.Registry.Playbooks.find(args.action)
         |> Util.Playbook.file_data()
-        |> Atree.Data.ExecPlan.build()
+        |> Atree.Data.PlanAction.build()
       true ->
         mod = Atree.Util.Registry.Actions.find(args.action)
 

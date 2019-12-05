@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+cmd="mix atree export mixed1.yaml $*"
+
+cat << EOF >&2
+---------------------------------------
+COMMAND: $cmd
+Demonstrate playbook which mixes playbooks and actions.
+---------------------------------------
+EOF
+
+eval $cmd
