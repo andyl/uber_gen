@@ -12,6 +12,7 @@ defmodule Atree.Executor.Export do
 
   """
 
+  alias Atree.Data.Log
   alias Atree.Data.PlanAction
   alias Atree.Executor.Util.Helpers
   use Atree.Executor.Util.ExecTree
@@ -22,7 +23,7 @@ defmodule Atree.Executor.Export do
     xprops = report.props || props
     xguide = Helpers.gen_guide(report, act, ctx_v2, xprops)
 
-    log = %{
+    log = %Log{
       action: act, 
       guide: xguide, 
       report: %{report | changeset: nil},

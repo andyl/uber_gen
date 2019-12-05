@@ -4,6 +4,7 @@ cmd="mix atree list $*"
 
 cat << EOF >&2
 ---------------------------------------
+ SCRIPT: $0
 COMMAND: $cmd
 List all Actions to stdout
 ---------------------------------------

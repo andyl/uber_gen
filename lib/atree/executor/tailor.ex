@@ -4,6 +4,7 @@ defmodule Atree.Executor.Tailor do
   Tailors an Action guide to your code-base.
   """
 
+  alias Atree.Data.Log
   alias Atree.Data.PlanAction
   alias Atree.Executor.Util.Helpers
   use Atree.Executor.Util.ExecTree
@@ -14,7 +15,7 @@ defmodule Atree.Executor.Tailor do
     xprops = report.props || props
     xguide = Helpers.gen_guide(report, act, ctx_v2, xprops)
 
-    log = %{
+    log = %Log{
       action: act,
       guide: xguide,
       report: report,

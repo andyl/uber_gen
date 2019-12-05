@@ -12,7 +12,7 @@ defmodule Atree.Data.Report do
   - changeset: an updated changeset
   """
 
-  @derive Jason.Encoder
+  @derive {Jason.Encoder, only: [:props, :valid?, :errors]}
 
   alias Atree.Data.Report
 

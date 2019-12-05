@@ -252,10 +252,8 @@
 
 ## TBD
 
-- [ ] children handle a single child
 - [ ] JSON output order items put children last
-
-- [ ] Document YAML Multiline https://yaml-multiline.info/
+- [ ] children handle a single child
 
 - [ ] TAILOR/LV: quit unless proper elixir env
 - [ ] TAILOR/LV: quit unless in-project
@@ -264,6 +262,8 @@
 
 - [ ] RUN executor
 - [ ] REPL executor
+
+- [ ] Document YAML Multiline https://yaml-multiline.info/
 
 - [ ] Write tests
 - [ ] Documentation (Actions, Playbook comments, Action callbacks)

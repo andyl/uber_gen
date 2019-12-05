@@ -93,6 +93,7 @@ defmodule Atree.Cli do
   defp setup_context(%{context: "stdin"}) do
     :stdio
     |> IO.read(:all)
+    |> IO.inspect()
     |> Jason.decode!()
     |> Util.Svc.convert_to_atom_map()
   end
