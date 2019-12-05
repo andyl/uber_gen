@@ -19,7 +19,7 @@ defmodule Atree.Executor.Run do
   def exec_log(ctx, plan) do
     mod = plan.action
     props = plan.props
-    report = Base.inspect(mod, ctx, props) 
+    report = Base.screen(mod, ctx, props) 
     cx0 = report.ctx || ctx
     cx1 = if report.valid?, do: Base.command(mod, cx0, props), else: cx0
     new_props = report.props || props

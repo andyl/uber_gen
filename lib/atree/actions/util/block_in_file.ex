@@ -13,7 +13,7 @@ defmodule Atree.Actions.Util.BlockInFile do
     target_file: [],
     file_type: []
 
-  def inspect(ctx, props) do
+  def screen(ctx, props) do
     %__MODULE__{}
     |> cast(props, [:header, :instruction, :text_block, :check_for, :target_file, :file_type])
     |> validate_required([:text_block, :target_file])

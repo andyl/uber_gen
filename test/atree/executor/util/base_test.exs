@@ -22,8 +22,8 @@ defmodule Atree.Executor.BaseTest do
       refute @pb.has_guide?()
     end
 
-    test "has_inspect" do
-      refute @pb.has_inspect?()
+    test "has_screen" do
+      refute @pb.has_screen?()
     end
   end
 
@@ -40,8 +40,8 @@ defmodule Atree.Executor.BaseTest do
       assert Base.guide(@pb, %{},%{}) == ""
     end
 
-    test "inspect" do
-      assert Base.inspect(@pb, %{},%{})
+    test "screen" do
+      assert Base.screen(@pb, %{},%{})
     end
   end
 end

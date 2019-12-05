@@ -1,7 +1,7 @@
 defmodule Atree.Data.Report do
 
   @moduledoc """
-  Return data from Action#inspect/2
+  Return data from Action#screen/2
 
   Add this line to your module:
 

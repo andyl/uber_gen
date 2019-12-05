@@ -9,7 +9,7 @@ defmodule Atree.Executor.Tailor do
   use Atree.Executor.Util.ExecTree
 
   def exec_log(ctx, %PlanAction{action: act, props: props}) do 
-    report = Base.inspect(act, ctx, props)
+    report = Base.screen(act, ctx, props)
     ctx_v2 = report.ctx || ctx  
     xprops = report.props || props
     xguide = Helpers.gen_guide(report, act, ctx_v2, xprops)
