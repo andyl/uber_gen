@@ -1,0 +1,145 @@
+---
+- action: Util.BlockInFile
+  props:
+    header: Install Dependencies
+    instruction: >
+      Update your `mix.exs` with dependencies from Hex, with the latest version:
+    text_block: |
+      def deps do
+        [
+          {:phoenix_live_view, "~> 0.3.0"},
+          {:floki, "~> 0.0.0", [only: test]}
+        ]
+      end
+    check_for:
+      - phoenix_live_view
+      - floki
+    target_file: mix.exs
+- action: Util.TextBlock
+  props:
+    body: |
+      If you want the latest features, get dependencies from GitHub:
+
+      ```elixir
+      def deps do
+        [
+          {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
+          {:floki, "~> 0.0.0", [only: test]}
+        ]
+      end
+      ```
+- action: Util.Command
+  props:
+    instruction: "Now install dependencies:"
+    command: "mix deps.get"
+- action: Util.BlockInFile
+  props:
+    instruction: |
+      Once installed, update your endpoint's configuration to
+      include a signing salt.  You can generate a signing salt
+      by running `mix phx.gen.secret 32`.
+    text_block: |
+      config :my_app, MyAppWeb.Endpoint,
+        live_view: [
+          signing_salt: "SECRET_SALT"
+        ]
+    check_for:
+      - live_view
+      - signing_salt
+    target_file: config/config.exs
+- action: Util.BlockInFile
+  props:
+    instruction: |
+      Next, add the LiveView flash plug to your browser pipeline, after
+      `:fetch_flash`:
+    text_block: >
+      pipeline :browser do
+        ...
+        plug :fetch_flash
+        plug :Phoenix.LiveView.Flash
+      end
+    check_for:
+      - Phoenix.LivewView.Flash
+    target_file: lib/my_app_web/router.ex
+- action: Util.BlockInFile
+  props:
+    instruction: >
+      Add LiveView NPM dependencies. For a regular project, do:
+    text_block: >
+      {
+        "dependencies": {
+          "phoenix": "file:../deps/phoenix",
+          "phoenix_html": "file:../deps/phoenix_html",
+          "phoenix_live_view": "file:../deps/phoenix_live_view"
+        }
+      }
+    target_file: assets/package.json,
+    check_for: 
+      - phoenix_live_view
+      - phoenix_html
+- action: Util.BlockInFile
+  props:
+    instruction: >
+      For an umbrella project, the dependency paths should be modified:
+    text_block: >
+      {
+        "dependencies": {
+          "phoenix": "file:../../../deps/phoenix",
+          "phoenix_html": "file:../../../deps/phoenix_html",
+          "phoenix_live_view": "file:../../../deps/phoenix_live_view"
+        }
+      }
+    target_file: assets/package.json,
+    check_for: 
+      - phoenix_live_view
+      - phoenix_html
+- action: Util.Command
+  props:
+    instruction: "Then install the new npm dependency."
+    command: "npm install --prefix assets"
+- action: Util.TextBlock
+  props:
+    body: >
+      or `cd assets && npm install` for windows users if --prefix doesn't work
+- action: Util.Command
+  props:
+    instruction: |
+      If you had previously installed `phoenix_live_view` and want to get the
+      latest javascript, then force an install.
+    command: "cd assets && npm install --force phoenix_live_view"
+- action: Util.BlockInFile
+  props: 
+    instruction: "Enable connecting to a LiveView socket."
+    text_block: |
+      import {Socket} from "phoenix"
+      import LiveSocket from "phoenix_live_view"
+      
+      let liveSocket = new LiveSocket("/live", Socket)
+      liveSocket.connect()
+    check_for:
+      - LiveSocket
+      - phoenix_live_view
+    target_file: assets/js/app.js
+- action: Util.BlockInFile
+  props: 
+    instruction: |
+      You can also optionally import the style for the default CSS classes.
+      For a regular project -
+    text_block: >
+      @import "../../deps/phoenix_live_view/assets/css/live_view.css";
+    check_for:
+      - live_view.css
+      - phoenix_live_view
+    target_file: assets/css/app.css
+- action: Util.BlockInFile
+  props: 
+    instruction: |
+      However, if you're adding `phoenix_live_view` to an umbrella project, the
+      import link should be modified appropriately -
+    text_block: |
+      @import "../../../../deps/phoenix_live_view/assets/css/live_view.css";
+    check_for:
+      - live_view.css
+      - phoenix_live_view
+    target_file: assets/css/app.css
+    

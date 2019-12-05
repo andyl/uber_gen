@@ -247,8 +247,15 @@
 ## 2019 Dec 05 Thu
 
 - [x] CleanUp Indentation
+- [x] markdown output wrap text
+- [x] markdown output preserve paragraphs & newlines
 
 ## TBD
+
+- [ ] children handle a single child
+- [ ] JSON output order items put children last
+
+- [ ] Document YAML Multiline https://yaml-multiline.info/
 
 - [ ] TAILOR/LV: quit unless proper elixir env
 - [ ] TAILOR/LV: quit unless in-project

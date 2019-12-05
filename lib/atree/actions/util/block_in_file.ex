@@ -37,7 +37,7 @@ defmodule Atree.Actions.Util.BlockInFile do
     ```#{file_type(opts)}
     #{comment_file(opts)}
 
-    #{text_block}
+    #{text_block |> String.replace(~r/\n+$/, "")}
     ```
     """
 
