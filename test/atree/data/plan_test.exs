@@ -23,7 +23,7 @@ defmodule Atree.Data.PlanTest do
     end
 
     test "mixed" do
-      assert Plan.expand("mixed1.yaml")
+      assert Plan.expand("mixed1.yaml") |> IO.inspect()
     end
   end
 end
