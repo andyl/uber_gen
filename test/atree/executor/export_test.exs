@@ -4,11 +4,6 @@ defmodule Atree.Executor.ExportTest do
   alias Atree.Executor.Export
   alias Atree.Actions
 
-
-  test "Hello World" do
-    assert 1 == 1
-  end
-
   describe "New Runner" do
     test "short name" do
       assert Export.with_input(Util.Null)
@@ -39,6 +34,16 @@ defmodule Atree.Executor.ExportTest do
       ctx = Atree.Executor.Export.with_input(plan)
       assert ctx.assigns[:a] == 1
       assert ctx.assigns[:b] == 2
+    end
+  end
+
+  describe "Playbooks" do
+    test "test1" do
+      assert Atree.Executor.Export.with_input("test1.yaml")
+    end
+
+    test "mixed1" do
+      assert Atree.Executor.Export.with_input("mixed1.yaml")
     end
   end
 end

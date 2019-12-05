@@ -22,7 +22,12 @@ defmodule Atree.Executor.Export do
     xprops = report.props || props
     xguide = Helpers.gen_guide(report, act, ctx_v2, xprops)
 
-    log = %{action: act, guide: xguide, report: report, children: []}
+    log = %{
+      action: act, 
+      guide: xguide, 
+      report: %{report | changeset: nil},
+      children: []
+    }
 
     {ctx_v2, log}
   end

@@ -12,6 +12,8 @@ defmodule Atree.Data.Guide do
 
   alias Atree.Data.Guide
 
+  @derive Jason.Encoder
+
   defstruct [header: nil, body: nil, format: "markdown"]
 
   @type t :: %Guide{

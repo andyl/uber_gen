@@ -4,10 +4,6 @@ defmodule Atree.Actions.Util.TextBlockTest do
   alias Atree.Actions.Util.TextBlock
   alias Atree.Data.PlanAction
 
-  test "Hello World" do
-    assert 1 == 1
-  end
-
   test "Export Guide" do
     plan = PlanAction.build({TextBlock, %{header: "asdf", body: "qwer"}})
     assert Atree.Executor.Export.with_input(plan)

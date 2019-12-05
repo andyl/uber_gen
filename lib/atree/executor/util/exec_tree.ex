@@ -59,6 +59,10 @@ defmodule Atree.Executor.Util.ExecTree do
 
       # ------------------------------------------------------------------
 
+      defp invoke(ctx, list) when is_list(list) do
+        exec(ctx, %PlanAction{action: Atree.Actions.Util.Null, children: list})
+      end
+
       defp invoke(ctx, plan_action = %PlanAction{}) do
         if Auth.check(ctx, plan_action) do
           exec(ctx, plan_action)

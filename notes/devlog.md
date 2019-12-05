@@ -232,7 +232,7 @@
 - [x] AUTH: update Run executor
 - [x] AUTH: update Export executor
 - [x] AUTH: update Tailor executor
-- [x] AUTH: need an evaluator function that returns T/F (with message?) auth(ctx, props, auth)
+- [x] AUTH: function that returns T/F (with message?) 
 - [x] AUTH: add 'when' handler
 - [x] AUTH: add 'unless' handler
 - [x] AUTH: update documentation
@@ -243,6 +243,10 @@
 ## 2019 Dec 04 Wed
 
 - [x] Implement: Playbooks as Children
+
+## 2019 Dec 05 Thu
+
+- [x] CleanUp Indentation
 
 ## TBD
 

@@ -1,5 +1,7 @@
 defmodule Atree.Data.Plan do
-  def expand(input = %{playbook: _}), do: expand_playbook(input)
+  def expand(input = %{playbook: _}) do
+    expand_playbook(input)
+  end
 
   def expand(input) when is_binary(input) do
     cond do
