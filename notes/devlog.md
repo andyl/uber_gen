@@ -195,7 +195,7 @@
 - [x] Action Lookup Function
 - [x] file path
 - [x] Doc: Mix.Task.moduledoc(module)
-- [x] Interface: IO.inspect(module.interface)
+- [x] Interface: inspect(module.interface)
 - [x] Module: module 
 - [x] Action Name: Mix.Task.task_name(module)
 - [x] Implement interface

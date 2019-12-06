@@ -7,19 +7,27 @@ defmodule Atree.Util.Beam do
   @type action_module :: atom
 
   def code_paths do
-    :code.get_path() ++ ebins(["."])
+    :code.get_path() 
+    |> Enum.map(&(List.to_string(&1)))
+    |> Enum.concat(ebins())
     |> List.flatten() 
     |> Enum.sort() 
     |> Enum.uniq() 
   end
 
-  def ebins(list) do
+  def ebins(list \\ ["."]) do
     list
     |> Enum.filter(&is_binary/1)
-    |> Enum.filter(&(byte_size(&1) > 1))
+    |> Enum.filter(&(byte_size(&1) > 0))
     |> Enum.map(&Path.expand/1)
     |> Enum.map(&(Path.wildcard("#{&1}/_build/dev/**/*ebin")))
     |> List.flatten()
+  end
+
+  def set_paths() do
+    ebins()
+    |> Enum.map(&(String.to_charlist(&1)))
+    |> Enum.map(&(:code.add_path(&1)))
   end
 
   @doc """
@@ -27,7 +35,8 @@ defmodule Atree.Util.Beam do
   """
   @spec load_all() :: [action_module]
   def load_all do
-    :code.get_path()
+    set_paths()
+    code_paths()
     |> load_actions()
   end
 
@@ -39,8 +48,8 @@ defmodule Atree.Util.Beam do
     # We may get duplicate modules because we look through the
     # entire load path so make sure we only return unique modules.
     for dir <- dirs,
-        file <- safe_list_dir(to_charlist(dir)),
-        mod = action_from_path(file),
+      file <- safe_list_dir(to_charlist(dir)),
+      mod = action_from_path(file),
         uniq: true,
         do: mod
   end
@@ -58,7 +67,6 @@ defmodule Atree.Util.Beam do
   defp action_from_path(filename) do
     base = Path.basename(filename)
     part = byte_size(base) - @prefix_size - @suffix_size
-
 
     case base do
       <<"Elixir.Atree.Actions.", rest::binary-size(part), ".beam">> ->
@@ -176,6 +184,10 @@ defmodule Atree.Util.Beam do
 
   defp ensure_action?(module) do
     # Code.ensure_loaded?(module) and function_exported?(module, :run, 1)
-    Code.ensure_loaded?(module)
+    # Code.ensure_loaded?(module)
+    case Code.ensure_loaded(module) do
+      {:error, reason} -> inspect({module, reason}, pretty: true) |> IO.puts()
+      _ -> true
+    end
   end
 end

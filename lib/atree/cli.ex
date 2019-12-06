@@ -3,7 +3,6 @@ defmodule Atree.Cli do
   @moduledoc false
   
   def main(args \\ []) do
-    IO.inspect Enum.count(:code.get_path())
     args
     |> parse_args()
     |> setup_args()
@@ -31,7 +30,7 @@ defmodule Atree.Cli do
   end
 
   def process(data) do
-    IO.inspect(data)
+    inspect(data, pretty: true) |> IO.puts()
     IO.puts("No method found")
   end
 
