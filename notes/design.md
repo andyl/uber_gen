@@ -61,6 +61,101 @@
 - [ ] Interop: calendar and events
 - [ ] Interop: IAM
 
+## Escript, Registry, Use in Projects
+
+Notes:
+- Mix isn't included in Escript
+- `:case.get_path()` unpredictable
+
+Study:
+- how does hex work?
+- how does hex do versioning?
+- how does mix work?
+- how do archives work?
+- how does archive.install work?
+
+Questions:
+- how to version playbooks?
+- how to version actions?
+- is there a "lock file" for playbooks?
+- can versions be specified in the childspec?
+
+Workflows:
+- finding a bug in a playbook
+- finding a bug in an action
+
+Supports:
+- versioning repos
+- versioning playbooks
+- installing repos
+- installing playbooks
+
+Scenarios:
+- Local use
+- Distribution / sharing
+
+Paths:
+- playbooks
+- action repos
+
+UseCases:
+- Use from within Atree repo
+- use from within another repo
+- Use as Escript anywhere in the FS
+- Use from within a docker container
+- Use as a standalone server
+
+Handling Beam Files - comparables:
+- Mix: from within a repo
+- Mix: installing a global archive
+- Mix releases
+
+## Atree Command Helpers 
+
+Atree command helpers are conveniences for working with paths and generating content.
+
+From Mix.Generator:
+
+| Function         | Description                                                  |
+|------------------|--------------------------------------------------------------|
+| copy_file        | Copies source to target.                                     |
+| copy_template    | Evaluates and copy templates at source to target.            |
+| create_directory | Creates a directory if one does not exist yet.               |
+| create_file      | Creates a file with the given contents.                      |
+| embed_template   | Embeds a template given by contents into the current module. |
+| embed_text       | Embeds a text given by contents into the current module.     |
+| overwrite?       | Prompts the user to overwrite the file if it exists.         |
+
+Other helpers - some inspired by Ansible:
+
+| Function       | Description                                                  |
+|----------------|--------------------------------------------------------------|
+| assign         | Set a key-value pair in the context                          |
+| command        | Execute shell command                                        |
+| mix            | Execute mix task                                             |
+| lineinfile     | Manage lines in text files                                   |
+| blockinfile    | Insert/update/remove a text block surrounded by marker lines |
+| git_commit     | Commit changes to git repository                             |
+| git_branch     | Checkout / create a git branch                               |
+| template_tree  | Copy an entire file tree as a template                       |
+| mix_dependency | Ensure dependency in a `mix.exs` file                        |
+| npm_package    | Ensure package setting in a `packages.json` file             |
+| npm_install    | Install NPM packages                                         |
+| webpack_config | Add a webpack config                                         |
+
+Refactoring functions - some inspired by JetBrains.  These functions require
+AST analysis and manipulation (which don't yet exist!):
+
+| Function         | Description                         |
+|------------------|-------------------------------------|
+| rename_project   | Rename a project                    |
+| rename_module    | Rename a module and all callers     |
+| rename_function  | Rename a function and all callers   |
+| rename_variable  | Rename all instances of a variable  |
+| extract_variable | Extract an expression to a variable |
+| extract_function | Extract an expression to a function |
+| ensure_config    | Set a config value                  |
+
 ## Intermixing Actions and Playbooks
 
 Playbook Source:
@@ -128,7 +223,7 @@ Run behavior - run until:
 - failed test (code red)
 - wait for manual input (code yellow)
 
-### Escript [DONE]
+### Escript 
 
 Standalone Usage:
 
@@ -176,7 +271,7 @@ Using Actions on the command line or in a bash script:
 
     atree run | atree Util.TextBlock -header "asdfasdf" | atree Util.Command -command "ps"
 
-## Validation / Interface / Inspect
+## Validation / Interface / Inspect / Screen
 
 Uses Cases
 - validating assigns and params 

@@ -1,4 +1,4 @@
-defmodule Atree.Util.Util do
+defmodule Atree.Util.Cli do
 
   def build_doc_list(modules, aliases) do
     {task_docs, task_max} = build_task_doc_list(modules)
@@ -8,13 +8,13 @@ defmodule Atree.Util.Util do
 
   def build_playbook_list(modules) do
     modules
-    |> Enum.map(&({&1, Mix.Task.task_name(&1)}))
+    |> Enum.map(&({&1, Atree.Util.Beam.action_name(&1)}))
   end
 
   def build_task_doc_list(modules) do
     Enum.reduce(modules, {[], 0}, fn module, {docs, max} ->
-      if doc = Mix.Task.shortdoc(module) do
-        task = Mix.Task.task_name(module)
+      if doc = Atree.Util.Beam.shortdoc(module) do
+        task = Atree.Util.Beam.action_name(module)
         {[{task, doc} | docs], max(byte_size(task), max)}
       else
         {docs, max}
@@ -32,7 +32,7 @@ defmodule Atree.Util.Util do
 
   def display_doc_list(docs, max) do
     Enum.each(Enum.sort(docs), fn {task, doc} ->
-      Mix.shell().info(format_task(task, max, doc))
+      IO.puts(format_task(task, max, doc))
     end)
   end
 

@@ -4,18 +4,6 @@ defmodule Atree.Util.Registry.Playbooks do
   Playbook Registry
   """
 
-  def priv_dir do
-    Path.expand("priv/playbooks")
-  end
-
-  def home_dir do
-    Path.expand("~/.atree/playbooks")
-  end
-
-  def path do
-    [priv_dir(), home_dir()]
-  end
-
   def find(name) do
     Atree.Util.Registry.Playbooks.full_playbooks()
     |> Enum.find(&(name == elem(&1, 1)))
@@ -23,7 +11,7 @@ defmodule Atree.Util.Registry.Playbooks do
   end
 
   def full_playbooks do
-    path()
+    Atree.Config.playbook_paths()
     |> ensure_created()
     |> Enum.map(&expand_all/1)
     |> List.flatten()

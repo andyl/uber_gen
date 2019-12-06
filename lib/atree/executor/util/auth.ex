@@ -14,7 +14,7 @@ defmodule Atree.Executor.Util.Auth do
   defp validate(_ctx, _plan, %{when: nil, unless: nil}), do: true 
 
   defp validate(_ctx, _plan, %{when: expression}) do
-    IO.inspect expression
+    inspect(expression, pretty: true) |> IO.puts()
     true
   end
 

@@ -30,7 +30,7 @@ defmodule Atree.Cli do
   end
 
   def process(data) do
-    IO.inspect(data)
+    inspect(data, pretty: true) |> IO.puts()
     IO.puts("No method found")
   end
 
@@ -45,7 +45,7 @@ defmodule Atree.Cli do
   def list(_data, "actions") do
     {docs, max} = Atree.Util.Registry.Actions.doclist()
 
-    Atree.Util.Util.display_doc_list(docs, max)
+    Atree.Util.Cli.display_doc_list(docs, max)
   end
 
   def list(data, nil) do

@@ -195,7 +195,7 @@
 - [x] Action Lookup Function
 - [x] file path
 - [x] Doc: Mix.Task.moduledoc(module)
-- [x] Interface: IO.inspect(module.interface)
+- [x] Interface: inspect(module.interface)
 - [x] Module: module 
 - [x] Action Name: Mix.Task.task_name(module)
 - [x] Implement interface
@@ -242,18 +242,24 @@
 
 ## 2019 Dec 04 Wed
 
-- [x] Implement: Playbooks as Children
+- [x] Implement Playbooks as Children
 
 ## 2019 Dec 05 Thu
 
 - [x] CleanUp Indentation
 - [x] markdown output wrap text
 - [x] markdown output preserve paragraphs & newlines
+- [x] JSON output order items put children last
+
+## 2019 Dec 06 Fri
+
+- [x] Remove all Mix dependencies (list)
+- [x] Run as Escript
+- [x] Parent project actions
+- [x] Add Action paths to config
+- [x] Add Playbook paths to config
 
 ## TBD
-
-- [ ] JSON output order items put children last
-- [ ] children handle a single child
 
 - [ ] TAILOR/LV: quit unless proper elixir env
 - [ ] TAILOR/LV: quit unless in-project
@@ -263,6 +269,7 @@
 - [ ] RUN executor
 - [ ] REPL executor
 
+- [ ] children handle a single child
 - [ ] Document YAML Multiline https://yaml-multiline.info/
 
 - [ ] Write tests
