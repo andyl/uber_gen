@@ -29,7 +29,9 @@ defmodule Atree.Util.Help do
     NOTES:
       - read ctx_json from STDIN using '-' or '-c -' or '-c stdin'
           `$ mix atree export | mix atree -`
-      - use `$ help <method>` to view usage examples
+      - use `$ atree help <method>` to view usage examples
+      - use `$ atree help <action>` to view action help
+      - use `$ atree help <playbook>` to view playbook help
     """
   end
 

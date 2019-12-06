@@ -91,11 +91,20 @@ UberGen extends `Mix.Generate`, and borrows ideas from other tools:
 
 ## Installing UgerGen
 
-UNDER CONSTRUCTION!
-
 To install `uber_gen`:
 
-    mix archive.install github andyl/uber_gen
+    $ git clone http://github.com/andyl/uber_gen
+    $ cd uber_gen
+    $ mix do deps.get, compile
+
+Now check to see that everything runs end-to-end:
+
+    $ mix atree        # show a help screen
+    $ mix test         # run all tests
+    $ mix script/all   # run example command-line scripts
+
+Best way to get started is probably to follow the `mix atree help` pages and to study
+the examples under the `script` directory.
 
 ## UberGen Architecture
 
