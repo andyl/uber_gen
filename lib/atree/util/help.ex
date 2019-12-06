@@ -98,10 +98,10 @@ defmodule Atree.Util.Help do
         Module: #{module}
 
         Summary: 
-        #{Mix.Task.shortdoc(module)}
+        #{Atree.Util.Beam.shortdoc(module)}
         
         Documentation:
-        #{Mix.Task.moduledoc(module)}
+        #{Atree.Util.Beam.moduledoc(module)}
         Propspecs:
         #{inspect(module.propspecs(), pretty: true, width: 40)}
         """

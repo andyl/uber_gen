@@ -1,20 +1,20 @@
 defmodule Atree.NoActionError do
-  defexception [:playbook, :message, mix: true]
+  defexception [:action, :message, mix: true]
 
   @impl true
   def exception(opts) do
-    playbook = opts[:playbook]
-    %Atree.NoActionError{playbook: playbook, message: msg(playbook)}
+    action = opts[:action]
+    %Atree.NoActionError{action: action, message: msg(action)}
   end
 
-  defp msg(playbook) do
-    msg = "The playbook #{inspect(playbook)} could not be found"
+  defp msg(action) do
+    msg = "The action #{inspect(action)} could not be found"
 
-    case did_you_mean(playbook) do
-      {mod, ^playbook, _score} ->
+    case did_you_mean(action) do
+      {mod, ^action, _score} ->
         msg <>
           " because the module is named #{inspect(mod)} instead of " <>
-          "#{expected_mod_name(playbook)} as expected. " <> "Please rename it and try again"
+          "#{expected_mod_name(action)} as expected. " <> "Please rename it and try again"
 
       {_mod, similar, score} when score > 0.8 ->
         msg <> ". Did you mean #{inspect(similar)}?"
@@ -24,13 +24,13 @@ defmodule Atree.NoActionError do
     end
   end
 
-  defp did_you_mean(playbook) do
-    # Ensure all playbooks are loaded
-    Atree.Util.Mix.load_all()
+  defp did_you_mean(action) do
+    # Ensure all actions are loaded
+    Atree.Util.Beam.load_all()
 
-    Atree.Util.Mix.all_modules()
-    |> Enum.map(&{&1, Atree.Util.Mix.playbook_name(&1)})
-    |> Enum.reduce({nil, nil, 0}, &max_similar(&1, playbook, &2))
+    Atree.Util.Beam.all_modules()
+    |> Enum.map(&{&1, Atree.Util.Beam.action_name(&1)})
+    |> Enum.reduce({nil, nil, 0}, &max_similar(&1, action, &2))
   end
 
   defp max_similar({mod, source}, target, {_, _, current} = best) do
@@ -38,18 +38,18 @@ defmodule Atree.NoActionError do
     if score < current, do: best, else: {mod, source, score}
   end
 
-  defp expected_mod_name(playbook) do
-    "Atree.Actions." <> Atree.Utils.command_to_module_name(playbook)
+  defp expected_mod_name(action) do
+    "Atree.Actions." <> Atree.Utils.command_to_module_name(action)
   end
 end
 
 defmodule Atree.InvalidActionError do
-  defexception [:playbook, :message, mix: true]
+  defexception [:action, :message, mix: true]
 
   @impl true
   def exception(opts) do
-    playbook = opts[:playbook]
-    %Atree.InvalidActionError{playbook: playbook, message: "The playbook #{inspect(playbook)} does not export run/1"}
+    action = opts[:action]
+    %Atree.InvalidActionError{action: action, message: "The action #{inspect(action)} does not export run/1"}
   end
 end
 

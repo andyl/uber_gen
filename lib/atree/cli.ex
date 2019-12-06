@@ -3,6 +3,7 @@ defmodule Atree.Cli do
   @moduledoc false
   
   def main(args \\ []) do
+    IO.inspect Enum.count(:code.get_path())
     args
     |> parse_args()
     |> setup_args()
@@ -45,7 +46,7 @@ defmodule Atree.Cli do
   def list(_data, "actions") do
     {docs, max} = Atree.Util.Registry.Actions.doclist()
 
-    Atree.Util.Util.display_doc_list(docs, max)
+    Atree.Util.Cli.display_doc_list(docs, max)
   end
 
   def list(data, nil) do

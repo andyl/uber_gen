@@ -242,18 +242,24 @@
 
 ## 2019 Dec 04 Wed
 
-- [x] Implement: Playbooks as Children
+- [x] Implement Playbooks as Children
 
 ## 2019 Dec 05 Thu
 
 - [x] CleanUp Indentation
 - [x] markdown output wrap text
 - [x] markdown output preserve paragraphs & newlines
+- [x] JSON output order items put children last
 
 ## TBD
 
-- [ ] JSON output order items put children last
-- [ ] children handle a single child
+- [ ] Remove all Mix dependencies (list)
+- [ ] Run as Escript
+
+- [ ] Parent project actions
+- [ ] Add Action paths to config
+- [ ] Add Playbook paths to config
+- [ ] Register 
 
 - [ ] TAILOR/LV: quit unless proper elixir env
 - [ ] TAILOR/LV: quit unless in-project
@@ -263,6 +269,7 @@
 - [ ] RUN executor
 - [ ] REPL executor
 
+- [ ] children handle a single child
 - [ ] Document YAML Multiline https://yaml-multiline.info/
 
 - [ ] Write tests

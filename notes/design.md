@@ -61,6 +61,55 @@
 - [ ] Interop: calendar and events
 - [ ] Interop: IAM
 
+## Escript, Registry, Use in Projects
+
+Notes:
+- Mix isn't included in Escript
+- `:case.get_path()` unpredictable
+
+Study:
+- how does hex work?
+- how does hex do versioning?
+- how does mix work?
+- how do archives work?
+- how does archive.install work?
+
+Questions:
+- how to version playbooks?
+- how to version actions?
+- is there a "lock file" for playbooks?
+- can versions be specified in the childspec?
+
+Workflows:
+- finding a bug in a playbook
+- finding a bug in an action
+
+Supports:
+- versioning repos
+- versioning playbooks
+- installing repos
+- installing playbooks
+
+Scenarios:
+- Local use
+- Distribution / sharing
+
+Paths:
+- playbooks
+- action repos
+
+UseCases:
+- Use from within Atree repo
+- use from within another repo
+- Use as Escript anywhere in the FS
+- Use from within a docker container
+- Use as a standalone server
+
+Handling Beam Files - comparables:
+- Mix: from within a repo
+- Mix: installing a global archive
+- Mix releases
+
 ## Intermixing Actions and Playbooks
 
 Playbook Source:
@@ -128,7 +177,7 @@ Run behavior - run until:
 - failed test (code red)
 - wait for manual input (code yellow)
 
-### Escript [DONE]
+### Escript 
 
 Standalone Usage:
 
@@ -176,7 +225,7 @@ Using Actions on the command line or in a bash script:
 
     atree run | atree Util.TextBlock -header "asdfasdf" | atree Util.Command -command "ps"
 
-## Validation / Interface / Inspect
+## Validation / Interface / Inspect / Screen
 
 Uses Cases
 - validating assigns and params 
