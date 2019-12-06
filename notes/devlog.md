@@ -251,15 +251,16 @@
 - [x] markdown output preserve paragraphs & newlines
 - [x] JSON output order items put children last
 
+## 2019 Dec 06 Fri
+
+- [x] Remove all Mix dependencies (list)
+- [x] Run as Escript
+- [x] Parent project actions
+
 ## TBD
 
-- [ ] Remove all Mix dependencies (list)
-- [ ] Run as Escript
-
-- [ ] Parent project actions
 - [ ] Add Action paths to config
 - [ ] Add Playbook paths to config
-- [ ] Register 
 
 - [ ] TAILOR/LV: quit unless proper elixir env
 - [ ] TAILOR/LV: quit unless in-project

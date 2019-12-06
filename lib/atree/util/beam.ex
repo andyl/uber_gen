@@ -15,7 +15,7 @@ defmodule Atree.Util.Beam do
     |> Enum.uniq() 
   end
 
-  def ebins(list \\ ["."]) do
+  def ebins(list \\ Atree.Config.action_paths()) do
     list
     |> Enum.filter(&is_binary/1)
     |> Enum.filter(&(byte_size(&1) > 0))

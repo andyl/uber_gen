@@ -42,7 +42,7 @@ defmodule Atree.MixProject do
     [
       main_module: Atree.Cli,
       name: "atree",
-      path: "bin/atree"
+      # path: "bin/atree"
     ]
   end
 end
