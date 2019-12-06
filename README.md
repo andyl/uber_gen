@@ -103,8 +103,10 @@ Now check to see that everything runs end-to-end:
     $ mix test         # run all tests
     $ mix script/all   # run example command-line scripts
 
-Best way to get started is probably to follow the `mix atree help` pages and to study
-the examples under the `script` directory.
+Best way to get started is probably to follow the `mix atree help` pages and to
+study the examples under the `script` directory.  Then read the example
+playbooks in the `priv/playbooks` directory, and read the action modules in the
+`lib/atree/actions` directory.
 
 ## UberGen Architecture
 
@@ -206,6 +208,14 @@ Atree playbooks are yaml or json files for composing Actions.
         instruction: "Create a setup directory"
         command: mkdir /tmp/setup_dir
         creates: /tmp/setup_dir
+      children:
+        - playbook: myprocedure1.json
+          auth: 
+            when: sky=dark
+        - playbook: myprocedure2.json
+        - action: Util.Command
+          auth:
+            when: sky=cloudy
     - action: Util.BlockInFile
       props:
         instruction: "Add this text"
@@ -217,6 +227,10 @@ Atree playbooks are yaml or json files for composing Actions.
           - key
           - value
 ```
+
+Notes:
+- you can nest playbooks as children
+- nested playbooks can only be used as leaf nodes
 
 ## Using Atree
 
@@ -247,7 +261,7 @@ You can join actions together using pipes:
 
 ### Custom Commands and Playbooks
 
-Add an atree dependency in your Elixir Repo:
+Add `atree` as a dependency to your Elixir Repo:
 
     # mix.exs
 
