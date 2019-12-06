@@ -91,6 +91,8 @@ UberGen extends `Mix.Generate`, and borrows ideas from other tools:
 
 ## Installing UgerGen
 
+UNDER CONSTRUCTION!
+
 To install `uber_gen`:
 
     mix archive.install github andyl/uber_gen
@@ -167,54 +169,14 @@ The Atree Context is a Plug-like structure:
           children: []
         }
       ]
-        
     }
 
-### Atree Command Helpers 
+The log shows data for each action in the tree.
 
-Atree command helpers are conveniences for working with paths and generating content.
+### Atree Presentors
 
-From Mix.Generator:
-
-| Function         | Description                                                  |
-|------------------|--------------------------------------------------------------|
-| copy_file        | Copies source to target.                                     |
-| copy_template    | Evaluates and copy templates at source to target.            |
-| create_directory | Creates a directory if one does not exist yet.               |
-| create_file      | Creates a file with the given contents.                      |
-| embed_template   | Embeds a template given by contents into the current module. |
-| embed_text       | Embeds a text given by contents into the current module.     |
-| overwrite?       | Prompts the user to overwrite the file if it exists.         |
-
-Other helpers - some inspired by Ansible:
-
-| Function       | Description                                                  |
-|----------------|--------------------------------------------------------------|
-| assign         | Set a key-value pair in the context                          |
-| command        | Execute shell command                                        |
-| mix            | Execute mix task                                             |
-| lineinfile     | Manage lines in text files                                   |
-| blockinfile    | Insert/update/remove a text block surrounded by marker lines |
-| git_commit     | Commit changes to git repository                             |
-| git_branch     | Checkout / create a git branch                               |
-| template_tree  | Copy an entire file tree as a template                       |
-| mix_dependency | Ensure dependency in a `mix.exs` file                        |
-| npm_package    | Ensure package setting in a `packages.json` file             |
-| npm_install    | Install NPM packages                                         |
-| webpack_config | Add a webpack config                                         |
-
-Refactoring functions - some inspired by JetBrains.  These functions require
-AST analysis and manipulation (which don't yet exist!):
-
-| Function         | Description                         |
-|------------------|-------------------------------------|
-| rename_project   | Rename a project                    |
-| rename_module    | Rename a module and all callers     |
-| rename_function  | Rename a function and all callers   |
-| rename_variable  | Rename all instances of a variable  |
-| extract_variable | Extract an expression to a variable |
-| extract_function | Extract an expression to a function |
-| ensure_config    | Set a config value                  |
+Atree Presentors are modules which take a context structure and generate output
+in HTML, JSON, Markdown or other useful format.
 
 ### Atree Playbooks
 
@@ -225,7 +187,7 @@ Atree playbooks are yaml or json files for composing Actions.
 - action: Util.TextBlock
   props: 
     header: Introduction
-    body: >
+    body: |
       This is an introductory paragraph for my HowTo Guide.
   children:
     - action: Util.Command
@@ -259,7 +221,13 @@ You can generate output in markdown, html, and other format.
 
 ### The Atree Escript
 
-The `atree` executable reads playbook configs from `yaml` or `json` files.
+The `atree` escript can be installed in order to use atree from any location in
+your filesystem.
+
+    $ git clone https://github.com/andy/uber_gen
+    $ cd uber_gen
+    $ mix do deps.get, compile, escript.build, escript.install --force
+
 You can invoke an action from the command line:
 
     $ atree help
@@ -268,9 +236,31 @@ You can join actions together using pipes:
 
     $ atree <playbook1> [options] | atree <playbook2> [options]
 
-### Atree in Elixir Source
+### Custom Commands and Playbooks
 
-    defmodule MyMod do
-      ...
-    end
+Add an atree dependency in your Elixir Repo:
 
+    # mix.exs
+
+    {:uber_gen, path: "~/src/uber_gen"}
+
+Then `mix deps.get`, and you can write your own Commands.
+
+    myapp/
+      lib/
+        atree/
+          actions/
+            my_action.ex
+        myapp/
+      priv
+        playbooks/
+          myplaybook.json
+
+Then `mix atree list` to start using your custom actions and playbooks.
+
+## Atree Configuration
+
+You can optionally use the `~/.atree` directory for local configuration data.
+
+- `~/.atree/playbooks` to save your local playbooks
+- `~/.atree/config.yaml` to specify action and playbook search paths.

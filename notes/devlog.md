@@ -256,11 +256,10 @@
 - [x] Remove all Mix dependencies (list)
 - [x] Run as Escript
 - [x] Parent project actions
+- [x] Add Action paths to config
+- [x] Add Playbook paths to config
 
 ## TBD
-
-- [ ] Add Action paths to config
-- [ ] Add Playbook paths to config
 
 - [ ] TAILOR/LV: quit unless proper elixir env
 - [ ] TAILOR/LV: quit unless in-project
