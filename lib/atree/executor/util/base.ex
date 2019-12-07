@@ -9,7 +9,7 @@ defmodule Atree.Executor.Util.Base do
   Note that Action callbacks should not be called directly.  Invoke a callback
   using `Executor.Base`:
 
-      Atree.Executor.Base.command(module, ctx, opts)
+      Atree.Executor.Base.command(module, ctx, props)
 
   This module is designed to be used by "high level" `Executor.*` modules:
 
@@ -19,7 +19,7 @@ defmodule Atree.Executor.Util.Base do
   use Atree.Data.Ctx
 
   @doc false
-  defmacro __using__(_opts) do
+  defmacro __using__(_props) do
     quote do
       use Atree.Data.Ctx
       alias Atree.Executor.Util.Base  
@@ -31,25 +31,25 @@ defmodule Atree.Executor.Util.Base do
     end
   end
 
-  def command(module, ctx, opts) do
-    if module.has_command?(), do: apply(module, :command, [ctx, opts]), else: ctx
+  def command(module, ctx, props) do
+    if module.has_command?(), do: apply(module, :command, [ctx, props]), else: ctx
   end
 
-  def test(module, ctx, opts) do
-    if module.has_test?(), do: apply(module, :test, [ctx, opts]), else: true
+  def test(module, ctx, props) do
+    if module.has_test?(), do: apply(module, :test, [ctx, props]), else: true
   end
 
-  def guide(module, ctx, opts) do
-    if module.has_guide?(), do: apply(module, :guide, [ctx, opts]), else: ""
+  def guide(module, ctx, props) do
+    if module.has_guide?(), do: apply(module, :guide, [ctx, props]), else: ""
   end
 
-  def children(module, ctx, opts) do
-    if module.has_children?(), do: apply(module, :children, [ctx, opts]), else: []
+  def children(module, ctx, props) do
+    if module.has_children?(), do: apply(module, :children, [ctx, props]), else: []
   end
 
-  def screen(module, params, opts) do
+  def screen(module, params, props) do
     if module.has_screen?(),
-      do: apply(module, :screen, [params, opts]),
+      do: apply(module, :screen, [params, props]),
       else: %Atree.Data.Report{}
   end
 end

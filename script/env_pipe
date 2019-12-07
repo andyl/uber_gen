@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+cmd="mix atree export env.host | mix atree export env.lang - $*"
+
+cat << EOF >&2
+---------------------------------------
+ SCRIPT: $0
+COMMAND: $cmd
+Demonstrate env pipelining
+---------------------------------------
+EOF
+
+eval $cmd

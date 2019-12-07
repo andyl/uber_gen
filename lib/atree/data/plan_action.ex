@@ -33,20 +33,21 @@ defmodule Atree.Data.PlanAction do
   def build(input), do: input |> to_plan()
 
   defp to_plan(input) when is_atom(input) do
-    %PlanAction{action: expand(input)}
+    mod = expand_action(input)
+    lst = get_children(mod)
+    %PlanAction{action: mod, children: lst}
   end
 
-  defp to_plan({mod, props}) when is_atom(mod) and is_map(props) do
-    %PlanAction{
-      action: mod |> expand(),
-      props: props
-    }
+  defp to_plan({action, props}) when is_atom(action) and is_map(props) do
+    mod = expand_action(action)
+    lst = get_children(mod, props)
+    %PlanAction{action: mod, props: props, children: lst}
   end
 
   defp to_plan({mod, props, children})
        when is_atom(mod) and is_map(props) and is_list(children) do
     %PlanAction{
-      action: mod |> expand(),
+      action: mod |> expand_action(),
       props: props,
       children: children |> Enum.map(&to_plan/1)
     }
@@ -55,13 +56,19 @@ defmodule Atree.Data.PlanAction do
   defp to_plan(input = %PlanAction{}), do: input
 
   defp to_plan(input) when is_map(input) do
-    clist = input[:children] || []
+    mod = expand_action(input[:action])
+    prp = input[:props] || input[:params] || %{}
+    lst = case input[:children] do
+      nil -> get_children(mod, prp)
+      [] -> get_children(mod, prp)
+      val -> val
+    end
 
     %PlanAction{
-      action: input[:action] |> expand(),
+      action: input[:action] |> expand_action(),
       props: input[:props] || input[:params] || %{},
       auth: input[:auths] || input[:auth] || [],
-      children: Enum.map(clist, &Plan.expand/1)
+      children: Enum.map(lst, &Plan.expand/1)
     }
   end
 
@@ -69,11 +76,11 @@ defmodule Atree.Data.PlanAction do
     input |> Enum.map(&to_plan/1)
   end
 
-  defp expand(action) when is_atom(action) do
-    action |> Atom.to_string() |> expand()
+  defp expand_action(action) when is_atom(action) do
+    action |> Atom.to_string() |> expand_action()
   end
 
-  defp expand(action) do
+  defp expand_action(action) do
     cleanact = action |> String.replace("Elixir.", "")
 
     base =
@@ -84,5 +91,9 @@ defmodule Atree.Data.PlanAction do
       end
 
     "Elixir.Atree.Actions.#{base}" |> String.to_existing_atom()
+  end
+
+  defp get_children(module, props \\ %{}) do
+    Atree.Executor.Util.Base.children(module, %{}, props)
   end
 end
