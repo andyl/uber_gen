@@ -1,4 +1,4 @@
-defmodule Atree.Actions.Env.Lang do
+defmodule Atree.Actions.Env.Exec do
   use Atree.Action
 
   @moduledoc """
@@ -15,10 +15,11 @@ defmodule Atree.Actions.Env.Lang do
       $ mix atree export env.host
   """
   def screen(ctx, _props) do
+    {:ok, cwd} = File.cwd()
     new_ctx =
       ctx
-      |> setenv(:lang_name, "Elixir")
-      |> setenv(:lang_version, System.version())
+      |> setenv(:utc_time, inspect(Time.utc_now()))
+      |> setenv(:cwd, cwd)
 
     %Atree.Data.Report{ctx: new_ctx}
   end

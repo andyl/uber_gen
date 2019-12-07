@@ -11,9 +11,9 @@ defmodule Atree.Actions.Phx.LiveView do
   @shortdoc "ShortDoc for #{__MODULE__}"
 
   def children(_ctx, _opts) do
-    "#{:code.priv_dir(:uber_gen)}/playbooks/live_view.yaml"
-    |> Util.Playbook.file_data()
-    |> Atree.Data.PlanAction.build()
+    [
+      "live_view.yaml"
+    ]
   end
 
   def guide(_ctx, _opts) do

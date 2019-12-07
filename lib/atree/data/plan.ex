@@ -17,7 +17,6 @@ defmodule Atree.Data.Plan do
 
   # -----------------------------------------------------------------
 
-  # TODO: add AUTH to ExecPlan...
   defp expand_playbook(%{playbook: playbook, auth: _auth}) do
     playbook
     |> Atree.Util.Registry.Playbooks.find()

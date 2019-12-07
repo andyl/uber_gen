@@ -264,10 +264,12 @@
 - [x] Check stdin operation
 - [x] Test env stdin
 - [x] Scripts: env/all, env/host |> env/lang
-- [ ] Get children working
-- [ ] Not listing all children
+- [x] Get children working
+- [x] Not listing all children
 
 ## TBD
+
+- [ ] Not picking up elements on the action_path
 
 - [ ] TAILOR/LV: quit unless proper elixir env
 - [ ] TAILOR/LV: quit unless in-project

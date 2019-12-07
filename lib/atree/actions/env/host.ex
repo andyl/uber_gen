@@ -5,6 +5,8 @@ defmodule Atree.Actions.Env.Host do
   Saves host values to context environment.
   """
 
+  @shortdoc "ShortDoc for #{__MODULE__}"
+
   @doc """
   Save host environment values to context.
 
@@ -13,12 +15,14 @@ defmodule Atree.Actions.Env.Host do
       $ mix atree export env.host
   """
   def screen(ctx, _props) do
-    IO.puts(:stderr, inspect(ctx, pretty: true))
-    
+    {:ok, hostname} = :inet.gethostname()
     new_ctx =
       ctx
       |> setenv(:os_type, inspect(:os.type()))
       |> setenv(:os_version, inspect(:os.version()))
+      |> setenv(:user_home, System.user_home())
+      |> setenv(:tmp_dir, System.tmp_dir())
+      |> setenv(:hostname, List.to_string(hostname))
 
     %Atree.Data.Report{ctx: new_ctx}
   end

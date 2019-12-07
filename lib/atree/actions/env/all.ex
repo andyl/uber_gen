@@ -7,12 +7,14 @@ defmodule Atree.Actions.Env.All do
   Saves all env values to context.
   """
 
+  @shortdoc "ShortDoc for #{__MODULE__}"
+
   @doc """
   Generate all environment values.
   """
   def children(_ctx, _props) do
-    IO.inspect("ALL")
     [
+      Env.Exec,
       Env.Host,
       Env.Lang
     ]

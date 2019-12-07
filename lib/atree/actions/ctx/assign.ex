@@ -6,6 +6,8 @@ defmodule Atree.Actions.Ctx.Assign do
   Assign values from props to context.
   """
 
+  @shortdoc "ShortDoc for #{__MODULE__}"
+
   @doc """
   Save all options in context assigns.
 
