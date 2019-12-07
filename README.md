@@ -117,10 +117,10 @@ UberGen uses a data abstration called an "Action Tree" - an `atree`.
 Atree Actions are independent modules that can be composed into trees:
 
     root_action
-      - mid_level_action
+      - branch_action
         - leaf_action
         - leaf_action
-      - mid_level_action
+      - branch_action
         - leaf_action
         - leaf_action
 

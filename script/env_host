@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+cmd="mix atree export env.host $*"
+
+cat << EOF >&2
+---------------------------------------
+ SCRIPT: $0
+COMMAND: $cmd
+Demo env host
+---------------------------------------
+EOF
+
+eval $cmd

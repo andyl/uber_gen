@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-script/export_lv_html &&
+script/env_all &&
+script/env_host &&
+script/env_pipe &&
 script/export_lv_json &&
 script/export_lv_markdown &&
 script/export_nested_markdown &&

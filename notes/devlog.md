@@ -259,6 +259,14 @@
 - [x] Add Action paths to config
 - [x] Add Playbook paths to config
 
+## 2019 Dec 06 Fri
+
+- [x] Check stdin operation
+- [x] Test env stdin
+- [x] Scripts: env/all, env/host |> env/lang
+- [ ] Get children working
+- [ ] Not listing all children
+
 ## TBD
 
 - [ ] TAILOR/LV: quit unless proper elixir env

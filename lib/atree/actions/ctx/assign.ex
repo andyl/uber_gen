@@ -3,7 +3,7 @@ defmodule Atree.Actions.Ctx.Assign do
   use Atree.Action
 
   @moduledoc """
-  Assign values from params to context.
+  Assign values from props to context.
   """
 
   @doc """
@@ -11,11 +11,11 @@ defmodule Atree.Actions.Ctx.Assign do
 
   Usage In Children:
 
-      {Ctx.Assign, %{a: 1, b: 2), []}
+      {Ctx.Assign, %{a: 1, b: 2)}
 
   """
-  def screen(ctx, opts) do
-    ctx2 = Enum.reduce(opts, ctx, fn({key, val}, acc) -> assign(acc, key, val) end)
+  def screen(ctx, props) do
+    ctx2 = Enum.reduce(props, ctx, fn({key, val}, acc) -> assign(acc, key, val) end)
     %Atree.Data.Report{ctx: ctx2}
   end
 end

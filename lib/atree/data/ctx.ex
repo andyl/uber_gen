@@ -38,14 +38,14 @@ defmodule Atree.Data.Ctx do
   @doc """
   Set an env value to a key in the context.
   """
-  def setenv(%Ctx{env: env} = ctx, key, value) when is_atom(key) do
+  def setenv(%{env: env} = ctx, key, value) when is_atom(key) do
     %{ctx | env: Map.put(env, key, value)}
   end
 
   @doc """
   Get an env value to a key in the context.
   """
-  def getenv(%Ctx{} = ctx, key) when is_atom(key) do
+  def getenv(%{} = ctx, key) when is_atom(key) do
     ctx.env.key
   end
 
@@ -56,7 +56,7 @@ defmodule Atree.Data.Ctx do
   that other actions in your action pipeline can access them. The assigns
   storage is a map.
   """
-  def assign(%Ctx{assigns: assigns} = ctx, key, value) when is_atom(key) do
+  def assign(%{assigns: assigns} = ctx, key, value) when is_atom(key) do
     %{ctx | assigns: Map.put(assigns, key, value)}
   end
   
@@ -66,7 +66,7 @@ defmodule Atree.Data.Ctx do
   Halts the Atree pipeline by preventing further actions downstream from
   being invoked. 
   """
-  def halt(%Ctx{} = ctx) do
+  def halt(%{} = ctx) do
     %{ctx | halted: true}
   end
 end
