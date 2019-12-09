@@ -267,6 +267,10 @@
 - [x] Get children working
 - [x] Not listing all children
 
+## 2019 Dec 08 Sun
+
+- [x] Move playbooks to `priv/atree/playbooks`
+
 ## TBD
 
 - [ ] TAILOR/LV: quit unless proper elixir env
