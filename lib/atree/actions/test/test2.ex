@@ -9,7 +9,7 @@ defmodule Atree.Actions.Test.Test2 do
   @shortdoc "ShortDoc for #{__MODULE__}"
 
   def children(_ctx, _opts) do
-    "#{:code.priv_dir(:uber_gen)}/playbooks/test2.yaml"
+    "#{:code.priv_dir(:uber_gen)}/atree/playbooks/test2.yaml"
     |> Util.Playbook.file_data()
     |> Atree.Data.PlanAction.build()
   end

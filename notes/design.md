@@ -61,6 +61,13 @@
 - [ ] Interop: calendar and events
 - [ ] Interop: IAM
 
+### Issues
+
+- [ ] datastore
+- [ ] tree transformations
+- [ ] prop update eventstore
+- [ ] CRDTs
+
 ## Escript, Registry, Use in Projects
 
 Notes:
@@ -474,7 +481,7 @@ Notes:
 - `doc` and `test` are invoked during `run`
 - `doc` and `test` save results in the `new_context`
 - `doc` can be over-ridden in parent playbooks
-- doc templates can be stored in `priv/playbooks/<playbook>/doc`
+- doc templates can be stored in `priv/atree/templates`
 
 Example playbook:
 

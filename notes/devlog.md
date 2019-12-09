@@ -259,7 +259,7 @@
 - [x] Add Action paths to config
 - [x] Add Playbook paths to config
 
-## 2019 Dec 06 Fri
+## 2019 Dec 07 Sat
 
 - [x] Check stdin operation
 - [x] Test env stdin
@@ -267,9 +267,12 @@
 - [x] Get children working
 - [x] Not listing all children
 
-## TBD
+## 2019 Dec 08 Sun
 
-- [ ] Not picking up elements on the action_path
+- [x] Move playbooks to `priv/atree/playbooks`
+- [x] Sometimes not picking up elements on the action_path
+
+## TBD
 
 - [ ] TAILOR/LV: quit unless proper elixir env
 - [ ] TAILOR/LV: quit unless in-project

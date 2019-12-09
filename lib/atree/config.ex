@@ -2,8 +2,7 @@ defmodule Atree.Config do
   def action_paths do
     [
       ".",
-      "~/src/uber_gen",
-      "~/src/atree_shared"
+      "~/src/uber_gen"
     ]
     |> Enum.concat(config_action_paths())
     |> Enum.map(&Path.expand/1)
@@ -27,6 +26,7 @@ defmodule Atree.Config do
     if File.exists?(file) do
       file
       |> YamlElixir.read_from_file!()
+      |> Util.Svc.convert_to_atom_map()
     else
       %{}
     end
@@ -49,6 +49,6 @@ defmodule Atree.Config do
 
   defp action_privs do
     action_paths()
-    |> Enum.map(&"#{&1}/priv/playbooks")
+    |> Enum.map(&"#{&1}/priv/atree/playbooks")
   end
 end
