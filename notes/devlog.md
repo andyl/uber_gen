@@ -270,6 +270,7 @@
 ## 2019 Dec 08 Sun
 
 - [x] Move playbooks to `priv/atree/playbooks`
+- [x] Sometimes not picking up elements on the action_path
 
 ## TBD
 
@@ -283,7 +284,6 @@
 
 - [ ] children handle a single child
 - [ ] Document YAML Multiline https://yaml-multiline.info/
-- [ ] Sometimes not picking up elements on the action_path
 
 - [ ] Write tests
 - [ ] Documentation (Actions, Playbook comments, Action callbacks)
