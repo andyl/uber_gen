@@ -49,6 +49,6 @@ defmodule Atree.Config do
 
   defp action_privs do
     action_paths()
-    |> Enum.map(&"#{&1}/priv/playbooks")
+    |> Enum.map(&"#{&1}/priv/atree/playbooks")
   end
 end

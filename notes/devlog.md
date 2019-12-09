@@ -259,7 +259,7 @@
 - [x] Add Action paths to config
 - [x] Add Playbook paths to config
 
-## 2019 Dec 06 Fri
+## 2019 Dec 07 Sat
 
 - [x] Check stdin operation
 - [x] Test env stdin
@@ -268,8 +268,6 @@
 - [x] Not listing all children
 
 ## TBD
-
-- [ ] Not picking up elements on the action_path
 
 - [ ] TAILOR/LV: quit unless proper elixir env
 - [ ] TAILOR/LV: quit unless in-project
@@ -281,6 +279,7 @@
 
 - [ ] children handle a single child
 - [ ] Document YAML Multiline https://yaml-multiline.info/
+- [ ] Sometimes not picking up elements on the action_path
 
 - [ ] Write tests
 - [ ] Documentation (Actions, Playbook comments, Action callbacks)

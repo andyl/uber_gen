@@ -105,8 +105,8 @@ Now check to see that everything runs end-to-end:
 
 Best way to get started is probably to follow the `mix atree help` pages and to
 study the examples under the `script` directory.  Then read the example
-playbooks in the `priv/playbooks` directory, and read the action modules in the
-`lib/atree/actions` directory.
+playbooks in the `priv/atree/playbooks` directory, and read the action modules
+in the `lib/atree/actions` directory.
 
 ## UberGen Architecture
 
