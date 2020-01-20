@@ -47,6 +47,8 @@
 
 - [ ] LiveView: LiveView components
 
+- [ ] Rete.js - RETE.JS interface
+
 - [ ] Community: who else is doing this now?
 - [ ] Community: who has the most experience?
 - [ ] Community: who is willing to mentor?
